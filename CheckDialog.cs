@@ -16,30 +16,38 @@ namespace CheckMyMail
             {
                 clbExt.Items.Add(DispAddress(item));
             }
+
+            foreach (Outlook.Attachment item in mail.Attachments)
+            {
+                clbFile.Items.Add(item.FileName);
+            }
         }
         private string DispAddress(Outlook.Recipient item)
         {
             switch (item.Type)
             {
                 case (int)Outlook.OlMailRecipientType.olBCC:
-                    return " Bcc:    " + item.Address;
+                    return $"Bcc : {item.Address}";
                 case (int)Outlook.OlMailRecipientType.olCC:
-                    return " Cc :    " + item.Address;
+                    return $" Cc : {item.Address}";
                 default:
-                    return " To :    " + item.Address;
-            }
+                    return $" To : {item.Address}";            }
         }
+
         private void OnMouseUp(object sender, MouseEventArgs e)
         {
-            if (AllChecked(clbExt))
+            if (AllChecked(clbExt) && AllChecked(clbTrusted) && AllChecked(clbFile))
             {
                 btnOK.Enabled = true;
+                btnOK.ForeColor = System.Drawing.Color.White;
+                btnOK.BackColor = System.Drawing.Color.RoyalBlue;
             }
             else
             {
                 btnOK.Enabled = false;
+                btnOK.ForeColor = System.Drawing.Color.FromName("ControlText");
+                btnOK.BackColor = System.Drawing.Color.FromName("Control");
             }
-
         }
 
         private bool AllChecked(CheckedListBox clb)

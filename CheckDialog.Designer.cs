@@ -138,12 +138,17 @@ namespace CheckMyMail
             // 
             // clbTrusted
             // 
+            this.clbTrusted.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clbTrusted.CheckOnClick = true;
+            this.clbTrusted.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbTrusted.FormattingEnabled = true;
             this.clbTrusted.Location = new System.Drawing.Point(12, 19);
             this.clbTrusted.Name = "clbTrusted";
             this.clbTrusted.Size = new System.Drawing.Size(480, 154);
             this.clbTrusted.TabIndex = 0;
+            this.clbTrusted.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // gbExt
             // 
@@ -159,9 +164,13 @@ namespace CheckMyMail
             // 
             // clbExt
             // 
+            this.clbExt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clbExt.CheckOnClick = true;
+            this.clbExt.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbExt.FormattingEnabled = true;
-            this.clbExt.Location = new System.Drawing.Point(12, 19);
+            this.clbExt.Location = new System.Drawing.Point(16, 27);
             this.clbExt.Name = "clbExt";
             this.clbExt.Size = new System.Drawing.Size(480, 184);
             this.clbExt.TabIndex = 1;
@@ -181,19 +190,25 @@ namespace CheckMyMail
             // 
             // clbFile
             // 
+            this.clbFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clbFile.CheckOnClick = true;
+            this.clbFile.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbFile.FormattingEnabled = true;
             this.clbFile.Location = new System.Drawing.Point(6, 19);
             this.clbFile.Name = "clbFile";
             this.clbFile.Size = new System.Drawing.Size(260, 379);
             this.clbFile.TabIndex = 2;
+            this.clbFile.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // btnOK
             // 
             this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOK.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnOK.BackColor = System.Drawing.SystemColors.Control;
             this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOK.Enabled = false;
+            this.btnOK.FlatAppearance.BorderSize = 0;
             this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnOK.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnOK.Location = new System.Drawing.Point(606, 8);

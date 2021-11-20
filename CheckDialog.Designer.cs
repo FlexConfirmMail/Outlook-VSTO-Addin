@@ -32,14 +32,20 @@ namespace CheckMyMail
             System.Windows.Forms.SplitContainer splitContainer1;
             System.Windows.Forms.SplitContainer splitContainer2;
             System.Windows.Forms.SplitContainer splitContainer3;
-            this.ButtonCancel = new System.Windows.Forms.Button();
-            this.trustedGB = new System.Windows.Forms.GroupBox();
-            this.extGB = new System.Windows.Forms.GroupBox();
-            this.attachGB = new System.Windows.Forms.GroupBox();
-            this.ButtonOK = new System.Windows.Forms.Button();
+            System.Windows.Forms.GroupBox gbTrusted;
+            System.Windows.Forms.GroupBox gbExt;
+            System.Windows.Forms.GroupBox gbFile;
+            this.clbTrusted = new System.Windows.Forms.CheckedListBox();
+            this.clbExt = new System.Windows.Forms.CheckedListBox();
+            this.clbFile = new System.Windows.Forms.CheckedListBox();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             splitContainer3 = new System.Windows.Forms.SplitContainer();
+            gbTrusted = new System.Windows.Forms.GroupBox();
+            gbExt = new System.Windows.Forms.GroupBox();
+            gbFile = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -52,20 +58,10 @@ namespace CheckMyMail
             splitContainer3.Panel1.SuspendLayout();
             splitContainer3.Panel2.SuspendLayout();
             splitContainer3.SuspendLayout();
+            gbTrusted.SuspendLayout();
+            gbExt.SuspendLayout();
+            gbFile.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // ButtonCancel
-            // 
-            this.ButtonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonCancel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.ButtonCancel.Location = new System.Drawing.Point(697, 8);
-            this.ButtonCancel.Name = "ButtonCancel";
-            this.ButtonCancel.Size = new System.Drawing.Size(75, 35);
-            this.ButtonCancel.TabIndex = 2;
-            this.ButtonCancel.Text = "キャンセル";
-            this.ButtonCancel.UseVisualStyleBackColor = false;
-            this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // splitContainer1
             // 
@@ -82,13 +78,12 @@ namespace CheckMyMail
             // 
             // splitContainer1.Panel2
             // 
-            splitContainer1.Panel2.Controls.Add(this.ButtonOK);
-            splitContainer1.Panel2.Controls.Add(this.ButtonCancel);
+            splitContainer1.Panel2.Controls.Add(this.btnOK);
+            splitContainer1.Panel2.Controls.Add(this.btnCancel);
             splitContainer1.Size = new System.Drawing.Size(784, 461);
             splitContainer1.SplitterDistance = 408;
             splitContainer1.TabIndex = 3;
             splitContainer1.TabStop = false;
-            splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
             // splitContainer2
             // 
@@ -103,7 +98,7 @@ namespace CheckMyMail
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(this.attachGB);
+            splitContainer2.Panel2.Controls.Add(gbFile);
             splitContainer2.Size = new System.Drawing.Size(784, 408);
             splitContainer2.SplitterDistance = 502;
             splitContainer2.TabIndex = 0;
@@ -119,65 +114,107 @@ namespace CheckMyMail
             // 
             // splitContainer3.Panel1
             // 
-            splitContainer3.Panel1.Controls.Add(this.trustedGB);
+            splitContainer3.Panel1.Controls.Add(gbTrusted);
             // 
             // splitContainer3.Panel2
             // 
-            splitContainer3.Panel2.Controls.Add(this.extGB);
+            splitContainer3.Panel2.Controls.Add(gbExt);
             splitContainer3.Size = new System.Drawing.Size(502, 408);
             splitContainer3.SplitterDistance = 190;
             splitContainer3.TabIndex = 0;
             splitContainer3.TabStop = false;
             // 
-            // trustedGB
+            // gbTrusted
             // 
-            this.trustedGB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.trustedGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trustedGB.Location = new System.Drawing.Point(0, 0);
-            this.trustedGB.Name = "trustedGB";
-            this.trustedGB.Size = new System.Drawing.Size(502, 190);
-            this.trustedGB.TabIndex = 0;
-            this.trustedGB.TabStop = false;
-            this.trustedGB.Text = " 信頼済みの送信先";
-            this.trustedGB.Enter += new System.EventHandler(this.groupBox1_Enter);
+            gbTrusted.Controls.Add(this.clbTrusted);
+            gbTrusted.Cursor = System.Windows.Forms.Cursors.Default;
+            gbTrusted.Dock = System.Windows.Forms.DockStyle.Fill;
+            gbTrusted.Location = new System.Drawing.Point(0, 0);
+            gbTrusted.Name = "gbTrusted";
+            gbTrusted.Size = new System.Drawing.Size(502, 190);
+            gbTrusted.TabIndex = 0;
+            gbTrusted.TabStop = false;
+            gbTrusted.Text = " 信頼済みの送信先";
             // 
-            // extGB
+            // clbTrusted
             // 
-            this.extGB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.extGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.extGB.Location = new System.Drawing.Point(0, 0);
-            this.extGB.Name = "extGB";
-            this.extGB.Size = new System.Drawing.Size(502, 214);
-            this.extGB.TabIndex = 1;
-            this.extGB.TabStop = false;
-            this.extGB.Text = "外部ドメインの送信先";
-            this.extGB.Enter += new System.EventHandler(this.groupBox1_Enter_1);
+            this.clbTrusted.CheckOnClick = true;
+            this.clbTrusted.FormattingEnabled = true;
+            this.clbTrusted.Location = new System.Drawing.Point(12, 19);
+            this.clbTrusted.Name = "clbTrusted";
+            this.clbTrusted.Size = new System.Drawing.Size(480, 154);
+            this.clbTrusted.TabIndex = 0;
             // 
-            // attachGB
+            // gbExt
             // 
-            this.attachGB.Cursor = System.Windows.Forms.Cursors.Default;
-            this.attachGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.attachGB.Location = new System.Drawing.Point(0, 0);
-            this.attachGB.Name = "attachGB";
-            this.attachGB.Size = new System.Drawing.Size(278, 408);
-            this.attachGB.TabIndex = 2;
-            this.attachGB.TabStop = false;
-            this.attachGB.Text = "添付ファイル";
-            this.attachGB.Enter += new System.EventHandler(this.groupBox2_Enter);
+            gbExt.Controls.Add(this.clbExt);
+            gbExt.Cursor = System.Windows.Forms.Cursors.Default;
+            gbExt.Dock = System.Windows.Forms.DockStyle.Fill;
+            gbExt.Location = new System.Drawing.Point(0, 0);
+            gbExt.Name = "gbExt";
+            gbExt.Size = new System.Drawing.Size(502, 214);
+            gbExt.TabIndex = 1;
+            gbExt.TabStop = false;
+            gbExt.Text = "外部ドメインの送信先";
             // 
-            // ButtonOK
+            // clbExt
             // 
-            this.ButtonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ButtonOK.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.ButtonOK.Enabled = false;
-            this.ButtonOK.Location = new System.Drawing.Point(606, 8);
-            this.ButtonOK.Name = "ButtonOK";
-            this.ButtonOK.Size = new System.Drawing.Size(75, 35);
-            this.ButtonOK.TabIndex = 1;
-            this.ButtonOK.Text = "送信";
-            this.ButtonOK.UseVisualStyleBackColor = false;
-            this.ButtonOK.Click += new System.EventHandler(this.button1_Click);
+            this.clbExt.CheckOnClick = true;
+            this.clbExt.FormattingEnabled = true;
+            this.clbExt.Location = new System.Drawing.Point(12, 19);
+            this.clbExt.Name = "clbExt";
+            this.clbExt.Size = new System.Drawing.Size(480, 184);
+            this.clbExt.TabIndex = 1;
+            this.clbExt.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            // 
+            // gbFile
+            // 
+            gbFile.Controls.Add(this.clbFile);
+            gbFile.Cursor = System.Windows.Forms.Cursors.Default;
+            gbFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            gbFile.Location = new System.Drawing.Point(0, 0);
+            gbFile.Name = "gbFile";
+            gbFile.Size = new System.Drawing.Size(278, 408);
+            gbFile.TabIndex = 2;
+            gbFile.TabStop = false;
+            gbFile.Text = "添付ファイル";
+            // 
+            // clbFile
+            // 
+            this.clbFile.CheckOnClick = true;
+            this.clbFile.FormattingEnabled = true;
+            this.clbFile.Location = new System.Drawing.Point(6, 19);
+            this.clbFile.Name = "clbFile";
+            this.clbFile.Size = new System.Drawing.Size(260, 379);
+            this.clbFile.TabIndex = 2;
+            // 
+            // btnOK
+            // 
+            this.btnOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOK.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnOK.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOK.Enabled = false;
+            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOK.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnOK.Location = new System.Drawing.Point(606, 8);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 35);
+            this.btnOK.TabIndex = 1;
+            this.btnOK.Text = "送信";
+            this.btnOK.UseVisualStyleBackColor = false;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Location = new System.Drawing.Point(697, 8);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 35);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "キャンセル";
+            this.btnCancel.UseVisualStyleBackColor = false;
             // 
             // CheckDialog
             // 
@@ -187,7 +224,6 @@ namespace CheckMyMail
             this.Controls.Add(splitContainer1);
             this.Name = "CheckDialog";
             this.Text = "メールを送信しますか？ - CheckMyMail";
-            this.Load += new System.EventHandler(this.ChecDialog_Load);
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).EndInit();
@@ -200,15 +236,18 @@ namespace CheckMyMail
             splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer3)).EndInit();
             splitContainer3.ResumeLayout(false);
+            gbTrusted.ResumeLayout(false);
+            gbExt.ResumeLayout(false);
+            gbFile.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button ButtonCancel;
-        private System.Windows.Forms.GroupBox trustedGB;
-        private System.Windows.Forms.GroupBox extGB;
-        private System.Windows.Forms.GroupBox attachGB;
-        private System.Windows.Forms.Button ButtonOK;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.CheckedListBox clbTrusted;
+        private System.Windows.Forms.CheckedListBox clbExt;
+        private System.Windows.Forms.CheckedListBox clbFile;
     }
 }

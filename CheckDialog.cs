@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace CheckMyMail
 {
@@ -16,46 +10,41 @@ namespace CheckMyMail
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        public void LoadMail(Outlook.MailItem mail)
         {
+            foreach (Outlook.Recipient item in mail.Recipients)
+            {
+                clbExt.Items.Add(DispAddress(item));
+            }
+        }
+        private string DispAddress(Outlook.Recipient item)
+        {
+            switch (item.Type)
+            {
+                case (int)Outlook.OlMailRecipientType.olBCC:
+                    return " Bcc:    " + item.Address;
+                case (int)Outlook.OlMailRecipientType.olCC:
+                    return " Cc :    " + item.Address;
+                default:
+                    return " To :    " + item.Address;
+            }
+        }
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (AllChecked(clbExt))
+            {
+                btnOK.Enabled = true;
+            }
+            else
+            {
+                btnOK.Enabled = false;
+            }
 
         }
 
-        private void ChecDialog_Load(object sender, EventArgs e)
+        private bool AllChecked(CheckedListBox clb)
         {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter_1(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonCancel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-
+            return clb.CheckedItems.Count == clb.Items.Count;
         }
     }
 }

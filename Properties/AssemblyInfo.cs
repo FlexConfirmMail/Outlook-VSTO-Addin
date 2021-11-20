@@ -1,7 +1,5 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Security;
 
 // アセンブリに関する一般情報は以下の属性セットを通して制御されます。
 // アセンブリに関連付けられている情報を変更するには、

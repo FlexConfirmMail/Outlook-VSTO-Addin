@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
-using Office = Microsoft.Office.Core;
-using System.Windows.Forms;
 
 namespace CheckMyMail
 {
@@ -19,14 +13,14 @@ namespace CheckMyMail
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
-        
+
         private void ThisAddIn_ItemSend(object Item, ref bool Cancel)
         {
             Outlook.MailItem mail = (Outlook.MailItem)Item;
             Cancel = true;
 
             CheckDialog form = new CheckDialog();
-
+            form.LoadMail(mail);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Cancel = false;
@@ -43,7 +37,7 @@ namespace CheckMyMail
             this.Startup += new System.EventHandler(ThisAddIn_Startup);
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
-        
+
         #endregion
     }
 }

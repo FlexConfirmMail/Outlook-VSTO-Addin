@@ -1,0 +1,7 @@
+*.suo
+*.aps
+*.user
+obj
+bin
+*.pfx
+.vs

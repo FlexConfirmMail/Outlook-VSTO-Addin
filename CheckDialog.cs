@@ -14,7 +14,14 @@ namespace CheckMyMail
         {
             foreach (Outlook.Recipient item in mail.Recipients)
             {
-                clbExt.Items.Add(DispAddress(item));
+                if (item.Address.IndexOf('@') < 0)
+                {
+                    clbTrusted.Items.Add(FormatAddress(item));
+                }
+                else
+                {
+                    clbExt.Items.Add(FormatAddress(item));
+                }
             }
 
             foreach (Outlook.Attachment item in mail.Attachments)
@@ -22,16 +29,25 @@ namespace CheckMyMail
                 clbFile.Items.Add(item.FileName);
             }
         }
-        private string DispAddress(Outlook.Recipient item)
+
+        private string FormatAddress(Outlook.Recipient item)
         {
+            string addr = item.Address;
+
+            /* Handle LegacyExchangeDN */
+            if (item.Address.IndexOf('@') < 0)
+            {
+                addr = $"組織アドレス ({item.Name})";
+            }
+
             switch (item.Type)
             {
                 case (int)Outlook.OlMailRecipientType.olBCC:
-                    return $"Bcc : {item.Address}";
+                    return $"Bcc : {addr}";
                 case (int)Outlook.OlMailRecipientType.olCC:
-                    return $" Cc : {item.Address}";
+                    return $" Cc : {addr}";
                 default:
-                    return $" To : {item.Address}";            }
+                    return $" To : {addr}";            }
         }
 
         private void OnMouseUp(object sender, MouseEventArgs e)

@@ -19,11 +19,15 @@ namespace CheckMyMail
             Outlook.MailItem mail = (Outlook.MailItem)Item;
             Cancel = true;
 
-            CheckDialog form = new CheckDialog();
-            form.LoadMail(mail);
-            if (form.ShowDialog() == DialogResult.OK)
+            CheckDialog checkDialog = new CheckDialog();
+            checkDialog.LoadMail(mail);
+            if (checkDialog.ShowDialog() == DialogResult.OK)
             {
-                Cancel = false;
+                CountDialog countDialog = new CountDialog();
+                if (countDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Cancel = false;
+                }
             }
         }
         #region VSTO で生成されたコード

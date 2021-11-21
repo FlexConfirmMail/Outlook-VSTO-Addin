@@ -6,15 +6,18 @@ namespace CheckMyMail
 {
     public partial class CheckDialog : Form
     {
+
         public CheckDialog()
         {
             InitializeComponent();
         }
-        public void LoadMail(Outlook.MailItem mail)
+
+        public void LoadMail(Outlook.MailItem mail, Config config)
         {
             foreach (Outlook.Recipient item in mail.Recipients)
             {
-                if (item.Address.IndexOf('@') < 0)
+                int idx = item.Address.IndexOf('@');
+                if (idx < 0 || config.TrustedDomains.Contains(item.Address.Substring(idx + 1)))
                 {
                     clbTrusted.Items.Add(FormatAddress(item));
                 }

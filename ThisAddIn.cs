@@ -19,8 +19,11 @@ namespace CheckMyMail
             Outlook.MailItem mail = (Outlook.MailItem)Item;
             Cancel = true;
 
+            var config = new Config();
+            config.LoadFileSystem();
+
             CheckDialog checkDialog = new CheckDialog();
-            checkDialog.LoadMail(mail);
+            checkDialog.LoadMail(mail, config);
             if (checkDialog.ShowDialog() == DialogResult.OK)
             {
                 CountDialog countDialog = new CountDialog();

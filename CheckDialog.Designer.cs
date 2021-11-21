@@ -170,6 +170,7 @@ namespace CheckMyMail
             | System.Windows.Forms.AnchorStyles.Right)));
             this.clbExt.CheckOnClick = true;
             this.clbExt.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clbExt.ForeColor = System.Drawing.Color.Red;
             this.clbExt.FormattingEnabled = true;
             this.clbExt.HorizontalScrollbar = true;
             this.clbExt.Location = new System.Drawing.Point(16, 27);

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,14 +18,14 @@ namespace CheckMyMail
             InitializeComponent();
         }
 
-        System.Threading.CancellationTokenSource source;
+        CancellationTokenSource source;
         Task task;
 
-        private void CountDown(int n, System.Threading.CancellationToken token)
+        private void CountDown(int seconds, CancellationToken token)
         {
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < seconds; i++)
             {
-                labelCount.Invoke(new Action(() => { labelCount.Text = $"{n - i}"; }));
+                labelCount.Invoke(new Action(() => { labelCount.Text = $"{seconds - i}"; }));
 
                 for (int j = 0; j < 10; j++)
                 {
@@ -47,7 +48,7 @@ namespace CheckMyMail
         private void CountDialog_Shown(object sender, EventArgs e)
         {
             source = new System.Threading.CancellationTokenSource();
-            task = Task.Run(() => { CountDown(5, source.Token); }, source.Token);
+            task = Task.Run(() => { CountDown(3, source.Token); }, source.Token);
         }
 
         private void CountDialog_Closing(object sender, EventArgs e)

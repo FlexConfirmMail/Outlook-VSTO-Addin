@@ -83,7 +83,7 @@
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(83, 91);
             this.labelCount.TabIndex = 1;
-            this.labelCount.Text = "5";
+            this.labelCount.Text = "3";
             // 
             // CountDialog
             // 

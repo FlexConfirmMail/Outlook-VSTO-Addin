@@ -144,6 +144,7 @@ namespace CheckMyMail
             this.clbTrusted.CheckOnClick = true;
             this.clbTrusted.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbTrusted.FormattingEnabled = true;
+            this.clbTrusted.HorizontalScrollbar = true;
             this.clbTrusted.Location = new System.Drawing.Point(12, 19);
             this.clbTrusted.Name = "clbTrusted";
             this.clbTrusted.Size = new System.Drawing.Size(480, 154);
@@ -170,6 +171,7 @@ namespace CheckMyMail
             this.clbExt.CheckOnClick = true;
             this.clbExt.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbExt.FormattingEnabled = true;
+            this.clbExt.HorizontalScrollbar = true;
             this.clbExt.Location = new System.Drawing.Point(16, 27);
             this.clbExt.Name = "clbExt";
             this.clbExt.Size = new System.Drawing.Size(480, 184);
@@ -196,6 +198,7 @@ namespace CheckMyMail
             this.clbFile.CheckOnClick = true;
             this.clbFile.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbFile.FormattingEnabled = true;
+            this.clbFile.HorizontalScrollbar = true;
             this.clbFile.Location = new System.Drawing.Point(6, 19);
             this.clbFile.Name = "clbFile";
             this.clbFile.Size = new System.Drawing.Size(260, 379);

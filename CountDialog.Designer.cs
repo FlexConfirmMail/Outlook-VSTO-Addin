@@ -78,7 +78,7 @@
             // 
             this.labelCount.AutoSize = true;
             this.labelCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCount.ForeColor = System.Drawing.Color.Red;
+            this.labelCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.labelCount.Location = new System.Drawing.Point(12, 33);
             this.labelCount.Name = "labelCount";
             this.labelCount.Size = new System.Drawing.Size(83, 91);

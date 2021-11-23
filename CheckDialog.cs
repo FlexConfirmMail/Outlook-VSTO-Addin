@@ -89,6 +89,10 @@ namespace CheckMyMail
             {
                 lvFile.Items.Add(item.FileName);
             }
+
+            chTrustedAddress.Width = -1;
+            chExtAddress.Width = -1;
+            chFileName.Width = -1;
         }
 
         private long LastCheckedTime = 0;

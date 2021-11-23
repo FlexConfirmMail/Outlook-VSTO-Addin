@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -12,9 +13,35 @@ namespace CheckMyMail
             InitializeComponent();
         }
 
+        private string GetSortHash(Outlook.Recipient item)
+        {
+            int idx = item.Address.IndexOf('@');
+            if (idx < 0)
+            {
+                return item.Address;
+            }
+            return item.Address.Substring(idx + 1) + item.Address.Substring(0, idx);
+        }
+
+        private List<Outlook.Recipient> GetSortedRecipients(Outlook.MailItem mail)
+        {
+            var list = new List<Outlook.Recipient>();
+            foreach (Outlook.Recipient item in mail.Recipients)
+            {
+                list.Add(item);
+            }
+
+            list.Sort((Outlook.Recipient r1, Outlook.Recipient r2) => {
+                return string.Compare(GetSortHash(r1), GetSortHash(r2));
+            });
+
+            return list;
+        }
+
         public void LoadMail(Outlook.MailItem mail, Config config)
         {
-            foreach (Outlook.Recipient item in mail.Recipients)
+
+            foreach (Outlook.Recipient item in GetSortedRecipients(mail))
             {
                 int idx = item.Address.IndexOf('@');
                 if (idx < 0 || config.TrustedDomains.Contains(item.Address.Substring(idx + 1)))

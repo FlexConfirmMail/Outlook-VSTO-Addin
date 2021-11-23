@@ -38,8 +38,23 @@ namespace CheckMyMail
 
             list.Sort((Outlook.Recipient r1, Outlook.Recipient r2) =>
             {
+                var d1 = r1.Address.Substring(r1.Address.IndexOf('@') + 1);
+                var d2 = r1.Address.Substring(r1.Address.IndexOf('@') + 1);
+
+                int domainOrder = String.Compare(d1, d2);
+                if (domainOrder != 0)
+                {
+                        return domainOrder;
+                }
+
+                int typeOrder = ((int)r1.Type).CompareTo((int)r2.Type);
+                if (typeOrder != 0)
+                {
+                        return typeOrder;
+                }
                 return String.Compare(r1.Address, r2.Address);
             });
+
             return list;
         }
 

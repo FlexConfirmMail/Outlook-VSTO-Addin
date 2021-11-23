@@ -87,8 +87,8 @@ namespace CheckMyMail
             // 
             splitContainer1.Panel2.Controls.Add(this.btnOK);
             splitContainer1.Panel2.Controls.Add(this.btnCancel);
-            splitContainer1.Size = new System.Drawing.Size(784, 461);
-            splitContainer1.SplitterDistance = 408;
+            splitContainer1.Size = new System.Drawing.Size(784, 511);
+            splitContainer1.SplitterDistance = 458;
             splitContainer1.TabIndex = 3;
             splitContainer1.TabStop = false;
             // 
@@ -97,6 +97,7 @@ namespace CheckMyMail
             splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer2.Location = new System.Drawing.Point(0, 0);
             splitContainer2.Name = "splitContainer2";
+            splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer2.Panel1
             // 
@@ -105,8 +106,8 @@ namespace CheckMyMail
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(gbFile);
-            splitContainer2.Size = new System.Drawing.Size(784, 408);
-            splitContainer2.SplitterDistance = 502;
+            splitContainer2.Size = new System.Drawing.Size(784, 458);
+            splitContainer2.SplitterDistance = 332;
             splitContainer2.TabIndex = 0;
             splitContainer2.TabStop = false;
             // 
@@ -115,7 +116,6 @@ namespace CheckMyMail
             splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             splitContainer3.Location = new System.Drawing.Point(0, 0);
             splitContainer3.Name = "splitContainer3";
-            splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer3.Panel1
             // 
@@ -124,8 +124,8 @@ namespace CheckMyMail
             // splitContainer3.Panel2
             // 
             splitContainer3.Panel2.Controls.Add(gbExt);
-            splitContainer3.Size = new System.Drawing.Size(502, 408);
-            splitContainer3.SplitterDistance = 190;
+            splitContainer3.Size = new System.Drawing.Size(784, 332);
+            splitContainer3.SplitterDistance = 389;
             splitContainer3.TabIndex = 0;
             splitContainer3.TabStop = false;
             // 
@@ -136,16 +136,13 @@ namespace CheckMyMail
             gbTrusted.Dock = System.Windows.Forms.DockStyle.Fill;
             gbTrusted.Location = new System.Drawing.Point(0, 0);
             gbTrusted.Name = "gbTrusted";
-            gbTrusted.Size = new System.Drawing.Size(502, 190);
+            gbTrusted.Size = new System.Drawing.Size(389, 332);
             gbTrusted.TabIndex = 0;
             gbTrusted.TabStop = false;
             gbTrusted.Text = " 信頼済みの送信先";
             // 
             // lvTrusted
             // 
-            this.lvTrusted.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvTrusted.CheckBoxes = true;
             this.lvTrusted.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             chTrustedType,
@@ -157,14 +154,13 @@ namespace CheckMyMail
             this.lvTrusted.Location = new System.Drawing.Point(10, 19);
             this.lvTrusted.MultiSelect = false;
             this.lvTrusted.Name = "lvTrusted";
-            this.lvTrusted.Size = new System.Drawing.Size(486, 170);
+            this.lvTrusted.Size = new System.Drawing.Size(373, 312);
             this.lvTrusted.TabIndex = 0;
             this.lvTrusted.UseCompatibleStateImageBehavior = false;
             this.lvTrusted.View = System.Windows.Forms.View.Details;
             this.lvTrusted.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvTrusted_ItemCheck);
-            this.lvTrusted.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvTrusted_MouseDown);
             this.lvTrusted.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvTrusted_ItemChecked);
-
+            this.lvTrusted.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvTrusted_MouseDown);
             // 
             // chTrustedType
             // 
@@ -172,7 +168,7 @@ namespace CheckMyMail
             // 
             // chTrustedAddress
             // 
-            this.chTrustedAddress.Width = 432;
+            this.chTrustedAddress.Width = 50;
             // 
             // gbExt
             // 
@@ -181,16 +177,13 @@ namespace CheckMyMail
             gbExt.Dock = System.Windows.Forms.DockStyle.Fill;
             gbExt.Location = new System.Drawing.Point(0, 0);
             gbExt.Name = "gbExt";
-            gbExt.Size = new System.Drawing.Size(502, 214);
+            gbExt.Size = new System.Drawing.Size(391, 332);
             gbExt.TabIndex = 1;
             gbExt.TabStop = false;
             gbExt.Text = "外部ドメインの送信先";
             // 
             // lvExt
             // 
-            this.lvExt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvExt.CheckBoxes = true;
             this.lvExt.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             chExtType,
@@ -201,14 +194,13 @@ namespace CheckMyMail
             this.lvExt.Location = new System.Drawing.Point(10, 19);
             this.lvExt.MultiSelect = false;
             this.lvExt.Name = "lvExt";
-            this.lvExt.Size = new System.Drawing.Size(486, 170);
+            this.lvExt.Size = new System.Drawing.Size(375, 312);
             this.lvExt.TabIndex = 1;
             this.lvExt.UseCompatibleStateImageBehavior = false;
             this.lvExt.View = System.Windows.Forms.View.Details;
             this.lvExt.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvExt_ItemCheck);
-            this.lvExt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvExt_MouseDown);
             this.lvExt.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvExt_ItemChecked);
-
+            this.lvExt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvExt_MouseDown);
             // 
             // chExtType
             // 
@@ -216,7 +208,7 @@ namespace CheckMyMail
             // 
             // chExtAddress
             // 
-            this.chExtAddress.Width = 432;
+            this.chExtAddress.Width = 50;
             // 
             // gbFile
             // 
@@ -225,7 +217,7 @@ namespace CheckMyMail
             gbFile.Dock = System.Windows.Forms.DockStyle.Fill;
             gbFile.Location = new System.Drawing.Point(0, 0);
             gbFile.Name = "gbFile";
-            gbFile.Size = new System.Drawing.Size(278, 408);
+            gbFile.Size = new System.Drawing.Size(784, 122);
             gbFile.TabIndex = 2;
             gbFile.TabStop = false;
             gbFile.Text = "添付ファイル";
@@ -244,13 +236,13 @@ namespace CheckMyMail
             this.lvFile.Location = new System.Drawing.Point(3, 19);
             this.lvFile.MultiSelect = false;
             this.lvFile.Name = "lvFile";
-            this.lvFile.Size = new System.Drawing.Size(272, 364);
+            this.lvFile.Size = new System.Drawing.Size(778, 97);
             this.lvFile.TabIndex = 2;
             this.lvFile.UseCompatibleStateImageBehavior = false;
             this.lvFile.View = System.Windows.Forms.View.Details;
             this.lvFile.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvFile_ItemCheck);
-            this.lvFile.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvFile_MouseDown);
             this.lvFile.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvFile_ItemChecked);
+            this.lvFile.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvFile_MouseDown);
             // 
             // chFileName
             // 
@@ -289,7 +281,7 @@ namespace CheckMyMail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 461);
+            this.ClientSize = new System.Drawing.Size(784, 511);
             this.Controls.Add(splitContainer1);
             this.Name = "CheckDialog";
             this.Text = "メールの宛先を確認してください - CheckMyMail";

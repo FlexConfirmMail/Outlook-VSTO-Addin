@@ -11,11 +11,13 @@ namespace CheckMyMail
     public class Config
     {
         const String ROOTPATH = @"C:\ProgramData\CheckMyMail\";
+        public const String DOMAIN_EXCHANGE = "Exchange";
 
         public List<string> TrustedDomains = new List<string>();
 
         public void LoadFileSystem()
         {
+            TrustedDomains.Add(DOMAIN_EXCHANGE);
             ReadDomainList(ROOTPATH + "trusted.txt", TrustedDomains);
         }
 

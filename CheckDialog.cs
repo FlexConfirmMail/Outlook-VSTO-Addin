@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -13,76 +14,109 @@ namespace CheckMyMail
             InitializeComponent();
         }
 
-        private string GetSortHash(Outlook.Recipient item)
+        private string GetRecipientType(Outlook.Recipient rp)
         {
-            int idx = item.Address.IndexOf('@');
-            if (idx < 0)
+            switch (rp.Type)
             {
-                return item.Address;
+                case (int)Outlook.OlMailRecipientType.olBCC:
+                    return "Bcc";
+                case (int)Outlook.OlMailRecipientType.olCC:
+                    return "Cc";
+                default:
+                    return "To";
             }
-            return item.Address.Substring(idx + 1) + item.Address.Substring(0, idx);
         }
 
-        private List<Outlook.Recipient> GetSortedRecipients(Outlook.MailItem mail)
+        private List<Outlook.Recipient> GetRecipients(Outlook.MailItem mail)
         {
             var list = new List<Outlook.Recipient>();
-            foreach (Outlook.Recipient item in mail.Recipients)
+
+            foreach (Outlook.Recipient recp in mail.Recipients)
             {
-                list.Add(item);
+                list.Add(recp);
             }
 
-            list.Sort((Outlook.Recipient r1, Outlook.Recipient r2) => {
-                return string.Compare(GetSortHash(r1), GetSortHash(r2));
+            list.Sort((Outlook.Recipient r1, Outlook.Recipient r2) =>
+            {
+                return String.Compare(r1.Address, r2.Address);
             });
-
             return list;
         }
 
         public void LoadMail(Outlook.MailItem mail, Config config)
         {
+            string address;
+            string domain;
+            ListView listview;
+            var groups = new Dictionary<string, ListViewGroup>();
 
-            foreach (Outlook.Recipient item in GetSortedRecipients(mail))
+            foreach (Outlook.Recipient recp in GetRecipients(mail))
             {
-                int idx = item.Address.IndexOf('@');
-                if (idx < 0 || config.TrustedDomains.Contains(item.Address.Substring(idx + 1)))
+                int idx = recp.Address.IndexOf('@');
+                if (idx < 0)
                 {
-                    clbTrusted.Items.Add(FormatAddress(item));
+                    address = recp.Name;
+                    domain = Config.DOMAIN_EXCHANGE;
                 }
                 else
                 {
-                    clbExt.Items.Add(FormatAddress(item));
+                    address = recp.Address;
+                    domain = recp.Address.Substring(idx + 1);
                 }
+
+                if (config.TrustedDomains.Contains(domain))
+                {
+                    listview = lvTrusted;
+                }
+                else
+                {
+                    listview = lvExt;
+                }
+
+                if (!groups.ContainsKey(domain))
+                {
+                    var group = new ListViewGroup(domain);
+                    groups.Add(domain, group);
+                    listview.Groups.Add(group);
+                }
+
+                listview.Items.Add(new ListViewItem(
+                    new string[] {GetRecipientType(recp), address},
+                    groups[domain]));
             }
 
             foreach (Outlook.Attachment item in mail.Attachments)
             {
-                clbFile.Items.Add(item.FileName);
+                lvFile.Items.Add(item.FileName);
             }
         }
 
-        private string FormatAddress(Outlook.Recipient item)
+        private long LastSelectTime = 0;
+        private ListViewItem LastSelectItem = null;
+
+        private void OnSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            string addr = item.Address;
-
-            /* Handle LegacyExchangeDN */
-            if (item.Address.IndexOf('@') < 0)
+            if (e.IsSelected)
             {
-                addr = $"組織アドレス ({item.Name})";
+                var now = DateTime.Now.Ticks;
+                if (e.Item !=LastSelectItem || (now - LastSelectTime) > 300 * TimeSpan.TicksPerMillisecond)
+                {
+                    e.Item.Checked = !e.Item.Checked;
+                }
+                LastSelectTime = now;
+                LastSelectItem = e.Item;
+                UpdateView();
             }
-
-            switch (item.Type)
-            {
-                case (int)Outlook.OlMailRecipientType.olBCC:
-                    return $"Bcc : {addr}";
-                case (int)Outlook.OlMailRecipientType.olCC:
-                    return $" Cc : {addr}";
-                default:
-                    return $" To : {addr}";            }
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        private void OnItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            if (AllChecked(clbExt) && AllChecked(clbTrusted) && AllChecked(clbFile))
+            UpdateView();
+        }
+
+        private void UpdateView()
+        {
+            if (AllChecked(lvExt) && AllChecked(lvTrusted) && AllChecked(lvFile))
             {
                 btnOK.Enabled = true;
                 btnOK.ForeColor = System.Drawing.Color.White;
@@ -96,9 +130,9 @@ namespace CheckMyMail
             }
         }
 
-        private bool AllChecked(CheckedListBox clb)
+        private bool AllChecked(ListView lv)
         {
-            return clb.CheckedItems.Count == clb.Items.Count;
+            return lv.CheckedItems.Count == lv.Items.Count;
         }
     }
 }

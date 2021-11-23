@@ -33,18 +33,25 @@ namespace CheckMyMail
             System.Windows.Forms.SplitContainer splitContainer2;
             System.Windows.Forms.SplitContainer splitContainer3;
             System.Windows.Forms.GroupBox gbTrusted;
+            System.Windows.Forms.ColumnHeader chTrustedType;
             System.Windows.Forms.GroupBox gbExt;
+            System.Windows.Forms.ColumnHeader chExtType;
             System.Windows.Forms.GroupBox gbFile;
-            this.clbTrusted = new System.Windows.Forms.CheckedListBox();
-            this.clbExt = new System.Windows.Forms.CheckedListBox();
-            this.clbFile = new System.Windows.Forms.CheckedListBox();
+            this.lvTrusted = new System.Windows.Forms.ListView();
+            this.chTrustedAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvExt = new System.Windows.Forms.ListView();
+            this.chExtAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvFile = new System.Windows.Forms.ListView();
+            this.chFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             splitContainer1 = new System.Windows.Forms.SplitContainer();
             splitContainer2 = new System.Windows.Forms.SplitContainer();
             splitContainer3 = new System.Windows.Forms.SplitContainer();
             gbTrusted = new System.Windows.Forms.GroupBox();
+            chTrustedType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             gbExt = new System.Windows.Forms.GroupBox();
+            chExtType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             gbFile = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -88,7 +95,6 @@ namespace CheckMyMail
             // splitContainer2
             // 
             splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer2.IsSplitterFixed = true;
             splitContainer2.Location = new System.Drawing.Point(0, 0);
             splitContainer2.Name = "splitContainer2";
             // 
@@ -107,7 +113,6 @@ namespace CheckMyMail
             // splitContainer3
             // 
             splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            splitContainer3.IsSplitterFixed = true;
             splitContainer3.Location = new System.Drawing.Point(0, 0);
             splitContainer3.Name = "splitContainer3";
             splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -126,7 +131,7 @@ namespace CheckMyMail
             // 
             // gbTrusted
             // 
-            gbTrusted.Controls.Add(this.clbTrusted);
+            gbTrusted.Controls.Add(this.lvTrusted);
             gbTrusted.Cursor = System.Windows.Forms.Cursors.Default;
             gbTrusted.Dock = System.Windows.Forms.DockStyle.Fill;
             gbTrusted.Location = new System.Drawing.Point(0, 0);
@@ -136,24 +141,38 @@ namespace CheckMyMail
             gbTrusted.TabStop = false;
             gbTrusted.Text = " 信頼済みの送信先";
             // 
-            // clbTrusted
+            // lvTrusted
             // 
-            this.clbTrusted.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvTrusted.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.clbTrusted.CheckOnClick = true;
-            this.clbTrusted.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbTrusted.FormattingEnabled = true;
-            this.clbTrusted.HorizontalScrollbar = true;
-            this.clbTrusted.Location = new System.Drawing.Point(12, 19);
-            this.clbTrusted.Name = "clbTrusted";
-            this.clbTrusted.Size = new System.Drawing.Size(480, 154);
-            this.clbTrusted.TabIndex = 0;
-            this.clbTrusted.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.lvTrusted.CheckBoxes = true;
+            this.lvTrusted.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            chTrustedType,
+            this.chTrustedAddress});
+            this.lvTrusted.Cursor = System.Windows.Forms.Cursors.Default;
+            this.lvTrusted.FullRowSelect = true;
+            this.lvTrusted.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvTrusted.Location = new System.Drawing.Point(10, 19);
+            this.lvTrusted.Name = "lvTrusted";
+            this.lvTrusted.Size = new System.Drawing.Size(486, 170);
+            this.lvTrusted.TabIndex = 0;
+            this.lvTrusted.UseCompatibleStateImageBehavior = false;
+            this.lvTrusted.View = System.Windows.Forms.View.Details;
+            this.lvTrusted.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
+            this.lvTrusted.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.OnSelectionChanged);
+            // 
+            // chTrustedType
+            // 
+            chTrustedType.Width = 50;
+            // 
+            // chTrustedAddress
+            // 
+            this.chTrustedAddress.Width = 432;
             // 
             // gbExt
             // 
-            gbExt.Controls.Add(this.clbExt);
+            gbExt.Controls.Add(this.lvExt);
             gbExt.Cursor = System.Windows.Forms.Cursors.Default;
             gbExt.Dock = System.Windows.Forms.DockStyle.Fill;
             gbExt.Location = new System.Drawing.Point(0, 0);
@@ -163,25 +182,36 @@ namespace CheckMyMail
             gbExt.TabStop = false;
             gbExt.Text = "外部ドメインの送信先";
             // 
-            // clbExt
+            // lvExt
             // 
-            this.clbExt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvExt.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.clbExt.CheckOnClick = true;
-            this.clbExt.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbExt.ForeColor = System.Drawing.Color.Red;
-            this.clbExt.FormattingEnabled = true;
-            this.clbExt.HorizontalScrollbar = true;
-            this.clbExt.Location = new System.Drawing.Point(16, 27);
-            this.clbExt.Name = "clbExt";
-            this.clbExt.Size = new System.Drawing.Size(480, 184);
-            this.clbExt.TabIndex = 1;
-            this.clbExt.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.lvExt.CheckBoxes = true;
+            this.lvExt.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            chExtType,
+            this.chExtAddress});
+            this.lvExt.FullRowSelect = true;
+            this.lvExt.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvExt.Location = new System.Drawing.Point(10, 19);
+            this.lvExt.Name = "lvExt";
+            this.lvExt.Size = new System.Drawing.Size(486, 170);
+            this.lvExt.TabIndex = 1;
+            this.lvExt.UseCompatibleStateImageBehavior = false;
+            this.lvExt.View = System.Windows.Forms.View.Details;
+            this.lvExt.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
+            // 
+            // chExtType
+            // 
+            chExtType.Width = 50;
+            // 
+            // chExtAddress
+            // 
+            this.chExtAddress.Width = 432;
             // 
             // gbFile
             // 
-            gbFile.Controls.Add(this.clbFile);
+            gbFile.Controls.Add(this.lvFile);
             gbFile.Cursor = System.Windows.Forms.Cursors.Default;
             gbFile.Dock = System.Windows.Forms.DockStyle.Fill;
             gbFile.Location = new System.Drawing.Point(0, 0);
@@ -191,20 +221,27 @@ namespace CheckMyMail
             gbFile.TabStop = false;
             gbFile.Text = "添付ファイル";
             // 
-            // clbFile
+            // lvFile
             // 
-            this.clbFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.clbFile.CheckOnClick = true;
-            this.clbFile.Font = new System.Drawing.Font("ＭＳ ゴシック", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.clbFile.FormattingEnabled = true;
-            this.clbFile.HorizontalScrollbar = true;
-            this.clbFile.Location = new System.Drawing.Point(6, 19);
-            this.clbFile.Name = "clbFile";
-            this.clbFile.Size = new System.Drawing.Size(260, 379);
-            this.clbFile.TabIndex = 2;
-            this.clbFile.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            this.lvFile.CheckBoxes = true;
+            this.lvFile.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.chFileName});
+            this.lvFile.FullRowSelect = true;
+            this.lvFile.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvFile.Location = new System.Drawing.Point(3, 19);
+            this.lvFile.Name = "lvFile";
+            this.lvFile.Size = new System.Drawing.Size(272, 364);
+            this.lvFile.TabIndex = 2;
+            this.lvFile.UseCompatibleStateImageBehavior = false;
+            this.lvFile.View = System.Windows.Forms.View.Details;
+            this.lvFile.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
+            // 
+            // chFileName
+            // 
+            this.chFileName.Width = 268;
             // 
             // btnOK
             // 
@@ -242,7 +279,7 @@ namespace CheckMyMail
             this.ClientSize = new System.Drawing.Size(784, 461);
             this.Controls.Add(splitContainer1);
             this.Name = "CheckDialog";
-            this.Text = "メールを送信しますか？ - CheckMyMail";
+            this.Text = "メールの宛先を確認してください - CheckMyMail";
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(splitContainer1)).EndInit();
@@ -265,8 +302,11 @@ namespace CheckMyMail
         #endregion
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.CheckedListBox clbTrusted;
-        private System.Windows.Forms.CheckedListBox clbExt;
-        private System.Windows.Forms.CheckedListBox clbFile;
+        private System.Windows.Forms.ListView lvTrusted;
+        private System.Windows.Forms.ListView lvExt;
+        private System.Windows.Forms.ListView lvFile;
+        private System.Windows.Forms.ColumnHeader chFileName;
+        private System.Windows.Forms.ColumnHeader chTrustedAddress;
+        private System.Windows.Forms.ColumnHeader chExtAddress;
     }
 }

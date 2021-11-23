@@ -153,14 +153,18 @@ namespace CheckMyMail
             this.lvTrusted.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvTrusted.FullRowSelect = true;
             this.lvTrusted.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvTrusted.HideSelection = false;
             this.lvTrusted.Location = new System.Drawing.Point(10, 19);
+            this.lvTrusted.MultiSelect = false;
             this.lvTrusted.Name = "lvTrusted";
             this.lvTrusted.Size = new System.Drawing.Size(486, 170);
             this.lvTrusted.TabIndex = 0;
             this.lvTrusted.UseCompatibleStateImageBehavior = false;
             this.lvTrusted.View = System.Windows.Forms.View.Details;
-            this.lvTrusted.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
-            this.lvTrusted.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.OnSelectionChanged);
+            this.lvTrusted.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvTrusted_ItemCheck);
+            this.lvTrusted.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvTrusted_MouseDown);
+            this.lvTrusted.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvTrusted_ItemChecked);
+
             // 
             // chTrustedType
             // 
@@ -193,13 +197,18 @@ namespace CheckMyMail
             this.chExtAddress});
             this.lvExt.FullRowSelect = true;
             this.lvExt.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvExt.HideSelection = false;
             this.lvExt.Location = new System.Drawing.Point(10, 19);
+            this.lvExt.MultiSelect = false;
             this.lvExt.Name = "lvExt";
             this.lvExt.Size = new System.Drawing.Size(486, 170);
             this.lvExt.TabIndex = 1;
             this.lvExt.UseCompatibleStateImageBehavior = false;
             this.lvExt.View = System.Windows.Forms.View.Details;
-            this.lvExt.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
+            this.lvExt.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvExt_ItemCheck);
+            this.lvExt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvExt_MouseDown);
+            this.lvExt.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvExt_ItemChecked);
+
             // 
             // chExtType
             // 
@@ -231,13 +240,17 @@ namespace CheckMyMail
             this.chFileName});
             this.lvFile.FullRowSelect = true;
             this.lvFile.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvFile.HideSelection = false;
             this.lvFile.Location = new System.Drawing.Point(3, 19);
+            this.lvFile.MultiSelect = false;
             this.lvFile.Name = "lvFile";
             this.lvFile.Size = new System.Drawing.Size(272, 364);
             this.lvFile.TabIndex = 2;
             this.lvFile.UseCompatibleStateImageBehavior = false;
             this.lvFile.View = System.Windows.Forms.View.Details;
-            this.lvFile.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.OnItemChecked);
+            this.lvFile.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvFile_ItemCheck);
+            this.lvFile.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvFile_MouseDown);
+            this.lvFile.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvFile_ItemChecked);
             // 
             // chFileName
             // 

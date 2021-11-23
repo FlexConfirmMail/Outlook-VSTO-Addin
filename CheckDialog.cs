@@ -91,25 +91,74 @@ namespace CheckMyMail
             }
         }
 
-        private long LastSelectTime = 0;
-        private ListViewItem LastSelectItem = null;
+        private long LastCheckedTime = 0;
+        private ListViewItem LastCheckedItem = null;
 
-        private void OnSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void OnMouseDown(ListView lv, MouseEventArgs e)
         {
-            if (e.IsSelected)
+            var item = lv.GetItemAt(e.X, e.Y);
+            if (item != null)
             {
-                var now = DateTime.Now.Ticks;
-                if (e.Item !=LastSelectItem || (now - LastSelectTime) > 300 * TimeSpan.TicksPerMillisecond)
-                {
-                    e.Item.Checked = !e.Item.Checked;
-                }
-                LastSelectTime = now;
-                LastSelectItem = e.Item;
-                UpdateView();
+                item.Checked = !item.Checked;;
             }
         }
 
-        private void OnItemChecked(object sender, ItemCheckedEventArgs e)
+        private void OnItemCheck(ListView lv, ItemCheckEventArgs e)
+        {
+            var item = lv.Items[e.Index];
+            if (item == LastCheckedItem)
+            {
+                var elapsed = DateTime.Now.Ticks - LastCheckedTime;
+                if (elapsed < 100 * TimeSpan.TicksPerMillisecond)
+                {
+                    e.NewValue = e.CurrentValue;
+                    return;
+                }
+            }
+            LastCheckedTime = DateTime.Now.Ticks;
+            LastCheckedItem = lv.Items[e.Index];
+        }
+
+        private void lvTrusted_MouseDown(object sender, MouseEventArgs e)
+        {
+            OnMouseDown(lvTrusted, e);
+        }
+
+        private void lvTrusted_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            OnItemCheck(lvTrusted, e);
+        }
+        private void lvTrusted_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void lvExt_MouseDown(object sender, MouseEventArgs e)
+        {
+            OnMouseDown(lvExt, e);
+        }
+
+        private void lvExt_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            OnItemCheck(lvExt, e);
+        }
+
+        private void lvExt_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void lvFile_MouseDown(object sender, MouseEventArgs e)
+        {
+            OnMouseDown(lvFile, e);
+        }
+
+        private void lvFile_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            OnItemCheck(lvFile, e);
+        }
+
+        private void lvFile_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             UpdateView();
         }

@@ -54,7 +54,6 @@ namespace CheckMyMail
                 }
                 return String.Compare(r1.Address, r2.Address);
             });
-
             return list;
         }
 
@@ -109,82 +108,34 @@ namespace CheckMyMail
             chExtAddress.Width = -1;
             chFileName.Width = -1;
         }
-
-        private long LastCheckedTime = 0;
-        private ListViewItem LastCheckedItem = null;
-
-        private void OnMouseDown(ListView lv, MouseEventArgs e)
+        private bool AllChecked(ListView lv)
         {
-            var item = lv.GetItemAt(e.X, e.Y);
-            if (item != null)
+            return lv.CheckedItems.Count == lv.Items.Count;
+        }
+
+        private void HighlightDone(ListView lv, bool done)
+        {
+            if (done)
             {
-                item.Checked = !item.Checked;;
+                lv.BackColor = System.Drawing.Color.FromName("lavender");
             }
-        }
-
-        private void OnItemCheck(ListView lv, ItemCheckEventArgs e)
-        {
-            var item = lv.Items[e.Index];
-            if (item == LastCheckedItem)
+            else
             {
-                var elapsed = DateTime.Now.Ticks - LastCheckedTime;
-                if (elapsed < 100 * TimeSpan.TicksPerMillisecond)
-                {
-                    e.NewValue = e.CurrentValue;
-                    return;
-                }
+                lv.BackColor = System.Drawing.Color.FromName("Window");
             }
-            LastCheckedTime = DateTime.Now.Ticks;
-            LastCheckedItem = lv.Items[e.Index];
-        }
-
-        private void lvTrusted_MouseDown(object sender, MouseEventArgs e)
-        {
-            OnMouseDown(lvTrusted, e);
-        }
-
-        private void lvTrusted_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            OnItemCheck(lvTrusted, e);
-        }
-        private void lvTrusted_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            UpdateView();
-        }
-
-        private void lvExt_MouseDown(object sender, MouseEventArgs e)
-        {
-            OnMouseDown(lvExt, e);
-        }
-
-        private void lvExt_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            OnItemCheck(lvExt, e);
-        }
-
-        private void lvExt_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            UpdateView();
-        }
-
-        private void lvFile_MouseDown(object sender, MouseEventArgs e)
-        {
-            OnMouseDown(lvFile, e);
-        }
-
-        private void lvFile_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            OnItemCheck(lvFile, e);
-        }
-
-        private void lvFile_ItemChecked(object sender, ItemCheckedEventArgs e)
-        {
-            UpdateView();
         }
 
         private void UpdateView()
         {
-            if (AllChecked(lvExt) && AllChecked(lvTrusted) && AllChecked(lvFile))
+            var bTrusted = AllChecked(lvTrusted);
+            var bExt = AllChecked(lvExt);
+            var bFile = AllChecked(lvFile);
+
+            HighlightDone(lvTrusted, bTrusted);
+            HighlightDone(lvExt, bExt);
+            HighlightDone(lvFile, bFile);
+
+            if (bTrusted && bExt && bFile)
             {
                 btnOK.Enabled = true;
                 btnOK.ForeColor = System.Drawing.Color.White;
@@ -198,9 +149,77 @@ namespace CheckMyMail
             }
         }
 
-        private bool AllChecked(ListView lv)
+        private long LastCheckedTime = 0;
+        private ListViewItem LastCheckedItem = null;
+
+        private void HandleMouseDown(ListView lv, MouseEventArgs e)
         {
-            return lv.CheckedItems.Count == lv.Items.Count;
+            var item = lv.GetItemAt(e.X, e.Y);
+            if (item != null)
+            {
+                item.Checked = !item.Checked; ;
+            }
+        }
+
+        private void HandleItemCheck(ListView lv, ItemCheckEventArgs e)
+        {
+            if (e.Index > -1)
+            {
+                var elapsed = DateTime.Now.Ticks - LastCheckedTime;
+                var item = lv.Items[e.Index];
+                if (item == LastCheckedItem && elapsed < 100 * TimeSpan.TicksPerMillisecond)
+                {
+                    e.NewValue = e.CurrentValue;
+                    return;
+                }
+                LastCheckedTime = DateTime.Now.Ticks;
+                LastCheckedItem = item;
+            }
+        }
+
+        private void lvTrusted_MouseDown(object sender, MouseEventArgs e)
+        {
+            HandleMouseDown(lvTrusted, e);
+        }
+
+        private void lvTrusted_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            HandleItemCheck(lvTrusted, e);
+        }
+
+        private void lvTrusted_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void lvExt_MouseDown(object sender, MouseEventArgs e)
+        {
+            HandleMouseDown(lvExt, e);
+        }
+
+        private void lvExt_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            HandleItemCheck(lvExt, e);
+        }
+
+        private void lvExt_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            UpdateView();
+        }
+
+        private void lvFile_MouseDown(object sender, MouseEventArgs e)
+        {
+            HandleMouseDown(lvFile, e);
+        }
+
+        private void lvFile_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            HandleItemCheck(lvFile, e);
+        }
+
+        private void lvFile_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            UpdateView();
         }
     }
 }

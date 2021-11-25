@@ -1,0 +1,21 @@
+on: [push]
+name: Build
+jobs:
+  build:
+    runs-on: [ windows-2019 ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.0.2
+      - name: Generate self-signed cert
+        run: |
+          $cert = New-SelfSignedCertificate -Subject "CN=CheckMyMailSelfSign" -Type CodeSigningCert -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
+          (Get-Content CheckMyMail.csproj) -Replace '<ManifestCertificateThumbprint>[^<]*',("<ManifestCertificateThumbprint>" + $cert.Thumbprint) | Set-Content CheckMyMail.csproj
+      - name: Compile
+        run: msbuild /p:Configuration=Release
+      - name: Make Installer
+        run: iscc.exe CheckMyMail.iss
+      - name: Upload Installer
+        uses: actions/upload-artifact@v2
+        with:
+          name: Installer
+          path: dest/*.exe

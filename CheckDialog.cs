@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -44,13 +43,13 @@ namespace CheckMyMail
                 int domainOrder = String.Compare(d1, d2);
                 if (domainOrder != 0)
                 {
-                        return domainOrder;
+                    return domainOrder;
                 }
 
                 int typeOrder = ((int)r1.Type).CompareTo((int)r2.Type);
                 if (typeOrder != 0)
                 {
-                        return typeOrder;
+                    return typeOrder;
                 }
                 return String.Compare(r1.Address, r2.Address);
             });
@@ -95,7 +94,7 @@ namespace CheckMyMail
                 }
 
                 listview.Items.Add(new ListViewItem(
-                    new string[] {GetRecipientType(recp), address},
+                    new string[] { GetRecipientType(recp), address },
                     groups[domain]));
             }
 

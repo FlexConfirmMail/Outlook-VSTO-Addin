@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using System.IO;
 
@@ -26,7 +23,7 @@ namespace CheckMyMail
             StreamReader sr;
             try
             {
-                sr = File.OpenText(ROOTPATH + "trusted.txt");    
+                sr = File.OpenText(ROOTPATH + "trusted.txt");
             }
             catch (Exception)
             {

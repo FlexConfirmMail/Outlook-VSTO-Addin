@@ -165,6 +165,9 @@
     <Compile Include="CheckDialog.Designer.cs">
       <DependentUpon>CheckDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomListView.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="CountDialog.cs">
       <SubType>Form</SubType>

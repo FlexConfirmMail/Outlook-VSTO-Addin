@@ -37,11 +37,14 @@ namespace CheckMyMail
             System.Windows.Forms.GroupBox gbExt;
             System.Windows.Forms.ColumnHeader chExtType;
             System.Windows.Forms.GroupBox gbFile;
-            this.lvTrusted = new System.Windows.Forms.ListView();
+            this.lvTrusted = new CustomListView();
+            this.lvTrusted.EnableDoubleBuffering();
             this.chTrustedAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvExt = new System.Windows.Forms.ListView();
+            this.lvExt = new CustomListView();
+            this.lvExt.EnableDoubleBuffering();
             this.chExtAddress = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvFile = new System.Windows.Forms.ListView();
+            this.lvFile = new CustomListView();
+            this.lvFile.EnableDoubleBuffering();
             this.chFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -150,7 +153,6 @@ namespace CheckMyMail
             this.lvTrusted.Cursor = System.Windows.Forms.Cursors.Default;
             this.lvTrusted.FullRowSelect = true;
             this.lvTrusted.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvTrusted.HideSelection = false;
             this.lvTrusted.Location = new System.Drawing.Point(10, 19);
             this.lvTrusted.MultiSelect = false;
             this.lvTrusted.Name = "lvTrusted";
@@ -160,7 +162,10 @@ namespace CheckMyMail
             this.lvTrusted.View = System.Windows.Forms.View.Details;
             this.lvTrusted.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvTrusted_ItemCheck);
             this.lvTrusted.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvTrusted_ItemChecked);
+            this.lvTrusted.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvTrusted_ItemSelectionChanged);
             this.lvTrusted.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvTrusted_MouseDown);
+            this.lvTrusted.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvTrusted_MouseMove);
+            this.lvTrusted.MouseLeave += new System.EventHandler(this.lvTrusted_MouseLeave);
             // 
             // chTrustedType
             // 
@@ -190,7 +195,6 @@ namespace CheckMyMail
             this.chExtAddress});
             this.lvExt.FullRowSelect = true;
             this.lvExt.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvExt.HideSelection = false;
             this.lvExt.Location = new System.Drawing.Point(10, 19);
             this.lvExt.MultiSelect = false;
             this.lvExt.Name = "lvExt";
@@ -200,7 +204,10 @@ namespace CheckMyMail
             this.lvExt.View = System.Windows.Forms.View.Details;
             this.lvExt.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvExt_ItemCheck);
             this.lvExt.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvExt_ItemChecked);
+            this.lvExt.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvExt_ItemSelectionChanged);
             this.lvExt.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvExt_MouseDown);
+            this.lvExt.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvExt_MouseMove);
+            this.lvExt.MouseLeave += new System.EventHandler(this.lvExt_MouseLeave);
             // 
             // chExtType
             // 
@@ -232,7 +239,6 @@ namespace CheckMyMail
             this.chFileName});
             this.lvFile.FullRowSelect = true;
             this.lvFile.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvFile.HideSelection = false;
             this.lvFile.Location = new System.Drawing.Point(3, 19);
             this.lvFile.MultiSelect = false;
             this.lvFile.Name = "lvFile";
@@ -242,7 +248,10 @@ namespace CheckMyMail
             this.lvFile.View = System.Windows.Forms.View.Details;
             this.lvFile.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.lvFile_ItemCheck);
             this.lvFile.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.lvFile_ItemChecked);
+            this.lvFile.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvFile_ItemSelectionChanged);
             this.lvFile.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lvFile_MouseDown);
+            this.lvFile.MouseMove += new System.Windows.Forms.MouseEventHandler(this.lvFile_MouseMove);
+            this.lvFile.MouseLeave += new System.EventHandler(this.lvFile_MouseLeave);
             // 
             // chFileName
             // 
@@ -307,9 +316,9 @@ namespace CheckMyMail
         #endregion
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.ListView lvTrusted;
-        private System.Windows.Forms.ListView lvExt;
-        private System.Windows.Forms.ListView lvFile;
+        private CustomListView lvTrusted;
+        private CustomListView lvExt;
+        private CustomListView lvFile;
         private System.Windows.Forms.ColumnHeader chFileName;
         private System.Windows.Forms.ColumnHeader chTrustedAddress;
         private System.Windows.Forms.ColumnHeader chExtAddress;

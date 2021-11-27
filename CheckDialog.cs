@@ -104,9 +104,9 @@ namespace CheckMyMail
                 lvFile.Items.Add(item.FileName);
             }
 
-            chTrustedAddress.Width = -1;
-            chExtAddress.Width = -1;
-            chFileName.Width = -1;
+            chTrustedAddress.Width = -2;
+            chExtAddress.Width = -2;
+            chFileName.Width = -2;
         }
         private bool AllChecked(ListView lv)
         {
@@ -177,6 +177,30 @@ namespace CheckMyMail
             }
         }
 
+        private void HandleMouseMove(ListView lv, MouseEventArgs e)
+        {
+            var hover = lv.GetItemAt(e.X, e.Y);
+            foreach (ListViewItem item in lv.Items)
+            {
+                if (item == hover)
+                {
+                    item.BackColor = System.Drawing.Color.LightBlue;
+                }
+                else
+                {
+                    item.BackColor = default(System.Drawing.Color);
+                }
+            }
+        }
+
+        private void HandleMouseLeave(ListView lv, EventArgs e)
+        {
+            foreach (ListViewItem item in lv.Items)
+            {
+                item.BackColor = default(System.Drawing.Color);
+            }
+        }
+
         private void lvTrusted_MouseDown(object sender, MouseEventArgs e)
         {
             HandleMouseDown(lvTrusted, e);
@@ -192,9 +216,37 @@ namespace CheckMyMail
             UpdateView();
         }
 
+        private void lvTrusted_MouseMove(object sender, MouseEventArgs e)
+        {
+            HandleMouseMove(lvTrusted, e);
+        }
+
+        private void lvTrusted_MouseLeave(object sender, EventArgs e)
+        {
+            HandleMouseLeave(lvTrusted, e);
+        }
+
+        private void lvTrusted_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                e.Item.Selected = false;
+            }
+        }
+
         private void lvExt_MouseDown(object sender, MouseEventArgs e)
         {
             HandleMouseDown(lvExt, e);
+        }
+
+        private void lvExt_MouseMove(object sender, MouseEventArgs e)
+        {
+            HandleMouseMove(lvExt, e);
+        }
+
+        private void lvExt_MouseLeave(object sender, EventArgs e)
+        {
+            HandleMouseLeave(lvExt, e);
         }
 
         private void lvExt_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -207,9 +259,27 @@ namespace CheckMyMail
             UpdateView();
         }
 
+        private void lvExt_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                e.Item.Selected = false;
+            }
+        }
+
         private void lvFile_MouseDown(object sender, MouseEventArgs e)
         {
             HandleMouseDown(lvFile, e);
+        }
+
+        private void lvFile_MouseMove(object sender, MouseEventArgs e)
+        {
+            HandleMouseMove(lvFile, e);
+        }
+
+        private void lvFile_MouseLeave(object sender, EventArgs e)
+        {
+            HandleMouseLeave(lvFile, e);
         }
 
         private void lvFile_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -220,6 +290,14 @@ namespace CheckMyMail
         private void lvFile_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             UpdateView();
+        }
+
+        private void lvFile_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (e.IsSelected)
+            {
+                e.Item.Selected = false;
+            }
         }
     }
 }

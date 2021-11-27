@@ -3,8 +3,8 @@ License
 
 ## CheckMyMail logo
 
-cmm-logo.png and cmm-icon.png are drivative work of Tango Icon and
-Ubuntu font, used under the following permissions.
+cmm-logo.png, cmm.png and cmm.ico are drivative work of Tango Icon
+and Ubuntu font, used under the following permissions.
 
 ### Tango Desktop Project Icon Set
 

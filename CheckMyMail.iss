@@ -2,13 +2,14 @@
 AppName=CheckMyMail
 AppVerName=CheckMyMail
 VersionInfoVersion=1.0.0.0
+AppPublisher=DeneBrowser
 AppVersion=1.0
+UninstallDisplayIcon={app}\cmm.ico
 DefaultDirName={commonpf}\CheckMyMail
 Compression=lzma2
 SolidCompression=yes
 OutputDir=dest
 OutputBaseFilename=CheckMyMailSetup
-AppPublisher=DeneBrowser
 VersionInfoDescription=CheckMyMailSetup
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
@@ -36,3 +37,4 @@ Source: "bin\Release\CheckMyMail.dll.manifest"; DestDir: "{app}"
 Source: "bin\Release\CheckMyMail.vsto"; DestDir: "{app}"
 Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"
+Source: "doc\cmm.ico"; DestDir: "{app}"

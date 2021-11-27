@@ -29,7 +29,9 @@ namespace CheckMyMail
                 CountDialog countDialog = new CountDialog();
                 if (countDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Cancel = false;
+#if !DEBUG
+                     Cancel = false;
+#endif
                 }
             }
         }

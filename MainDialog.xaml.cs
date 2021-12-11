@@ -72,7 +72,7 @@ namespace CheckMyMail
                         Content = recp.Group
                     };
                     label.FontWeight = FontWeights.Bold;
-                    label.Padding = new Thickness(0, 3, 0, 3);
+                    label.Padding = new Thickness(0, 4, 0, 4);
                     sp.Children.Add(label);
                     groups.Add(recp.Group);
                 }
@@ -82,7 +82,9 @@ namespace CheckMyMail
                     ToolTip = recp.Tooltip
                 };
                 cb.Click += HandleClickCB;
-                cb.Margin = new Thickness(10, 2, 0, 2);
+                cb.Margin = new Thickness(7, 2, 0, 2);
+                cb.MouseEnter += HandleMouseEnter;
+                cb.MouseLeave += HandleMouseLeave;
                 sp.Children.Add(cb);
             }
 
@@ -90,8 +92,19 @@ namespace CheckMyMail
             {
                 cb = new CheckBox { Content = item.FileName };
                 cb.Click += HandleClickCB;
+                cb.MouseEnter += HandleMouseEnter;
+                cb.MouseLeave += HandleMouseLeave;
                 spFile.Children.Add(cb);
             }
+        }
+
+        void HandleMouseEnter(object sender, RoutedEventArgs e)
+        {
+            ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.SteelBlue;
+        }
+        void HandleMouseLeave(object sender, RoutedEventArgs e)
+        {
+            ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.Black;
         }
 
         void HandleClickCB(object sender, RoutedEventArgs e)

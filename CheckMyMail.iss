@@ -28,6 +28,10 @@ Root: HKLM32; Subkey: "Software\Microsoft\Office\Outlook\Addins\DeneBrowser.Chec
 Root: HKLM32; Subkey: "Software\Microsoft\Office\Outlook\Addins\DeneBrowser.CheckMyMail"; ValueType: string; ValueName: "Manifest"; ValueData: "file:///{app}\CheckMyMail.vsto|vstolocal"
 Root: HKLM32; Subkey: "Software\Microsoft\Office\Outlook\Addins\DeneBrowser.CheckMyMail"; ValueType: dword; ValueName: "LoadBehavior"; ValueData: 3
 
+; Prevent Outlook from disabling .NET addon
+Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Outlook\Resiliency\DoNotDisableAddinList"; ValueType: dword; ValueName: "DeneBrowser.CheckMyMail"; ValueData: 1
+Root: HKCU; Subkey: "Software\Microsoft\Office\13.0\Outlook\Resiliency\DoNotDisableAddinList"; ValueType: dword; ValueName: "DeneBrowser.CheckMyMail"; ValueData: 1
+
 [Languages]
 Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 

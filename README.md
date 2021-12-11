@@ -7,9 +7,24 @@ CheckMyMail
 
 **主な機能**
 
+ * メールの送信時に、宛先と添付ファイルを確認するためのダイアログを表示します。
  * Microsoft Office 2013以降をサポートしています。
- * 確認ダイアログ上で、宛先をチェックリスト形式で確認できます。
- * 送信前のカウントダウン機能を備えています。
+
+**使い方**
+
+ 1. 「.NET Framework 4.7.2 Runtime」をインストールします。  
+    https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472
+ 2. 「Visual Studio 2010 Tools for Office Runtime」をインストールします。  
+    https://www.microsoft.com/en-us/download/details.aspx?id=48217
+ 3. CheckMyMailのインストーラを実行します。
+
+**TODO**
+
+ * [ ] 利用マニュアルを作成する。
+ * [ ] 新しいWPF版ダイアログで動画を撮影しなおす。
+ * [ ] GitHub上で最初のバージョンをリリースする。
+ * [ ] 送信者のドメインを社内の宛先と自動的に解釈する。
+ * [ ] GPOによる集中管理の仕組みを実装する。
 
 **使い方の紹介動画（音声無し・23秒）**
 

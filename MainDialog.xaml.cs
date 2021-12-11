@@ -52,8 +52,11 @@ namespace CheckMyMail
         {
             StackPanel sp;
             CheckBox cb;
-            var groups = new HashSet<string>();
 
+            // Show the mail subject in title bar
+            this.Title = $"{mail.Subject} - CheckMyMail";
+
+            var groups = new HashSet<string>();
             foreach (MailRecipient recp in GetRecipients(mail))
             {
                 if (config.InternalDomains.Contains(recp.Group))

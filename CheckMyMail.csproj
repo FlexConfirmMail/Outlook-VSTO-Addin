@@ -164,9 +164,6 @@
   -->
   <ItemGroup>
     <Compile Include="MailRecipient.cs" />
-    <Compile Include="CustomListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Config.cs" />
     <Compile Include="CountDialog.cs">
       <SubType>Form</SubType>

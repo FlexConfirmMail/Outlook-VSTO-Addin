@@ -1,0 +1,41 @@
+﻿<Window x:Class="CheckMyMail.MainDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CheckMyMail"
+             mc:Ignorable="d" Width="750" Height="500"
+             Title="宛先と添付ファイルの一覧を表示しています - CheckMyMail">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="375*"/>
+            <ColumnDefinition Width="191*"/>
+            <ColumnDefinition Width="185*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="265*"/>
+            <RowDefinition Height="125*"/>
+            <RowDefinition Height="30*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="0,0,10,10" Width="160" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Height="20" Grid.Column="2">
+            <Button x:Name="ButtonOK" Content="送信" Width="75" IsEnabled="False" Click="HandleClickOK" ToolTip="メールを送信します"/>
+            <Button Content="キャンセル" Width="75" Margin="10,0,0,0" IsCancel="True" ToolTip="メールの送信を中止します"/>
+        </StackPanel>
+        <Label x:Name="labelHint" Content="" Grid.Row="2" Width="555" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
+        <GroupBox Header="社内の送信先" Margin="10,10,10,0">
+            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="5">
+                <StackPanel x:Name="spInt"/>
+            </Border>
+        </GroupBox>
+        <GroupBox Header="その他の送信先" Margin="0,10,10,0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="5">
+                <StackPanel x:Name="spExt"/>
+            </Border>
+        </GroupBox>
+        <GroupBox Header="添付ファイル" Margin="10,10,10,5" Grid.ColumnSpan="3" Grid.Row="1">
+            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="5">
+                <StackPanel x:Name="spFile"/>
+            </Border>
+        </GroupBox>
+    </Grid>
+</Window>

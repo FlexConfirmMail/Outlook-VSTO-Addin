@@ -10,15 +10,15 @@ namespace CheckMyMail
         const String ROOTPATH = @"C:\ProgramData\CheckMyMail\";
         public const String DOMAIN_EXCHANGE = "Exchange";
 
-        public List<string> TrustedDomains = new List<string>();
+        public HashSet<string> InternalDomains = new HashSet<string>();
 
         public void LoadFileSystem()
         {
-            TrustedDomains.Add(DOMAIN_EXCHANGE);
-            ReadDomainList(ROOTPATH + "trusted.txt", TrustedDomains);
+            InternalDomains.Add(DOMAIN_EXCHANGE);
+            ReadDomainList(ROOTPATH + "internal.txt", InternalDomains);
         }
 
-        private void ReadDomainList(string path, List<string> list)
+        private void ReadDomainList(string path, HashSet<string> list)
         {
             StreamReader sr;
             try

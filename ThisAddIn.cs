@@ -19,21 +19,25 @@ namespace CheckMyMail
             Outlook.MailItem mail = (Outlook.MailItem)Item;
             Cancel = true;
 
-            var config = new Config();
-            config.LoadFileSystem();
-
-            CheckDialog checkDialog = new CheckDialog();
-            checkDialog.LoadMail(mail, config);
-            if (checkDialog.ShowDialog() == DialogResult.OK)
+            try
             {
-                CountDialog countDialog = new CountDialog();
-                if (countDialog.ShowDialog() == DialogResult.OK)
+                Config config = new Config();
+                config.LoadFileSystem();
+
+                MainDialog mainDialog = new MainDialog();
+                mainDialog.LoadMail(mail, config);
+                if (mainDialog.ShowDialog() == true)
                 {
+                    CountDialog countDialog = new CountDialog();
+                    if (countDialog.ShowDialog() == DialogResult.OK)
+                    {
 #if !DEBUG
-                     Cancel = false;
+                        Cancel = false;
 #endif
+                    }
                 }
             }
+            catch { }
         }
         #region VSTO で生成されたコード
 

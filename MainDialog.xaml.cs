@@ -40,7 +40,7 @@ namespace CheckMyMail
             {
                 return ret;
             }
-            ret = String.Compare(x.SendType, y.SendType);
+            ret = String.Compare(x.RecipientType, y.RecipientType);
             if (ret != 0)
             {
                 return -ret;
@@ -81,7 +81,7 @@ namespace CheckMyMail
                 }
                 cb = new CheckBox
                 {
-                    Content = recp.Address,
+                    Content = $"{recp.RecipientType,-3}: {recp.Address}",
                     ToolTip = recp.Tooltip
                 };
                 cb.Click += HandleClickCB;

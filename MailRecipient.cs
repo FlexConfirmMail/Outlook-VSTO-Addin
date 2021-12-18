@@ -7,14 +7,14 @@ namespace CheckMyMail
         public Outlook.Recipient Recipient { get; }
         public string Group { get; }
         public string Address { get; }
-        public string SendType { get; }
+        public string RecipientType { get; }
         public string Tooltip { get; }
         public int DispOrder { get; }
 
         public MailRecipient(Outlook.Recipient recp)
         {
             Recipient = recp;
-            SendType = GetSendType(recp);
+            RecipientType = GetSendType(recp);
             Address = recp.Name;
             DispOrder = 0;
 

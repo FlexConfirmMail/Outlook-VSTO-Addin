@@ -8,25 +8,22 @@ CheckMyMail
 **主な機能**
 
  * メールの送信時に、宛先と添付ファイルを確認するためのダイアログを表示します。
- * Microsoft Office 2013以降をサポートしています。
+ * 社内・外部ドメインを分けてチェックすることで、誤送信を効果的に防止できます。
+ * Microsoft Office 2013以降であれば動作します。
 
 **使い方**
 
- 1. 「.NET Framework 4.7.2 Runtime」をインストールします。  
-    https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472
- 2. 「Visual Studio 2010 Tools for Office Runtime」をインストールします。  
-    https://www.microsoft.com/en-us/download/details.aspx?id=48217
- 3. CheckMyMailのインストーラを実行します。
+Microsoft公式から次のライブラリをインストールします。
 
-**TODO**
+ 1. [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
+ 2. [Visual Studio 2010 Tools for Office Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=48217)
 
- * [ ] 利用マニュアルを作成する。
- * [ ] 新しいWPF版ダイアログで動画を撮影しなおす。
- * [ ] GitHub上で最初のバージョンをリリースする。
- * [ ] 送信者のドメインを社内の宛先と自動的に解釈する。
- * [ ] GPOによる集中管理の仕組みを実装する。
+次の手順でCheckMyMailをインストールします。
 
-**使い方の紹介動画（音声無し・23秒）**
+ 1. CheckMyMailの最新版のインストーラをダウンロードします。
+ 2. 対象端末上でインストーラを実行します。
+ 3. Outlookを立ち上げて動作を確認します。
 
-https://user-images.githubusercontent.com/8974561/143678820-2e42b04d-4da7-47ab-9ea5-95c9e9d71234.mp4
+**紹介動画（音声無し・25秒）**
 
+https://user-images.githubusercontent.com/8974561/146636247-4d0d4351-b569-457a-8f9e-f744fcd949af.mp4

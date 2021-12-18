@@ -59,7 +59,7 @@ namespace CheckMyMail
             var groups = new HashSet<string>();
             foreach (MailRecipient recp in GetRecipients(mail))
             {
-                if (config.InternalDomains.Contains(recp.Group))
+                if (config.TrustedDomains.Contains(recp.Group))
                 {
                     sp = spInt;
                 }

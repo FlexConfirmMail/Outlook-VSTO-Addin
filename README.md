@@ -21,4 +21,4 @@ CheckMyMail
 
 **紹介動画（音声無し・25秒）**
 
-https://user-images.githubusercontent.com/8974561/146636247-4d0d4351-b569-457a-8f9e-f744fcd949af.mp4
+https://user-images.githubusercontent.com/8974561/147380768-97c41d35-28be-4a86-b0a0-18016931bc92.mp4

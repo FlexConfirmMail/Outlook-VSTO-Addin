@@ -15,15 +15,8 @@ CheckMyMail
 
 **使い方**
 
-Microsoft公式から次のライブラリをインストールします。
-
- 1. [.NET Framework 4.7.2 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472)
- 2. [Visual Studio 2010 Tools for Office Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=48217)
-
-次の手順でCheckMyMailをインストールします。
-
- 1. CheckMyMailの最新版のインストーラをダウンロードします。
- 2. 対象端末上でインストーラを実行します。
+ 1. [リリース](https://github.com/DeneBrowser/CheckMyMail/releases)からCheckMyMailの最新版のインストーラを取得します。
+ 2. 導入対象の端末でインストーラを実行します。
  3. Outlookを立ち上げて動作を確認します。
 
 **紹介動画（音声無し・25秒）**

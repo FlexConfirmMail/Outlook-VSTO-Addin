@@ -33,7 +33,10 @@ namespace CheckMyMail
             string s;
             while ((s = sr.ReadLine()) != null)
             {
-                list.Add(s.Trim());
+                if (!s.StartsWith("#"))
+                {
+                    list.Add(s.Trim());
+                }
             }
             sr.Close();
         }

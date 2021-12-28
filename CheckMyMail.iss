@@ -43,3 +43,4 @@ Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir:
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"
 Source: "doc\cmm.ico"; DestDir: "{app}"
 Source: "doc\EnableCheckMyMail.bat "; DestDir: "{app}"
+Source: "doc\trusted.txt"; DestDir: "{commonappdata}\CheckMyMail"

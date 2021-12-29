@@ -2,6 +2,7 @@
 *.aps
 *.user
 *.pfx
+*.pdf
 obj
 bin
 .vs

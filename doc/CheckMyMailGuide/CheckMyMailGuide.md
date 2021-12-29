@@ -53,9 +53,11 @@ CheckMyMailインストーラには次のファイルが含まれています。
 
 \newpage
 
-# CheckMyMailのインストール
+# 導入とセットアップ
 
-この章ではCheckMyMailのインストール手順を解説します。
+この章ではCheckMyMailのインストール（およびアンインストール）手順を解説します。
+
+## CheckMyMailをインストールする
 
 1. [リリースページ](https://github.com/DeneBrowser/CheckMyMail/releases/)から最新のインストーラを取得します。
 
@@ -72,6 +74,14 @@ CheckMyMailインストーラには次のファイルが含まれています。
 4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にCheckMyMailがあることが確認できれば成功です。
 
    ![](option.png){width=400}
+
+## CheckMyMailをアンインストールする
+
+ 1. スタートメニューから「プログラムの追加と削除」を起動します。
+
+ 2. CheckMyMailを選択し「アンインストール」を選択します。
+
+ 3. ディレクトリ`C:\ProgramData\CheckMyMail`を削除します。
 
 \newpage
 

@@ -36,10 +36,10 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\13.0\Outlook\Resiliency\DoNotDisa
 Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Files]
-Source: "bin\Release\CheckMyMail.dll"; DestDir: "{app}"
-Source: "bin\Release\CheckMyMail.dll.manifest"; DestDir: "{app}"
-Source: "bin\Release\CheckMyMail.vsto"; DestDir: "{app}"
-Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"
-Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"
-Source: "doc\cmm.ico"; DestDir: "{app}"
-Source: "doc\trusted.txt"; DestDir: "{commonappdata}\CheckMyMail"
+Source: "bin\Release\CheckMyMail.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\CheckMyMail.dll.manifest"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\CheckMyMail.vsto"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "doc\cmm.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "doc\trusted.txt"; DestDir: "{commonappdata}\CheckMyMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall

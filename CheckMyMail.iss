@@ -43,3 +43,4 @@ Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir:
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "doc\cmm.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "doc\trusted.txt"; DestDir: "{commonappdata}\CheckMyMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall
+Source: "doc\unsafe.txt"; DestDir: "{commonappdata}\CheckMyMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall

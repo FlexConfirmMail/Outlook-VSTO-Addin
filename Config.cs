@@ -11,11 +11,13 @@ namespace CheckMyMail
         public const String DOMAIN_EXCHANGE = "Exchange";
 
         public HashSet<string> TrustedDomains = new HashSet<string>();
+        public HashSet<string> UnsafeDomains = new HashSet<string>();
 
         public void LoadFileSystem()
         {
             TrustedDomains.Add(DOMAIN_EXCHANGE);
             ReadDomainList(ROOTPATH + "trusted.txt", TrustedDomains);
+            ReadDomainList(ROOTPATH + "unsafe.txt", UnsafeDomains);
         }
 
         private void ReadDomainList(string path, HashSet<string> list)

@@ -41,10 +41,29 @@ namespace CheckMyMail
             {
                 spFile.Children.Add(NewCheckBox(item.FileName, item.FileName));
             }
-            CheckDomainCount(trusted.Concat(ext).ToList());
+
+            var all = trusted.Concat(ext).ToList();
+            CheckDomainCount(all);
+            CheckUnsafeDomain(all, config);
 
             /* Show the subject string in title bar */
             this.Title = $"{mail.Subject} - CheckMyMail";
+        }
+
+        private void CheckUnsafeDomain(List<MailRecipient> list, Config config)
+        {
+            var domains = new HashSet<string>();
+            foreach (MailRecipient recp in list)
+            {
+                if (config.UnsafeDomains.Contains(recp.Domain) && !domains.Contains(recp.Domain))
+                {
+                    spFile.Children.Add(NewCheckBox(
+                        $"[警告] 注意が必要なドメイン（{recp.Domain}）が宛先に含まれています。",
+                        "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
+                    ));
+                    domains.Add(recp.Domain);
+                }
+            }
         }
 
         private void CheckDomainCount(List<MailRecipient> list)

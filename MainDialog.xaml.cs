@@ -16,89 +16,82 @@ namespace CheckMyMail
             InitializeComponent();
         }
 
-        private List<MailRecipient> GetRecipients(Outlook.MailItem mail)
+        public void LoadMail(Outlook.MailItem mail, Config config)
         {
-            var list = new List<MailRecipient>();
+            var trusted = new List<MailRecipient>();
+            var ext = new List<MailRecipient>();
 
             foreach (Outlook.Recipient recp in mail.Recipients)
             {
-                list.Add(new MailRecipient(recp));
-            }
-
-            list.Sort(CompareByAddress);
-            return list;
-        }
-
-        public int CompareByAddress(MailRecipient x, MailRecipient y)
-        {
-            if (x.DispOrder != y.DispOrder)
-            {
-                return x.DispOrder - y.DispOrder;
-            }
-            var ret = String.Compare(x.Group, y.Group);
-            if (ret != 0)
-            {
-                return ret;
-            }
-            ret = String.Compare(x.RecipientType, y.RecipientType);
-            if (ret != 0)
-            {
-                return -ret;
-            }
-            return String.Compare(x.Address, y.Address);
-        }
-
-        public void LoadMail(Outlook.MailItem mail, Config config)
-        {
-            StackPanel sp;
-            CheckBox cb;
-
-            // Show the mail subject in title bar
-            this.Title = $"{mail.Subject} - CheckMyMail";
-
-            var groups = new HashSet<string>();
-            foreach (MailRecipient recp in GetRecipients(mail))
-            {
-                if (config.TrustedDomains.Contains(recp.Group))
+                var mr = MailRecipientFactory.Create(recp);
+                if (config.TrustedDomains.Contains(mr.Domain))
                 {
-                    sp = spTrusted;
+                    trusted.Add(mr);
                 }
                 else
                 {
-                    sp = spExt;
+                    ext.Add(mr);
                 }
-
-                if (!groups.Contains(recp.Group))
-                {
-                    var label = new Label
-                    {
-                        Content = recp.Group
-                    };
-                    label.FontWeight = FontWeights.Bold;
-                    label.Padding = new Thickness(0, 4, 0, 4);
-                    sp.Children.Add(label);
-                    groups.Add(recp.Group);
-                }
-                cb = new CheckBox
-                {
-                    Content = $"{recp.RecipientType,-3}: {recp.Address}",
-                    ToolTip = recp.Tooltip
-                };
-                cb.Click += HandleClickCB;
-                cb.Margin = new Thickness(7, 2, 0, 2);
-                cb.MouseEnter += HandleMouseEnter;
-                cb.MouseLeave += HandleMouseLeave;
-                sp.Children.Add(cb);
             }
+            RenderAddressList(spTrusted, trusted);
+            RenderAddressList(spExt, ext);
 
             foreach (Outlook.Attachment item in mail.Attachments)
             {
-                cb = new CheckBox { Content = item.FileName };
-                cb.Click += HandleClickCB;
-                cb.MouseEnter += HandleMouseEnter;
-                cb.MouseLeave += HandleMouseLeave;
-                spFile.Children.Add(cb);
+                spFile.Children.Add(NewCheckBox(item.FileName, item.FileName));
             }
+
+            /* Show the subject string in title bar */
+            this.Title = $"{mail.Subject} - CheckMyMail";
+        }
+
+        private void RenderAddressList(StackPanel sp, List<MailRecipient> list)
+        {
+            var domains = new HashSet<string>();
+            list.Sort();
+
+            foreach (MailRecipient recp in list)
+            {
+                if (!domains.Contains(recp.Domain))
+                {
+                    sp.Children.Add(NewDomainLabel(recp.Domain));
+                    domains.Add(recp.Domain);
+                }
+                sp.Children.Add(NewCheckBox($"{recp.Type,-3}: {recp.Address}", recp.Help));
+            }
+        }
+
+        private Label NewDomainLabel(string title)
+        {
+            var label = new Label();
+            label.Content = title;
+            label.FontWeight = FontWeights.Bold;
+            label.Padding = new Thickness(0, 4, 0, 4);
+            return label;
+        }
+
+        private CheckBox NewCheckBox(string title, string help)
+        {
+            var cb = new CheckBox();
+            cb.Content = title;
+            cb.ToolTip = help;
+            cb.Margin = new Thickness(7, 2, 0, 2);
+            cb.Click += HandleClickCB;
+            cb.MouseEnter += HandleMouseEnter;
+            cb.MouseLeave += HandleMouseLeave;
+            return cb;
+        }
+
+        private static bool IsAllChecked(StackPanel sp)
+        {
+            foreach (UIElement e in sp.Children)
+            {
+                if (e is CheckBox && ((CheckBox)e).IsChecked != true)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         void HandleMouseEnter(object sender, RoutedEventArgs e)
@@ -119,18 +112,6 @@ namespace CheckMyMail
         void HandleClickOK(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-        }
-
-        private static bool IsAllChecked(StackPanel sp)
-        {
-            foreach (UIElement e in sp.Children)
-            {
-                if (e is CheckBox && ((CheckBox)e).IsChecked != true)
-                {
-                    return false;
-                }
-            }
-            return true;
         }
     }
 }

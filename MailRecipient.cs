@@ -1,69 +1,116 @@
 ﻿using Outlook = Microsoft.Office.Interop.Outlook;
+using System;
 
 namespace CheckMyMail
 {
-    public class MailRecipient
+    public class MailRecipient : IComparable
     {
-        public Outlook.Recipient Recipient { get; }
-        public string Group { get; }
-        public string Address { get; }
-        public string RecipientType { get; }
-        public string Tooltip { get; }
-        public int DispOrder { get; }
-
-        public MailRecipient(Outlook.Recipient recp)
+        public MailRecipient(string type, string address, string domain,
+                         string help, bool isSMTP)
         {
-            Recipient = recp;
-            RecipientType = GetSendType(recp);
-            Address = recp.Name;
-            DispOrder = 0;
+            Type = type;
+            Address = address;
+            Domain = domain;
+            Help = help;
+            IsSMTP = isSMTP;
+        }
 
+        public string Type { get; }
+        public string Address { get; }
+        public string Domain { get; }
+        public string Help { get; }
+        private bool IsSMTP { get; }
+
+        public int CompareTo(object other)
+        {
+            if (other == null) return 1;
+
+            MailRecipient omr = other as MailRecipient;
+            /*
+             * Non-SMTP addresses come first.
+             */
+            if (IsSMTP && !omr.IsSMTP)
+                return 1;
+            if (!IsSMTP && omr.IsSMTP)
+                return -1;
+
+            /*
+             * Sort by domain. This is the crux that essentially
+             * makes MainDialog.RenderAddressList() work.
+             */
+            var ret = String.Compare(Domain, omr.Domain);
+            if (ret != 0)
+            {
+                return ret;
+            }
+
+            /* Sort by recipient types (To > Cc > Bcc) */
+            ret = String.Compare(Type, omr.Type);
+            if (ret != 0)
+            {
+                return -ret;
+            }
+            return String.Compare(Address, omr.Address);
+        }
+    }
+
+    class MailRecipientFactory
+    {
+        static public MailRecipient Create(Outlook.Recipient recp)
+        {
+            string Type = GetType(recp);
+            string Address;
+            string Domain;
+            string Help;
+            bool IsSMTP = CheckSMTP(recp);
+
+            /*
+             * First, we process normal SMTP entries. This is the easiest
+             * part, because they are just addresses like "foo@example.com".
+             */
+            if (IsSMTP)
+            {
+                Address = recp.Address;
+                Help = Address;
+                Domain = Address.Substring(Address.IndexOf('@') + 1);
+                return new MailRecipient(Type, Address, Domain, Help, IsSMTP);
+            }
+
+            /*
+             * Next we need to handle the non-SMTP recipients. For details, see:
+             * https://docs.microsoft.com/en-us/dotnet/api/microsoft.office.interop.outlook.oldisplaytype
+             */
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:
-                    if (recp.AddressEntry.Type == "SMTP")
-                    {
-                        Group = GetDomain(recp.Address);
-                        Address = recp.Address;
-                        Tooltip = Address;
-                        DispOrder = 1;
-                    }
-                    else
-                    {
-                        Group = "Exchange";
-                        Tooltip = $"[{Group}] {Address}";
-                    }
+                    Domain = "Exchange";
                     break;
                 case Outlook.OlDisplayType.olRemoteUser:
-                    Group = "Exchange（外部）";
-                    Tooltip = $"[{Group}] {Address}";
+                    Domain = "Exchange（外部）";
                     break;
                 case Outlook.OlDisplayType.olDistList:
                 case Outlook.OlDisplayType.olPrivateDistList:
-                    Group = "連絡先リスト";
-                    Tooltip = $"[{Group}] {recp.Name}";
-                    break;
-                case Outlook.OlDisplayType.olAgent:
-                    Group = "エージェント";
-                    Tooltip = $"[{Group}] {recp.Name}";
-                    break;
-                case Outlook.OlDisplayType.olForum:
-                    Group = "フォーラム";
-                    Tooltip = $"[{Group}] {recp.Name}";
+                    Domain = "送信先リスト";
                     break;
                 default:
-                    Group = "不明な宛先";
-                    Tooltip = $"[{Group}] {recp.Name}";
+                    Domain = "その他";
                     break;
             }
+            Address = recp.Name;
+            Help = $"[{Domain}] {recp.Name}";
+            return new MailRecipient(Type, Address, Domain, Help, IsSMTP);
         }
 
-        private static string GetDomain(string addr)
+        private static bool CheckSMTP(Outlook.Recipient recp)
         {
-            return addr.Substring(addr.IndexOf('@') + 1);
+            if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser)
+            {
+                return recp.AddressEntry.Type == "SMTP";
+            }
+            return false;
         }
 
-        private static string GetSendType(Outlook.Recipient recp)
+        private static string GetType(Outlook.Recipient recp)
         {
             switch (recp.Type)
             {

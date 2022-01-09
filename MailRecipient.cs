@@ -19,7 +19,7 @@ namespace CheckMyMail
         public string Address { get; }
         public string Domain { get; }
         public string Help { get; }
-        private bool IsSMTP { get; }
+        public bool IsSMTP { get; }
 
         public int CompareTo(object other)
         {

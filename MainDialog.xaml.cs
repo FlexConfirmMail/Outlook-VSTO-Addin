@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -40,9 +41,30 @@ namespace CheckMyMail
             {
                 spFile.Children.Add(NewCheckBox(item.FileName, item.FileName));
             }
+            CheckDomainCount(trusted.Concat(ext).ToList());
 
             /* Show the subject string in title bar */
             this.Title = $"{mail.Subject} - CheckMyMail";
+        }
+
+        private void CheckDomainCount(List<MailRecipient> list)
+        {
+            var domains = new HashSet<string>();
+            foreach (MailRecipient recp in list)
+            {
+                if (recp.IsSMTP && recp.Type != "Bcc" && !domains.Contains(recp.Domain))
+                {
+                    domains.Add(recp.Domain);
+                }
+            }
+            if (domains.Count > 3)
+            {
+                spFile.Children.Add(NewCheckBox(
+                    "[警告] To・Ccに4件以上のドメインが含まれています。",
+                    @"多数のドメインが検知された場合の警告です。
+ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
+                ));
+            }
         }
 
         private void RenderAddressList(StackPanel sp, List<MailRecipient> list)

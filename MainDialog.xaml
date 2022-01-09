@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CheckMyMail"
              mc:Ignorable="d" Width="750" Height="500"
-             Title="宛先と添付ファイルの一覧を表示しています - CheckMyMail">
+             Title="">
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="375*"/>
@@ -13,9 +13,9 @@
             <ColumnDefinition Width="185*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="265*"/>
-            <RowDefinition Height="125*"/>
-            <RowDefinition Height="30*"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="32*"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,0,10,10" Width="160" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Height="20" Grid.Column="2">
             <Button x:Name="ButtonOK" Content="送信" Width="75" IsEnabled="False" Click="HandleClickOK" ToolTip="メールを送信します"/>

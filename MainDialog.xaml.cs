@@ -61,7 +61,7 @@ namespace CheckMyMail
             {
                 if (config.TrustedDomains.Contains(recp.Group))
                 {
-                    sp = spInt;
+                    sp = spTrusted;
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace CheckMyMail
 
         void HandleClickCB(object sender, RoutedEventArgs e)
         {
-            if (AllChecked(spInt) && AllChecked(spExt) && AllChecked(spFile))
+            if (AllChecked(spTrusted) && AllChecked(spExt) && AllChecked(spFile))
             {
                 ButtonOK.IsEnabled = true;
             }

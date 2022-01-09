@@ -24,7 +24,7 @@
         <Label x:Name="labelHint" Content="" Grid.Row="2" Width="555" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="10,0,0,0" Grid.ColumnSpan="2"/>
         <GroupBox Header="社内の送信先" Margin="10,10,10,0">
             <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="5">
-                <StackPanel x:Name="spInt"/>
+                <StackPanel x:Name="spTrusted"/>
             </Border>
         </GroupBox>
         <GroupBox Header="その他の送信先" Margin="0,10,10,0" Grid.Column="1" Grid.ColumnSpan="2">

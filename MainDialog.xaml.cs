@@ -105,6 +105,7 @@ namespace CheckMyMail
         {
             ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.SteelBlue;
         }
+
         void HandleMouseLeave(object sender, RoutedEventArgs e)
         {
             ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.Black;
@@ -112,14 +113,7 @@ namespace CheckMyMail
 
         void HandleClickCB(object sender, RoutedEventArgs e)
         {
-            if (AllChecked(spTrusted) && AllChecked(spExt) && AllChecked(spFile))
-            {
-                ButtonOK.IsEnabled = true;
-            }
-            else
-            {
-                ButtonOK.IsEnabled = false;
-            }
+            ButtonOK.IsEnabled = IsAllChecked(spTrusted) && IsAllChecked(spExt) && IsAllChecked(spFile);
         }
 
         void HandleClickOK(object sender, RoutedEventArgs e)
@@ -127,7 +121,7 @@ namespace CheckMyMail
             this.DialogResult = true;
         }
 
-        private bool AllChecked(StackPanel sp)
+        private static bool IsAllChecked(StackPanel sp)
         {
             foreach (UIElement e in sp.Children)
             {

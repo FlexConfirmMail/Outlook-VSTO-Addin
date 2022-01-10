@@ -2,9 +2,9 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-title:     CheckMyMail管理者マニュアル v1.0.1
+title:     CheckMyMail管理者マニュアル v1.1.0
 author:    DeneBrowser
-date:      2021-12-29
+date:      2022-01-10
 logo:      cmm-logo.png
 logo-width: 300
 titlepage: true

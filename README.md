@@ -1,12 +1,12 @@
-CheckMyMail
+FlexConfirmMail
 ===========
 
 メールの誤送信を防止するためのOutlook向けアドオンです。
 
-![CheckMyMail logo](doc/CheckMyMailGuide/cmm-logo.png)
+![FlexConfirmMail logo](doc/FlexConfirmMailGuide/cmm-logo.png)
 
- * 公式サイト: https://denebrowser.github.io/CheckMyMail/
- * インストーラ: https://github.com/DeneBrowser/CheckMyMail/releases
+ * 公式サイト: https://denebrowser.github.io/FlexConfirmMail/
+ * インストーラ: https://github.com/DeneBrowser/FlexConfirmMail/releases
 
 **主な機能**
 
@@ -16,7 +16,7 @@ CheckMyMail
 
 **使い方**
 
- 1. リリースページからCheckMyMailの最新版のインストーラを取得します。
+ 1. リリースページからFlexConfirmMailの最新版のインストーラを取得します。
  2. 導入対象の端末でインストーラを実行します。
  3. Outlookを立ち上げて動作を確認します。
 

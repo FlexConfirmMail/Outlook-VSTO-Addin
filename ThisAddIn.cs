@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
-namespace CheckMyMail
+namespace FlexConfirmMail
 {
     public partial class ThisAddIn
     {

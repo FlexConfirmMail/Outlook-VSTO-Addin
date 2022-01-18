@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Controls;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
-namespace CheckMyMail
+namespace FlexConfirmMail
 {
     /// <summary>
     /// MainDialog.xaml の相互作用ロジック
@@ -47,7 +47,7 @@ namespace CheckMyMail
             CheckUnsafeDomain(all, config);
 
             /* Show the subject string in title bar */
-            this.Title = $"{mail.Subject} - CheckMyMail";
+            this.Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
         private void CheckUnsafeDomain(List<MailRecipient> list, Config config)

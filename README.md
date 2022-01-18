@@ -3,7 +3,7 @@ FlexConfirmMail
 
 メールの誤送信を防止するためのOutlook向けアドオンです。
 
-![FlexConfirmMail logo](doc/FlexConfirmMailGuide/cmm-logo.png)
+![FlexConfirmMail logo](doc/FlexConfirmMailGuide/fcm-logo.png)
 
  * 公式サイト: https://denebrowser.github.io/FlexConfirmMail/
  * インストーラ: https://github.com/DeneBrowser/FlexConfirmMail/releases

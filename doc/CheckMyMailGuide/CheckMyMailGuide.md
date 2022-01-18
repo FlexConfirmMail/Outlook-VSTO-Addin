@@ -5,7 +5,7 @@ CJKoptions:
 title:     CheckMyMail管理者マニュアル v1.1.0
 author:    DeneBrowser
 date:      2022-01-10
-logo:      cmm-logo.png
+logo:      fcm-logo.png
 logo-width: 300
 titlepage: true
 colorlinks: true
@@ -45,7 +45,7 @@ CheckMyMailインストーラには次のファイルが含まれています。
 | CheckMyMail.dll          | CheckMyMail本体                     |
 | CheckMyMail.dll.manifest | CheckMyMailマニフェスト             |
 | CheckMyMail.vsto         | Outlook向けのアドオン定義           |
-| cmm.ico                  | アイコンファイル                    |
+| fcm.ico                  | アイコンファイル                    |
 | unins000.exe             | アンインストーラ                    |
 | unins000.dat             | アンインストーラ（データファイル）  |
 | Microsoft.Office.Tools.Common.v4.0.Utilities.dll | VSTOアドオンライブラリ |

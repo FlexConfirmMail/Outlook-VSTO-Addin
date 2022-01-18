@@ -4,7 +4,7 @@ AppVerName=FlexConfirmMail
 VersionInfoVersion=1.1.0.0
 AppPublisher=ClearCode Inc.
 AppVersion=1.1.0
-UninstallDisplayIcon={app}\cmm.ico
+UninstallDisplayIcon={app}\fcm.ico
 DefaultDirName={commonpf}\FlexConfirmMail
 Compression=lzma2
 SolidCompression=yes
@@ -41,6 +41,6 @@ Source: "bin\Release\FlexConfirmMail.dll.manifest"; DestDir: "{app}"; Flags: ign
 Source: "bin\Release\FlexConfirmMail.vsto"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "doc\cmm.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "doc\fcm.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "doc\trusted.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall
 Source: "doc\unsafe.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall

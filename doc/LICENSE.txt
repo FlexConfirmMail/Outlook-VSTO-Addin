@@ -1,7 +1,7 @@
 License
 =======
 
-CheckMyMailGuide depnds on Eisvogel as the base design template.
+FlexConfirmMailGuide uses Eisvogel as the base design template.
 
 ### eisvogel.tex
 

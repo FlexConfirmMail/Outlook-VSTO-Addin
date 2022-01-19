@@ -20,7 +20,7 @@ titlepage-rule-height: 2
 
 # FlexConfirmMailとは
 
-FlexConfirmMail for Outlook （以下、本文書では FlexConfirmMail と呼びます）は、
+FlexConfirmMail for Outlook （本文書では FlexConfirmMail と呼びます）とは、
 誤送信を防止するためのオープンソースのOutlookアドオンです。
 送信時に宛先と添付ファイルをダイアログで確認することで、送信ミスを防ぎます。
 
@@ -60,7 +60,7 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 
 ## FlexConfirmMailをインストールする
 
-1. 最新のインストーラを取得します。
+1. FlexConfirmMailSetup.exe を端末に配置します。
 
 2. インストーラを実行し、ウィザードを完遂させます。
 
@@ -70,7 +70,7 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 
    ![](warning.png){width=400}
 
-4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にFlexConfirmMailがあることが確認できれば成功です。
+4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にFlexConfirmMailが存在していれば成功です。
 
    ![](option.png){width=400}
 

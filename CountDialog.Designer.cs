@@ -1,4 +1,4 @@
-﻿namespace CheckMyMail
+﻿namespace FlexConfirmMail
 {
     partial class CountDialog
     {
@@ -95,7 +95,7 @@
             this.Controls.Add(label2);
             this.Controls.Add(this.labelCount);
             this.Name = "CountDialog";
-            this.Text = "送信カウントダウン - CheckMyMail";
+            this.Text = "送信カウントダウン - FlexConfirmMail";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CountDialog_Closing);
             this.Shown += new System.EventHandler(this.CountDialog_Shown);
             this.ResumeLayout(false);

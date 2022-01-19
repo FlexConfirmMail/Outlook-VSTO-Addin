@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 using System.IO;
 
-namespace CheckMyMail
+namespace FlexConfirmMail
 {
     public class Config
     {
-        const String ROOTPATH = @"C:\ProgramData\CheckMyMail\";
+        const String ROOTPATH = @"C:\ProgramData\FlexConfirmMail\";
         public const String DOMAIN_EXCHANGE = "Exchange";
 
         public HashSet<string> TrustedDomains = new HashSet<string>();

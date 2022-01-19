@@ -8,12 +8,12 @@ jobs:
       - uses: microsoft/setup-msbuild@v1.0.2
       - name: Generate self-signed cert
         run: |
-          $cert = New-SelfSignedCertificate -Subject "CN=CheckMyMailSelfSign" -Type CodeSigningCert -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
-          (Get-Content CheckMyMail.csproj) -Replace '<ManifestCertificateThumbprint>[^<]*',("<ManifestCertificateThumbprint>" + $cert.Thumbprint) | Set-Content CheckMyMail.csproj
+          $cert = New-SelfSignedCertificate -Subject "CN=FlexConfirmMailSelfSign" -Type CodeSigningCert -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
+          (Get-Content FlexConfirmMail.csproj) -Replace '<ManifestCertificateThumbprint>[^<]*',("<ManifestCertificateThumbprint>" + $cert.Thumbprint) | Set-Content FlexConfirmMail.csproj
       - name: Compile
         run: msbuild /p:Configuration=Release
       - name: Make Installer
-        run: iscc.exe CheckMyMail.iss
+        run: iscc.exe FlexConfirmMail.iss
       - name: Upload Installer
         uses: actions/upload-artifact@v2
         with:

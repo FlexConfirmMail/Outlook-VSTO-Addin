@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CheckMyMail
+namespace FlexConfirmMail
 {
     public partial class CountDialog : Form
     {

@@ -2,10 +2,10 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-title:     CheckMyMail管理者マニュアル v1.1.0
-author:    DeneBrowser
-date:      2022-01-10
-logo:      cmm-logo.png
+title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v0.1.0
+author:    ClearCode Inc.
+date:      2022-01-19
+logo:      fcm-logo.png
 logo-width: 300
 titlepage: true
 colorlinks: true
@@ -18,9 +18,10 @@ titlepage-rule-color: "AA0000"
 titlepage-rule-height: 2
 ---
 
-# CheckMyMailとは
+# FlexConfirmMailとは
 
-CheckMyMailは、誤送信を防止するための、オープンソースのOutlookアドオンです。
+FlexConfirmMail for Outlook （以下、本文書では FlexConfirmMail と呼びます）は、
+誤送信を防止するためのオープンソースのOutlookアドオンです。
 送信時に宛先と添付ファイルをダイアログで確認することで、送信ミスを防ぎます。
 
  * メールの送信時に、宛先と添付ファイルを確認するダイアログを表示します。
@@ -29,7 +30,7 @@ CheckMyMailは、誤送信を防止するための、オープンソースのOut
 
 ## システム要件
 
-CheckMyMailは次のシステムをサポートしています。
+FlexConfirmMailは次のシステムをサポートしています。
 
  | 項目             | サポートバージョン |
  | ---------------- | ------------------ |
@@ -38,16 +39,16 @@ CheckMyMailは次のシステムをサポートしています。
 
 ## ソフトウェアの構成
 
-CheckMyMailインストーラには次のファイルが含まれています。
+FlexConfirmMailインストーラには次のファイルが含まれています。
 
-| ファイル                 |  設定内容                           |
-| ------------------------ | ----------------------------------- |
-| CheckMyMail.dll          | CheckMyMail本体                     |
-| CheckMyMail.dll.manifest | CheckMyMailマニフェスト             |
-| CheckMyMail.vsto         | Outlook向けのアドオン定義           |
-| cmm.ico                  | アイコンファイル                    |
-| unins000.exe             | アンインストーラ                    |
-| unins000.dat             | アンインストーラ（データファイル）  |
+| ファイル                     |  設定内容                           |
+| ---------------------------- | ----------------------------------- |
+| FlexConfirmMail.dll          | FlexConfirmMail本体                 |
+| FlexConfirmMail.dll.manifest | FlexConfirmMailマニフェスト         |
+| FlexConfirmMail.vsto         | Outlook向けのアドオン定義           |
+| fcm.ico                      | アイコンファイル                    |
+| unins000.exe                 | アンインストーラ                    |
+| unins000.dat                 | アンインストーラ（データファイル）  |
 | Microsoft.Office.Tools.Common.v4.0.Utilities.dll | VSTOアドオンライブラリ |
 | Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll | VSTOアドオンライブラリ |
 
@@ -55,13 +56,11 @@ CheckMyMailインストーラには次のファイルが含まれています。
 
 # 導入とセットアップ
 
-この章ではCheckMyMailのインストール（およびアンインストール）手順を解説します。
+この章ではFlexConfirmMailのインストール（およびアンインストール）手順を解説します。
 
-## CheckMyMailをインストールする
+## FlexConfirmMailをインストールする
 
-1. [リリースページ](https://github.com/DeneBrowser/CheckMyMail/releases/)から最新のインストーラを取得します。
-
-   ![](download.png){width=400}
+1. 最新のインストーラを取得します。
 
 2. インストーラを実行し、ウィザードを完遂させます。
 
@@ -71,28 +70,28 @@ CheckMyMailインストーラには次のファイルが含まれています。
 
    ![](warning.png){width=400}
 
-4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にCheckMyMailがあることが確認できれば成功です。
+4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にFlexConfirmMailがあることが確認できれば成功です。
 
    ![](option.png){width=400}
 
-## CheckMyMailをアンインストールする
+## FlexConfirmMailをアンインストールする
 
  1. スタートメニューから「プログラムの追加と削除」を起動します。
 
- 2. CheckMyMailを選択し「アンインストール」を選択します。
+ 2. FlexConfirmMailを選択し「アンインストール」を選択します。
 
- 3. ディレクトリ`C:\ProgramData\CheckMyMail`を削除します。
+ 3. ディレクトリ`C:\ProgramData\FlexConfirmMail`を削除します。
 
 \newpage
 
-# CheckMyMailの設定
+# FlexConfirmMailの設定
 
- * CheckMyMailの設定ファイルは`C:\ProgramData\CheckMyMail`ディレクトリに配置します。
+ * FlexConfirmMailの設定ファイルは`C:\ProgramData\FlexConfirmMail`ディレクトリに配置します。
  * 設定ファイルの文字コードは「UTF-8」のみサポートしています。
 
 ## 社内ドメインを設定する
 
- 1. テキストエディタで`C:\ProgramData\CheckMyMail\trusted.txt`を開きます。
+ 1. テキストエディタで`C:\ProgramData\FlexConfirmMail\trusted.txt`を開きます。
 
  2. ファイルに社内の宛先として登録したいドメインを追記します。
 
@@ -104,7 +103,7 @@ CheckMyMailインストーラには次のファイルが含まれています。
 
 宛先に含まれる場合に、特に注意が必要なドメインの一覧を設定します。
 
- 1. テキストエディタで`C:\ProgramData\CheckMyMail\unsafe.txt`を開きます。
+ 1. テキストエディタで`C:\ProgramData\FlexConfirmMail\unsafe.txt`を開きます。
 
  2. ファイルに対象となるドメインを追記します。
 
@@ -120,11 +119,11 @@ CheckMyMailインストーラには次のファイルが含まれています。
 
 ## インストーラをサイレント実行したい
 
-組織の端末に配布する時などに、CheckMyMailをサイレントインストールしたい場合は、
+組織の端末に配布する時などに、FlexConfirmMailをサイレントインストールしたい場合は、
 次のように `/SILENT` オプションを利用します。
 
 ```
-% CheckMyMailSetup.exe /SILENT
+% FlexConfirmMailSetup.exe /SILENT
 ```
 
 ## アドオンが自動的に無効化されるのを防止したい
@@ -132,7 +131,7 @@ CheckMyMailインストーラには次のファイルが含まれています。
 Office 2013以降にはパフォーマンスを自動的に最適化する機能が組み込まれており、
 その一環としてアドオンを自動的に無効化することがあります。
 
-CheckMyMailが自動的に無効化されるのを防止するには、グループポリシーで下記の設定を追加ください。
+FlexConfirmMailが自動的に無効化されるのを防止するには、グループポリシーで下記の設定を追加ください。
 
  1. グループポリシーエディタを開き、「ユーザーの構成」を開く。
 
@@ -142,7 +141,7 @@ CheckMyMailが自動的に無効化されるのを防止するには、グルー
 
  4. 設定を「有効」にした上で、オプション欄の「表示」ボタンをクリックする。
 
- 5. 値の名前に`DeneBrowser.CheckMyMail`と入力し、値を`1`に設定する。
+ 5. 値の名前に`FlexConfirmMail`と入力し、値を`1`に設定する。
 
     ![](resiliency.png){width=300}
 

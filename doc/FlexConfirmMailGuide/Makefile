@@ -5,7 +5,7 @@ PANDOC_OPT_PDF= --toc-depth=2 -N --table-of-contents -f markdown+autolink_bare_u
                 -V classoption=titlepage \
                 --pdf-engine=xelatex
 
-all: CheckMyMailGuide.pdf
+all: FlexConfirmMailGuide.pdf
 
 %.pdf: %.md
 	pandoc ${PANDOC_OPT_PDF} -o $@ < $^

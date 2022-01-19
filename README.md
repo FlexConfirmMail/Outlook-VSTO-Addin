@@ -1,12 +1,12 @@
-FlexConfirmMail
-===========
+FlexConfirmMail for Outlook
+===========================
 
 メールの誤送信を防止するためのOutlook向けアドオンです。
 
 ![FlexConfirmMail logo](doc/FlexConfirmMailGuide/fcm-logo.png)
 
- * 公式サイト: https://denebrowser.github.io/FlexConfirmMail/
- * インストーラ: https://github.com/DeneBrowser/FlexConfirmMail/releases
+ * 公式サイト: https://flexconfirmmail.github.io/
+ * インストーラ: https://github.com/FlexConfirmMail/Outlook/releases
 
 **主な機能**
 
@@ -20,6 +20,18 @@ FlexConfirmMail
  2. 導入対象の端末でインストーラを実行します。
  3. Outlookを立ち上げて動作を確認します。
 
-**紹介動画（音声無し・25秒）**
+**開発手順**
 
-https://user-images.githubusercontent.com/8974561/147380768-97c41d35-28be-4a86-b0a0-18016931bc92.mp4
+ 1. 開発用のVisual Studio 2019環境を用意します。
+    * Visual Studio 2019をターゲットにしています。
+ 2. Visual Studio Installerで次のコンポーネントを追加します。
+    * `Workloads > Office/Sharepoint Development`
+    * `個別のコンポーネント > Visual Studio Tools for Office (VSTO)`
+ 3. 開発用のOfficeアプリを用意します（任意）
+    * コンパイルのみであれば必要ありませんが、用意すると開発上は便利です。
+ 4. Visual StudioでFlexConfirmMailプロジェクトを開きます。
+ 5. VSTO開発用のダミー証明書を生成します
+    * ソリューションエクスプローラでFlexConfirmMailを右クリックします。
+    * Properties > Signing > Create Test Certificate を順に選択します。
+    * OKを押して確定します（パスワードは不要です）
+ 6. ビルドを開始します。

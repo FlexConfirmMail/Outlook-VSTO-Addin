@@ -36,7 +36,7 @@
                 </ScrollViewer>
             </Border>
         </GroupBox>
-        <GroupBox Header="添付ファイル" Margin="10,10,10,5" Grid.ColumnSpan="3" Grid.Row="1">
+        <GroupBox Header="添付ファイル／その他の警告" Margin="10,10,10,5" Grid.ColumnSpan="3" Grid.Row="1">
             <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Margin="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Padding="5">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                     <StackPanel x:Name="spFile"/>

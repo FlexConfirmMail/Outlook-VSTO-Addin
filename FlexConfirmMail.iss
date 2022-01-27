@@ -42,5 +42,5 @@ Source: "bin\Release\FlexConfirmMail.vsto"; DestDir: "{app}"; Flags: ignoreversi
 Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "doc\fcm.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "doc\trusted.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall
-Source: "doc\unsafe.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall
+Source: "doc\trusted.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Permissions: users-modify
+Source: "doc\unsafe.txt"; DestDir: "{commonappdata}\FlexConfirmMail"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall; Permissions: users-modify

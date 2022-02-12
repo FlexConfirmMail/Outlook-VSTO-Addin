@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Collections.Generic;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail.Dialog
@@ -47,7 +47,7 @@ namespace FlexConfirmMail.Dialog
             CheckUnsafeDomain(all, config);
 
             /* Show the subject string in title bar */
-            this.Title = $"{mail.Subject} - FlexConfirmMail";
+            Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
         private void CheckUnsafeDomain(List<MailRecipient> list, Config config)
@@ -135,24 +135,24 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             return true;
         }
 
-        void HandleMouseEnter(object sender, RoutedEventArgs e)
+        private void HandleMouseEnter(object sender, RoutedEventArgs e)
         {
             ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.SteelBlue;
         }
 
-        void HandleMouseLeave(object sender, RoutedEventArgs e)
+        private void HandleMouseLeave(object sender, RoutedEventArgs e)
         {
             ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.Black;
         }
 
-        void HandleClickCB(object sender, RoutedEventArgs e)
+        private void HandleClickCB(object sender, RoutedEventArgs e)
         {
             ButtonOK.IsEnabled = IsAllChecked(spTrusted) && IsAllChecked(spExt) && IsAllChecked(spFile);
         }
 
-        void HandleClickOK(object sender, RoutedEventArgs e)
+        private void HandleClickOK(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            DialogResult = true;
         }
     }
 }

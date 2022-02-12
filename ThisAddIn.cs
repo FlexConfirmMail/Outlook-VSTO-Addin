@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using FlexConfirmMail.Dialog;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail

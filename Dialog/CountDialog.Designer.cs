@@ -1,4 +1,4 @@
-﻿namespace FlexConfirmMail
+﻿namespace FlexConfirmMail.Dialog
 {
     partial class CountDialog
     {

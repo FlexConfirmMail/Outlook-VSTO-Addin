@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows.Controls;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
-namespace FlexConfirmMail
+namespace FlexConfirmMail.Dialog
 {
     /// <summary>
     /// MainDialog.xaml の相互作用ロジック

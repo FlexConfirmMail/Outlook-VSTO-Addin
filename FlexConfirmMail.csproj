@@ -163,21 +163,21 @@
     can be found.
   -->
   <ItemGroup>
-    <Compile Include="MailRecipient.cs" />
+    <Compile Include="Dialog\Helper.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="CountDialog.cs">
+    <Compile Include="Dialog\CountDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CountDialog.Designer.cs">
+    <Compile Include="Dialog\CountDialog.Designer.cs">
       <DependentUpon>CountDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainDialog.xaml.cs">
+    <Compile Include="Dialog\MainDialog.xaml.cs">
       <DependentUpon>MainDialog.xaml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="CountDialog.resx">
+    <EmbeddedResource Include="Dialog\CountDialog.resx">
       <DependentUpon>CountDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -209,7 +209,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainDialog.xaml">
+    <Page Include="Dialog\MainDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

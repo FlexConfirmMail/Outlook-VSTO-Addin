@@ -1,7 +1,7 @@
 ﻿using Outlook = Microsoft.Office.Interop.Outlook;
 using System;
 
-namespace FlexConfirmMail
+namespace FlexConfirmMail.Dialog
 {
     public class MailRecipient : IComparable
     {

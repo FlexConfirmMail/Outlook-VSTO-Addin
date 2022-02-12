@@ -165,21 +165,15 @@
   <ItemGroup>
     <Compile Include="Dialog\Helper.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="Dialog\CountDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dialog\CountDialog.Designer.cs">
-      <DependentUpon>CountDialog.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Dialog\MainDialog.xaml.cs">
       <DependentUpon>MainDialog.xaml</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Dialog\CountDialog.resx">
-      <DependentUpon>CountDialog.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="Dialog\CountDialog.xaml.cs">
+      <DependentUpon>CountDialog.xaml</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -210,6 +204,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dialog\MainDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\CountDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

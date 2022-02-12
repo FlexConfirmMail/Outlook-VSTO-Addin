@@ -1,0 +1,23 @@
+﻿<Window x:Class="FlexConfirmMail.Dialog.CountDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlexConfirmMail"
+             mc:Ignorable="d" Width="400" Height="270"
+             Closing="HandleClosing" Loaded="HandleLoaded" Title="送信カウントダウン - FlexConfirmMail">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="42,10,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
+            <Label x:Name="labelCount" Content="0" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="5,0,5,0" FontSize="130"/>
+            <Label Content="秒後に送信します" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="0,0,0,30" FontSize="30" VerticalAlignment="Bottom" UseLayoutRounding="False"/>
+        </StackPanel>
+        <StackPanel Margin="0,0,10,10" Width="160" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Height="20">
+            <Button x:Name="ButtonOK" Content="今すぐ送信" Width="75" Click="HandleClickOK" ToolTip="メールを送信します"/>
+            <Button Content="キャンセル" Width="75" Margin="10,0,0,0" IsCancel="True" ToolTip="メールの送信を中止します"/>
+        </StackPanel>
+    </Grid>
+</Window>

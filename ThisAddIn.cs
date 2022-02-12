@@ -30,7 +30,7 @@ namespace FlexConfirmMail
                 if (mainDialog.ShowDialog() == true)
                 {
                     CountDialog countDialog = new CountDialog();
-                    if (countDialog.ShowDialog() == DialogResult.OK)
+                    if (countDialog.ShowDialog() == true)
                     {
 #if !DEBUG
                         Cancel = false;

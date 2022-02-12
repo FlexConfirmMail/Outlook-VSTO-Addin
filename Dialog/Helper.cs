@@ -3,83 +3,38 @@ using System;
 
 namespace FlexConfirmMail.Dialog
 {
-    public class MailRecipient : IComparable
+    internal class RecipientInfo : IComparable
     {
-        public MailRecipient(string type, string address, string domain,
-                         string help, bool isSMTP)
+        public string Type { get; set; }
+        public string Address { get; set; }
+        public string Domain { get; set; }
+        public string Help { get; set; }
+        public bool IsSMTP { get; set; }
+
+        public RecipientInfo(Outlook.Recipient recp)
         {
-            Type = type;
-            Address = address;
-            Domain = domain;
-            Help = help;
-            IsSMTP = isSMTP;
+            if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser
+                && recp.AddressEntry.Type == "SMTP")
+            {
+                FromSMTP(recp);
+            }
+            else
+            {
+                FromOther(recp);
+            }
         }
 
-        public string Type { get; }
-        public string Address { get; }
-        public string Domain { get; }
-        public string Help { get; }
-        public bool IsSMTP { get; }
-
-        public int CompareTo(object other)
+        private void FromSMTP(Outlook.Recipient recp)
         {
-            if (other == null) return 1;
-
-            MailRecipient omr = other as MailRecipient;
-            /*
-             * Non-SMTP addresses come first.
-             */
-            if (IsSMTP && !omr.IsSMTP)
-                return 1;
-            if (!IsSMTP && omr.IsSMTP)
-                return -1;
-
-            /*
-             * Sort by domain. This is the crux that essentially
-             * makes MainDialog.RenderAddressList() work.
-             */
-            var ret = String.Compare(Domain, omr.Domain);
-            if (ret != 0)
-            {
-                return ret;
-            }
-
-            /* Sort by recipient types (To > Cc > Bcc) */
-            ret = String.Compare(Type, omr.Type);
-            if (ret != 0)
-            {
-                return -ret;
-            }
-            return String.Compare(Address, omr.Address);
+            Type = GetType(recp);
+            Address = recp.Address;
+            Domain = Address.Substring(Address.IndexOf('@') + 1);
+            Help = Address;
+            IsSMTP = true;
         }
-    }
 
-    class MailRecipientFactory
-    {
-        static public MailRecipient Create(Outlook.Recipient recp)
+        private void FromOther(Outlook.Recipient recp)
         {
-            string Type = GetType(recp);
-            string Address;
-            string Domain;
-            string Help;
-            bool IsSMTP = CheckSMTP(recp);
-
-            /*
-             * First, we process normal SMTP entries. This is the easiest
-             * part, because they are just addresses like "foo@example.com".
-             */
-            if (IsSMTP)
-            {
-                Address = recp.Address;
-                Help = Address;
-                Domain = Address.Substring(Address.IndexOf('@') + 1);
-                return new MailRecipient(Type, Address, Domain, Help, IsSMTP);
-            }
-
-            /*
-             * Next we need to handle the non-SMTP recipients. For details, see:
-             * https://docs.microsoft.com/en-us/dotnet/api/microsoft.office.interop.outlook.oldisplaytype
-             */
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:
@@ -96,18 +51,11 @@ namespace FlexConfirmMail.Dialog
                     Domain = "その他";
                     break;
             }
-            Address = recp.Name;
-            Help = $"[{Domain}] {recp.Name}";
-            return new MailRecipient(Type, Address, Domain, Help, IsSMTP);
-        }
 
-        private static bool CheckSMTP(Outlook.Recipient recp)
-        {
-            if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser)
-            {
-                return recp.AddressEntry.Type == "SMTP";
-            }
-            return false;
+            Type = GetType(recp);
+            Address = recp.Name;
+            Help = $"[{Domain}] {Address}";
+            IsSMTP = false;
         }
 
         private static string GetType(Outlook.Recipient recp)
@@ -121,6 +69,41 @@ namespace FlexConfirmMail.Dialog
                 default:
                     return "To";
             }
+        }
+
+        public int CompareTo(object other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            RecipientInfo info = other as RecipientInfo;
+
+            /*
+             * Non-SMTP addresses come first.
+             */
+            if (IsSMTP && !info.IsSMTP)
+                return 1;
+            if (!IsSMTP && info.IsSMTP)
+                return -1;
+
+            /*
+             * Sort by domain. This is the crux that essentially
+             * makes MainDialog.RenderAddressList() work.
+             */
+            var ret = String.Compare(Domain, info.Domain);
+            if (ret != 0)
+            {
+                return ret;
+            }
+
+            /* Sort by recipient types (To > Cc > Bcc) */
+            ret = String.Compare(Type, info.Type);
+            if (ret != 0)
+            {
+                return -ret;
+            }
+            return String.Compare(Address, info.Address);
         }
     }
 }

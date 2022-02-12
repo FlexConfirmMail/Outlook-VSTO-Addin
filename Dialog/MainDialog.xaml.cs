@@ -19,19 +19,19 @@ namespace FlexConfirmMail.Dialog
 
         public void LoadMail(Outlook.MailItem mail, Config config)
         {
-            var trusted = new List<MailRecipient>();
-            var ext = new List<MailRecipient>();
+            var trusted = new List<RecipientInfo>();
+            var ext = new List<RecipientInfo>();
 
             foreach (Outlook.Recipient recp in mail.Recipients)
             {
-                var mr = MailRecipientFactory.Create(recp);
-                if (config.TrustedDomains.Contains(mr.Domain))
+                var info = new RecipientInfo(recp);
+                if (config.TrustedDomains.Contains(info.Domain))
                 {
-                    trusted.Add(mr);
+                    trusted.Add(info);
                 }
                 else
                 {
-                    ext.Add(mr);
+                    ext.Add(info);
                 }
             }
             RenderAddressList(spTrusted, trusted);
@@ -50,30 +50,30 @@ namespace FlexConfirmMail.Dialog
             Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
-        private void CheckUnsafeDomain(List<MailRecipient> list, Config config)
+        private void CheckUnsafeDomain(List<RecipientInfo> list, Config config)
         {
             var domains = new HashSet<string>();
-            foreach (MailRecipient recp in list)
+            foreach (RecipientInfo info in list)
             {
-                if (config.UnsafeDomains.Contains(recp.Domain) && !domains.Contains(recp.Domain))
+                if (config.UnsafeDomains.Contains(info.Domain) && !domains.Contains(info.Domain))
                 {
                     spFile.Children.Add(NewCheckBox(
-                        $"[警告] 注意が必要なドメイン（{recp.Domain}）が宛先に含まれています。",
+                        $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
                         "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
                     ));
-                    domains.Add(recp.Domain);
+                    domains.Add(info.Domain);
                 }
             }
         }
 
-        private void CheckDomainCount(List<MailRecipient> list)
+        private void CheckDomainCount(List<RecipientInfo> list)
         {
             var domains = new HashSet<string>();
-            foreach (MailRecipient recp in list)
+            foreach (RecipientInfo info in list)
             {
-                if (recp.IsSMTP && recp.Type != "Bcc" && !domains.Contains(recp.Domain))
+                if (info.IsSMTP && info.Type != "Bcc" && !domains.Contains(info.Domain))
                 {
-                    domains.Add(recp.Domain);
+                    domains.Add(info.Domain);
                 }
             }
             if (domains.Count > 3)
@@ -86,19 +86,19 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             }
         }
 
-        private void RenderAddressList(StackPanel sp, List<MailRecipient> list)
+        private void RenderAddressList(StackPanel sp, List<RecipientInfo> list)
         {
             var domains = new HashSet<string>();
             list.Sort();
 
-            foreach (MailRecipient recp in list)
+            foreach (RecipientInfo info in list)
             {
-                if (!domains.Contains(recp.Domain))
+                if (!domains.Contains(info.Domain))
                 {
-                    sp.Children.Add(NewDomainLabel(recp.Domain));
-                    domains.Add(recp.Domain);
+                    sp.Children.Add(NewDomainLabel(info.Domain));
+                    domains.Add(info.Domain);
                 }
-                sp.Children.Add(NewCheckBox($"{recp.Type,-3}: {recp.Address}", recp.Help));
+                sp.Children.Add(NewCheckBox($"{info.Type,-3}: {info.Address}", info.Help));
             }
         }
 

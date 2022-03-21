@@ -12,8 +12,15 @@ namespace FlexConfirmMail
 
         public static string[] Get()
         {
-            Init();
-            return s_queue.ToArray();
+            try
+            {
+                Init();
+                return s_queue.ToArray();
+            }
+            catch
+            {
+                return new string[0];
+            }
         }
 
         private static void NoException(Action func)

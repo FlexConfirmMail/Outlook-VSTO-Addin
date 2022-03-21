@@ -44,23 +44,24 @@ namespace FlexConfirmMail.Dialog
                     ext.Add(info);
                 }
             }
-            RenderAddressList(spTrusted, trusted);
-            RenderAddressList(spExt, ext);
+            RenderAddressList(trusted, true);
+            RenderAddressList(ext, false);
+
+            var all = trusted.Concat(ext).ToList();
+            CheckSafeBcc(all);
+            CheckUnsafeDomains(all);
+            CheckUnsafeFiles(mail);
 
             foreach (Outlook.Attachment item in mail.Attachments)
             {
-                spFile.Children.Add(NewCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
+                spFile.Children.Add(getCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
             }
-
-            var all = trusted.Concat(ext).ToList();
-            CheckDomainCount(all);
-            CheckUnsafeDomain(all);
 
             /* Show the subject string in title bar */
             Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
-        private void CheckUnsafeDomain(List<RecipientInfo> list)
+        private void CheckUnsafeDomains(List<RecipientInfo> list)
         {
             HashSet<string> hsUnsafe = _config.GetHashSet(ConfigFile.UnsafeDomains);
             HashSet<string> done = new HashSet<string>();
@@ -74,7 +75,7 @@ namespace FlexConfirmMail.Dialog
 
                 if (hsUnsafe.Contains(info.Domain))
                 {
-                    spFile.Children.Add(NewCheckBox(
+                    spFile.Children.Add(getWarnCheckBox(
                         $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
                         "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
                     ));
@@ -83,7 +84,29 @@ namespace FlexConfirmMail.Dialog
             }
         }
 
-        private void CheckDomainCount(List<RecipientInfo> list)
+        private void CheckUnsafeFiles(Outlook.MailItem mail)
+        {
+            HashSet<string> unsafeFiles = _config.GetHashSet(ConfigFile.UnsafeFiles);
+
+            foreach (Outlook.Attachment item in mail.Attachments)
+            {
+                foreach (string word in unsafeFiles)
+                {
+
+                    if (item.FileName.Contains(word))
+                    {
+                        spFile.Children.Add(getWarnCheckBox(
+                            $"[警告] 注意が必要なファイル名（{word}）が含まれています。",
+                            $"添付ファイル「{item.FileName}」に注意が必要な単語が含まれているため、再確認を促す警告を出しています。"
+                        ));
+                        break;
+                    }
+
+                }
+            }
+        }
+
+        private void CheckSafeBcc(List<RecipientInfo> list)
         {
             if (!_config.GetBool(ConfigOption.SafeBccEnabled))
             {
@@ -106,7 +129,7 @@ namespace FlexConfirmMail.Dialog
             }
             if (domains.Count >= threshold)
             {
-                spFile.Children.Add(NewCheckBox(
+                spFile.Children.Add(getWarnCheckBox(
                     $"[警告] To・Ccに{threshold}件以上のドメインが含まれています。",
                     @"宛先に多数のドメインが検知されました。
 ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、
@@ -115,23 +138,35 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             }
         }
 
-        private void RenderAddressList(StackPanel sp, List<RecipientInfo> list)
+        private void RenderAddressList(List<RecipientInfo> list, bool trusted)
         {
             var domains = new HashSet<string>();
+            var sp = trusted ? spTrusted : spExt;
+            CheckBox cb;
+
             list.Sort();
 
             foreach (RecipientInfo info in list)
             {
                 if (!domains.Contains(info.Domain))
                 {
-                    sp.Children.Add(NewDomainLabel(info.Domain));
+                    sp.Children.Add(getDomainLabel(info.Domain));
                     domains.Add(info.Domain);
                 }
-                sp.Children.Add(NewCheckBox($"{info.Type,-3}: {info.Address}", info.Help));
+                if (trusted)
+                {
+                    cb = getCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
+                }
+                else
+                {
+                    cb = getWarnCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
+                }
+                sp.Children.Add(cb);
+
             }
         }
 
-        private Label NewDomainLabel(string title)
+        private Label getDomainLabel(string title)
         {
             var label = new Label();
             label.Content = title;
@@ -140,7 +175,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             return label;
         }
 
-        private CheckBox NewCheckBox(string title, string help)
+        private CheckBox getCheckBox(string title, string help)
         {
             var cb = new CheckBox();
             cb.Content = title;
@@ -149,6 +184,14 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             cb.Click += HandleClickCB;
             cb.MouseEnter += HandleMouseEnter;
             cb.MouseLeave += HandleMouseLeave;
+            return cb;
+        }
+
+        private CheckBox getWarnCheckBox(string title, string help)
+        {
+            CheckBox cb = getCheckBox(title, help);
+            cb.Foreground = System.Windows.Media.Brushes.Firebrick;
+            cb.FontWeight = FontWeight.FromOpenTypeWeight(500);
             return cb;
         }
 
@@ -166,12 +209,29 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
 
         private void HandleMouseEnter(object sender, RoutedEventArgs e)
         {
-            ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.SteelBlue;
+            var cb = (CheckBox)sender;
+            if (cb.Foreground == System.Windows.Media.Brushes.Firebrick)
+            {
+                  cb.Foreground = System.Windows.Media.Brushes.RosyBrown;
+            }
+            else
+            {
+                  cb.Foreground = System.Windows.Media.Brushes.SteelBlue;
+            }
         }
 
         private void HandleMouseLeave(object sender, RoutedEventArgs e)
         {
-            ((CheckBox)sender).Foreground = System.Windows.Media.Brushes.Black;
+
+            var cb = (CheckBox)sender;
+            if (cb.Foreground == System.Windows.Media.Brushes.RosyBrown)
+            {
+                cb.Foreground = System.Windows.Media.Brushes.Firebrick;
+            }
+            else
+            {
+                cb.Foreground = System.Windows.Media.Brushes.Black;
+            }
         }
 
         private void HandleClickCB(object sender, RoutedEventArgs e)

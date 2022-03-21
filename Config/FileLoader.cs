@@ -94,7 +94,7 @@ namespace FlexConfirmMail.Config
                 {
                     continue;
                 }
-                if (_tokenize(line, out key, out val))
+                if (TryParse(line, out key, out val))
                 {
                     _config.AddOption(key, val);
                     QueueLogger.Log($" - {key} = {val}");
@@ -102,7 +102,7 @@ namespace FlexConfirmMail.Config
             }
         }
 
-        private bool _tokenize(string line, out string key, out string val)
+        private bool TryParse(string line, out string key, out string val)
         {
             key = null;
             val = null;

@@ -53,7 +53,7 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in mail.Attachments)
             {
-                spFile.Children.Add(getCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
+                spFile.Children.Add(GetCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
             }
 
             /* Show the subject string in title bar */
@@ -74,7 +74,7 @@ namespace FlexConfirmMail.Dialog
 
                 if (hsUnsafe.Contains(info.Domain))
                 {
-                    spFile.Children.Add(getWarnCheckBox(
+                    spFile.Children.Add(GetWarnCheckBox(
                         $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
                         "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
                     ));
@@ -94,7 +94,7 @@ namespace FlexConfirmMail.Dialog
 
                     if (item.FileName.Contains(word))
                     {
-                        spFile.Children.Add(getWarnCheckBox(
+                        spFile.Children.Add(GetWarnCheckBox(
                             $"[警告] 注意が必要なファイル名（{word}）が含まれています。",
                             $"添付ファイル「{item.FileName}」に注意が必要な単語が含まれているため、再確認を促す警告を出しています。"
                         ));
@@ -128,7 +128,7 @@ namespace FlexConfirmMail.Dialog
             }
             if (domains.Count >= threshold)
             {
-                spFile.Children.Add(getWarnCheckBox(
+                spFile.Children.Add(GetWarnCheckBox(
                     $"[警告] To・Ccに{threshold}件以上のドメインが含まれています。",
                     @"宛先に多数のドメインが検知されました。
 ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、
@@ -149,23 +149,23 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             {
                 if (!domains.Contains(info.Domain))
                 {
-                    sp.Children.Add(getDomainLabel(info.Domain));
+                    sp.Children.Add(GetDomainLabel(info.Domain));
                     domains.Add(info.Domain);
                 }
                 if (trusted)
                 {
-                    cb = getCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
+                    cb = GetCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
                 }
                 else
                 {
-                    cb = getWarnCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
+                    cb = GetWarnCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
                 }
                 sp.Children.Add(cb);
 
             }
         }
 
-        private Label getDomainLabel(string title)
+        private Label GetDomainLabel(string title)
         {
             var label = new Label();
             label.Content = title;
@@ -174,7 +174,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             return label;
         }
 
-        private CheckBox getCheckBox(string title, string help)
+        private CheckBox GetCheckBox(string title, string help)
         {
             var cb = new CheckBox();
             cb.Content = title;
@@ -186,9 +186,9 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             return cb;
         }
 
-        private CheckBox getWarnCheckBox(string title, string help)
+        private CheckBox GetWarnCheckBox(string title, string help)
         {
-            CheckBox cb = getCheckBox(title, help);
+            CheckBox cb = GetCheckBox(title, help);
             cb.Foreground = System.Windows.Media.Brushes.Firebrick;
             cb.FontWeight = FontWeight.FromOpenTypeWeight(500);
             return cb;

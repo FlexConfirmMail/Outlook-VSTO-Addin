@@ -11,7 +11,7 @@ namespace FlexConfirmMail
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
             this.Application.ItemSend += new Microsoft.Office.Interop.Outlook.ApplicationEvents_11_ItemSendEventHandler(ThisAddIn_ItemSend);
-            _banner();
+            ShowBanner();
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -31,7 +31,7 @@ namespace FlexConfirmMail
                 QueueLogger.Log("Start handling ItemSend");
 
                 ConfigData config = new ConfigData();
-                _doLoadConfig(config);
+                DoLoadConfig(config);
 
                 MainDialog mainDialog = new MainDialog(config);
                 mainDialog.LoadMail(mail);
@@ -61,14 +61,14 @@ namespace FlexConfirmMail
 #endif
         }
 
-        private void _banner()
+        private void ShowBanner()
         {
             QueueLogger.Log($"Start {Global.AppName} {Global.Version}");
             QueueLogger.Log($" - Outlook {Application.Version}");
             QueueLogger.Log($" - {System.Environment.OSVersion.VersionString}");
         }
 
-        private bool _doLoadConfig(ConfigData config)
+        private bool DoLoadConfig(ConfigData config)
         {
             FileLoader loader = new FileLoader(config);
             loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);

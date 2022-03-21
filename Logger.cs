@@ -5,47 +5,47 @@ namespace FlexConfirmMail
 {
     public class QueueLogger
     {
-        private static ConcurrentQueue<string> _queue;
+        private static ConcurrentQueue<string> s_queue;
 
-        public static void Log(string message) => noexcept(() => _log(message));
-        public static void Log(Exception e) => noexcept(() => _log(e));
+        public static void Log(string message) => NoException(() => LogImpl(message));
+        public static void Log(Exception e) => NoException(() => LogImpl(e));
 
         public static string[] Get()
         {
-            _init();
-            return _queue.ToArray();
+            Init();
+            return s_queue.ToArray();
         }
 
-        private static void noexcept(Action func)
+        private static void NoException(Action func)
         {
             try { func(); } catch { }
         }
 
-        private static void _init()
+        private static void Init()
         {
-            if (_queue is null)
+            if (s_queue is null)
             {
-                _queue = new ConcurrentQueue<string>();
+                s_queue = new ConcurrentQueue<string>();
             }
         }
 
-        private static void _log(string message)
+        private static void LogImpl(string message)
         {
-            _init();
-            if (5000 < _queue.Count + 1)
+            Init();
+            if (5000 < s_queue.Count + 1)
             {
                 string throwaway;
-                _queue.TryDequeue(out throwaway);
+                s_queue.TryDequeue(out throwaway);
             }
-            _queue.Enqueue($"{_timestamp()} : {message}");
+            s_queue.Enqueue($"{GetTimestamp()} : {message}");
         }
 
-        private static void _log(Exception e)
+        private static void LogImpl(Exception e)
         {
-            _log(e.ToString());
+            LogImpl(e.ToString());
         }
 
-        private static string _timestamp()
+        private static string GetTimestamp()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }

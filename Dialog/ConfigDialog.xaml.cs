@@ -37,7 +37,8 @@ namespace FlexConfirmMail.Dialog
 
             UnsafeFiles.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
         }
-        private string _serialize()
+
+        private string SerializeCommon()
         {
             return $@"
 {ConfigOption.CountEnabled} = {CountEnabled.IsChecked.ToString()}
@@ -47,13 +48,14 @@ namespace FlexConfirmMail.Dialog
 {ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}
 ";
         }
-        private bool _saveFile(string basedir, string file, string content)
+
+        private bool SaveFile(string basedir, string file, string content)
         {
             try
             {
                 QueueLogger.Log($"- Save {file}\n{content}");
                 string path = System.IO.Path.Combine(basedir, file);
-                string tmp = $"{path}.{_timestamp()}.txt";
+                string tmp = $"{path}.{GetTimestamp()}.txt";
                 System.IO.File.WriteAllText(tmp, content);
                 System.IO.File.Replace(tmp, path, null);
                 return true;
@@ -65,7 +67,7 @@ namespace FlexConfirmMail.Dialog
             }
         }
 
-        private string _timestamp()
+        private string GetTimestamp()
         {
             return DateTime.Now.ToString("yyyyMMddhhmmssffff");
         }
@@ -80,10 +82,10 @@ namespace FlexConfirmMail.Dialog
         private void HandleSaveClicked(object sender, RoutedEventArgs e)
         {
             QueueLogger.Log("Save configurations");
-            _saveFile(StandardPath.GetUserDir(), ConfigFile.Common, _serialize());
-            _saveFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, TrustedDomains.Text);
-            _saveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, UnsafeDomains.Text);
-            _saveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, UnsafeFiles.Text);
+            SaveFile(StandardPath.GetUserDir(), ConfigFile.Common, SerializeCommon());
+            SaveFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, TrustedDomains.Text);
+            SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, UnsafeDomains.Text);
+            SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, UnsafeFiles.Text);
             DialogResult = true;
         }
 

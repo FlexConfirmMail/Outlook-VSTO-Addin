@@ -7,9 +7,6 @@ using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail.Dialog
 {
-    /// <summary>
-    /// MainDialog.xaml の相互作用ロジック
-    /// </summary>
     public partial class MainDialog : Window
     {
         private Outlook.MailItem _mail;
@@ -170,7 +167,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
 
         private Label GetDomainLabel(string title)
         {
-            var label = new Label();
+            Label label = new Label();
             label.Content = title;
             label.FontWeight = FontWeights.Bold;
             label.Padding = new Thickness(0, 4, 0, 4);
@@ -179,7 +176,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
 
         private CheckBox GetCheckBox(string title, string help)
         {
-            var cb = new CheckBox();
+            CheckBox cb = new CheckBox();
             cb.Content = title;
             cb.ToolTip = help;
             cb.Margin = new Thickness(7, 2, 0, 2);
@@ -211,7 +208,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
 
         private void CheckBox_MouseEnter(object sender, RoutedEventArgs e)
         {
-            var cb = (CheckBox)sender;
+            CheckBox cb = (CheckBox)sender;
             if (cb.Foreground == System.Windows.Media.Brushes.Firebrick)
             {
                 cb.Foreground = System.Windows.Media.Brushes.RosyBrown;
@@ -225,7 +222,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
         private void CheckBox_MouseLeave(object sender, RoutedEventArgs e)
         {
 
-            var cb = (CheckBox)sender;
+            CheckBox cb = (CheckBox)sender;
             if (cb.Foreground == System.Windows.Media.Brushes.RosyBrown)
             {
                 cb.Foreground = System.Windows.Media.Brushes.Firebrick;

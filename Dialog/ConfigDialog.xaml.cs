@@ -15,26 +15,27 @@ namespace FlexConfirmMail.Dialog
             InitializeComponent();
             Configure();
         }
+
         private void Configure()
         {
             ConfigData config = new ConfigData();
             FileLoader loader = new FileLoader(config);
             loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);
 
+            // Common
             CountEnabled.IsChecked = config.GetBool(ConfigOption.CountEnabled);
-
             CountAllowSkip.IsChecked = config.GetBool(ConfigOption.CountAllowSkip);
-
             CountSeconds.Text = config.GetInt(ConfigOption.CountSeconds).ToString();
-
             SafeBccEnabled.IsChecked = config.GetBool(ConfigOption.SafeBccEnabled);
-
             SafeBccThreshold.Text = config.GetInt(ConfigOption.SafeBccThreshold).ToString();
 
+            // TrustedDomains
             TrustedDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains);
 
+            // UnsafeDomains
             UnsafeDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
 
+            // UnsafeFiles
             UnsafeFiles.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
         }
 
@@ -45,8 +46,7 @@ namespace FlexConfirmMail.Dialog
 {ConfigOption.CountAllowSkip} = {CountAllowSkip.IsChecked.ToString()}
 {ConfigOption.CountSeconds} = {CountSeconds.Text}
 {ConfigOption.SafeBccEnabled} = {SafeBccEnabled.IsChecked.ToString()}
-{ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}
-";
+{ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}";
         }
 
         private bool SaveFile(string basedir, string file, string content)
@@ -89,6 +89,5 @@ namespace FlexConfirmMail.Dialog
             SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, UnsafeFiles.Text);
             DialogResult = true;
         }
-
     }
 }

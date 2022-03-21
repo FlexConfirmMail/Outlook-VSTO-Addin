@@ -124,6 +124,5 @@ namespace FlexConfirmMail.Config
         {
             return new HashSet<string>(GetList(key));
         }
-
     }
 }

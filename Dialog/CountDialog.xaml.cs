@@ -5,9 +5,6 @@ using System.Windows.Threading;
 
 namespace FlexConfirmMail.Dialog
 {
-    /// <summary>
-    /// CountDialog.xaml の相互作用ロジック
-    /// </summary>
     public partial class CountDialog : Window
     {
         private ConfigData _config;

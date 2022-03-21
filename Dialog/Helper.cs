@@ -82,25 +82,21 @@ namespace FlexConfirmMail.Dialog
             }
             RecipientInfo info = other as RecipientInfo;
 
-            /*
-             * Non-SMTP addresses come first.
-             */
+            // Non-SMTP addresses come first.
             if (IsSMTP && !info.IsSMTP)
                 return 1;
             if (!IsSMTP && info.IsSMTP)
                 return -1;
 
-            /*
-             * Sort by domain. This is the crux that essentially
-             * makes MainDialog.RenderAddressList() work.
-             */
+            // Sort by domain. This is the crux that essentially
+            // makes MainDialog.RenderAddressList() work.
             var ret = String.Compare(Domain, info.Domain);
             if (ret != 0)
             {
                 return ret;
             }
 
-            /* Sort by recipient types (To > Cc > Bcc) */
+            // Sort by recipient types (To > Cc > Bcc)
             ret = String.Compare(Type, info.Type);
             if (ret != 0)
             {

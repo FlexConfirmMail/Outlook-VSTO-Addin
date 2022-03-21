@@ -36,25 +36,27 @@ namespace FlexConfirmMail.Dialog
             }
         }
 
-        private void HandleLoaded(object sender, EventArgs e)
+        private void CountDialog_Loaded(object sender, EventArgs e)
         {
             labelCount.Content = _timeout;
             _timer = new DispatcherTimer();
             _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += HandleTick;
+            _timer.Tick += Timer_Tick;
             _timer.Start();
         }
 
-        private void HandleClosing(object sender, EventArgs e)
+        private void CountDialog_Closing(object sender, EventArgs e)
         {
             _timer.Stop();
-            _timer.Tick -= HandleTick;
+            _timer.Tick -= Timer_Tick;
         }
 
-        private void HandleTick(object sender, EventArgs e)
+        private void Timer_Tick(object sender, EventArgs e)
         {
             _timeout -= 1;
 
+            // We need Dispatcher.Invoke() in order to modify
+            // the UI from a thread.
             Dispatcher.Invoke(new Action(() =>
             {
                 labelCount.Content = _timeout;
@@ -67,7 +69,7 @@ namespace FlexConfirmMail.Dialog
             }
         }
 
-        private void HandleClickOK(object sender, RoutedEventArgs e)
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }

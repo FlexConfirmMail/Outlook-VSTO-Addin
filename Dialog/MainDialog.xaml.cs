@@ -183,9 +183,9 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             cb.Content = title;
             cb.ToolTip = help;
             cb.Margin = new Thickness(7, 2, 0, 2);
-            cb.Click += HandleClickCB;
-            cb.MouseEnter += HandleMouseEnter;
-            cb.MouseLeave += HandleMouseLeave;
+            cb.Click +=  CheckBox_Click;
+            cb.MouseEnter += CheckBox_MouseEnter;
+            cb.MouseLeave += CheckBox_MouseLeave;
             return cb;
         }
 
@@ -209,7 +209,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             return true;
         }
 
-        private void HandleMouseEnter(object sender, RoutedEventArgs e)
+        private void CheckBox_MouseEnter(object sender, RoutedEventArgs e)
         {
             var cb = (CheckBox)sender;
             if (cb.Foreground == System.Windows.Media.Brushes.Firebrick)
@@ -222,7 +222,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             }
         }
 
-        private void HandleMouseLeave(object sender, RoutedEventArgs e)
+        private void CheckBox_MouseLeave(object sender, RoutedEventArgs e)
         {
 
             var cb = (CheckBox)sender;
@@ -236,12 +236,12 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             }
         }
 
-        private void HandleClickCB(object sender, RoutedEventArgs e)
+        private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
             ButtonOK.IsEnabled = IsAllChecked(spTrusted) && IsAllChecked(spExt) && IsAllChecked(spFile);
         }
 
-        private void HandleClickOK(object sender, RoutedEventArgs e)
+        private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
         }

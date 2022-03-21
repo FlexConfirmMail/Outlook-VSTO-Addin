@@ -12,10 +12,10 @@
             <RowDefinition Height="39*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="0,0,7,0.5" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1">
-            <Button Content="設定を保存して終了" Click="HandleSaveClicked" VerticalAlignment="Center" Margin="5,0,5,0" Width="120"/>
+            <Button Content="設定を保存して終了" Click="SaveButton_Click" VerticalAlignment="Center" Margin="5,0,5,0" Width="120"/>
             <Button Content="キャンセル" VerticalAlignment="Center" Margin="5,0,5,0" Width="120" IsCancel="True"/>
         </StackPanel>
-        <TabControl Margin="0,0,0,0.5" SelectionChanged="HandleSelectionChanged"  BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}">
+        <TabControl Margin="0,0,0,0.5" SelectionChanged="TabControl_SelectionChanged"  BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}">
             <TabItem Header="基本設定">
                 <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
                     <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,0.5">

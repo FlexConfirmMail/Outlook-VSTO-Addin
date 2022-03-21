@@ -17,7 +17,7 @@
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
         <StackPanel Margin="0,0,10,10.5" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Height="20" Grid.Column="1">
-            <Button x:Name="ButtonOK" Content="送信" Width="75" IsEnabled="False" Click="HandleClickOK" ToolTip="メールを送信します"/>
+            <Button x:Name="ButtonOK" Content="送信" Width="75" IsEnabled="False" Click="ButtonOK_Click" ToolTip="メールを送信します"/>
             <Button Content="キャンセル" Width="75" Margin="10,0,0,0" IsCancel="True" ToolTip="メールの送信を中止します"/>
         </StackPanel>
         <GroupBox Header="外部の送信先" Margin="10,10,10,4.5">

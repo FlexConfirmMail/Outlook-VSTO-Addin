@@ -72,14 +72,15 @@ namespace FlexConfirmMail.Dialog
             return DateTime.Now.ToString("yyyyMMddhhmmssffff");
         }
 
-        private void HandleSelectionChanged(object sender, SelectionChangedEventArgs args)
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs args)
         {
             if (tabAboutAddon.IsSelected)
             {
                 textLog.Text = String.Join("\n", QueueLogger.Get());
             }
         }
-        private void HandleSaveClicked(object sender, RoutedEventArgs e)
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             QueueLogger.Log("Save configurations");
             SaveFile(StandardPath.GetUserDir(), ConfigFile.Common, SerializeCommon());

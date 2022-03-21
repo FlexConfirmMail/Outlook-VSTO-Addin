@@ -22,90 +22,126 @@ namespace FlexConfirmMail.Dialog
             InitializeComponent();
             _config = config;
             _mail = mail;
-            LoadMail(mail)
+
+            // Show the subject string in title bar
+            Title = $"{mail.Subject} - FlexConfirmMail";
+
+            // Render contents in the dialog
+            RenderMain();
         }
 
-        private void LoadMail(Outlook.MailItem mail)
+        private void RenderMain()
         {
-            var trusted = new List<RecipientInfo>();
-            var ext = new List<RecipientInfo>();
+            List<RecipientInfo> recipients = new List<RecipientInfo>();
 
-            foreach (Outlook.Recipient recp in mail.Recipients)
+            foreach (Outlook.Recipient recp in _mail.Recipients)
             {
-                HashSet<string> hsTrusted = _config.GetHashSet(ConfigFile.TrustedDomains);
-                RecipientInfo info = new RecipientInfo(recp);
-                if (hsTrusted.Contains(info.Domain) || info.Domain == RecipientInfo.DOMAIN_EXCHANGE)
-                {
-                    trusted.Add(info);
-                }
-                else
-                {
-                    ext.Add(info);
-                }
+                recipients.Add(new RecipientInfo(recp));
             }
-            RenderAddressList(trusted, true);
-            RenderAddressList(ext, false);
 
-            var all = trusted.Concat(ext).ToList();
-            CheckSafeBcc(all);
-            CheckUnsafeDomains(all);
-            CheckUnsafeFiles(mail);
+            // Address CheckBox
+            recipients.Sort();
+            RenderExternalList(recipients);
+            RenderTrustedList(recipients);
 
-            foreach (Outlook.Attachment item in mail.Attachments)
+            // Attachments/Alerts
+            CheckSafeBcc(recipients);
+            CheckUnsafeDomains(recipients);
+            CheckUnsafeFiles();
+
+            foreach (Outlook.Attachment item in _mail.Attachments)
             {
                 spFile.Children.Add(GetCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
             }
-
-            /* Show the subject string in title bar */
-            Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
-        private void CheckUnsafeDomains(List<RecipientInfo> list)
+        private void RenderTrustedList(List<RecipientInfo> recipients)
         {
-            HashSet<string> hsUnsafe = _config.GetHashSet(ConfigFile.UnsafeDomains);
-            HashSet<string> done = new HashSet<string>();
+            HashSet<string> seen = new HashSet<string>();
+            HashSet<string> trustedDomains = _config.GetHashSet(ConfigFile.TrustedDomains);
+
+            // Assume Exchange as internal domain.
+            trustedDomains.Add(RecipientInfo.DOMAIN_EXCHANGE);
+
+            foreach (RecipientInfo info in recipients)
+            {
+                if (trustedDomains.Contains(info.Domain))
+                {
+                    if (!seen.Contains(info.Domain))
+                    {
+                        spTrusted.Children.Add(GetDomainLabel(info.Domain));
+                        seen.Add(info.Domain);
+                    }
+                    spTrusted.Children.Add(GetCheckBox($"{info.Type,-3}: {info.Address}", info.Help));
+                }
+            }
+        }
+
+        private void RenderExternalList(List<RecipientInfo> list)
+        {
+            HashSet<string> seen = new HashSet<string>();
+            HashSet<string> trustedDomains = _config.GetHashSet(ConfigFile.TrustedDomains);
+
+            // Consider Exchange as internal domain.
+            trustedDomains.Add(RecipientInfo.DOMAIN_EXCHANGE);
 
             foreach (RecipientInfo info in list)
             {
-                if (done.Contains(info.Domain))
+                if (!trustedDomains.Contains(info.Domain))
                 {
-                    continue;
+                    if (!seen.Contains(info.Domain))
+                    {
+                        spExt.Children.Add(GetDomainLabel(info.Domain));
+                        seen.Add(info.Domain);
+                    }
+                    spExt.Children.Add(GetWarnCheckBox($"{info.Type,-3}: {info.Address}", info.Help));
                 }
-
-                if (hsUnsafe.Contains(info.Domain))
-                {
-                    spFile.Children.Add(GetWarnCheckBox(
-                        $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
-                        "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
-                    ));
-                }
-                done.Add(info.Domain);
             }
         }
 
-        private void CheckUnsafeFiles(Outlook.MailItem mail)
+        private void CheckUnsafeDomains(List<RecipientInfo> recipients)
+        {
+            HashSet<string> unsafeDomains = _config.GetHashSet(ConfigFile.UnsafeDomains);
+            HashSet<string> seen = new HashSet<string>();
+
+            foreach (RecipientInfo info in recipients)
+            {
+                if (!seen.Contains(info.Domain))
+                {
+                    if (unsafeDomains.Contains(info.Domain))
+                    {
+                        spFile.Children.Add(GetWarnCheckBox(
+                            $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
+                            "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
+                        ));
+                    }
+                    seen.Add(info.Domain);
+                }
+            }
+        }
+
+        private void CheckUnsafeFiles()
         {
             HashSet<string> unsafeFiles = _config.GetHashSet(ConfigFile.UnsafeFiles);
 
-            foreach (Outlook.Attachment item in mail.Attachments)
+            foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                foreach (string word in unsafeFiles)
+                foreach (string keyword in unsafeFiles)
                 {
-
-                    if (item.FileName.Contains(word))
+                    if (item.FileName.Contains(keyword))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
-                            $"[警告] 注意が必要なファイル名（{word}）が含まれています。",
-                            $"添付ファイル「{item.FileName}」に注意が必要な単語が含まれているため、再確認を促す警告を出しています。"
+                            $"[警告] 注意が必要なファイル名（{keyword}）が含まれています。",
+                            $"添付ファイル「{item.FileName}」に注意が必要な単語が含まれているため、" +
+                            $"再確認を促す警告を出しています。"
                         ));
                         break;
                     }
-
                 }
             }
         }
 
-        private void CheckSafeBcc(List<RecipientInfo> list)
+        private void CheckSafeBcc(List<RecipientInfo> recipients)
         {
             if (!_config.GetBool(ConfigOption.SafeBccEnabled))
             {
@@ -118,50 +154,23 @@ namespace FlexConfirmMail.Dialog
                 return;
             }
 
-            var domains = new HashSet<string>();
-            foreach (RecipientInfo info in list)
+            HashSet<string> domains = new HashSet<string>();
+            foreach (RecipientInfo info in recipients)
             {
                 if (info.IsSMTP && info.Type != "Bcc" && !domains.Contains(info.Domain))
                 {
                     domains.Add(info.Domain);
                 }
             }
+
             if (domains.Count >= threshold)
             {
                 spFile.Children.Add(GetWarnCheckBox(
                     $"[警告] To・Ccに{threshold}件以上のドメインが含まれています。",
-                    @"宛先に多数のドメインが検知されました。
-ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、
-アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
+                    $"宛先に多数のドメインが検知されました。" +
+                    $"ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、" +
+                    $"アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
                 ));
-            }
-        }
-
-        private void RenderAddressList(List<RecipientInfo> list, bool trusted)
-        {
-            var domains = new HashSet<string>();
-            var sp = trusted ? spTrusted : spExt;
-            CheckBox cb;
-
-            list.Sort();
-
-            foreach (RecipientInfo info in list)
-            {
-                if (!domains.Contains(info.Domain))
-                {
-                    sp.Children.Add(GetDomainLabel(info.Domain));
-                    domains.Add(info.Domain);
-                }
-                if (trusted)
-                {
-                    cb = GetCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
-                }
-                else
-                {
-                    cb = GetWarnCheckBox($"{info.Type,-3}: {info.Address}", info.Help);
-                }
-                sp.Children.Add(cb);
-
             }
         }
 

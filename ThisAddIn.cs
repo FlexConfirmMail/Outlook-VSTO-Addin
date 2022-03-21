@@ -1,7 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using FlexConfirmMail.Config;
 using FlexConfirmMail.Dialog;
+using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
-using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail
 {
@@ -82,7 +82,7 @@ namespace FlexConfirmMail
         {
             return new Ribbon();
         }
-#region VSTO で生成されたコード
+        #region VSTO で生成されたコード
 
         /// <summary>
         /// デザイナーのサポートに必要なメソッドです。
@@ -94,6 +94,6 @@ namespace FlexConfirmMail
             this.Shutdown += new System.EventHandler(ThisAddIn_Shutdown);
         }
 
-#endregion
+        #endregion
     }
 }

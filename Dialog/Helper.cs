@@ -1,5 +1,5 @@
-﻿using Outlook = Microsoft.Office.Interop.Outlook;
-using System;
+﻿using System;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail.Dialog
 {

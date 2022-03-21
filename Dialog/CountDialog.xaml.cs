@@ -1,8 +1,7 @@
-﻿using System;
+﻿using FlexConfirmMail.Config;
+using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Threading;
-using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail.Dialog
 {
@@ -56,7 +55,8 @@ namespace FlexConfirmMail.Dialog
         {
             _timeout -= 1;
 
-            Dispatcher.Invoke(new Action(() => {
+            Dispatcher.Invoke(new Action(() =>
+            {
                 labelCount.Content = _timeout;
             }));
 

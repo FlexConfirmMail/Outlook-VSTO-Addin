@@ -1,17 +1,14 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-using System.IO;
-using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail
 {
     public class QueueLogger
     {
         private static ConcurrentQueue<string> _queue;
-        
-        public static void Log(string message) => noexcept(() =>  _log(message) );
-        public static void Log(Exception e) => noexcept(() =>  _log(e) );
+
+        public static void Log(string message) => noexcept(() => _log(message));
+        public static void Log(Exception e) => noexcept(() => _log(e));
 
         public static string[] Get()
         {

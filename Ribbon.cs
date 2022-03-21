@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FlexConfirmMail.Dialog;
+using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using Office = Microsoft.Office.Core;
-using FlexConfirmMail.Dialog;
 
 namespace FlexConfirmMail
 {

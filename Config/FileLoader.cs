@@ -56,7 +56,7 @@ namespace FlexConfirmMail.Config
             {
                 return File.ReadAllText(Path.Combine(basedir, file));
             }
-            catch(IOException e)
+            catch (IOException e)
             {
                 QueueLogger.Log($"Skip {file} ({e.GetType().Name})");
                 return "";

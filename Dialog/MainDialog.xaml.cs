@@ -1,10 +1,9 @@
-﻿using System;
+﻿using FlexConfirmMail.Config;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Generic;
 using Outlook = Microsoft.Office.Interop.Outlook;
-using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail.Dialog
 {
@@ -212,11 +211,11 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
             var cb = (CheckBox)sender;
             if (cb.Foreground == System.Windows.Media.Brushes.Firebrick)
             {
-                  cb.Foreground = System.Windows.Media.Brushes.RosyBrown;
+                cb.Foreground = System.Windows.Media.Brushes.RosyBrown;
             }
             else
             {
-                  cb.Foreground = System.Windows.Media.Brushes.SteelBlue;
+                cb.Foreground = System.Windows.Media.Brushes.SteelBlue;
             }
         }
 

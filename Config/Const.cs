@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.IO;
+﻿using System.Collections.Generic;
 
 namespace FlexConfirmMail.Config
 {
@@ -27,7 +24,7 @@ namespace FlexConfirmMail.Config
         public static string SafeBccEnabled = "SafeBccEnabled";
         public static string SafeBccThreshold = "SafeBccThreshold";
     }
-        
+
     public class ConfigDefault
     {
         static public Dictionary<string, string> Get()

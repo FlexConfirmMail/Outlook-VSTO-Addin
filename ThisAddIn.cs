@@ -77,6 +77,11 @@ namespace FlexConfirmMail
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
             return true;
         }
+
+        protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
+        {
+            return new Ribbon();
+        }
 #region VSTO で生成されたコード
 
         /// <summary>

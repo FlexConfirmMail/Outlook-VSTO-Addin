@@ -163,6 +163,9 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Dialog\ConfigDialog.xaml.cs">
+      <DependentUpon>ConfigDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\Helper.cs" />
     <Compile Include="Config\ConfigData.cs" />
     <Compile Include="Config\FileLoader.cs" />
@@ -178,6 +181,7 @@
       <DependentUpon>CountDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logger.cs" />
+    <Compile Include="Ribbon.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -208,6 +212,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialog\ConfigDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Dialog\MainDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +224,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Ribbon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\banner.png" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

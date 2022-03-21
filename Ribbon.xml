@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<customUI xmlns="http://schemas.microsoft.com/office/2009/07/customui" onLoad="Ribbon_Load" loadImage="Ribbon_LoadImage">
+  <ribbon>
+	  <tabs>
+		<tab idMso="TabMail">
+			<group id="GroupFlexConfirmMail" label="送信チェック" insertAfterMso="GroupMailRespond">
+				<button id="ButtonFlexConfirmMail" label="FlexConfirmMail設定"
+					 image="logo.png" showImage="true" size="large"
+					 screentip="設定画面" onAction="OnClickConfig" 
+					 supertip="FlexConfirmMailの設定画面を表示します"/>
+			</group>
+		</tab>
+	</tabs>
+  </ribbon>
+</customUI>
+

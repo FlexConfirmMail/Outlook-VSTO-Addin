@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail.Dialog
 {
@@ -10,12 +11,30 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class CountDialog : Window
     {
-        private int _timeout = 3;
+        private ConfigData _config;
+        private int _timeout;
         private DispatcherTimer _timer;
 
         public CountDialog()
         {
             InitializeComponent();
+        }
+
+        public CountDialog(ConfigData config)
+        {
+            InitializeComponent();
+            _config = config;
+            Configure();
+        }
+
+        private void Configure()
+        {
+            _timeout = _config.GetInt("CountSeconds");
+            if (!_config.GetBool("CountAllowSkip"))
+            {
+                buttonOK.Visibility = Visibility.Hidden;
+                buttonOK.IsEnabled = false;
+            }
         }
 
         private void HandleLoaded(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Collections.Generic;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using FlexConfirmMail.Config;
 
 namespace FlexConfirmMail.Dialog
 {
@@ -12,20 +13,29 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class MainDialog : Window
     {
+        private ConfigData _config;
+
         public MainDialog()
         {
             InitializeComponent();
         }
 
-        public void LoadMail(Outlook.MailItem mail, Config config)
+        public MainDialog(ConfigData config)
+        {
+            InitializeComponent();
+            _config = config;
+        }
+
+        public void LoadMail(Outlook.MailItem mail)
         {
             var trusted = new List<RecipientInfo>();
             var ext = new List<RecipientInfo>();
 
             foreach (Outlook.Recipient recp in mail.Recipients)
             {
-                var info = new RecipientInfo(recp);
-                if (config.TrustedDomains.Contains(info.Domain))
+                HashSet<string> hsTrusted = _config.GetHashSet(ConfigFile.TrustedDomains);
+                RecipientInfo info = new RecipientInfo(recp);
+                if (hsTrusted.Contains(info.Domain) || info.Domain == RecipientInfo.DOMAIN_EXCHANGE)
                 {
                     trusted.Add(info);
                 }
@@ -39,35 +49,53 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in mail.Attachments)
             {
-                spFile.Children.Add(NewCheckBox(item.FileName, item.FileName));
+                spFile.Children.Add(NewCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
             }
 
             var all = trusted.Concat(ext).ToList();
             CheckDomainCount(all);
-            CheckUnsafeDomain(all, config);
+            CheckUnsafeDomain(all);
 
             /* Show the subject string in title bar */
             Title = $"{mail.Subject} - FlexConfirmMail";
         }
 
-        private void CheckUnsafeDomain(List<RecipientInfo> list, Config config)
+        private void CheckUnsafeDomain(List<RecipientInfo> list)
         {
-            var domains = new HashSet<string>();
+            HashSet<string> hsUnsafe = _config.GetHashSet(ConfigFile.UnsafeDomains);
+            HashSet<string> done = new HashSet<string>();
+
             foreach (RecipientInfo info in list)
             {
-                if (config.UnsafeDomains.Contains(info.Domain) && !domains.Contains(info.Domain))
+                if (done.Contains(info.Domain))
+                {
+                    continue;
+                }
+
+                if (hsUnsafe.Contains(info.Domain))
                 {
                     spFile.Children.Add(NewCheckBox(
                         $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
                         "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
                     ));
-                    domains.Add(info.Domain);
                 }
+                done.Add(info.Domain);
             }
         }
 
         private void CheckDomainCount(List<RecipientInfo> list)
         {
+            if (!_config.GetBool(ConfigOption.SafeBccEnabled))
+            {
+                return;
+            }
+
+            int threshold = _config.GetInt(ConfigOption.SafeBccThreshold);
+            if (threshold < 1)
+            {
+                return;
+            }
+
             var domains = new HashSet<string>();
             foreach (RecipientInfo info in list)
             {
@@ -76,12 +104,13 @@ namespace FlexConfirmMail.Dialog
                     domains.Add(info.Domain);
                 }
             }
-            if (domains.Count > 3)
+            if (domains.Count >= threshold)
             {
                 spFile.Children.Add(NewCheckBox(
-                    "[警告] To・Ccに4件以上のドメインが含まれています。",
-                    @"多数のドメインが検知された場合の警告です。
-ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
+                    $"[警告] To・Ccに{threshold}件以上のドメインが含まれています。",
+                    @"宛先に多数のドメインが検知されました。
+ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、
+アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
                 ));
             }
         }

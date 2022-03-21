@@ -11,6 +11,9 @@ namespace FlexConfirmMail.Dialog
         public string Help { get; set; }
         public bool IsSMTP { get; set; }
 
+        public const string DOMAIN_EXCHANGE = "Exchange";
+        public const string DOMAIN_EXCHANGE_EXT = "Exchange (外部)";
+
         public RecipientInfo(Outlook.Recipient recp)
         {
             if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser
@@ -38,10 +41,10 @@ namespace FlexConfirmMail.Dialog
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:
-                    Domain = "Exchange";
+                    Domain = DOMAIN_EXCHANGE;
                     break;
                 case Outlook.OlDisplayType.olRemoteUser:
-                    Domain = "Exchange（外部）";
+                    Domain = DOMAIN_EXCHANGE_EXT;
                     break;
                 case Outlook.OlDisplayType.olDistList:
                 case Outlook.OlDisplayType.olPrivateDistList:

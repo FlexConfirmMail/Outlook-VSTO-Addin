@@ -164,7 +164,10 @@
   -->
   <ItemGroup>
     <Compile Include="Dialog\Helper.cs" />
-    <Compile Include="Config.cs" />
+    <Compile Include="Config\ConfigData.cs" />
+    <Compile Include="Config\FileLoader.cs" />
+    <Compile Include="Config\Const.cs" />
+    <Compile Include="Config\StandardPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

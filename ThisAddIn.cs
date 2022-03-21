@@ -28,32 +28,15 @@ namespace FlexConfirmMail
 
             try
             {
-                QueueLogger.Log("Start handling ItemSend");
-
-                ConfigData config = new ConfigData();
-                DoLoadConfig(config);
-
-                MainDialog mainDialog = new MainDialog(config, mail);
-                if (mainDialog.ShowDialog() == true)
-                {
-                    if (config.GetBool("CountEnabled"))
-                    {
-                        CountDialog countDialog = new CountDialog(config);
-                        if (countDialog.ShowDialog() == true)
-                        {
-                            Cancel = false;
-                        }
-                    }
-                    else
-                    {
-                        Cancel = false;
-                    }
+                if (DoCheck(mail)) {
+                    Cancel = false;
                 }
             }
             catch (System.Exception e)
             {
                 QueueLogger.Log(e);
             }
+
             // Never send a message with a debug build!
 #if DEBUG
             Cancel = true;
@@ -67,20 +50,38 @@ namespace FlexConfirmMail
             QueueLogger.Log($" - {System.Environment.OSVersion.VersionString}");
         }
 
-        private bool DoLoadConfig(ConfigData config)
+        private bool DoCheck(Outlook.MailItem mail)
         {
+            QueueLogger.Log("Start handling ItemSend");
+
+            ConfigData config = new ConfigData();
             FileLoader loader = new FileLoader(config);
+
             loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains);
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
-            return true;
+
+            if (new MainDialog(config, mail).ShowDialog() == true)
+            {
+                if (!config.GetBool("CountEnabled"))
+                {
+                    return true;
+                }
+
+                if (new CountDialog(config).ShowDialog() == true)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()
         {
             return new Ribbon();
         }
+
         #region VSTO で生成されたコード
 
         /// <summary>

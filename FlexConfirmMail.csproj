@@ -174,6 +174,7 @@
     <Compile Include="Dialog\CountDialog.xaml.cs">
       <DependentUpon>CountDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logger.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

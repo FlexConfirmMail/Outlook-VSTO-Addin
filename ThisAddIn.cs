@@ -33,8 +33,7 @@ namespace FlexConfirmMail
                 ConfigData config = new ConfigData();
                 DoLoadConfig(config);
 
-                MainDialog mainDialog = new MainDialog(config);
-                mainDialog.LoadMail(mail);
+                MainDialog mainDialog = new MainDialog(config, mail);
                 if (mainDialog.ShowDialog() == true)
                 {
                     if (config.GetBool("CountEnabled"))

@@ -12,6 +12,7 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class MainDialog : Window
     {
+        private Outlook.MailItem _mail;
         private ConfigData _config;
 
         public MainDialog()
@@ -19,13 +20,15 @@ namespace FlexConfirmMail.Dialog
             InitializeComponent();
         }
 
-        public MainDialog(ConfigData config)
+        public MainDialog(ConfigData config, Outlook.MailItem mail)
         {
             InitializeComponent();
             _config = config;
+            _mail = mail;
+            LoadMail(mail)
         }
 
-        public void LoadMail(Outlook.MailItem mail)
+        private void LoadMail(Outlook.MailItem mail)
         {
             var trusted = new List<RecipientInfo>();
             var ext = new List<RecipientInfo>();

@@ -7,7 +7,6 @@ namespace FlexConfirmMail.Dialog
 {
     public partial class CountDialog : Window
     {
-        private ConfigData _config;
         private int _timeout;
         private DispatcherTimer _timer;
 
@@ -19,17 +18,13 @@ namespace FlexConfirmMail.Dialog
         public CountDialog(ConfigData config)
         {
             InitializeComponent();
-            _config = config;
-            Configure();
-        }
 
-        private void Configure()
-        {
-            _timeout = _config.GetInt("CountSeconds");
-            if (!_config.GetBool("CountAllowSkip"))
+            _timeout = config.GetInt(ConfigOption.CountSeconds);
+
+            if (!config.GetBool(ConfigOption.CountAllowSkip))
             {
-                buttonOK.Visibility = Visibility.Hidden;
-                buttonOK.IsEnabled = false;
+                ButtonOK.Visibility = Visibility.Hidden;
+                ButtonOK.IsEnabled = false;
             }
         }
 

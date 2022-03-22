@@ -51,7 +51,7 @@ example.org";
         {
             InitializeComponent();
 
-            QueueLogger.Log("Open ConfigDialog");
+            QueueLogger.Log("Open ConfigDialog()");
 
             ConfigData config = new ConfigData();
             FileLoader loader = new FileLoader(config);
@@ -98,7 +98,8 @@ example.org";
 
         private bool SaveFile(string basedir, string file, string content)
         {
-            try {
+            try
+            {
                 string path = System.IO.Path.Combine(basedir, file);
                 string tmp = $"{path}.{GetTimestamp()}.txt";
                 System.IO.File.WriteAllText(tmp, content);
@@ -110,7 +111,7 @@ example.org";
                 {
                     System.IO.File.Move(tmp, path);
                 }
-                QueueLogger.Log($"- Saved {path} ({content.Length} bytes)");
+                QueueLogger.Log($"* Write {file} ({content.Length} bytes)");
                 return true;
             }
             catch (Exception e)
@@ -136,7 +137,7 @@ example.org";
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            QueueLogger.Log("Save configurations");
+            QueueLogger.Log("* Save button clicked. closing...");
             SaveFile(StandardPath.GetUserDir(), ConfigFile.Common, SerializeCommon());
             SaveFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, TrustedDomains.Text);
             SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, UnsafeDomains.Text);

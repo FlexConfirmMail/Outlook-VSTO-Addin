@@ -30,6 +30,11 @@ namespace FlexConfirmMail
             {
                 if (DoCheck(mail)) {
                     Cancel = false;
+                    QueueLogger.Log("Check finished [send=yes]");
+                }
+                else
+                {
+                    QueueLogger.Log("Check finished [send=no]");
                 }
             }
             catch (System.Exception e)
@@ -45,14 +50,22 @@ namespace FlexConfirmMail
 
         private void ShowBanner()
         {
-            QueueLogger.Log($"Start {Global.AppName} {Global.Version}");
-            QueueLogger.Log($" - Outlook {Application.Version}");
-            QueueLogger.Log($" - {System.Environment.OSVersion.VersionString}");
+            try
+            {
+                QueueLogger.Log($"Start {Global.AppName} {Global.Version}");
+                QueueLogger.Log($"* Outlook {Application.Version}");
+                QueueLogger.Log($"* {System.Environment.OSVersion.VersionString}");
+                QueueLogger.Log($"* AppData is {StandardPath.GetUserDir()}");
+            }
+            catch (System.Exception e)
+            {
+                QueueLogger.Log(e);
+            }
         }
 
         private bool DoCheck(Outlook.MailItem mail)
         {
-            QueueLogger.Log("Start handling ItemSend");
+            QueueLogger.Log($"Setup config for mail (Subject={mail.Subject})");
 
             ConfigData config = new ConfigData();
             FileLoader loader = new FileLoader(config);

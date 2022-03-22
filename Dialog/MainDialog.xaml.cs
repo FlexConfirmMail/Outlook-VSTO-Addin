@@ -23,6 +23,8 @@ namespace FlexConfirmMail.Dialog
             _config = config;
             _mail = mail;
 
+            QueueLogger.Log("Open MainDialog()");
+
             // Show the subject string in title bar
             Title = $"{mail.Subject} - FlexConfirmMail";
 
@@ -249,6 +251,7 @@ namespace FlexConfirmMail.Dialog
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            QueueLogger.Log("* Send button clicked. closing...");
             DialogResult = true;
         }
     }

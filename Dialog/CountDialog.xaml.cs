@@ -19,6 +19,8 @@ namespace FlexConfirmMail.Dialog
         {
             InitializeComponent();
 
+            QueueLogger.Log("Open CountDialog()");
+
             _timeout = config.GetInt(ConfigOption.CountSeconds);
 
             if (!config.GetBool(ConfigOption.CountAllowSkip))
@@ -26,6 +28,7 @@ namespace FlexConfirmMail.Dialog
                 ButtonOK.Visibility = Visibility.Hidden;
                 ButtonOK.IsEnabled = false;
             }
+
         }
 
         private void CountDialog_Loaded(object sender, EventArgs e)
@@ -35,6 +38,7 @@ namespace FlexConfirmMail.Dialog
             _timer.Interval = TimeSpan.FromSeconds(1);
             _timer.Tick += Timer_Tick;
             _timer.Start();
+            QueueLogger.Log($"* Timer activated. waiting for {_timeout} seconds");
         }
 
         private void CountDialog_Closing(object sender, EventArgs e)
@@ -56,6 +60,7 @@ namespace FlexConfirmMail.Dialog
 
             if (_timeout <= 0)
             {
+                QueueLogger.Log("* Timer finished. closing...");
                 DialogResult = true;
                 Close();
             }
@@ -63,6 +68,7 @@ namespace FlexConfirmMail.Dialog
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            QueueLogger.Log("* Send button clicked. closing...");
             DialogResult = true;
         }
     }

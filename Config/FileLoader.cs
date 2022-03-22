@@ -21,14 +21,14 @@ namespace FlexConfirmMail.Config
             {
                 using (TextReader sr = File.OpenText(Path.Combine(basedir, file)))
                 {
-                    QueueLogger.Log($"Load a list from {file}");
+                    QueueLogger.Log($"* Loading list from {file}");
                     ReadListFile(sr, file);
                     return true;
                 }
             }
             catch (IOException e)
             {
-                QueueLogger.Log($"Skip {file} ({e.GetType().Name})");
+                QueueLogger.Log($"* Skip {file} ({e.GetType().Name})");
                 return false;
             }
         }
@@ -39,14 +39,14 @@ namespace FlexConfirmMail.Config
             {
                 using (TextReader sr = File.OpenText(Path.Combine(basedir, file)))
                 {
-                    QueueLogger.Log($"Load params from {file}");
+                    QueueLogger.Log($"* Loading params from {file}");
                     ReadOptionFile(sr);
                     return true;
                 }
             }
             catch (IOException e)
             {
-                QueueLogger.Log($"Skip {file} ({e.GetType().Name})");
+                QueueLogger.Log($"* Skip {file} ({e.GetType().Name})");
                 return false;
             }
         }
@@ -58,7 +58,7 @@ namespace FlexConfirmMail.Config
             }
             catch (IOException e)
             {
-                QueueLogger.Log($"Skip {file} ({e.GetType().Name})");
+                QueueLogger.Log($"* Skip {file} ({e.GetType().Name})");
                 return "";
             }
         }
@@ -76,7 +76,7 @@ namespace FlexConfirmMail.Config
                     continue;
                 }
                 list.Add(line);
-                QueueLogger.Log($" - {line}");
+                QueueLogger.Log($"* Entry: {line}");
             }
             _config.AddList(file, list);
         }
@@ -97,7 +97,7 @@ namespace FlexConfirmMail.Config
                 if (TryParse(line, out key, out val))
                 {
                     _config.AddOption(key, val);
-                    QueueLogger.Log($" - {key} = {val}");
+                    QueueLogger.Log($"* Option: {key} = {val}");
                 }
             }
         }

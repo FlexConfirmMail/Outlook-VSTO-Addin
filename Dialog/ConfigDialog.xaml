@@ -61,20 +61,24 @@
             </TabItem>
             <TabItem Header="注意が必要なファイル名">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="199*"/>
-                        <ColumnDefinition Width="71*"/>
-                    </Grid.ColumnDefinitions>
-                    <GroupBox Header="注意が必要なドメイン設定" Margin="5,5,5,5" Grid.ColumnSpan="2">
+
+                    <GroupBox Header="注意が必要なドメイン設定" Margin="5,5,5,5">
                         <TextBox x:Name="UnsafeFiles" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3"></TextBox>
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabAboutAddon" Header="このアドオンについて">
                 <Grid>
-
-                    <GroupBox Header="動作ログ" Margin="5,5,5,5">
-                        <TextBox x:Name="textLog" Padding="1,3,1,3" Margin="3,3,3,3" IsReadOnly="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="200*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="20,0,0,0" VerticalAlignment="Center">
+                        <Label x:Name="VersionInfo" Content="FlexConfirmMail" Foreground="#FF625661" FontWeight="Bold" FontSize="25"></Label>
+                        <Label Foreground="Black" FontSize="12">2022 ClearCode Inc. All rights reserved.</Label>
+                    </StackPanel>
+                    <GroupBox Header="動作ログ" Grid.Row="1" Margin="5,5,5,5">
+                        <TextBox x:Name="TextLog" Padding="1,3,1,3" Margin="3,3,3,3" IsReadOnly="True" VerticalScrollBarVisibility="Visible" TextWrapping="Wrap"/>
                     </GroupBox>
 
                 </Grid>

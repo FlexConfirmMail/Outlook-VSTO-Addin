@@ -10,14 +10,49 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class ConfigDialog : Window
     {
+        private string _templateTrutedDomains = @"
+# 社内の宛先として扱うドメイン ###
+#
+# ドメインとはメールアドレスのうち「@」の後の部分を指し、
+# 以下の例のように一行に一件ずつ記載します。
+#
+# また、冒頭が「#」から始まる行は無視されますので、
+# 更新管理にご利用下さい。
+##################################
+
+example.com
+example.org";
+        private string _templateUnsafeDomains = @"
+# 送信時に警告するドメイン ###
+#
+# ドメインとはメールアドレスのうち「@」の後の部分を指し、
+# 以下の例のように一行に一件ずつ記載します。
+#
+# また、冒頭が「#」から始まる行は無視されますので、
+# 更新管理にご利用下さい。
+##################################
+
+example.com
+example.org";
+        private string _templateUnsafeFiles = @"
+# 警告対象となるファイル名 ###
+#
+# 添付ファイルに含まれている場合に警告対象とする単語を
+# 以下の例のように一行に一件ずつ記載します。
+#
+# また、冒頭が「#」から始まる行は無視されますので、
+# 更新管理にご利用下さい。
+##################################
+
+社外秘
+機密";
+
         public ConfigDialog()
         {
             InitializeComponent();
-            Configure();
-        }
 
-        private void Configure()
-        {
+            QueueLogger.Log("Open ConfigDialog");
+
             ConfigData config = new ConfigData();
             FileLoader loader = new FileLoader(config);
             loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);
@@ -31,12 +66,24 @@ namespace FlexConfirmMail.Dialog
 
             // TrustedDomains
             TrustedDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains);
+            if (String.IsNullOrWhiteSpace(TrustedDomains.Text))
+            {
+                TrustedDomains.Text = _templateTrutedDomains.Trim();
+            }
 
             // UnsafeDomains
             UnsafeDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
+            if (String.IsNullOrWhiteSpace(UnsafeDomains.Text))
+            {
+                UnsafeDomains.Text = _templateUnsafeDomains.Trim();
+            }
 
             // UnsafeFiles
             UnsafeFiles.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
+            if (String.IsNullOrWhiteSpace(UnsafeFiles.Text))
+            {
+                UnsafeFiles.Text = _templateUnsafeFiles.Trim();
+            }
         }
 
         private string SerializeCommon()
@@ -51,13 +98,19 @@ namespace FlexConfirmMail.Dialog
 
         private bool SaveFile(string basedir, string file, string content)
         {
-            try
-            {
-                QueueLogger.Log($"- Save {file}\n{content}");
+            try {
                 string path = System.IO.Path.Combine(basedir, file);
                 string tmp = $"{path}.{GetTimestamp()}.txt";
                 System.IO.File.WriteAllText(tmp, content);
-                System.IO.File.Replace(tmp, path, null);
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Replace(tmp, path, null);
+                }
+                else
+                {
+                    System.IO.File.Move(tmp, path);
+                }
+                QueueLogger.Log($"- Saved {path} ({content.Length} bytes)");
                 return true;
             }
             catch (Exception e)
@@ -76,7 +129,8 @@ namespace FlexConfirmMail.Dialog
         {
             if (tabAboutAddon.IsSelected)
             {
-                textLog.Text = String.Join("\n", QueueLogger.Get());
+                VersionInfo.Content = $"{Global.AppName} v{Global.Version}";
+                TextLog.Text = String.Join("\n", QueueLogger.Get());
             }
         }
 

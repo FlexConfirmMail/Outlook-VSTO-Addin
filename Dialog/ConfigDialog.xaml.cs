@@ -11,37 +11,34 @@ namespace FlexConfirmMail.Dialog
     public partial class ConfigDialog : Window
     {
         private string _templateTrutedDomains = @"
-# 社内の宛先として扱うドメイン ###
+# 社内ドメイン設定 ###
 #
-# ドメインとはメールアドレスのうち「@」の後の部分を指し、
-# 以下の例のように一行に一件ずつ記載します。
+# (1) 送信時に社内の宛先として扱うドメインを指定します。
+# (2) 以下の例のように一行に一件ずつ記載します。
+# (3) 冒頭が「#」から始まる行は無視されます。
 #
-# また、冒頭が「#」から始まる行は無視されますので、
-# 更新管理にご利用下さい。
 ##################################
 
 example.com
 example.org";
         private string _templateUnsafeDomains = @"
-# 送信時に警告するドメイン ###
+# 注意が必要なドメイン設定 ###
 #
-# ドメインとはメールアドレスのうち「@」の後の部分を指し、
-# 以下の例のように一行に一件ずつ記載します。
+# (1) 送信時に警告対象とする注意ドメインを指定します。
+# (2) 以下の例のように一行に一件ずつ記載します。
+# (3) 冒頭が「#」から始まる行は無視されます。
 #
-# また、冒頭が「#」から始まる行は無視されますので、
-# 更新管理にご利用下さい。
 ##################################
 
 example.com
 example.org";
         private string _templateUnsafeFiles = @"
-# 警告対象となるファイル名 ###
+# 注意が必要なファイル名設定 ###
 #
-# 添付ファイルに含まれている場合に警告対象とする単語を
-# 以下の例のように一行に一件ずつ記載します。
+# (1) 添付ファイルに含まれる場合に警告する注意ワードを指定します。
+# (2) 以下の例のように一行に一件ずつ記載します。
+# (3) 冒頭が「#」から始まる行は無視されます。
 #
-# また、冒頭が「#」から始まる行は無視されますので、
-# 更新管理にご利用下さい。
 ##################################
 
 社外秘
@@ -65,22 +62,32 @@ example.org";
             SafeBccThreshold.Text = config.GetInt(ConfigOption.SafeBccThreshold).ToString();
 
             // TrustedDomains
-            TrustedDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains);
-            if (String.IsNullOrWhiteSpace(TrustedDomains.Text))
+            string text;
+            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, out text))
+            {
+                TrustedDomains.Text = text;
+            }
+            else
             {
                 TrustedDomains.Text = _templateTrutedDomains.Trim();
             }
 
             // UnsafeDomains
-            UnsafeDomains.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
-            if (String.IsNullOrWhiteSpace(UnsafeDomains.Text))
+            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, out text))
+            {
+                UnsafeDomains.Text = text;
+            }
+            else
             {
                 UnsafeDomains.Text = _templateUnsafeDomains.Trim();
             }
 
             // UnsafeFiles
-            UnsafeFiles.Text = loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
-            if (String.IsNullOrWhiteSpace(UnsafeFiles.Text))
+            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, out text))
+            {
+                UnsafeFiles.Text = text;
+            }
+            else
             {
                 UnsafeFiles.Text = _templateUnsafeFiles.Trim();
             }

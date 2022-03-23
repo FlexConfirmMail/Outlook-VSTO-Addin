@@ -50,16 +50,18 @@ namespace FlexConfirmMail.Config
                 return false;
             }
         }
-        public string TryRawFile(string basedir, string file)
+        public bool TryRawFile(string basedir, string file, out string ret)
         {
             try
             {
-                return File.ReadAllText(Path.Combine(basedir, file));
+                ret = File.ReadAllText(Path.Combine(basedir, file));
+                return true;
             }
             catch (IOException e)
             {
                 QueueLogger.Log($"* Skip {file} ({e.GetType().Name})");
-                return "";
+                ret = "";
+                return false;
             }
         }
 

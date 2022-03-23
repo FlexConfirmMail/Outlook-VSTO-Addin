@@ -2,9 +2,9 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v0.1.0
+title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v22.0-rc1
 author:    ClearCode Inc.
-date:      2022-01-19
+date:      2022-03
 logo:      fcm-logo.png
 logo-width: 300
 titlepage: true
@@ -34,7 +34,7 @@ FlexConfirmMailは次のシステムをサポートしています。
 
  | 項目             | サポートバージョン |
  | ---------------- | ------------------ |
- | システム         | Microsoft Windows 7/8/8.1/10 |
+ | システム         | Microsoft Windows 7/8/8.1/10/11 |
  | アプリケーション | Office 2013/2016/2019・Microsoft365デスクトップアプリ |
 
 ## ソフトウェアの構成
@@ -66,11 +66,7 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 
    ![](installer.png){width=400}
 
-3. Outlookを起動します。次のような警告が表示された場合は「インストール」を押下します。
-
-   ![](warning.png){width=400}
-
-4. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にFlexConfirmMailが存在していれば成功です。
+3. メニューバーの「ファイル」からオプションを選択し、有効なアドオンの一覧にFlexConfirmMailが存在していれば成功です。
 
    ![](option.png){width=400}
 
@@ -80,38 +76,55 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 
  2. FlexConfirmMailを選択し「アンインストール」を選択します。
 
- 3. ディレクトリ`C:\ProgramData\FlexConfirmMail`を削除します。
-
 \newpage
 
 # FlexConfirmMailの設定
 
- * FlexConfirmMailの設定ファイルは`C:\ProgramData\FlexConfirmMail`ディレクトリに配置します。
- * 設定ファイルの文字コードは「UTF-8」のみサポートしています。
+ * FlexConfirmMailの設定はOutlookのリボンのアイコンから変更できます。
+ * 設定情報は`%AppData%\FlexConfirmMail`ディレクトリに格納されます。
 
 ## 社内ドメインを設定する
 
- 1. テキストエディタで`C:\ProgramData\FlexConfirmMail\trusted.txt`を開きます。
+ 1. Outlookのホームタブから「FlexConfirmMail設定」をクリックします。
 
- 2. ファイルに社内の宛先として登録したいドメインを追記します。
+ 2. 「社内ドメイン」タブをクリックし、ドメインを追記します。
 
-    ![](trusted.png){width=400}
+    ![](TrustedDomains.png){width=400}
 
- 3. ファイルを保存すれば完了です。
+ 3. 「設定を保存して終了」を押下すれば完了です。
 
-## 特に注意が必要なドメインを設定する
+## 注意が必要なドメインを設定する
 
 宛先に含まれる場合に、特に注意が必要なドメインの一覧を設定します。
 
- 1. テキストエディタで`C:\ProgramData\FlexConfirmMail\unsafe.txt`を開きます。
+ 1. Outlookのホームタブから「FlexConfirmMail設定」をクリックします。
 
- 2. ファイルに対象となるドメインを追記します。
+ 2. 「注意が必要なドメイン」タブをクリックし、ドメインを追記します。
 
- 3. ファイルを保存すれば完了です
+    ![](UnsafeDomains.png){width=400}
+
+ 3. 「設定を保存して終了」を押下すれば完了です。
 
 **警告の例**
 
-![](unsafe.png){width=450}
+![](UnsafeDomainsExample.png){width=450}
+
+## 注意が必要なドメインを設定する
+
+注意が必要な添付ファイルのキーワードを設定します。
+
+ 1. Outlookのホームタブから「FlexConfirmMail設定」をクリックします。
+
+ 2. 「注意が必要なファイル名」タブをクリックします。
+
+    ![](UnsafeFiles.png){width=450}
+
+ 3. キーワードを追記し、「設定を保存して終了」を押下すれば完了です。
+
+**警告の例**
+
+![](UnsafeFilesExample.png){width=450}
+
 
 \newpage
 

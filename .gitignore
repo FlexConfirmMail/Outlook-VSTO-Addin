@@ -3,6 +3,7 @@
 *.user
 *.pfx
 *.pdf
+*.exe
 obj
 bin
 .vs

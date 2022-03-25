@@ -4,7 +4,7 @@ namespace FlexConfirmMail.Config
 {
     public class Global
     {
-        public static readonly string Version = "22.0-rc1";
+        public static readonly string Version = "22.0-rc2";
         public static readonly string AppName = "FlexConfirmMail";
     }
 

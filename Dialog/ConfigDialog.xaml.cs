@@ -109,6 +109,7 @@ example.org";
             {
                 string path = System.IO.Path.Combine(basedir, file);
                 string tmp = $"{path}.{GetTimestamp()}.txt";
+                System.IO.Directory.CreateDirectory(basedir);
                 System.IO.File.WriteAllText(tmp, content);
                 if (System.IO.File.Exists(path))
                 {

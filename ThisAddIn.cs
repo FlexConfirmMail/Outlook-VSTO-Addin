@@ -77,7 +77,7 @@ namespace FlexConfirmMail
 
             if (new MainDialog(config, mail).ShowDialog() == true)
             {
-                if (!config.GetBool("CountEnabled"))
+                if (!config.GetBool(ConfigOption.CountEnabled))
                 {
                     return true;
                 }

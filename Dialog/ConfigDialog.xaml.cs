@@ -60,6 +60,7 @@ example.org";
             CountSeconds.Text = config.GetInt(ConfigOption.CountSeconds).ToString();
             SafeBccEnabled.IsChecked = config.GetBool(ConfigOption.SafeBccEnabled);
             SafeBccThreshold.Text = config.GetInt(ConfigOption.SafeBccThreshold).ToString();
+            MainSkipIfNoExt.IsChecked = config.GetBool(ConfigOption.MainSkipIfNoExt);
 
             // TrustedDomains
             string text;
@@ -100,7 +101,8 @@ example.org";
 {ConfigOption.CountAllowSkip} = {CountAllowSkip.IsChecked.ToString()}
 {ConfigOption.CountSeconds} = {CountSeconds.Text}
 {ConfigOption.SafeBccEnabled} = {SafeBccEnabled.IsChecked.ToString()}
-{ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}";
+{ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}
+{ConfigOption.MainSkipIfNoExt} = {MainSkipIfNoExt.IsChecked.ToString()}";
         }
 
         private bool SaveFile(string basedir, string file, string content)

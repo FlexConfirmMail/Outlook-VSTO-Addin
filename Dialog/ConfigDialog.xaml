@@ -42,6 +42,13 @@
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
+                        <GroupBox Header="その他の設定" Padding="5,5,5,5" Margin="5,5,5,5">
+                            <StackPanel>
+                                <StackPanel>
+                                    <CheckBox x:Name="MainSkipIfNoExt" Content="宛先が社内ドメインのみの場合は確認をスキップする" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
                     </StackPanel>
                 </Grid>
             </TabItem>

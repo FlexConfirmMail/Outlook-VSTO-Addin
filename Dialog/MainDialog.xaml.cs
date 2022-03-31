@@ -32,6 +32,19 @@ namespace FlexConfirmMail.Dialog
             RenderMain();
         }
 
+        public bool SkipConfirm()
+        {
+            if (_config.GetBool(ConfigOption.MainSkipIfNoExt))
+            {
+                if (spExt.Children.Count == 0)
+                {
+                    QueueLogger.Log("* No external address found. skipping...");
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void RenderMain()
         {
             List<RecipientInfo> recipients = new List<RecipientInfo>();

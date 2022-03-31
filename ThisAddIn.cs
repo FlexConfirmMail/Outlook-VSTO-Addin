@@ -75,7 +75,13 @@ namespace FlexConfirmMail
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
             loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
 
-            if (new MainDialog(config, mail).ShowDialog() == true)
+            MainDialog mainDialog = new MainDialog(config, mail);
+            if (mainDialog.SkipConfirm())
+            {
+                return true;
+            }
+
+            if (mainDialog.ShowDialog() == true)
             {
                 if (!config.GetBool(ConfigOption.CountEnabled))
                 {

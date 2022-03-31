@@ -23,6 +23,7 @@ namespace FlexConfirmMail.Config
         public static string CountAllowSkip = "CountAllowSkip";
         public static string SafeBccEnabled = "SafeBccEnabled";
         public static string SafeBccThreshold = "SafeBccThreshold";
+        public static string MainSkipIfNoExt = "MainSkipIfNoExt";
     }
 
     public class ConfigDefault
@@ -35,6 +36,7 @@ namespace FlexConfirmMail.Config
             options.Add(ConfigOption.CountAllowSkip, "true");
             options.Add(ConfigOption.SafeBccEnabled, "true");
             options.Add(ConfigOption.SafeBccThreshold, "4");
+            options.Add(ConfigOption.MainSkipIfNoExt, "false");
             return options;
         }
     }

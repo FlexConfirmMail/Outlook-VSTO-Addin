@@ -2,7 +2,7 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v22.0-rc2
+title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v22.0-rc3
 author:    ClearCode Inc.
 date:      2022-03
 logo:      fcm-logo.png

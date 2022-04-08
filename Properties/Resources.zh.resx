@@ -1,0 +1,280 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\banner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonButtonFlexConfirmMail" xml:space="preserve">
+    <value>设置FlexConfirmMail</value>
+  </data>
+  <data name="RibbonGroupFlexConfirmMail" xml:space="preserve">
+    <value>安全发送</value>
+  </data>
+  <data name="SaveAndQuit" xml:space="preserve">
+    <value>保存并退出</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>秒</value>
+  </data>
+  <data name="ConfigWindowTitle" xml:space="preserve">
+    <value>设置FlexConfirmMail</value>
+  </data>
+  <data name="ConfigGeneral" xml:space="preserve">
+    <value>一般</value>
+  </data>
+  <data name="ConfigCount" xml:space="preserve">
+    <value>倒计时</value>
+  </data>
+  <data name="ConfigCountEnabled" xml:space="preserve">
+    <value>发送信息时启用倒计时</value>
+  </data>
+  <data name="ConfigCountAllowSkip" xml:space="preserve">
+    <value>激活"现在发送"按钮</value>
+  </data>
+  <data name="ConfigCountSeconds" xml:space="preserve">
+    <value>倒计时秒:</value>
+  </data>
+  <data name="ConfigWarning" xml:space="preserve">
+    <value>To/Cc</value>
+  </data>
+  <data name="ConfigSafeBccEnabled" xml:space="preserve">
+    <value>当To/Cc包含许多域时发出警告</value>
+  </data>
+  <data name="ConfigSafeBccThreshold" xml:space="preserve">
+    <value>警告的阈值:</value>
+  </data>
+  <data name="ConfigSafeBccThresholdSuffix" xml:space="preserve">
+    <value>个域名或更多</value>
+  </data>
+  <data name="ConfigMisc" xml:space="preserve">
+    <value>其他设置</value>
+  </data>
+  <data name="ConfigMainSkipIfNoExt" xml:space="preserve">
+    <value>如果所有目的地都是受信任的域，则立即发送</value>
+  </data>
+  <data name="ConfigTrustedDomains" xml:space="preserve">
+    <value>信任域</value>
+  </data>
+  <data name="ConfigTrustedDomainsTemplate" xml:space="preserve">
+    <value># 信任域 ###
+#
+# (1) 设置域被视为内部目的地
+# (2) 每行写一个条目，如下所示
+# (3) 以 "#" 开头的行被忽略
+#
+##################################
+
+example.com
+example.org</value>
+  </data>
+  <data name="ConfigUnsafeDomainsTemplate" xml:space="preserve">
+    <value># 不安全域 ###
+#
+# (1) 设置要被提醒的域
+# (2) 每行写一个条目，如下所示
+# (3) 以 "#" 开头的行被忽略
+#
+##################################
+
+example.com
+example.org</value>
+  </data>
+  <data name="ConfigUnsafeFilesTemplate" xml:space="preserve">
+    <value># 不安全的文件名 ###
+#
+# (1) 为附件设置警告关键字
+# (2) 每行写一个条目，如下所示
+# (3) 以 "#" 开头的行被忽略
+#
+##################################
+
+秘密
+</value>
+  </data>
+  <data name="TrustedDomains" xml:space="preserve">
+    <value>信任域</value>
+  </data>
+  <data name="ConfigUnsafeDomains" xml:space="preserve">
+    <value>不安全域</value>
+  </data>
+  <data name="UnsafeDomains" xml:space="preserve">
+    <value>不安全域</value>
+  </data>
+  <data name="ConfigUnsafeFiles" xml:space="preserve">
+    <value>不安全的文件名</value>
+  </data>
+  <data name="UnsafeFiles" xml:space="preserve">
+    <value>不安全的文件名</value>
+  </data>
+  <data name="AboutAddon" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="TextLog" xml:space="preserve">
+    <value>调试日志</value>
+  </data>
+  <data name="CountWindowTitle" xml:space="preserve">
+    <value>倒數計時 - FlexConfirmMail</value>
+  </data>
+  <data name="CountSendInSeconds" xml:space="preserve">
+    <value>秒后发送</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="SendNow" xml:space="preserve">
+    <value>现在发送</value>
+  </data>
+  <data name="MainExternal" xml:space="preserve">
+    <value>外部目的地</value>
+  </data>
+  <data name="MainUnsafeDomainsWarning" xml:space="preserve">
+    <value>[警告] 包含不安全的域 ({0})</value>
+  </data>
+  <data name="MainUnsafeDomainsWarningHint" xml:space="preserve">
+    <value>该域名被列入不安全域名列表中</value>
+  </data>
+  <data name="MainUnsafeFilesWarning" xml:space="preserve">
+    <value>[警告] 包含不安全的文件名 ({0}) </value>
+  </data>
+  <data name="MainUnsafeFilesWarningHint" xml:space="preserve">
+    <value>该附件名被列入不安全文件名列表中</value>
+  </data>
+  <data name="MainSafeBccWarning" xml:space="preserve">
+    <value>[警告] To/Cc 包含{0}个以上的域</value>
+  </data>
+  <data name="MainSafeBccWarningHint" xml:space="preserve">
+    <value>使用Bcc来发送电子邮件到大量的目的地</value>
+  </data>
+  <data name="MainInternal" xml:space="preserve">
+    <value>内部目的地</value>
+  </data>
+  <data name="MainFilesWarning" xml:space="preserve">
+    <value>[附件] {0}</value>
+  </data>
+  <data name="MainFile" xml:space="preserve">
+    <value>附件 / 警告</value>
+  </data>
+</root>

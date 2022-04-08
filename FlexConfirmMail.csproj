@@ -182,6 +182,8 @@
     </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="Ribbon.cs" />
+    <EmbeddedResource Include="Properties\Resources.zh.resx" />
+    <EmbeddedResource Include="Properties\Resources.en.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

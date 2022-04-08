@@ -3,11 +3,11 @@
   <ribbon>
 	  <tabs>
 		<tab idMso="TabMail">
-			<group id="GroupFlexConfirmMail" label="送信チェック" insertAfterMso="GroupMailRespond">
-				<button id="ButtonFlexConfirmMail" label="FlexConfirmMail設定"
+			<group id="GroupFlexConfirmMail" getLabel="Ribbon_LoadLabel" insertAfterMso="GroupMailRespond">
+				<button id="ButtonFlexConfirmMail" getLabel="Ribbon_LoadLabel"
 					 image="logo.png" showImage="true" size="large"
-					 screentip="設定画面" onAction="OnClickConfig" 
-					 supertip="FlexConfirmMailの設定画面を表示します"/>
+					 screentip="Configuration" onAction="OnClickConfig"
+					 supertip="FlexConfirmMail Options"/>
 			</group>
 		</tab>
 	</tabs>

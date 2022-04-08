@@ -12,7 +12,7 @@ namespace FlexConfirmMail.Dialog
         public bool IsSMTP { get; set; }
 
         public const string DOMAIN_EXCHANGE = "Exchange";
-        public const string DOMAIN_EXCHANGE_EXT = "Exchange (外部)";
+        public const string DOMAIN_EXCHANGE_EXT = "Exchange (ext)";
 
         public RecipientInfo(Outlook.Recipient recp)
         {

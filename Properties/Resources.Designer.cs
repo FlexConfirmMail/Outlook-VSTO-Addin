@@ -22,7 +22,7 @@ namespace FlexConfirmMail.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace FlexConfirmMail.Properties {
         ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("FlexConfirmMail.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace FlexConfirmMail.Properties {
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace FlexConfirmMail.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap banner {
+        public static System.Drawing.Bitmap banner {
             get {
                 object obj = ResourceManager.GetObject("banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
@@ -73,10 +73,262 @@ namespace FlexConfirmMail.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap logo {
+        public static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+
+        public static string RibbonButtonFlexConfirmMail {
+            get {
+                return ResourceManager.GetString("RibbonButtonFlexConfirmMail", resourceCulture);
+            }
+        }
+
+        public static string RibbonGroupFlexConfirmMail {
+            get {
+                return ResourceManager.GetString("RibbonGroupFlexConfirmMail", resourceCulture);
+            }
+        }
+
+        public static string SaveAndQuit {
+            get {
+                return ResourceManager.GetString("SaveAndQuit", resourceCulture);
+            }
+        }
+
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+
+        public static string Seconds {
+            get {
+                return ResourceManager.GetString("Seconds", resourceCulture);
+            }
+        }
+
+        public static string ConfigWindowTitle {
+            get {
+                return ResourceManager.GetString("ConfigWindowTitle", resourceCulture);
+            }
+        }
+
+        public static string ConfigGeneral {
+            get {
+                return ResourceManager.GetString("ConfigGeneral", resourceCulture);
+            }
+        }
+
+        public static string ConfigCount {
+            get {
+                return ResourceManager.GetString("ConfigCount", resourceCulture);
+            }
+        }
+
+        public static string ConfigCountEnabled {
+            get {
+                return ResourceManager.GetString("ConfigCountEnabled", resourceCulture);
+            }
+        }
+
+        public static string ConfigCountAllowSkip {
+            get {
+                return ResourceManager.GetString("ConfigCountAllowSkip", resourceCulture);
+            }
+        }
+
+        public static string ConfigCountSeconds {
+            get {
+                return ResourceManager.GetString("ConfigCountSeconds", resourceCulture);
+            }
+        }
+
+        public static string ConfigWarning {
+            get {
+                return ResourceManager.GetString("ConfigWarning", resourceCulture);
+            }
+        }
+
+        public static string ConfigSafeBccEnabled {
+            get {
+                return ResourceManager.GetString("ConfigSafeBccEnabled", resourceCulture);
+            }
+        }
+
+        public static string ConfigSafeBccThreshold {
+            get {
+                return ResourceManager.GetString("ConfigSafeBccThreshold", resourceCulture);
+            }
+        }
+
+        public static string ConfigSafeBccThresholdSuffix {
+            get {
+                return ResourceManager.GetString("ConfigSafeBccThresholdSuffix", resourceCulture);
+            }
+        }
+
+        public static string ConfigMisc {
+            get {
+                return ResourceManager.GetString("ConfigMisc", resourceCulture);
+            }
+        }
+
+        public static string ConfigMainSkipIfNoExt {
+            get {
+                return ResourceManager.GetString("ConfigMainSkipIfNoExt", resourceCulture);
+            }
+        }
+
+        public static string ConfigTrustedDomains {
+            get {
+                return ResourceManager.GetString("ConfigTrustedDomains", resourceCulture);
+            }
+        }
+
+        public static string ConfigTrustedDomainsTemplate {
+            get {
+                return ResourceManager.GetString("ConfigTrustedDomainsTemplate", resourceCulture);
+            }
+        }
+
+        public static string ConfigUnsafeDomainsTemplate {
+            get {
+                return ResourceManager.GetString("ConfigUnsafeDomainsTemplate", resourceCulture);
+            }
+        }
+
+        public static string ConfigUnsafeFilesTemplate {
+            get {
+                return ResourceManager.GetString("ConfigUnsafeFilesTemplate", resourceCulture);
+            }
+        }
+
+        public static string TrustedDomains {
+            get {
+                return ResourceManager.GetString("TrustedDomains", resourceCulture);
+            }
+        }
+
+        public static string ConfigUnsafeDomains {
+            get {
+                return ResourceManager.GetString("ConfigUnsafeDomains", resourceCulture);
+            }
+        }
+
+        public static string UnsafeDomains {
+            get {
+                return ResourceManager.GetString("UnsafeDomains", resourceCulture);
+            }
+        }
+
+        public static string ConfigUnsafeFiles {
+            get {
+                return ResourceManager.GetString("ConfigUnsafeFiles", resourceCulture);
+            }
+        }
+
+        public static string UnsafeFiles {
+            get {
+                return ResourceManager.GetString("UnsafeFiles", resourceCulture);
+            }
+        }
+
+        public static string AboutAddon {
+            get {
+                return ResourceManager.GetString("AboutAddon", resourceCulture);
+            }
+        }
+
+        public static string TextLog {
+            get {
+                return ResourceManager.GetString("TextLog", resourceCulture);
+            }
+        }
+
+        public static string CountWindowTitle {
+            get {
+                return ResourceManager.GetString("CountWindowTitle", resourceCulture);
+            }
+        }
+
+        public static string CountSendInSeconds {
+            get {
+                return ResourceManager.GetString("CountSendInSeconds", resourceCulture);
+            }
+        }
+
+        public static string Send {
+            get {
+                return ResourceManager.GetString("Send", resourceCulture);
+            }
+        }
+
+        public static string SendNow {
+            get {
+                return ResourceManager.GetString("SendNow", resourceCulture);
+            }
+        }
+
+        public static string MainExternal {
+            get {
+                return ResourceManager.GetString("MainExternal", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeDomainsWarning {
+            get {
+                return ResourceManager.GetString("MainUnsafeDomainsWarning", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeDomainsWarningHint {
+            get {
+                return ResourceManager.GetString("MainUnsafeDomainsWarningHint", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeFilesWarning {
+            get {
+                return ResourceManager.GetString("MainUnsafeFilesWarning", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeFilesWarningHint {
+            get {
+                return ResourceManager.GetString("MainUnsafeFilesWarningHint", resourceCulture);
+            }
+        }
+
+        public static string MainSafeBccWarning {
+            get {
+                return ResourceManager.GetString("MainSafeBccWarning", resourceCulture);
+            }
+        }
+
+        public static string MainSafeBccWarningHint {
+            get {
+                return ResourceManager.GetString("MainSafeBccWarningHint", resourceCulture);
+            }
+        }
+
+        public static string MainFilesWarning {
+            get {
+                return ResourceManager.GetString("MainFilesWarning", resourceCulture);
+            }
+        }
+
+        public static string MainInternal {
+            get {
+                return ResourceManager.GetString("MainInternal", resourceCulture);
+            }
+        }
+
+        public static string MainFile {
+            get {
+                return ResourceManager.GetString("MainFile", resourceCulture);
             }
         }
     }

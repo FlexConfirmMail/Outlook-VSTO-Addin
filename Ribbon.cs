@@ -26,6 +26,18 @@ namespace FlexConfirmMail
             return null;
         }
 
+        public string Ribbon_LoadLabel(Office.IRibbonControl Control)
+        {
+            switch (Control.Id)
+            {
+                case "GroupFlexConfirmMail":
+                    return Properties.Resources.RibbonGroupFlexConfirmMail;
+                case "ButtonFlexConfirmMail":
+                    return Properties.Resources.RibbonButtonFlexConfirmMail;
+            }
+            return "";
+        }
+
         #region IRibbonExtensibility のメンバー
 
         public string GetCustomUI(string ribbonID)

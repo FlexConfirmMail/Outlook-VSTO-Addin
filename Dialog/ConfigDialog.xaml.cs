@@ -10,40 +10,6 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class ConfigDialog : Window
     {
-        private string _templateTrutedDomains = @"
-# 社内ドメイン設定 ###
-#
-# (1) 送信時に社内の宛先として扱うドメインを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
-#
-##################################
-
-example.com
-example.org";
-        private string _templateUnsafeDomains = @"
-# 注意が必要なドメイン設定 ###
-#
-# (1) 送信時に警告対象とする注意ドメインを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
-#
-##################################
-
-example.com
-example.org";
-        private string _templateUnsafeFiles = @"
-# 注意が必要なファイル名設定 ###
-#
-# (1) 添付ファイルに含まれる場合に警告する注意ワードを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
-#
-##################################
-
-社外秘
-機密";
-
         public ConfigDialog()
         {
             InitializeComponent();
@@ -70,7 +36,7 @@ example.org";
             }
             else
             {
-                TrustedDomains.Text = _templateTrutedDomains.Trim();
+                TrustedDomains.Text = Properties.Resources.ConfigTrustedDomainsTemplate;
             }
 
             // UnsafeDomains
@@ -80,7 +46,7 @@ example.org";
             }
             else
             {
-                UnsafeDomains.Text = _templateUnsafeDomains.Trim();
+                UnsafeDomains.Text = Properties.Resources.ConfigUnsafeDomainsTemplate;
             }
 
             // UnsafeFiles
@@ -90,7 +56,7 @@ example.org";
             }
             else
             {
-                UnsafeFiles.Text = _templateUnsafeFiles.Trim();
+                UnsafeFiles.Text = Properties.Resources.ConfigUnsafeFilesTemplate;
             }
         }
 

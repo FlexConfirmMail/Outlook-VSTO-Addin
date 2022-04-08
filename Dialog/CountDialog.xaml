@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FlexConfirmMail"
+             xmlns:resx="clr-namespace:FlexConfirmMail.Properties"
              mc:Ignorable="d" Width="450" Height="270"
              Closing="CountDialog_Closing" Loaded="CountDialog_Loaded"
-             Title="送信カウントダウン - FlexConfirmMail">
+             Title="{x:Static resx:Resources.CountWindowTitle}">
     <Grid Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="200*"/>
@@ -14,11 +15,11 @@
         </Grid.RowDefinitions>
         <StackPanel Margin="42,10,0,0" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0">
             <Label x:Name="labelCount" Content="0" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="5,0,5,0" FontSize="130"/>
-            <Label Content="秒後に送信します" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="0,0,0,30" FontSize="30" VerticalAlignment="Bottom" UseLayoutRounding="False"/>
+            <Label Content="{x:Static resx:Resources.CountSendInSeconds}" HorizontalAlignment="Left" Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" Margin="0,0,0,30" FontSize="30" VerticalAlignment="Bottom" UseLayoutRounding="False"/>
         </StackPanel>
         <StackPanel Margin="0,0,10,10" Width="160" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Height="20">
-            <Button x:Name="ButtonOK" Content="今すぐ送信" Width="75" Click="ButtonOK_Click" ToolTip="メールを送信します"/>
-            <Button Content="キャンセル" Width="75" Margin="10,0,0,0" IsCancel="True" ToolTip="メールの送信を中止します"/>
+            <Button x:Name="ButtonOK" Content="{x:Static resx:Resources.SendNow}" Width="75" Click="ButtonOK_Click"/>
+            <Button Content="{x:Static resx:Resources.Cancel}" Width="75" Margin="10,0,0,0" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>

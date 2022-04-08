@@ -66,7 +66,9 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                spFile.Children.Add(GetCheckBox($"[添付ファイル] {item.FileName}", item.FileName));
+                spFile.Children.Add(GetCheckBox(
+                    string.Format(Properties.Resources.MainFilesWarning, item.FileName),
+                    item.FileName));
             }
         }
 
@@ -126,8 +128,8 @@ namespace FlexConfirmMail.Dialog
                     if (unsafeDomains.Contains(info.Domain))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
-                            $"[警告] 注意が必要なドメイン（{info.Domain}）が宛先に含まれています。",
-                            "このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。"
+                            string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
+                            Properties.Resources.MainUnsafeDomainsWarningHint
                         ));
                     }
                     seen.Add(info.Domain);
@@ -146,9 +148,8 @@ namespace FlexConfirmMail.Dialog
                     if (item.FileName.Contains(keyword))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
-                            $"[警告] 注意が必要なファイル名（{keyword}）が含まれています。",
-                            $"添付ファイル「{item.FileName}」に注意が必要な単語が含まれているため、" +
-                            $"再確認を促す警告を出しています。"
+                            string.Format(Properties.Resources.MainUnsafeFilesWarning, keyword),
+                            Properties.Resources.MainUnsafeFilesWarningHint
                         ));
                         break;
                     }
@@ -181,10 +182,9 @@ namespace FlexConfirmMail.Dialog
             if (domains.Count >= threshold)
             {
                 spFile.Children.Add(GetWarnCheckBox(
-                    $"[警告] To・Ccに{threshold}件以上のドメインが含まれています。",
-                    $"宛先に多数のドメインが検知されました。" +
-                    $"ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、" +
-                    $"アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。"
+
+                    string.Format(Properties.Resources.MainSafeBccWarning, threshold),
+                    Properties.Resources.MainSafeBccWarningHint
                 ));
             }
         }

@@ -6,6 +6,7 @@ AppPublisher=ClearCode Inc.
 AppVersion=22.0-rc3
 UninstallDisplayIcon={app}\fcm.ico
 DefaultDirName={commonpf}\FlexConfirmMail
+ShowLanguageDialog=no
 Compression=lzma2
 SolidCompression=yes
 OutputDir=dest
@@ -33,6 +34,7 @@ Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Outlook\Resiliency\DoNotDisa
 Root: HKCU; Subkey: "Software\Microsoft\Office\13.0\Outlook\Resiliency\DoNotDisableAddinList"; ValueType: dword; ValueName: "FlexConfirmMail"; ValueData: 1
 
 [Languages]
+Name: en; MessagesFile: "compiler:Default.isl"
 Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 
 [Files]

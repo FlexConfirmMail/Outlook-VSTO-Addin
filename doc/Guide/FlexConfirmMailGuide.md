@@ -2,9 +2,9 @@
 CJKmainfont: Noto Sans CJK JP
 CJKoptions:
   - BoldFont=Noto Sans CJK JP Bold
-title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v22.0-rc3
+title:     FlexConfirmMail for Outlook \newline 管理者マニュアル v22.0
 author:    ClearCode Inc.
-date:      2022-03
+date:      2022-04
 logo:      fcm-logo.png
 logo-width: 300
 titlepage: true
@@ -22,11 +22,12 @@ titlepage-rule-height: 2
 
 FlexConfirmMail for Outlook （本文書では FlexConfirmMail と呼びます）とは、
 誤送信を防止するためのオープンソースのOutlookアドオンです。
-送信時に宛先と添付ファイルをダイアログで確認することで、送信ミスを防ぎます。
+
+**ハイライト**
 
  * メールの送信時に、宛先と添付ファイルを確認するダイアログを表示します。
  * チェックリスト形式で確認することで送信ミスを防ぎます。
- * 社内ドメインを登録することで、外部の宛先を区別してチェックできます。
+ * 設定を通じて細かく挙動を調整することが可能です。
 
 ## システム要件
 
@@ -35,7 +36,7 @@ FlexConfirmMailは次のシステムをサポートしています。
  | 項目             | サポートバージョン |
  | ---------------- | ------------------ |
  | システム         | Microsoft Windows 7/8/8.1/10/11 |
- | アプリケーション | Office 2013/2016/2019・Microsoft365デスクトップアプリ |
+ | アプリケーション | Office 2013/2016/2019, Microsoft365デスクトップアプリ |
 
 ## ソフトウェアの構成
 
@@ -48,7 +49,7 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 | FlexConfirmMail.vsto         | Outlook向けのアドオン定義           |
 | fcm.ico                      | アイコンファイル                    |
 | unins000.exe                 | アンインストーラ                    |
-| unins000.dat                 | アンインストーラ（データファイル）  |
+| unins000.dat                 | アンインストーラ                    |
 | Microsoft.Office.Tools.Common.v4.0.Utilities.dll | VSTOアドオンライブラリ |
 | Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll | VSTOアドオンライブラリ |
 
@@ -81,6 +82,9 @@ FlexConfirmMailインストーラには次のファイルが含まれていま�
 # FlexConfirmMailの設定
 
  * FlexConfirmMailの設定はOutlookのリボンのアイコンから変更できます。
+
+   ![](Ribbon.png){width=400}
+
  * 設定情報は`%AppData%\FlexConfirmMail`ディレクトリに格納されます。
 
 ## 社内ドメインを設定する

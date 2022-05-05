@@ -20,3 +20,8 @@ iscc.exe FlexConfirmMail.iss
 @REM Sign the installer
 @REM ==================
 signtool sign /t %timestamp%  /fd SHA256 /sha1 %cert% dest\FlexConfirmMailSetup*.exe
+
+@REM ==================
+@REM Compress templates
+@REM ==================
+powershell -C "Compress-Archive  -DestinationPath dest\FlexConfirmMailADMX.zip policy"

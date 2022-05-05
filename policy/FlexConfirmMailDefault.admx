@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions revision="2.4" schemaVersion="1.0">
+  <policyNamespaces>
+    <target prefix="FlexConfirmMailDefault" namespace="FlexConfirmMail.Policies.Default"/>
+    <using prefix="FlexConfirmMail" namespace="FlexConfirmMail.Policies"/>
+  </policyNamespaces>
+  <resources minRequiredRevision="2.4"/>
+  <categories>
+    <category displayName="$(string.Default)" name="FlexConfirmMailDefault">
+      <parentCategory ref="FlexConfirmMail:FlexConfirmMail"/>
+    </category>
+  </categories>
+  <policies>
+    <policy name="CountEnabled" valueName="CountEnabled"
+        displayName="$(string.CountEnabled)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
+    <policy name="CountSeconds" valueName="CountSeconds"
+        displayName="$(string.CountSeconds)" class="Machine"
+        presentation="$(presentation.CountSeconds)"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <elements>
+        <decimal id="CountSeconds" valueName="CountSeconds" minValue="1" maxValue="1000" />
+      </elements>
+    </policy>
+    <policy name="CountAllowSkip" valueName="CountAllowSkip"
+        displayName="$(string.CountAllowSkip)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
+    <policy name="SafeBccEnabled" valueName="SafeBccEnabled"
+        displayName="$(string.SafeBccEnabled)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
+    <policy name="SafeBccThreshold" valueName="SafeBccThreshold"
+        displayName="$(string.SafeBccThreshold)" class="Machine"
+        presentation="$(presentation.SafeBccThreshold)"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <elements>
+        <decimal id="SafeBccThreshold" valueName="SafeBccThreshold" minValue="1" maxValue="1000" />
+      </elements>
+    </policy>
+    <policy name="MainSkipIfNoExt" valueName="MainSkipIfNoExt"
+        displayName="$(string.MainSkipIfNoExt)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
+    <policy name="TrustedDomains"
+        displayName="$(string.TrustedDomains)"
+        explainText="$(string.TrustedDomains_Explain)"
+        presentation="$(presentation.TrustedDomains)"
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\TrustedDomains">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <elements>
+        <list id="TrustedDomains" key="SOFTWARE\Policies\FlexConfirmMail\Default\TrustedDomains" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="UnsafeDomains"
+        displayName="$(string.UnsafeDomains)"
+        explainText="$(string.UnsafeDomains_Explain)"
+        presentation="$(presentation.UnsafeDomains)"
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeDomains">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <elements>
+        <list id="UnsafeDomains" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeDomains" valuePrefix=""/>
+      </elements>
+    </policy>
+    <policy name="UnsafeFiles"
+        displayName="$(string.UnsafeFiles)"
+        explainText="$(string.UnsafeFiles_Explain)"
+        presentation="$(presentation.UnsafeFiles)"
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeFiles">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <elements>
+        <list id="UnsafeFiles" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeFiles" valuePrefix=""/>
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

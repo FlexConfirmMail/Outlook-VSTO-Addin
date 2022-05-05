@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="2.4" schemaVersion="1.0" >
+  <displayName/>
+  <description/>
+  <resources>
+    <stringTable>
+      <string id="Default">既定値</string>
+      <string id="CountEnabled">メール送信前のカウントダウンを有効化する</string>
+      <string id="CountAllowSkip">カウントダウンのダイアログの「いますぐ送信」ボタンを有効化する</string>
+      <string id="CountSeconds">送信までのカウントダウン秒数</string>
+      <string id="SafeBccEnabled">To/Ccに一定数以上のドメインが含まれている場合に警告する</string>
+      <string id="SafeBccThreshold">To/Ccの警告対象となるドメインの数</string>
+      <string id="MainSkipIfNoExt">宛先が社内ドメインのみの場合は確認をスキップする</string>
+      <string id="TrustedDomains">社内ドメイン設定</string>
+      <string id="TrustedDomains_Explain">送信時に社内の宛先として扱うドメインを指定します。</string>
+      <string id="UnsafeDomains">注意が必要なドメイン設定</string>
+      <string id="UnsafeDomains_Explain">送信時に警告対象とする注意ドメインを指定します。</string>
+      <string id="UnsafeFiles">注意が必要なファイル名設定</string>
+      <string id="UnsafeFiles_Explain">添付ファイルに含まれる場合に警告する注意ワードを指定します。</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="CountSeconds">
+        <decimalTextBox refId="CountSeconds" defaultValue="3" spinStep="1">秒</decimalTextBox>
+      </presentation>
+      <presentation id="SafeBccThreshold">
+        <decimalTextBox refId="SafeBccThreshold" defaultValue="4" spinStep="1">件数</decimalTextBox>
+      </presentation>
+      <presentation id="TrustedDomains">
+        <listBox refId="TrustedDomains"/>
+      </presentation>
+      <presentation id="UnsafeDomains">
+        <listBox refId="UnsafeDomains"/>
+      </presentation>
+      <presentation id="UnsafeFiles">
+        <listBox refId="UnsafeFiles"/>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

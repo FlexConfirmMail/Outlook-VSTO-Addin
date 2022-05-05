@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="2.4" schemaVersion="1.0" >
+  <displayName/>
+  <description/>
+  <resources>
+    <stringTable>
+      <string id="Default">默认值</string>
+      <string id="CountEnabled">发送信息时启用倒计时</string>
+      <string id="CountAllowSkip">激活"现在发送"按钮</string>
+      <string id="CountSeconds">倒计时秒</string>
+      <string id="SafeBccEnabled">当To/Cc包含许多域时发出警告</string>
+      <string id="SafeBccThreshold">受到警告的To/Cc域的阈值</string>
+      <string id="MainSkipIfNoExt">如果所有目的地都是受信任的域，则立即发送</string>
+      <string id="TrustedDomains">设置信任域</string>
+      <string id="TrustedDomains_Explain">设置域被视为内部目的地</string>
+      <string id="UnsafeDomains">设置不安全域</string>
+      <string id="UnsafeDomains_Explain">设置要被提醒的域</string>
+      <string id="UnsafeFiles">设置不安全的文件名</string>
+      <string id="UnsafeFiles_Explain">为附件设置警告关键字</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="CountSeconds">
+        <decimalTextBox refId="CountSeconds" defaultValue="3" spinStep="1">秒</decimalTextBox>
+      </presentation>
+      <presentation id="SafeBccThreshold">
+        <decimalTextBox refId="SafeBccThreshold" defaultValue="4" spinStep="1">警告的阈值</decimalTextBox>
+      </presentation>
+      <presentation id="TrustedDomains">
+        <listBox refId="TrustedDomains"/>
+      </presentation>
+      <presentation id="UnsafeDomains">
+        <listBox refId="UnsafeDomains"/>
+      </presentation>
+      <presentation id="UnsafeFiles">
+        <listBox refId="UnsafeFiles"/>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

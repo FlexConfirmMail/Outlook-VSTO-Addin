@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="2.4" schemaVersion="1.0" >
+  <displayName/>
+  <description/>
+  <resources>
+    <stringTable>
+      <string id="Default">Defaults</string>
+      <string id="CountEnabled">Show a countdown clock when sending a message</string>
+      <string id="CountAllowSkip">Show "Send Now" button in the countdown dialog</string>
+      <string id="CountSeconds">Delay sending a message by N seconds</string>
+      <string id="SafeBccEnabled">Enable "too many domains in To/Cc fields" warnings</string>
+      <string id="SafeBccThreshold">Warn if To/Cc fields contain N domains (or more)</string>
+      <string id="MainSkipIfNoExt">Skip confirmation if all the recpients are trusted</string>
+      <string id="TrustedDomains">Configure Trusted Domains</string>
+      <string id="TrustedDomains_Explain">Set the list of domains to be treated as internal ones.</string>
+      <string id="UnsafeDomains">Configure Unsafe Domains</string>
+      <string id="UnsafeDomains_Explain">Set the list of domains to show an "unsafe recipient" warning.</string>
+      <string id="UnsafeFiles">Configure Unsafe files</string>
+      <string id="UnsafeFiles_Explain">Set the list of keywords to show an "unsafe filename" warning.</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="CountSeconds">
+        <decimalTextBox refId="CountSeconds" defaultValue="3" spinStep="1">Seconds</decimalTextBox>
+      </presentation>
+      <presentation id="SafeBccThreshold">
+        <decimalTextBox refId="SafeBccThreshold" defaultValue="4" spinStep="1">Number of Domains</decimalTextBox>
+      </presentation>
+      <presentation id="TrustedDomains">
+        <listBox refId="TrustedDomains"/>
+      </presentation>
+      <presentation id="UnsafeDomains">
+        <listBox refId="UnsafeDomains"/>
+      </presentation>
+      <presentation id="UnsafeFiles">
+        <listBox refId="UnsafeFiles"/>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

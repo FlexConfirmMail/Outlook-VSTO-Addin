@@ -201,7 +201,7 @@ namespace FlexConfirmMail.Dialog
         private CheckBox GetCheckBox(string title, string help)
         {
             CheckBox cb = new CheckBox();
-            cb.Content = title;
+            cb.Content = title.Replace("_", "__");
             cb.ToolTip = help;
             cb.Margin = new Thickness(7, 2, 0, 2);
             cb.Click +=  CheckBox_Click;

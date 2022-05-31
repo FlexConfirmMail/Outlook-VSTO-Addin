@@ -268,8 +268,11 @@ example.org</value>
   <data name="MainSafeBccWarningHint" xml:space="preserve">
     <value>使用Bcc来发送电子邮件到大量的目的地</value>
   </data>
-  <data name="MainInternal" xml:space="preserve">
+  <data name="MainTrusted" xml:space="preserve">
     <value>内部目的地</value>
+  </data>
+  <data name="MainCheckAll" xml:space="preserve">
+    <value>勾选所有</value>
   </data>
   <data name="MainFilesWarning" xml:space="preserve">
     <value>[附件] {0}</value>

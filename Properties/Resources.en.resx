@@ -270,8 +270,11 @@ confidential
     <value>Beware that To/Cc fields are visible to any recipients,
 so please use Bcc when sending an message to unrelated parties.</value>
   </data>
-  <data name="MainInternal" xml:space="preserve">
+  <data name="MainTrusted" xml:space="preserve">
     <value>Internal Recipients</value>
+  </data>
+  <data name="MainCheckAll" xml:space="preserve">
+    <value>Check all</value>
   </data>
   <data name="MainFilesWarning" xml:space="preserve">
     <value>[Attachment] {0}</value>

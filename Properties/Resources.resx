@@ -274,8 +274,11 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
   <data name="MainFilesWarning" xml:space="preserve">
     <value>[添付ファイル] {0}</value>
   </data>
-  <data name="MainInternal" xml:space="preserve">
+  <data name="MainTrusted" xml:space="preserve">
     <value>社内の送信先</value>
+  </data>
+  <data name="MainCheckAll" xml:space="preserve">
+    <value>一括チェック</value>
   </data>
   <data name="MainFile" xml:space="preserve">
     <value>添付ファイル／その他の警告</value>

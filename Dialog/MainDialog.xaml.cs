@@ -267,5 +267,17 @@ namespace FlexConfirmMail.Dialog
             QueueLogger.Log("* Send button clicked. closing...");
             DialogResult = true;
         }
+
+        private void CheckAllTrusted_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (UIElement child in spTrusted.Children)
+            {
+                if (child is CheckBox)
+                {
+                    ((CheckBox)child).IsChecked = true;
+                }
+            }
+            ButtonOK.IsEnabled = IsAllChecked(spTrusted) && IsAllChecked(spExt) && IsAllChecked(spFile);
+        }
     }
 }

@@ -320,9 +320,15 @@ namespace FlexConfirmMail.Properties {
             }
         }
 
-        public static string MainInternal {
+        public static string MainTrusted {
             get {
-                return ResourceManager.GetString("MainInternal", resourceCulture);
+                return ResourceManager.GetString("MainTrusted", resourceCulture);
+            }
+        }
+
+        public static string MainCheckAll {
+            get {
+                return ResourceManager.GetString("MainCheckAll", resourceCulture);
             }
         }
 

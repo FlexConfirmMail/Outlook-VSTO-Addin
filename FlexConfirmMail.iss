@@ -1,9 +1,9 @@
 ﻿[Setup]
 AppName=FlexConfirmMail
 AppVerName=FlexConfirmMail
-VersionInfoVersion=22.0.0.0
+VersionInfoVersion=22.1.0.0
 AppPublisher=ClearCode Inc.
-AppVersion=22.0
+AppVersion=22.1-rc1
 UninstallDisplayIcon={app}\fcm.ico
 DefaultDirName={commonpf}\FlexConfirmMail
 ShowLanguageDialog=no

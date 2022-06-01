@@ -21,6 +21,11 @@ namespace FlexConfirmMail.Dialog
             {
                 FromSMTP(recp);
             }
+            else if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser ||
+                     recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olRemoteUser)
+            {
+                FromExchange(recp);
+            }
             else
             {
                 FromOther(recp);
@@ -36,15 +41,30 @@ namespace FlexConfirmMail.Dialog
             IsSMTP = true;
         }
 
+        private void FromExchange(Outlook.Recipient recp)
+        {
+            Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
+            if (user == null || string.IsNullOrEmpty(user.PrimarySmtpAddress))
+            {
+                FromOther(recp);
+            }
+            else
+            {
+                Type = GetType(recp);
+                Address = user.PrimarySmtpAddress;
+                Domain = Address.Substring(Address.IndexOf('@') + 1);
+                Help = Address;
+                IsSMTP = true;
+            }
+        }
+
         private void FromOther(Outlook.Recipient recp)
         {
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:
-                    Domain = DOMAIN_EXCHANGE;
-                    break;
                 case Outlook.OlDisplayType.olRemoteUser:
-                    Domain = DOMAIN_EXCHANGE_EXT;
+                    Domain = DOMAIN_EXCHANGE;
                     break;
                 case Outlook.OlDisplayType.olDistList:
                 case Outlook.OlDisplayType.olPrivateDistList:

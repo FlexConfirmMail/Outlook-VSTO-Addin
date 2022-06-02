@@ -85,8 +85,10 @@ namespace FlexConfirmMail.Dialog
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:
-                case Outlook.OlDisplayType.olRemoteUser:
                     Domain = DOMAIN_EXCHANGE;
+                    break;
+                case Outlook.OlDisplayType.olRemoteUser:
+                    Domain = DOMAIN_EXCHANGE_EXT;
                     break;
                 case Outlook.OlDisplayType.olDistList:
                 case Outlook.OlDisplayType.olPrivateDistList:

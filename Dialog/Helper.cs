@@ -26,6 +26,11 @@ namespace FlexConfirmMail.Dialog
             {
                 FromExchange(recp);
             }
+            else if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olPrivateDistList ||
+                     recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olDistList)
+            {
+                FromDistList(recp);
+            }
             else
             {
                 FromOther(recp);
@@ -52,6 +57,23 @@ namespace FlexConfirmMail.Dialog
             {
                 Type = GetType(recp);
                 Address = user.PrimarySmtpAddress;
+                Domain = Address.Substring(Address.IndexOf('@') + 1);
+                Help = Address;
+                IsSMTP = true;
+            }
+        }
+
+        private void FromDistList(Outlook.Recipient recp)
+        {
+            Outlook.ExchangeDistributionList dist = recp.AddressEntry.GetExchangeDistributionList();
+            if (dist == null || string.IsNullOrEmpty(dist.PrimarySmtpAddress))
+            {
+                FromOther(recp);
+            }
+            else
+            {
+                Type = GetType(recp);
+                Address = dist.PrimarySmtpAddress;
                 Domain = Address.Substring(Address.IndexOf('@') + 1);
                 Help = Address;
                 IsSMTP = true;

@@ -2,7 +2,7 @@
 
 using System.IO;
 
-namespace FlexConfirmMail.Config
+namespace FlexConfirmMail
 {
     public class StandardPath
     {

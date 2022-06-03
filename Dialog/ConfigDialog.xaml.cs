@@ -1,5 +1,5 @@
-﻿using FlexConfirmMail.Config;
-using System;
+﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -10,27 +10,28 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class ConfigDialog : Window
     {
+        Config _config;
+
         public ConfigDialog()
         {
             InitializeComponent();
 
             QueueLogger.Log("Open ConfigDialog()");
 
-            ConfigData config = new ConfigData();
-            FileLoader loader = new FileLoader(config);
-            loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);
+            _config = Loader.LoadFromDir(StandardPath.GetUserDir());
 
             // Common
-            CountEnabled.IsChecked = config.GetBool(ConfigOption.CountEnabled);
-            CountAllowSkip.IsChecked = config.GetBool(ConfigOption.CountAllowSkip);
-            CountSeconds.Text = config.GetInt(ConfigOption.CountSeconds).ToString();
-            SafeBccEnabled.IsChecked = config.GetBool(ConfigOption.SafeBccEnabled);
-            SafeBccThreshold.Text = config.GetInt(ConfigOption.SafeBccThreshold).ToString();
-            MainSkipIfNoExt.IsChecked = config.GetBool(ConfigOption.MainSkipIfNoExt);
+            CountEnabled.IsChecked = _config.CountEnabled;
+            CountAllowSkip.IsChecked = _config.CountAllowSkip;
+            CountSeconds.Text = _config.CountSeconds.ToString();
+            SafeBccEnabled.IsChecked = _config.SafeBccEnabled;
+            SafeBccThreshold.Text = _config.SafeBccThreshold.ToString();
+            MainSkipIfNoExt.IsChecked = _config.MainSkipIfNoExt;
 
             // TrustedDomains
             string text;
-            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, out text))
+            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "TrustedDomains.txt"));
+            if (text != null)
             {
                 TrustedDomains.Text = text;
             }
@@ -40,7 +41,8 @@ namespace FlexConfirmMail.Dialog
             }
 
             // UnsafeDomains
-            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, out text))
+            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "UnsafeDomains.txt"));
+            if (text != null)
             {
                 UnsafeDomains.Text = text;
             }
@@ -50,7 +52,8 @@ namespace FlexConfirmMail.Dialog
             }
 
             // UnsafeFiles
-            if (loader.TryRawFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, out text))
+            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "UnsafeFiles.txt"));
+            if (text != null)
             {
                 UnsafeFiles.Text = text;
             }
@@ -114,11 +117,23 @@ namespace FlexConfirmMail.Dialog
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             QueueLogger.Log("* Save button clicked. closing...");
-            SaveFile(StandardPath.GetUserDir(), ConfigFile.Common, SerializeCommon());
-            SaveFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains, TrustedDomains.Text);
-            SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains, UnsafeDomains.Text);
-            SaveFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles, UnsafeFiles.Text);
+            SaveFile(StandardPath.GetUserDir(), "Common.txt", SerializeCommon());
+            SaveFile(StandardPath.GetUserDir(), "TrustedDomains.txt", TrustedDomains.Text);
+            SaveFile(StandardPath.GetUserDir(), "UnsafeDomains.txt", UnsafeDomains.Text);
+            SaveFile(StandardPath.GetUserDir(), "UnsafeFiles.txt", UnsafeFiles.Text);
             DialogResult = true;
+        }
+
+        private string ReadFile(string path)
+        {
+             try
+             {
+                 return File.ReadAllText(path);
+             }
+             catch (IOException)
+             {
+                 return null;
+             }
         }
     }
 }

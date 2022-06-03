@@ -1,5 +1,4 @@
-﻿using FlexConfirmMail.Config;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -15,15 +14,15 @@ namespace FlexConfirmMail.Dialog
             InitializeComponent();
         }
 
-        public CountDialog(ConfigData config)
+        public CountDialog(Config config)
         {
             InitializeComponent();
 
             QueueLogger.Log("Open CountDialog()");
 
-            _timeout = config.GetInt(ConfigOption.CountSeconds);
+            _timeout = config.CountSeconds;
 
-            if (!config.GetBool(ConfigOption.CountAllowSkip))
+            if (!config.CountAllowSkip)
             {
                 ButtonOK.Visibility = Visibility.Hidden;
                 ButtonOK.IsEnabled = false;

@@ -1,5 +1,4 @@
-﻿using FlexConfirmMail.Config;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,14 +9,14 @@ namespace FlexConfirmMail.Dialog
     public partial class MainDialog : Window
     {
         private Outlook.MailItem _mail;
-        private ConfigData _config;
+        private Config _config;
 
         public MainDialog()
         {
             InitializeComponent();
         }
 
-        public MainDialog(ConfigData config, Outlook.MailItem mail)
+        public MainDialog(Config config, Outlook.MailItem mail)
         {
             InitializeComponent();
             _config = config;
@@ -34,7 +33,7 @@ namespace FlexConfirmMail.Dialog
 
         public bool SkipConfirm()
         {
-            if (_config.GetBool(ConfigOption.MainSkipIfNoExt))
+            if (_config.MainSkipIfNoExt)
             {
                 if (spExt.Children.Count == 0)
                 {
@@ -87,14 +86,15 @@ namespace FlexConfirmMail.Dialog
         private void RenderTrustedList(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trustedDomains = _config.GetHashSet(ConfigFile.TrustedDomains);
+            HashSet<string> trusted = new HashSet<string>();
 
             // Assume Exchange as internal domain.
-            trustedDomains.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            trusted.UnionWith(_config.TrustedDomains);
 
             foreach (RecipientInfo info in recipients)
             {
-                if (trustedDomains.Contains(info.Domain))
+                if (trusted.Contains(info.Domain))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -109,14 +109,15 @@ namespace FlexConfirmMail.Dialog
         private void RenderExternalList(List<RecipientInfo> list)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trustedDomains = _config.GetHashSet(ConfigFile.TrustedDomains);
+            HashSet<string> trusted = new HashSet<string>();
 
             // Consider Exchange as internal domain.
-            trustedDomains.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            trusted.UnionWith(_config.TrustedDomains);
 
             foreach (RecipientInfo info in list)
             {
-                if (!trustedDomains.Contains(info.Domain))
+                if (!trusted.Contains(info.Domain))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -130,14 +131,13 @@ namespace FlexConfirmMail.Dialog
 
         private void CheckUnsafeDomains(List<RecipientInfo> recipients)
         {
-            HashSet<string> unsafeDomains = _config.GetHashSet(ConfigFile.UnsafeDomains);
             HashSet<string> seen = new HashSet<string>();
 
             foreach (RecipientInfo info in recipients)
             {
                 if (!seen.Contains(info.Domain))
                 {
-                    if (unsafeDomains.Contains(info.Domain))
+                    if (_config.UnsafeDomains.Contains(info.Domain))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
                             string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
@@ -151,11 +151,9 @@ namespace FlexConfirmMail.Dialog
 
         private void CheckUnsafeFiles()
         {
-            HashSet<string> unsafeFiles = _config.GetHashSet(ConfigFile.UnsafeFiles);
-
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                foreach (string keyword in unsafeFiles)
+                foreach (string keyword in _config.UnsafeFiles)
                 {
                     if (item.FileName.Contains(keyword))
                     {
@@ -171,12 +169,12 @@ namespace FlexConfirmMail.Dialog
 
         private void CheckSafeBcc(List<RecipientInfo> recipients)
         {
-            if (!_config.GetBool(ConfigOption.SafeBccEnabled))
+            if (!_config.SafeBccEnabled)
             {
                 return;
             }
 
-            int threshold = _config.GetInt(ConfigOption.SafeBccThreshold);
+            int threshold = _config.SafeBccThreshold;
             if (threshold < 1)
             {
                 return;

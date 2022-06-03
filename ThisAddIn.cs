@@ -1,5 +1,4 @@
-﻿using FlexConfirmMail.Config;
-using FlexConfirmMail.Dialog;
+﻿using FlexConfirmMail.Dialog;
 using System.Windows.Forms;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
@@ -67,13 +66,7 @@ namespace FlexConfirmMail
         {
             QueueLogger.Log($"Setup config for mail (Subject={mail.Subject})");
 
-            ConfigData config = new ConfigData();
-            FileLoader loader = new FileLoader(config);
-
-            loader.TryOptionFile(StandardPath.GetUserDir(), ConfigFile.Common);
-            loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.TrustedDomains);
-            loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeDomains);
-            loader.TryListFile(StandardPath.GetUserDir(), ConfigFile.UnsafeFiles);
+            Config config = Loader.LoadFromDir(StandardPath.GetUserDir());
 
             MainDialog mainDialog = new MainDialog(config, mail);
             if (mainDialog.SkipConfirm())
@@ -83,7 +76,7 @@ namespace FlexConfirmMail
 
             if (mainDialog.ShowDialog() == true)
             {
-                if (!config.GetBool(ConfigOption.CountEnabled))
+                if (!config.CountEnabled)
                 {
                     return true;
                 }

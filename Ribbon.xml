@@ -3,7 +3,7 @@
   <ribbon>
 	  <tabs>
 		<tab idMso="TabMail">
-			<group id="GroupFlexConfirmMail" getLabel="Ribbon_LoadLabel" insertAfterMso="GroupMailRespond">
+			<group id="GroupFlexConfirmMail" getLabel="Ribbon_LoadLabel">
 				<button id="ButtonFlexConfirmMail" getLabel="Ribbon_LoadLabel"
 					 image="logo.png" showImage="true" size="large"
 					 screentip="Configuration" onAction="OnClickConfig"

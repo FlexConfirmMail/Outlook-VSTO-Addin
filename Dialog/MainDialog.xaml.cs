@@ -66,10 +66,22 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                spFile.Children.Add(GetCheckBox(
-                    string.Format(Properties.Resources.MainFilesWarning, item.FileName),
-                    item.FileName));
+                if (!IsEmbeddedImage(item))
+                {
+                    spFile.Children.Add(GetCheckBox(
+                        string.Format(Properties.Resources.MainFilesWarning, item.FileName),
+                        item.FileName));
+                }
             }
+        }
+
+        private bool IsEmbeddedImage(Outlook.Attachment item)
+        {
+            // Outlook embeds images into HTML Email like this:
+            //
+            //   <img width=1806 height=475 src="cid:image002.png@01D87765.44471120">
+            //
+            return _mail.HTMLBody.Contains($"cid:{item.FileName}");
         }
 
         private void RenderTrustedList(List<RecipientInfo> recipients)

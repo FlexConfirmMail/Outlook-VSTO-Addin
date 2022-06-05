@@ -51,10 +51,10 @@ namespace FlexConfirmMail
         {
             try
             {
-                QueueLogger.Log($"Start {Global.AppName} {Global.Version}");
+                QueueLogger.Log($"Start {Global.AppName}");
+                QueueLogger.Log($"* Version {Global.Version} {Global.Edition}");
                 QueueLogger.Log($"* Outlook {Application.Version}");
                 QueueLogger.Log($"* {System.Environment.OSVersion.VersionString}");
-                QueueLogger.Log($"* AppData is {StandardPath.GetUserDir()}");
             }
             catch (System.Exception e)
             {

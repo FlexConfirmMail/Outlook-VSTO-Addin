@@ -109,7 +109,7 @@ namespace FlexConfirmMail.Dialog
         {
             if (tabAboutAddon.IsSelected)
             {
-                VersionInfo.Content = $"{Global.AppName} v{Global.Version}";
+                VersionInfo.Content = $"{Global.AppName} v{Global.Version} {Global.Edition}";
                 TextLog.Text = String.Join("\n", QueueLogger.Get());
             }
         }

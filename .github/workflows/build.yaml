@@ -11,7 +11,9 @@ jobs:
           $cert = New-SelfSignedCertificate -Subject "CN=FlexConfirmMailSelfSign" -Type CodeSigningCert -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
           (Get-Content FlexConfirmMail.csproj) -Replace '<ManifestCertificateThumbprint>[^<]*',("<ManifestCertificateThumbprint>" + $cert.Thumbprint) | Set-Content FlexConfirmMail.csproj
       - name: Compile
-        run: msbuild /p:Configuration=Release
+        run: |
+          cp Global.public.cs Global.cs
+          msbuild /p:Configuration=Release
       - name: Make Installer
         run: iscc.exe FlexConfirmMail.iss
       - name: Upload Installer

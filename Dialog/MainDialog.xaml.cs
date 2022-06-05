@@ -83,14 +83,32 @@ namespace FlexConfirmMail.Dialog
             return _mail.HTMLBody.Contains($"cid:{item.FileName}");
         }
 
+        private HashSet<string> GetHashSet(List<string> list)
+        {
+            HashSet<string> ret = new HashSet<string>();
+            HashSet<string> exclude = new HashSet<string>();
+            foreach (string entry in list)
+            {
+                if (entry.StartsWith("-"))
+                {
+                    exclude.Add(entry.Substring(1));
+                }
+                else
+                {
+                    ret.Add(entry);
+                }
+            }
+            ret.ExceptWith(exclude);
+            return ret;
+        }
+
         private void RenderTrustedList(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = new HashSet<string>();
+            HashSet<string> trusted = GetHashSet(_config.TrustedDomains);
 
             // Assume Exchange as internal domain.
             trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
-            trusted.UnionWith(_config.TrustedDomains);
 
             foreach (RecipientInfo info in recipients)
             {
@@ -109,11 +127,10 @@ namespace FlexConfirmMail.Dialog
         private void RenderExternalList(List<RecipientInfo> list)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = new HashSet<string>();
+            HashSet<string> trusted = GetHashSet(_config.TrustedDomains);
 
             // Consider Exchange as internal domain.
             trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
-            trusted.UnionWith(_config.TrustedDomains);
 
             foreach (RecipientInfo info in list)
             {
@@ -132,12 +149,13 @@ namespace FlexConfirmMail.Dialog
         private void CheckUnsafeDomains(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
+            HashSet<string> notsafe = GetHashSet(_config.UnsafeDomains);
 
             foreach (RecipientInfo info in recipients)
             {
                 if (!seen.Contains(info.Domain))
                 {
-                    if (_config.UnsafeDomains.Contains(info.Domain))
+                    if (notsafe.Contains(info.Domain))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
                             string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
@@ -151,9 +169,11 @@ namespace FlexConfirmMail.Dialog
 
         private void CheckUnsafeFiles()
         {
+            HashSet<string> notsafe = GetHashSet(_config.UnsafeFiles);
+
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                foreach (string keyword in _config.UnsafeFiles)
+                foreach (string keyword in notsafe)
                 {
                     if (item.FileName.Contains(keyword))
                     {

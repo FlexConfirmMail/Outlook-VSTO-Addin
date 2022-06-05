@@ -64,9 +64,15 @@ namespace FlexConfirmMail
 
         private bool DoCheck(Outlook.MailItem mail)
         {
-            QueueLogger.Log($"Setup config for mail (Subject={mail.Subject})");
+            QueueLogger.Log($"===== Start DoCheck() ======");
 
-            Config config = Loader.LoadFromDir(StandardPath.GetUserDir());
+            Config config = new Config();
+
+            if (Global.EnableGPO)
+            {
+                config.Merge(Loader.LoadFromReg(RegistryPath.DefaultPolicy));
+            }
+            config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
 
             MainDialog mainDialog = new MainDialog(config, mail);
             if (mainDialog.SkipConfirm())

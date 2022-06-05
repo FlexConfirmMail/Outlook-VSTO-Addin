@@ -178,7 +178,55 @@
   <data name="ConfigTrustedDomains" xml:space="preserve">
     <value>信任域</value>
   </data>
-  <data name="ConfigTrustedDomainsTemplate" xml:space="preserve">
+  <data name="TrustedDomainsPolicy" xml:space="preserve">
+    <value># 信任域 ###
+# 以下域是由组策略信任的。
+#
+# {0}
+#
+# 要添加更多的域，请在下面输入条目（每行一个）。
+# 你也可以通过在开头添加"-"来排除域名。
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeDomainsPolicy" xml:space="preserve">
+    <value># 不安全域 ###
+# 以下域被组策略视为不安全的域
+#
+# {0}
+#
+# 要添加更多的域，请在下面输入条目（每行一个）。
+# 你也可以通过在开头添加"-"来排除域名。
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeFilesPolicy" xml:space="preserve">
+    <value># 不安全的文件名 ###
+# 以下关键词被组策略认为是不安全的。
+#
+# {0}
+#
+# 要添加更多的关键词，请在下面输入条目（每行一个）。
+# 你也可以通过在开头添加"-"来排除关键词。
+##################################
+
+{1}</value>
+  </data>
+  <data name="TrustedDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeFilesExample" xml:space="preserve">
+    <value>保密
+-排除项目</value>
+  </data>
+  <data name="TrustedDomainsTemplate" xml:space="preserve">
     <value># 信任域 ###
 #
 # (1) 设置域被视为内部目的地
@@ -190,7 +238,7 @@
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeDomainsTemplate" xml:space="preserve">
+  <data name="UnsafeDomainsTemplate" xml:space="preserve">
     <value># 不安全域 ###
 #
 # (1) 设置要被提醒的域
@@ -202,7 +250,7 @@ example.org</value>
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeFilesTemplate" xml:space="preserve">
+  <data name="UnsafeFilesTemplate" xml:space="preserve">
     <value># 不安全的文件名 ###
 #
 # (1) 为附件设置警告关键字
@@ -212,6 +260,7 @@ example.org</value>
 ##################################
 
 秘密
+-排除项目
 </value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">

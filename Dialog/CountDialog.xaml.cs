@@ -18,7 +18,7 @@ namespace FlexConfirmMail.Dialog
         {
             InitializeComponent();
 
-            QueueLogger.Log("Open CountDialog()");
+            QueueLogger.Log("===== Open CountDialog() =====");
 
             _timeout = config.CountSeconds;
 

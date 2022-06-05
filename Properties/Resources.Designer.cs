@@ -188,21 +188,57 @@ namespace FlexConfirmMail.Properties {
             }
         }
 
-        public static string ConfigTrustedDomainsTemplate {
+        public static string TrustedDomainsPolicy {
             get {
-                return ResourceManager.GetString("ConfigTrustedDomainsTemplate", resourceCulture);
+                return ResourceManager.GetString("TrustedDomainsPolicy", resourceCulture);
             }
         }
 
-        public static string ConfigUnsafeDomainsTemplate {
+        public static string UnsafeDomainsPolicy{
             get {
-                return ResourceManager.GetString("ConfigUnsafeDomainsTemplate", resourceCulture);
+                return ResourceManager.GetString("UnsafeDomainsPolicy", resourceCulture);
             }
         }
 
-        public static string ConfigUnsafeFilesTemplate {
+        public static string UnsafeFilesPolicy {
             get {
-                return ResourceManager.GetString("ConfigUnsafeFilesTemplate", resourceCulture);
+                return ResourceManager.GetString("UnsafeFilesPolicy", resourceCulture);
+            }
+        }
+
+        public static string TrustedDomainsExample {
+            get {
+                return ResourceManager.GetString("TrustedDomainsExample", resourceCulture);
+            }
+        }
+
+        public static string UnsafeDomainsExample {
+            get {
+                return ResourceManager.GetString("UnsafeDomainsExample", resourceCulture);
+            }
+        }
+
+        public static string UnsafeFilesExample {
+            get {
+                return ResourceManager.GetString("UnsafeFilesExample", resourceCulture);
+            }
+        }
+
+        public static string TrustedDomainsTemplate {
+            get {
+                return ResourceManager.GetString("TrustedDomainsTemplate", resourceCulture);
+            }
+        }
+
+        public static string UnsafeDomainsTemplate {
+            get {
+                return ResourceManager.GetString("UnsafeDomainsTemplate", resourceCulture);
+            }
+        }
+
+        public static string UnsafeFilesTemplate {
+            get {
+                return ResourceManager.GetString("UnsafeFilesTemplate", resourceCulture);
             }
         }
 

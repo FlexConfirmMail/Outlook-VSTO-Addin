@@ -178,7 +178,55 @@
   <data name="ConfigTrustedDomains" xml:space="preserve">
     <value>Configure Trusted Domains</value>
   </data>
-  <data name="ConfigTrustedDomainsTemplate" xml:space="preserve">
+  <data name="TrustedDomainsPolicy" xml:space="preserve">
+    <value># Trusted Domains ###
+# The following domains are trusted by Group Policy.
+#
+# {0}
+#
+# To add more domains, input entries (one per line) below.
+# You can also exclude domains by adding "-" at the beginning.
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeDomainsPolicy" xml:space="preserve">
+    <value># Unsafe Domains ###
+# The following domains are considered unsafe by Group Policy.
+#
+# {0}
+#
+# To add more domains, input entries (one per line) below.
+# You can also exclude domains by adding "-" at the beginning.
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeFilesPolicy" xml:space="preserve">
+    <value># Unsafe Files ###
+# The following keywords are considered unsafe by Group Policy.
+#
+# {0}
+#
+# To add more keywords, input entries (one per line) below.
+# You can also exclude keywords by adding "-" at the beginning.
+##################################
+
+{1}</value>
+  </data>
+  <data name="TrustedDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeFilesExample" xml:space="preserve">
+    <value>Confidential
+-ExcludedItem</value>
+  </data>
+  <data name="TrustedDomainsTemplate" xml:space="preserve">
     <value># Trusted Domains ###
 #
 # (1) Set the list of domains to be treated as internal ones.
@@ -190,7 +238,7 @@
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeDomainsTemplate" xml:space="preserve">
+  <data name="UnsafeDomainsTemplate" xml:space="preserve">
     <value># Unsafe Domains ###
 #
 # (1) Set the list of domains to show an "unsafe recipient" warning.
@@ -202,7 +250,7 @@ example.org</value>
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeFilesTemplate" xml:space="preserve">
+  <data name="UnsafeFilesTemplate" xml:space="preserve">
     <value># Unsafe Files ###
 #
 # (1) Set the list of keywords to show an "unsafe filename" warning.

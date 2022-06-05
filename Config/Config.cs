@@ -23,5 +23,60 @@ namespace FlexConfirmMail
             UnsafeFiles = new List<string>();
             Modified = new HashSet<ConfigOption>();
         }
+
+        public void Merge(Config other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+
+            if (other.Modified.Contains(ConfigOption.CountEnabled))
+            {
+                CountEnabled = other.CountEnabled;
+            }
+
+            if (other.Modified.Contains(ConfigOption.CountSeconds))
+            {
+                CountSeconds = other.CountSeconds;
+            }
+
+            if (other.Modified.Contains(ConfigOption.CountAllowSkip))
+            {
+                CountAllowSkip = other.CountAllowSkip;
+            }
+
+            if (other.Modified.Contains(ConfigOption.SafeBccEnabled))
+            {
+                SafeBccEnabled = other.SafeBccEnabled;
+            }
+
+            if (other.Modified.Contains(ConfigOption.SafeBccThreshold))
+            {
+                SafeBccThreshold = other.SafeBccThreshold;
+            }
+
+            if (other.Modified.Contains(ConfigOption.MainSkipIfNoExt))
+            {
+                MainSkipIfNoExt = other.MainSkipIfNoExt;
+            }
+
+            if (other.Modified.Contains(ConfigOption.TrustedDomains))
+            {
+                TrustedDomains.AddRange(other.TrustedDomains);
+            }
+
+            if (other.Modified.Contains(ConfigOption.UnsafeDomains))
+            {
+                UnsafeDomains.AddRange(other.UnsafeDomains);
+            }
+
+            if (other.Modified.Contains(ConfigOption.UnsafeFiles))
+            {
+                UnsafeFiles.AddRange(other.UnsafeFiles);
+            }
+
+            Modified.UnionWith(other.Modified);
+        }
     }
 }

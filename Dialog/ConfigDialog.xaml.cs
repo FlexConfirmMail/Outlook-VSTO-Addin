@@ -10,15 +10,24 @@ namespace FlexConfirmMail.Dialog
     /// </summary>
     public partial class ConfigDialog : Window
     {
-        Config _config;
+        Config _config = new Config();
+        Config _default = new Config();
+        Config _local = new Config();
 
         public ConfigDialog()
         {
             InitializeComponent();
 
-            QueueLogger.Log("Open ConfigDialog()");
+            QueueLogger.Log("===== Open ConfigDialog() =====");
 
-            _config = Loader.LoadFromDir(StandardPath.GetUserDir());
+            if (Global.EnableGPO)
+            {
+                _default = Loader.LoadFromReg(RegistryPath.DefaultPolicy);
+                _config.Merge(_default);
+            }
+
+            _local = Loader.LoadFromDir(StandardPath.GetUserDir());
+            _config.Merge(_local);
 
             // Common
             CountEnabled.IsChecked = _config.CountEnabled;
@@ -29,38 +38,76 @@ namespace FlexConfirmMail.Dialog
             MainSkipIfNoExt.IsChecked = _config.MainSkipIfNoExt;
 
             // TrustedDomains
-            string text;
-            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "TrustedDomains.txt"));
-            if (text != null)
+            if (_default.Modified.Contains(ConfigOption.TrustedDomains))
             {
-                TrustedDomains.Text = text;
+                TrustedDomains.Text = GetTrustedDomainsPolicy();
+            }
+            else if (_local.Modified.Contains(ConfigOption.TrustedDomains))
+            {
+                TrustedDomains.Text = ReadLocalConfig("TrustedDomains.txt");
             }
             else
             {
-                TrustedDomains.Text = Properties.Resources.ConfigTrustedDomainsTemplate;
+                TrustedDomains.Text = Properties.Resources.TrustedDomainsTemplate;
             }
 
             // UnsafeDomains
-            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "UnsafeDomains.txt"));
-            if (text != null)
+            if (_default.Modified.Contains(ConfigOption.UnsafeDomains))
             {
-                UnsafeDomains.Text = text;
+                UnsafeDomains.Text = GetUnsafeDomainsPolicy();
+            }
+            else if (_local.Modified.Contains(ConfigOption.UnsafeDomains))
+            {
+                UnsafeDomains.Text = ReadLocalConfig("UnsafeDomains.txt");
             }
             else
             {
-                UnsafeDomains.Text = Properties.Resources.ConfigUnsafeDomainsTemplate;
+                UnsafeDomains.Text = Properties.Resources.UnsafeDomainsTemplate;
             }
 
             // UnsafeFiles
-            text = ReadFile(Path.Combine(StandardPath.GetUserDir(), "UnsafeFiles.txt"));
-            if (text != null)
+            if (_default.Modified.Contains(ConfigOption.UnsafeFiles))
             {
-                UnsafeFiles.Text = text;
+                UnsafeFiles.Text = GetUnsafeFilesPolicy();
+            }
+            else if (_local.Modified.Contains(ConfigOption.UnsafeFiles))
+            {
+                UnsafeFiles.Text = ReadLocalConfig("UnsafeFiles.txt");
             }
             else
             {
-                UnsafeFiles.Text = Properties.Resources.ConfigUnsafeFilesTemplate;
+                UnsafeFiles.Text = Properties.Resources.UnsafeFilesTemplate;
             }
+        }
+
+        private string GetTrustedDomainsPolicy()
+        {
+            string template = Properties.Resources.TrustedDomainsPolicy;
+            string policy = String.Join("\n# ", _default.TrustedDomains);
+            string example = _local.Modified.Contains(ConfigOption.TrustedDomains) ?
+                             String.Join("\n", _local.TrustedDomains) :
+                             Properties.Resources.TrustedDomainsExample;
+            return String.Format(template, policy, example);
+        }
+
+        private string GetUnsafeDomainsPolicy()
+        {
+            string template = Properties.Resources.UnsafeDomainsPolicy;
+            string policy = String.Join("\n# ", _default.UnsafeDomains);
+            string example = _local.Modified.Contains(ConfigOption.UnsafeDomains) ?
+                             String.Join("\n", _local.UnsafeDomains) :
+                             Properties.Resources.UnsafeDomainsExample;
+            return String.Format(template, policy, example);
+        }
+
+        private string GetUnsafeFilesPolicy()
+        {
+            string template = Properties.Resources.UnsafeFilesPolicy;
+            string policy = String.Join("\n# ", _default.UnsafeFiles);
+            string example = _local.Modified.Contains(ConfigOption.UnsafeFiles) ?
+                             String.Join("\n", _local.UnsafeFiles) :
+                             Properties.Resources.UnsafeFilesExample;
+            return String.Format(template, policy, example);
         }
 
         private string SerializeCommon()
@@ -72,6 +119,19 @@ namespace FlexConfirmMail.Dialog
 {ConfigOption.SafeBccEnabled} = {SafeBccEnabled.IsChecked.ToString()}
 {ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}
 {ConfigOption.MainSkipIfNoExt} = {MainSkipIfNoExt.IsChecked.ToString()}";
+        }
+
+        private string ReadLocalConfig(string file)
+        {
+            string path = Path.Combine(StandardPath.GetUserDir(), file);
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (IOException)
+            {
+                return "";
+            }
         }
 
         private bool SaveFile(string basedir, string file, string content)
@@ -122,18 +182,6 @@ namespace FlexConfirmMail.Dialog
             SaveFile(StandardPath.GetUserDir(), "UnsafeDomains.txt", UnsafeDomains.Text);
             SaveFile(StandardPath.GetUserDir(), "UnsafeFiles.txt", UnsafeFiles.Text);
             DialogResult = true;
-        }
-
-        private string ReadFile(string path)
-        {
-             try
-             {
-                 return File.ReadAllText(path);
-             }
-             catch (IOException)
-             {
-                 return null;
-             }
         }
     }
 }

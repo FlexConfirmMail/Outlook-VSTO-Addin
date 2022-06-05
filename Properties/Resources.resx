@@ -178,7 +178,55 @@
   <data name="ConfigTrustedDomains" xml:space="preserve">
     <value>社内ドメイン設定</value>
   </data>
-  <data name="ConfigTrustedDomainsTemplate" xml:space="preserve">
+  <data name="TrustedDomainsPolicy" xml:space="preserve">
+    <value># 社内ドメイン設定 ###
+# 組織設定により、社内ドメインとして以下が指定されています。
+#
+# {0}
+#
+# さらにドメインを追加する場合は、以下に1行ずつ入力してください。
+# また、先頭に「-」をつけると、ドメインを除外することができます。
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeDomainsPolicy" xml:space="preserve">
+    <value># 注意が必要なドメイン設定 ###
+# 組織設定により、注意が必要なドメインとして以下が指定されています。
+#
+# {0}
+#
+# さらにドメインを追加する場合は、以下に1行ずつ入力してください。
+# また、先頭に「-」をつけると、ドメインを除外することができます。
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeFilesPolicy" xml:space="preserve">
+    <value># 注意が必要なファイル名設定 ###
+# 組織設定により、注意が必要なファイル名として以下が指定されています。
+#
+# {0}
+#
+# さらにキーワードを追加する場合は、以下に1行ずつ入力してください。
+# また、先頭に「-」をつけると、キーワードを除外することができます。
+##################################
+
+{1}</value>
+  </data>
+  <data name="TrustedDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeDomainsExample" xml:space="preserve">
+    <value>example.com
+-example.org</value>
+  </data>
+  <data name="UnsafeFilesExample" xml:space="preserve">
+    <value>社外秘
+-除外キーワード</value>
+  </data>
+  <data name="TrustedDomainsTemplate" xml:space="preserve">
     <value># 社内ドメイン設定 ###
 #
 # (1) 送信時に社内の宛先として扱うドメインを指定します。
@@ -190,7 +238,7 @@
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeDomainsTemplate" xml:space="preserve">
+  <data name="UnsafeDomainsTemplate" xml:space="preserve">
     <value># 注意が必要なドメイン設定 ###
 #
 # (1) 送信時に警告対象とする注意ドメインを指定します。
@@ -202,7 +250,7 @@ example.org</value>
 example.com
 example.org</value>
   </data>
-  <data name="ConfigUnsafeFilesTemplate" xml:space="preserve">
+  <data name="UnsafeFilesTemplate" xml:space="preserve">
     <value># 注意が必要なファイル名設定 ###
 #
 # (1) 添付ファイルに含まれる場合に警告する注意ワードを指定します。

@@ -170,6 +170,7 @@
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\File.cs" />
     <Compile Include="Config\Loader.cs" />
+    <Compile Include="Config\Registry.cs" />
     <Compile Include="Config\Const.cs" />
     <Compile Include="Config\StandardPath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

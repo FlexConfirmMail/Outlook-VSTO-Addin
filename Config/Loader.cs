@@ -54,6 +54,54 @@ namespace FlexConfirmMail
             return config;
         }
 
+        public static Config LoadFromReg(string basedir)
+        {
+            Config config = new Config();
+            Dictionary<string, string> dict;
+
+
+            dict = RegistryConfig.ReadDict(basedir);
+            if (dict != null)
+            {
+                foreach (KeyValuePair<string, string> kv in dict)
+                {
+                    if (Assign(config, kv.Key, kv.Value))
+                    {
+                        QueueLogger.Log($"* Option: {kv.Key} = {kv.Value}");
+                    }
+                    else
+                    {
+                        QueueLogger.Log($"* Unknown option: {kv.Key} = {kv.Value}");
+                    }
+                }
+            }
+
+            dict = RegistryConfig.ReadDict(basedir + "\\TrustedDomains");
+            if (dict != null)
+            {
+                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
+                config.TrustedDomains.AddRange(dict.Values);
+                config.Modified.Add(ConfigOption.TrustedDomains);
+            }
+
+            dict = RegistryConfig.ReadDict(basedir + "\\UnsafeDomains");
+            if (dict != null)
+            {
+                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
+                config.UnsafeDomains.AddRange(dict.Values);
+                config.Modified.Add(ConfigOption.UnsafeDomains);
+            }
+
+            dict = RegistryConfig.ReadDict(basedir + "\\UnsafeFiles");
+            if (dict != null)
+            {
+                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
+                config.UnsafeFiles.AddRange(dict.Values);
+                config.Modified.Add(ConfigOption.UnsafeFiles);
+            }
+            return config;
+        }
+
         private static bool Assign(Config config, string key, string val)
         {
             int i;

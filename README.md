@@ -3,7 +3,7 @@ FlexConfirmMail for Outlook
 
 メールの誤送信を防止するためのOutlook向けアドオンです。
 
-![FlexConfirmMail logo](doc/FlexConfirmMailGuide/fcm-logo.png)
+![FlexConfirmMail logo](doc/Guide/fcm-logo.png)
 
  * 公式サイト: https://flexconfirmmail.github.io/
  * インストーラ: https://github.com/FlexConfirmMail/Outlook/releases

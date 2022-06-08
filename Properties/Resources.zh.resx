@@ -259,9 +259,7 @@ example.org</value>
 #
 ##################################
 
-秘密
--排除项目
-</value>
+秘密</value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
     <value>信任域</value>

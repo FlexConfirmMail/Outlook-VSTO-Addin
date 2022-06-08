@@ -56,14 +56,14 @@
             <TabItem Header="{x:Static resx:Resources.TrustedDomains}">
                 <Grid>
                     <GroupBox Header="{x:Static resx:Resources.ConfigTrustedDomains}" Margin="5,5,5,5">
-                        <TextBox x:Name="TrustedDomains" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3"></TextBox>
+                        <TextBox x:Name="TrustedDomains" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3" VerticalScrollBarVisibility="Auto"></TextBox>
                     </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static resx:Resources.UnsafeDomains}">
                 <Grid>
                     <GroupBox Header="{x:Static resx:Resources.ConfigUnsafeDomains}" Margin="5,5,5,5">
-                        <TextBox x:Name="UnsafeDomains" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3"></TextBox>
+                        <TextBox x:Name="UnsafeDomains" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3" VerticalScrollBarVisibility="Auto"></TextBox>
                     </GroupBox>
                 </Grid>
             </TabItem>
@@ -71,7 +71,7 @@
                 <Grid>
 
                     <GroupBox Header="{x:Static resx:Resources.ConfigUnsafeFiles}" Margin="5,5,5,5">
-                        <TextBox x:Name="UnsafeFiles" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3"></TextBox>
+                        <TextBox x:Name="UnsafeFiles" AcceptsReturn="True"  Padding="1,3,1,3" Margin="3,3,3,3" VerticalScrollBarVisibility="Auto"></TextBox>
                     </GroupBox>
                 </Grid>
             </TabItem>

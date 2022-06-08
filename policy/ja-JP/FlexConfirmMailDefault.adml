@@ -26,13 +26,13 @@
         <decimalTextBox refId="SafeBccThreshold" defaultValue="4" spinStep="1">件数</decimalTextBox>
       </presentation>
       <presentation id="TrustedDomains">
-        <listBox refId="TrustedDomains"/>
+        <multiTextBox refId="TrustedDomains"/>
       </presentation>
       <presentation id="UnsafeDomains">
-        <listBox refId="UnsafeDomains"/>
+        <multiTextBox refId="UnsafeDomains"/>
       </presentation>
       <presentation id="UnsafeFiles">
-        <listBox refId="UnsafeFiles"/>
+        <multiTextBox refId="UnsafeFiles"/>
       </presentation>
     </presentationTable>
   </resources>

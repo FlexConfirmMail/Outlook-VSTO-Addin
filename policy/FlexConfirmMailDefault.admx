@@ -83,33 +83,33 @@
         displayName="$(string.TrustedDomains)"
         explainText="$(string.TrustedDomains_Explain)"
         presentation="$(presentation.TrustedDomains)"
-        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\TrustedDomains">
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default">
       <parentCategory ref="FlexConfirmMailDefault"/>
       <supportedOn ref="SUPPORTED_NotSpecified"/>
       <elements>
-        <list id="TrustedDomains" key="SOFTWARE\Policies\FlexConfirmMail\Default\TrustedDomains" valuePrefix=""/>
+        <multiText id="TrustedDomains" valueName="TrustedDomains"/>
       </elements>
     </policy>
     <policy name="UnsafeDomains"
         displayName="$(string.UnsafeDomains)"
         explainText="$(string.UnsafeDomains_Explain)"
         presentation="$(presentation.UnsafeDomains)"
-        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeDomains">
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default">
       <parentCategory ref="FlexConfirmMailDefault"/>
       <supportedOn ref="SUPPORTED_NotSpecified"/>
       <elements>
-        <list id="UnsafeDomains" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeDomains" valuePrefix=""/>
+        <multiText id="UnsafeDomains" valueName="UnsafeDomains"/>
       </elements>
     </policy>
     <policy name="UnsafeFiles"
         displayName="$(string.UnsafeFiles)"
         explainText="$(string.UnsafeFiles_Explain)"
         presentation="$(presentation.UnsafeFiles)"
-        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeFiles">
+        class="Machine" key="SOFTWARE\Policies\FlexConfirmMail\Default">
       <parentCategory ref="FlexConfirmMailDefault"/>
       <supportedOn ref="SUPPORTED_NotSpecified"/>
       <elements>
-        <list id="UnsafeFiles" key="SOFTWARE\Policies\FlexConfirmMail\Default\UnsafeFiles" valuePrefix=""/>
+        <multiText id="UnsafeFiles" valueName="UnsafeFiles"/>
       </elements>
     </policy>
   </policies>

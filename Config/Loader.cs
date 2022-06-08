@@ -76,29 +76,6 @@ namespace FlexConfirmMail
                 }
             }
 
-            dict = RegistryConfig.ReadDict(basedir + "\\TrustedDomains");
-            if (dict != null)
-            {
-                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
-                config.TrustedDomains.AddRange(dict.Values);
-                config.Modified.Add(ConfigOption.TrustedDomains);
-            }
-
-            dict = RegistryConfig.ReadDict(basedir + "\\UnsafeDomains");
-            if (dict != null)
-            {
-                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
-                config.UnsafeDomains.AddRange(dict.Values);
-                config.Modified.Add(ConfigOption.UnsafeDomains);
-            }
-
-            dict = RegistryConfig.ReadDict(basedir + "\\UnsafeFiles");
-            if (dict != null)
-            {
-                QueueLogger.Log("* List: " + String.Join(" ", dict.Values));
-                config.UnsafeFiles.AddRange(dict.Values);
-                config.Modified.Add(ConfigOption.UnsafeFiles);
-            }
             return config;
         }
 
@@ -106,6 +83,7 @@ namespace FlexConfirmMail
         {
             int i;
             bool b;
+            List<string> list;
 
             if (key == "CountEnabled")
             {
@@ -166,7 +144,48 @@ namespace FlexConfirmMail
                     return true;
                 }
             }
+
+            if (key == "TrustedDomains")
+            {
+                if (ParseList(val, out list))
+                {
+                    config.TrustedDomains.AddRange(list);
+                    config.Modified.Add(ConfigOption.TrustedDomains);
+                    return true;
+                }
+            }
+
+            if (key == "UnsafeDomains")
+            {
+                if (ParseList(val, out list))
+                {
+                    config.UnsafeDomains.AddRange(list);
+                    config.Modified.Add(ConfigOption.UnsafeDomains);
+                    return true;
+                }
+            }
+
+            if (key == "UnsafeFiles")
+            {
+                if (ParseList(val, out list))
+                {
+                    config.UnsafeFiles.AddRange(list);
+                    config.Modified.Add(ConfigOption.UnsafeFiles);
+                    return true;
+                }
+            }
+
             return false;
+        }
+
+        private static bool ParseList(string val, out List<string> ret)
+        {
+            ret = new List<string>();
+            foreach (string line in val.Split('\n'))
+            {
+                ret.Add(line.Trim());
+            }
+            return true;
         }
 
         private static bool ParseBool(string val, out bool ret)

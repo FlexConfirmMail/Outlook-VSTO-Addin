@@ -50,6 +50,8 @@ namespace FlexConfirmMail
                     return (string) o;
                 case RegistryValueKind.DWord:
                     return ((int) o).ToString();
+                case RegistryValueKind.MultiString:
+                    return String.Join("\n", (string[]) o);
             }
             return null;
         }

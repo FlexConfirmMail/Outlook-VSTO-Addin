@@ -1,5 +1,7 @@
 ﻿using FlexConfirmMail.Dialog;
 using System.Windows.Forms;
+using System.Windows.Media;
+using System.Windows.Interop;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail
@@ -20,6 +22,10 @@ namespace FlexConfirmMail
         private void ThisAddIn_ItemSend(object Item, ref bool Cancel)
         {
             Outlook.MailItem mail = (Outlook.MailItem)Item;
+
+            // Some users reported that Intel Graphic + Win10 causes
+            // a blank screen. Diable Hardware Accerelation.
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
 
             // First of all, enable Cancel flag. This makes Outlook
             // NOT to send the mail even if something goes awry.

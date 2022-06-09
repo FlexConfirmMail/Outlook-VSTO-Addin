@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Media;
+using System.Windows.Interop;
 using Office = Microsoft.Office.Core;
 
 namespace FlexConfirmMail
@@ -58,6 +60,10 @@ namespace FlexConfirmMail
         #endregion
         public void OnClickConfig(Office.IRibbonControl control)
         {
+            // Some users reported that Intel Graphic + Win10 causes
+            // a blank screen. Diable Hardware Accerelation.
+            RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+
             new ConfigDialog().ShowDialog();
         }
         #region ヘルパー

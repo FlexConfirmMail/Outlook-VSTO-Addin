@@ -110,15 +110,46 @@ namespace FlexConfirmMail.Dialog
             return String.Format(template, policy, example);
         }
 
+        private string Serialize(ConfigOption opt, bool? cur, bool? def)
+        {
+            if (_local.Modified.Contains(opt) || (cur != def))
+            {
+                return $"{opt} = {cur}\n";
+            }
+            return "";
+        }
+
+        private string Serialize(ConfigOption opt, string cur, string def)
+        {
+            if (_local.Modified.Contains(opt) || (cur != def))
+            {
+                return $"{opt} = {cur}\n";
+            }
+            return "";
+        }
+
         private string SerializeCommon()
         {
-            return $@"
-{ConfigOption.CountEnabled} = {CountEnabled.IsChecked.ToString()}
-{ConfigOption.CountAllowSkip} = {CountAllowSkip.IsChecked.ToString()}
-{ConfigOption.CountSeconds} = {CountSeconds.Text}
-{ConfigOption.SafeBccEnabled} = {SafeBccEnabled.IsChecked.ToString()}
-{ConfigOption.SafeBccThreshold} = {SafeBccThreshold.Text}
-{ConfigOption.MainSkipIfNoExt} = {MainSkipIfNoExt.IsChecked.ToString()}";
+            string text = "";
+            text += Serialize(ConfigOption.CountEnabled,
+                              CountEnabled.IsChecked,
+                              _default.CountEnabled);
+            text += Serialize(ConfigOption.CountAllowSkip,
+                              CountAllowSkip.IsChecked,
+                              _default.CountAllowSkip);
+            text += Serialize(ConfigOption.CountSeconds,
+                              CountSeconds.Text,
+                              _default.CountSeconds.ToString());
+            text += Serialize(ConfigOption.SafeBccEnabled,
+                              SafeBccEnabled.IsChecked,
+                              _default.SafeBccEnabled);
+            text += Serialize(ConfigOption.SafeBccThreshold,
+                              SafeBccThreshold.Text,
+                              _default.SafeBccThreshold.ToString());
+            text += Serialize(ConfigOption.MainSkipIfNoExt,
+                              MainSkipIfNoExt.IsChecked,
+                              _default.MainSkipIfNoExt);
+            return text;
         }
 
         private string ReadLocalConfig(string file)

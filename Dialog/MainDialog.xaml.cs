@@ -25,7 +25,7 @@ namespace FlexConfirmMail.Dialog
             QueueLogger.Log("===== Open MainDialog() =====");
 
             // Show the subject string in title bar
-            Title = $"{mail.Subject} - FlexConfirmMail";
+            Title = $"{mail.Subject} - {Global.AppName} v{Global.Version} {Global.Edition}";
 
             // Render contents in the dialog
             RenderMain();

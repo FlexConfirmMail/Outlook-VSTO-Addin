@@ -102,17 +102,32 @@ namespace FlexConfirmMail.Dialog
             return ret;
         }
 
+        private List<string> ToLower(List<string> list)
+        {
+            List<string> ret = new List<string>();
+            foreach (string entry in list)
+            {
+                ret.Add(entry.ToLower());
+            }
+            return ret;
+        }
+
+        private bool IsTrustedDomain(string domain, HashSet<string> trusted)
+        {
+            // Note: DOMAIN_EXCHANGE basically means "LegacyDN recipients whose
+            // SMTP address we don't know". We assume they are internal users,
+            // since it implies that they reside in Active Direcotry.
+            return trusted.Contains(domain) || domain == RecipientInfo.DOMAIN_EXCHANGE;
+        }
+
         private void RenderTrustedList(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(_config.TrustedDomains);
-
-            // Assume Exchange as internal domain.
-            trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in recipients)
             {
-                if (trusted.Contains(info.Domain))
+                if (IsTrustedDomain(info.Domain, trusted))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -127,14 +142,11 @@ namespace FlexConfirmMail.Dialog
         private void RenderExternalList(List<RecipientInfo> list)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(_config.TrustedDomains);
-
-            // Consider Exchange as internal domain.
-            trusted.Add(RecipientInfo.DOMAIN_EXCHANGE);
+            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in list)
             {
-                if (!trusted.Contains(info.Domain))
+                if (!IsTrustedDomain(info.Domain, trusted))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -149,7 +161,7 @@ namespace FlexConfirmMail.Dialog
         private void CheckUnsafeDomains(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> notsafe = GetHashSet(_config.UnsafeDomains);
+            HashSet<string> notsafe = GetHashSet(ToLower(_config.UnsafeDomains));
 
             foreach (RecipientInfo info in recipients)
             {

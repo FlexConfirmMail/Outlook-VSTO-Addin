@@ -41,7 +41,7 @@ namespace FlexConfirmMail.Dialog
         {
             Type = GetType(recp);
             Address = recp.Address;
-            Domain = Address.Substring(Address.IndexOf('@') + 1);
+            Domain = GetDomainFromSMTP(Address);
             Help = Address;
             IsSMTP = true;
         }
@@ -57,7 +57,7 @@ namespace FlexConfirmMail.Dialog
             {
                 Type = GetType(recp);
                 Address = user.PrimarySmtpAddress;
-                Domain = Address.Substring(Address.IndexOf('@') + 1);
+                Domain = GetDomainFromSMTP(Address);
                 Help = Address;
                 IsSMTP = true;
             }
@@ -74,7 +74,7 @@ namespace FlexConfirmMail.Dialog
             {
                 Type = GetType(recp);
                 Address = dist.PrimarySmtpAddress;
-                Domain = Address.Substring(Address.IndexOf('@') + 1);
+                Domain = GetDomainFromSMTP(Address);
                 Help = Address;
                 IsSMTP = true;
             }
@@ -103,6 +103,11 @@ namespace FlexConfirmMail.Dialog
             Address = recp.Name;
             Help = $"[{Domain}] {Address}";
             IsSMTP = false;
+        }
+
+        private string GetDomainFromSMTP(string addr)
+        {
+            return addr.Substring(addr.IndexOf('@') + 1).ToLower();
         }
 
         private static string GetType(Outlook.Recipient recp)

@@ -3,8 +3,8 @@
 @REM
 @REM PS> Get-ChildItem -Path Cert:CurrentUser\My
 @REM
-set cert=1F02225E5C681EFACE0520494285DAF0D24987DF
-set timestamp=http://timestamp.digicert.com
+set cert=73E7B9D1F72EDA033E7A9D6B17BC37A96CE8513A
+set timestamp=http://timestamp.sectigo.com
 
 @REM ==================
 @REM Compile C# sources

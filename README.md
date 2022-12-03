@@ -3,22 +3,19 @@ FlexConfirmMail for Outlook
 
 メールの誤送信を防止するためのOutlook向けアドオンです。
 
-![FlexConfirmMail logo](doc/Guide/fcm-logo.png)
 
- * 公式サイト: https://flexconfirmmail.github.io/
- * インストーラ: https://github.com/FlexConfirmMail/Outlook/releases
+
+![FlexConfirmMail logo](doc/Guide/fcm-logo.png)
 
 **主な機能**
 
  * メールの送信時に、宛先を確認するダイアログを表示します。
- * チェックリスト形式で確認することで送信ミスを防ぎます。
- * Office 2013/2016/2019をサポートしています。
+ * Office 2016/2019/2021 + Microsoft 365をサポートしています。
 
 **使い方**
 
- 1. リリースページからFlexConfirmMailの最新版のインストーラを取得します。
- 2. 導入対象の端末でインストーラを実行します。
- 3. Outlookを立ち上げて動作を確認します。
+* 利用方法は公式サイトで詳しく解説しています。  
+  https://www.flexconfirmmail.com
 
 **開発手順**
 

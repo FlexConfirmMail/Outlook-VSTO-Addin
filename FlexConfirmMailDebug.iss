@@ -10,8 +10,8 @@ ShowLanguageDialog=no
 Compression=lzma2
 SolidCompression=yes
 OutputDir=dest
-OutputBaseFilename=FlexConfirmMailSetup-{#SetupSetting("AppVersion")}
-VersionInfoDescription=FlexConfirmMailSetup
+OutputBaseFilename=FlexConfirmMailDebugSetup-{#SetupSetting("AppVersion")}
+VersionInfoDescription=FlexConfirmMailDebugSetup
 ArchitecturesAllowed=x64
 ArchitecturesInstallIn64BitMode=x64
 

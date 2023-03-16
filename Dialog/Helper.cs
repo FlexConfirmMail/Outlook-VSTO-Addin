@@ -16,6 +16,14 @@ namespace FlexConfirmMail.Dialog
 
         public RecipientInfo(Outlook.Recipient recp)
         {
+            QueueLogger.Log("RecipientInfo");
+            QueueLogger.Log($"  Name: {recp.Name}");
+            QueueLogger.Log($"  Type: {recp.Type}");
+            QueueLogger.Log($"  Address: {recp.Address}");
+            QueueLogger.Log($"  AddressEntry.Name: {recp.AddressEntry.Name}");
+            QueueLogger.Log($"  AddressEntry.Address: {recp.AddressEntry.Address}");
+            QueueLogger.Log($"  AddressEntry.DisplayType: {recp.AddressEntry.DisplayType}");
+            QueueLogger.Log($"  AddressEntry.Type: {recp.AddressEntry.Type}");
             if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser
                 && recp.AddressEntry.Type == "SMTP")
             {
@@ -39,6 +47,7 @@ namespace FlexConfirmMail.Dialog
 
         private void FromSMTP(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromSMTP");
             Type = GetType(recp);
             Address = recp.Address;
             Domain = GetDomainFromSMTP(Address);
@@ -48,7 +57,9 @@ namespace FlexConfirmMail.Dialog
 
         private void FromExchange(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromExchange");
             Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
+            QueueLogger.Log($"  user: {user}");
             if (user == null || string.IsNullOrEmpty(user.PrimarySmtpAddress))
             {
                 FromOther(recp);
@@ -65,7 +76,9 @@ namespace FlexConfirmMail.Dialog
 
         private void FromDistList(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromDistList");
             Outlook.ExchangeDistributionList dist = recp.AddressEntry.GetExchangeDistributionList();
+            QueueLogger.Log($"  dist: {dist}");
             if (dist == null || string.IsNullOrEmpty(dist.PrimarySmtpAddress))
             {
                 FromOther(recp);
@@ -82,6 +95,7 @@ namespace FlexConfirmMail.Dialog
 
         private void FromOther(Outlook.Recipient recp)
         {
+            QueueLogger.Log($" => FromOther ({recp.AddressEntry.DisplayType})");
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:

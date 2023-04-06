@@ -16,7 +16,9 @@ namespace FlexConfirmMail.Dialog
 
         public RecipientInfo(Outlook.Recipient recp)
         {
+            recipient.Resolve();
             QueueLogger.Log("RecipientInfo");
+            QueueLogger.Log($"  Resolved: {recp.Resolved}");
             QueueLogger.Log($"  Name: {recp.Name}");
             QueueLogger.Log($"  Type: {recp.Type}");
             QueueLogger.Log($"  Address: {recp.Address}");

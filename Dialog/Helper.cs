@@ -62,18 +62,32 @@ namespace FlexConfirmMail.Dialog
             QueueLogger.Log(" => FromExchange");
             Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
             QueueLogger.Log($"  user: {user}");
-            if (user == null || string.IsNullOrEmpty(user.PrimarySmtpAddress))
+            if (user == null)
             {
                 FromOther(recp);
+                return;
             }
-            else
+
+            string PossibleAddress = user.PrimarySmtpAddress;
+            if (string.IsNullOrEmpty(PossibleAddress))
             {
-                Type = GetType(recp);
-                Address = user.PrimarySmtpAddress;
-                Domain = GetDomainFromSMTP(Address);
-                Help = Address;
-                IsSMTP = true;
+                QueueLogger.Log("  PrimarySmtpAddress is blank: trying to get it via PropertyAccessor");
+                const string PR_SMTP_ADDRESS = "http://schemas.microsoft.com/mapi/proptag/0x39FE001E";
+                PossibleAddress = user.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
+                if (string.IsNullOrEmpty(PossibleAddress))
+                {
+                    QueueLogger.Log("  Couldn't get address");
+                    FromOther(recp);
+                    return;
+                }
             }
+            QueueLogger.Log($"  => finally resolved addrss: {PossibleAddress}");
+
+            Type = GetType(recp);
+            Address = PossibleAddress;
+            Domain = GetDomainFromSMTP(Address);
+            Help = Address;
+            IsSMTP = true;
         }
 
         private void FromDistList(Outlook.Recipient recp)

@@ -72,8 +72,8 @@ namespace FlexConfirmMail.Dialog
             if (string.IsNullOrEmpty(PossibleAddress))
             {
                 QueueLogger.Log("  PrimarySmtpAddress is blank: trying to get it via PropertyAccessor");
-                const string PR_SMTP_ADDRESS = "http://schemas.microsoft.com/mapi/proptag/0x39FE001E";
-                PossibleAddress = user.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
+                const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
+                PossibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
                 if (string.IsNullOrEmpty(PossibleAddress))
                 {
                     QueueLogger.Log("  Couldn't get address");

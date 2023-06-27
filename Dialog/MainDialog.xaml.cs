@@ -180,12 +180,12 @@ namespace FlexConfirmMail.Dialog
                 {
                     try {
                         if (Regex.IsMatch(info.Domain, _config.UnsafeDomainsPattern, RegexOptions.IgnoreCase))
-                    {
-                        spFile.Children.Add(GetWarnCheckBox(
-                            string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
-                            Properties.Resources.MainUnsafeDomainsWarningHint
-                        ));
-                    }
+                        {
+                            spFile.Children.Add(GetWarnCheckBox(
+                                string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
+                                Properties.Resources.MainUnsafeDomainsWarningHint
+                            ));
+                        }
                     }
                     catch (RegexMatchTimeoutException) {}
                     seen.Add(info.Domain);

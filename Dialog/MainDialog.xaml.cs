@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using Outlook = Microsoft.Office.Interop.Outlook;
@@ -19,6 +20,7 @@ namespace FlexConfirmMail.Dialog
         public MainDialog(Config config, Outlook.MailItem mail)
         {
             InitializeComponent();
+            config.RebuildPatterns();
             _config = config;
             _mail = mail;
 
@@ -117,7 +119,17 @@ namespace FlexConfirmMail.Dialog
             // Note: DOMAIN_EXCHANGE basically means "LegacyDN recipients whose
             // SMTP address we don't know". We assume they are internal users,
             // since it implies that they reside in Active Direcotry.
-            return trusted.Contains(domain) || domain == RecipientInfo.DOMAIN_EXCHANGE;
+            if (domain == RecipientInfo.DOMAIN_EXCHANGE)
+            {
+                return true;
+            }
+
+            try {
+                return Regex.IsMatch(domain, _config.TrustedDomainsPattern, RegexOptions.IgnoreCase);
+            }
+            catch (RegexMatchTimeoutException) {}
+
+            return false;
         }
 
         private void RenderTrustedList(List<RecipientInfo> recipients)
@@ -161,19 +173,21 @@ namespace FlexConfirmMail.Dialog
         private void CheckUnsafeDomains(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> notsafe = GetHashSet(ToLower(_config.UnsafeDomains));
 
             foreach (RecipientInfo info in recipients)
             {
                 if (!seen.Contains(info.Domain))
                 {
-                    if (notsafe.Contains(info.Domain))
+                    try {
+                        if (Regex.IsMatch(info.Domain, _config.UnsafeDomainsPattern, RegexOptions.IgnoreCase))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
                             string.Format(Properties.Resources.MainUnsafeDomainsWarning, info.Domain),
                             Properties.Resources.MainUnsafeDomainsWarningHint
                         ));
                     }
+                    }
+                    catch (RegexMatchTimeoutException) {}
                     seen.Add(info.Domain);
                 }
             }
@@ -185,17 +199,17 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                foreach (string keyword in notsafe)
-                {
-                    if (item.FileName.Contains(keyword))
+                try {
+                    foreach (Match match in Regex.Matches(item.FileName, _config.UnsafeFilesPattern, RegexOptions.IgnoreCase))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
-                            string.Format(Properties.Resources.MainUnsafeFilesWarning, keyword),
+                            string.Format(Properties.Resources.MainUnsafeFilesWarning, match.Value),
                             Properties.Resources.MainUnsafeFilesWarningHint
                         ));
                         break;
                     }
                 }
+                catch (RegexMatchTimeoutException) {}
             }
         }
 

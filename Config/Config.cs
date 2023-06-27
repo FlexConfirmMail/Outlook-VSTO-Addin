@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace FlexConfirmMail
 {
@@ -15,6 +17,10 @@ namespace FlexConfirmMail
         public List<string> UnsafeDomains;
         public List<string> UnsafeFiles;
         public HashSet<ConfigOption> Modified;
+
+        public string TrustedDomainsPattern = "";
+        public string UnsafeDomainsPattern = "";
+        public string UnsafeFilesPattern = "";
 
         public Config()
         {
@@ -77,6 +83,18 @@ namespace FlexConfirmMail
             }
 
             Modified.UnionWith(other.Modified);
+        }
+
+        public void RebuildPatterns()
+        {
+            TrustedDomainsPattern = $"^({string.Join("|", TrustedDomains.Select(ConvertWildCardToRegex))})$";
+            UnsafeDomainsPattern = $"^({string.Join("|", UnsafeDomains.Select(ConvertWildCardToRegex))})$";
+            UnsafeFilesPattern = $"^({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})$";
+        }
+
+        private static string ConvertWildCardToRegex(string value)
+        {
+            return Regex.Escape(value).Replace("\\*", ".*").Replace("\\?", ".");
         }
     }
 }

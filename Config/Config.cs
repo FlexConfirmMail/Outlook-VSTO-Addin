@@ -89,7 +89,7 @@ namespace FlexConfirmMail
         {
             TrustedDomainsPattern = $"^({string.Join("|", TrustedDomains.Select(ConvertWildCardToRegex))})$";
             UnsafeDomainsPattern = $"^({string.Join("|", UnsafeDomains.Select(ConvertWildCardToRegex))})$";
-            UnsafeFilesPattern = $"^({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})$";
+            UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
         }
 
         private static string ConvertWildCardToRegex(string value)

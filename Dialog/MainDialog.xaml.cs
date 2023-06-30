@@ -124,10 +124,11 @@ namespace FlexConfirmMail.Dialog
                 return true;
             }
 
-            try {
+            try
+            {
                 return Regex.IsMatch(domain, _config.TrustedDomainsPattern, RegexOptions.IgnoreCase);
             }
-            catch (RegexMatchTimeoutException) {}
+            catch (RegexMatchTimeoutException) { }
 
             return false;
         }
@@ -178,7 +179,8 @@ namespace FlexConfirmMail.Dialog
             {
                 if (!seen.Contains(info.Domain))
                 {
-                    try {
+                    try
+                    {
                         if (Regex.IsMatch(info.Domain, _config.UnsafeDomainsPattern, RegexOptions.IgnoreCase))
                         {
                             spFile.Children.Add(GetWarnCheckBox(
@@ -187,7 +189,7 @@ namespace FlexConfirmMail.Dialog
                             ));
                         }
                     }
-                    catch (RegexMatchTimeoutException) {}
+                    catch (RegexMatchTimeoutException) { }
                     seen.Add(info.Domain);
                 }
             }
@@ -199,7 +201,8 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
-                try {
+                try
+                {
                     foreach (Match match in Regex.Matches(item.FileName, _config.UnsafeFilesPattern, RegexOptions.IgnoreCase))
                     {
                         spFile.Children.Add(GetWarnCheckBox(
@@ -209,7 +212,7 @@ namespace FlexConfirmMail.Dialog
                         break;
                     }
                 }
-                catch (RegexMatchTimeoutException) {}
+                catch (RegexMatchTimeoutException) { }
             }
         }
 
@@ -260,7 +263,7 @@ namespace FlexConfirmMail.Dialog
             cb.Content = title.Replace("_", "__");
             cb.ToolTip = help;
             cb.Margin = new Thickness(7, 2, 0, 2);
-            cb.Click +=  CheckBox_Click;
+            cb.Click += CheckBox_Click;
             cb.MouseEnter += CheckBox_MouseEnter;
             cb.MouseLeave += CheckBox_MouseLeave;
             return cb;

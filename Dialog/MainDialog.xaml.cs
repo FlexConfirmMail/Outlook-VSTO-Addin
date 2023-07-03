@@ -206,7 +206,8 @@ namespace FlexConfirmMail.Dialog
                 {
                     foreach (Match match in Regex.Matches(item.FileName, _config.UnsafeFilesPattern, RegexOptions.IgnoreCase))
                     {
-                        if (seen.Contains(match.Value))
+                        string lowerValue = match.Value.ToLower();
+                        if (seen.Contains(lowerValue))
                         {
                             continue;
                         }
@@ -214,7 +215,7 @@ namespace FlexConfirmMail.Dialog
                             string.Format(Properties.Resources.MainUnsafeFilesWarning, match.Value),
                             Properties.Resources.MainUnsafeFilesWarningHint
                         ));
-                        seen.Add(match.Value);
+                        seen.Add(lowerValue);
                     }
                 }
                 catch (RegexMatchTimeoutException) { }

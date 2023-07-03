@@ -201,15 +201,20 @@ namespace FlexConfirmMail.Dialog
 
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
+                HashSet<string> seen = new HashSet<string>();
                 try
                 {
                     foreach (Match match in Regex.Matches(item.FileName, _config.UnsafeFilesPattern, RegexOptions.IgnoreCase))
                     {
+                        if (seen.Contains(match.Value))
+                        {
+                            continue;
+                        }
                         spFile.Children.Add(GetWarnCheckBox(
                             string.Format(Properties.Resources.MainUnsafeFilesWarning, match.Value),
                             Properties.Resources.MainUnsafeFilesWarningHint
                         ));
-                        break;
+                        seen.Add(match.Value);
                     }
                 }
                 catch (RegexMatchTimeoutException) { }

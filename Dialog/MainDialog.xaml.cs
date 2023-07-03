@@ -3,9 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Threading.Tasks;
 using Outlook = Microsoft.Office.Interop.Outlook;
-
 
 namespace FlexConfirmMail.Dialog
 {
@@ -51,14 +49,11 @@ namespace FlexConfirmMail.Dialog
         private void RenderMain()
         {
             List<RecipientInfo> recipients = new List<RecipientInfo>();
-            RecipientInfo info = null;
 
             foreach (Outlook.Recipient recp in _mail.Recipients)
             {
-	            info = new RecipientInfo(recp);
-                recipients.Add(info);
+                recipients.Add(new RecipientInfo(recp));
             }
-            QueueLogger.Log("initializing...");
 
             // Address CheckBox
             recipients.Sort();

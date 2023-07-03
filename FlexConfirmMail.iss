@@ -40,14 +40,9 @@ Name: jp; MessagesFile: "compiler:Languages\Japanese.isl"
 [Files]
 Source: "bin\Release\FlexConfirmMail.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\FlexConfirmMail.dll.manifest"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\FlexConfirmMail.dll.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\FlexConfirmMail.vsto"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\en\FlexConfirmMail.resources.dll"; DestDir: "{app}\en"; Flags: ignoreversion
 Source: "bin\Release\zh\FlexConfirmMail.resources.dll"; DestDir: "{app}\zh"; Flags: ignoreversion
-;Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
-;Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\Azure.*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\Microsoft.*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\System.*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin\Release\Tavis.*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Resources\fcm.ico"; DestDir: "{app}"; Flags: ignoreversion

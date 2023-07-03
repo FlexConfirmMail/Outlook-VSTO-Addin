@@ -94,7 +94,7 @@ namespace FlexConfirmMail
 
         private static string ConvertWildCardToRegex(string value)
         {
-            return Regex.Escape(value).Replace("\\*", ".*").Replace("\\?", ".");
+            return Regex.Escape(value).Replace("\\*", ".*?").Replace("\\?", ".");
         }
     }
 }

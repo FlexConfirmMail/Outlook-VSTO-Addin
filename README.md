@@ -41,3 +41,13 @@ FlexConfirmMail for Outlook
                「FlexConfirmMailSelfSign」が表示されている場合、「OK」ボタンをクリックして選択します。
                そうでない場合、「その他」をクリックしてクライアント証明書の一覧から「FlexConfirmMailSelfSign」を選択し、「OK」ボタンをクリックして選択します。
  6. ビルドを開始します。
+
+**リリース**
+
+1. 以下のファイルに埋め込まれているバージョン情報を更新する。
+   * Global.cs
+   * Global.public.cs
+   * FlexConfirmMail.iss
+2. Visual Studio 2019でビルドする。
+3. `FlexConfirmMail.iss`をInno Setupでビルドする。
+4. `dist`フォルダー配下に作成されたインストーラを公開する。

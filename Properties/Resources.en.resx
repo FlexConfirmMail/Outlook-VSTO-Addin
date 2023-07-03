@@ -186,6 +186,7 @@
 #
 # To add more domains, input entries (one per line) below.
 # You can also exclude domains by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
@@ -198,6 +199,7 @@
 #
 # To add more domains, input entries (one per line) below.
 # You can also exclude domains by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
@@ -210,6 +212,7 @@
 #
 # To add more keywords, input entries (one per line) below.
 # You can also exclude keywords by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
@@ -232,6 +235,7 @@
 # (1) Set the list of domains to be treated as internal ones.
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 
@@ -244,6 +248,7 @@ example.org</value>
 # (1) Set the list of domains to show an "unsafe recipient" warning.
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 
@@ -256,6 +261,7 @@ example.org</value>
 # (1) Set the list of keywords to show an "unsafe filename" warning.
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 

@@ -12,11 +12,11 @@
       <string id="SafeBccThreshold">Warn if To/Cc fields contain N domains (or more)</string>
       <string id="MainSkipIfNoExt">Skip confirmation if all the recpients are trusted</string>
       <string id="TrustedDomains">Configure Trusted Domains</string>
-      <string id="TrustedDomains_Explain">Set the list of domains to be treated as internal ones.</string>
+      <string id="TrustedDomains_Explain">Set the list of domains to be treated as internal ones. Wildcards (* and ?) are available.</string>
       <string id="UnsafeDomains">Configure Unsafe Domains</string>
-      <string id="UnsafeDomains_Explain">Set the list of domains to show an "unsafe recipient" warning.</string>
+      <string id="UnsafeDomains_Explain">Set the list of domains to show an "unsafe recipient" warning. Wildcards (* and ?) are available.</string>
       <string id="UnsafeFiles">Configure Unsafe files</string>
-      <string id="UnsafeFiles_Explain">Set the list of keywords to show an "unsafe filename" warning.</string>
+      <string id="UnsafeFiles_Explain">Set the list of keywords to show an "unsafe filename" warning. Wildcards (* and ?) are available.</string>
     </stringTable>
     <presentationTable>
       <presentation id="CountSeconds">

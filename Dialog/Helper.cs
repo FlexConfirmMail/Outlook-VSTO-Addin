@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail.Dialog
@@ -62,24 +63,24 @@ namespace FlexConfirmMail.Dialog
             QueueLogger.Log(" => FromExchange");
             Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
             QueueLogger.Log($"  user: {user}");
+
+            string PossibleAddress;
             if (user == null)
             {
-                FromOther(recp);
-                return;
+                QueueLogger.Log("  user is null: trying to get it via PropertyAccessor");
+                const string PR_EMS_PROXY_ADDRESSES = "http://schemas.microsoft.com/mapi/proptag/0x800f101e";
+                PossibleAddress = recp.PropertyAccessor.GetProperty(PR_EMS_PROXY_ADDRESSES).ToString();
+                PossibleAddress = Regex.Replace(PossibleAddress, "^SMTP:", "");
+            }
+            else {
+                PossibleAddress = user.PrimarySmtpAddress;
             }
 
-            string PossibleAddress = user.PrimarySmtpAddress;
             if (string.IsNullOrEmpty(PossibleAddress))
             {
-                QueueLogger.Log("  PrimarySmtpAddress is blank: trying to get it via PropertyAccessor");
-                const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
-                PossibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
-                if (string.IsNullOrEmpty(PossibleAddress))
-                {
-                    QueueLogger.Log("  Couldn't get address");
-                    FromOther(recp);
-                    return;
-                }
+                QueueLogger.Log("  Couldn't get address: fallback to FromOther");
+                FromOther(recp);
+                return;
             }
             QueueLogger.Log($"  => finally resolved addrss: {PossibleAddress}");
 

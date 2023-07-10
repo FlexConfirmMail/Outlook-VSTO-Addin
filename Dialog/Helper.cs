@@ -73,9 +73,9 @@ namespace FlexConfirmMail.Dialog
                     const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
                     possibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    QueueLogger.Log("  Failed to GetProperty with PR_SMTP_ADDRESS");
+                    QueueLogger.Log($"  Failed to GetProperty with PR_SMTP_ADDRESS: {ex}");
                 }
 
                 if (string.IsNullOrEmpty(possibleAddress))
@@ -86,9 +86,9 @@ namespace FlexConfirmMail.Dialog
                         possibleAddress = recp.PropertyAccessor.GetProperty(PR_EMS_PROXY_ADDRESSES).ToString();
                         possibleAddress = Regex.Replace(possibleAddress, "^SMTP:", "");
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        QueueLogger.Log("  Failed to GetProperty with PR_EMS_PROXY_ADDRESSES");
+                        QueueLogger.Log($"  Failed to GetProperty with PR_EMS_PROXY_ADDRESSES: {ex}");
                     }
                 }
             }

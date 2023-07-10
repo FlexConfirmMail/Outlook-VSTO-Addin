@@ -64,27 +64,27 @@ namespace FlexConfirmMail.Dialog
             Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
             QueueLogger.Log($"  user: {user}");
 
-            string PossibleAddress = "";
+            string possibleAddress = "";
             if (user == null)
             {
                 QueueLogger.Log("  user is null: trying to get it via PropertyAccessor");
                 try
                 {
                     const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
-                    PossibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
+                    possibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
                 }
                 catch
                 {
                     QueueLogger.Log("  Failed to GetProperty with PR_SMTP_ADDRESS");
                 }
 
-                if (string.IsNullOrEmpty(PossibleAddress))
+                if (string.IsNullOrEmpty(possibleAddress))
                 {
                     try
                     {
                         const string PR_EMS_PROXY_ADDRESSES = "http://schemas.microsoft.com/mapi/proptag/0x800f101e";
-                        PossibleAddress = recp.PropertyAccessor.GetProperty(PR_EMS_PROXY_ADDRESSES).ToString();
-                        PossibleAddress = Regex.Replace(PossibleAddress, "^SMTP:", "");
+                        possibleAddress = recp.PropertyAccessor.GetProperty(PR_EMS_PROXY_ADDRESSES).ToString();
+                        possibleAddress = Regex.Replace(possibleAddress, "^SMTP:", "");
                     }
                     catch
                     {
@@ -94,19 +94,19 @@ namespace FlexConfirmMail.Dialog
             }
             else
             {
-                PossibleAddress = user.PrimarySmtpAddress;
+                possibleAddress = user.PrimarySmtpAddress;
             }
 
-            if (string.IsNullOrEmpty(PossibleAddress))
+            if (string.IsNullOrEmpty(possibleAddress))
             {
                 QueueLogger.Log("  Couldn't get address: fallback to FromOther");
                 FromOther(recp);
                 return;
             }
-            QueueLogger.Log($"  => finally resolved addrss: {PossibleAddress}");
+            QueueLogger.Log($"  => finally resolved addrss: {possibleAddress}");
 
             Type = GetType(recp);
-            Address = PossibleAddress;
+            Address = possibleAddress;
             Domain = GetDomainFromSMTP(Address);
             Help = Address;
             IsSMTP = true;

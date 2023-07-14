@@ -65,7 +65,8 @@ namespace FlexConfirmMail.Dialog
             QueueLogger.Log($"  user: {user}");
 
             string possibleAddress = "";
-            if (user == null)
+            if (user == null ||
+                string.IsNullOrEmpty(user.PrimarySmtpAddress))
             {
                 QueueLogger.Log("  user is null: trying to get it via PropertyAccessor");
                 try

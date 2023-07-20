@@ -102,7 +102,7 @@ namespace FlexConfirmMail.Dialog
             try
             {
                 QueueLogger.Log($"  Retrieving values for {schemaName}...");
-                object propertyValue = recp.AddressEntry.PropertyAccessor.GetProperty(schemaName);
+                dynamic propertyValue = recp.AddressEntry.PropertyAccessor.GetProperty(schemaName);
                 if (propertyValue is string[] values)
                 {
                     foreach (string value in values)

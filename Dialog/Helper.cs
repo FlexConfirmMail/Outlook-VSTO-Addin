@@ -68,29 +68,13 @@ namespace FlexConfirmMail.Dialog
             if (user == null ||
                 string.IsNullOrEmpty(user.PrimarySmtpAddress))
             {
-                QueueLogger.Log("  user is null: trying to get it via PropertyAccessor");
-                try
-                {
-                    const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
-                    possibleAddress = recp.PropertyAccessor.GetProperty(PR_SMTP_ADDRESS).ToString();
-                }
-                catch (Exception ex)
-                {
-                    QueueLogger.Log($"  Failed to GetProperty with PR_SMTP_ADDRESS: {ex}");
-                }
-
+                QueueLogger.Log("  user is null or has no PrimarySmtpAddress: trying to get it via PropertyAccessor");
+                const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
+                possibleAddress = GetSMTPAddressViaAccessor(recp, PR_SMTP_ADDRESS);
                 if (string.IsNullOrEmpty(possibleAddress))
                 {
-                    try
-                    {
-                        const string PR_EMS_PROXY_ADDRESSES = "http://schemas.microsoft.com/mapi/proptag/0x800f101e";
-                        possibleAddress = recp.PropertyAccessor.GetProperty(PR_EMS_PROXY_ADDRESSES).ToString();
-                        possibleAddress = Regex.Replace(possibleAddress, "^SMTP:", "");
-                    }
-                    catch (Exception ex)
-                    {
-                        QueueLogger.Log($"  Failed to GetProperty with PR_EMS_PROXY_ADDRESSES: {ex}");
-                    }
+                    const string PR_EMS_PROXY_ADDRESSES = "http://schemas.microsoft.com/mapi/proptag/0x800f101e";
+                    possibleAddress = GetSMTPAddressViaAccessor(recp, PR_EMS_PROXY_ADDRESSES);
                 }
             }
             else
@@ -111,6 +95,37 @@ namespace FlexConfirmMail.Dialog
             Domain = GetDomainFromSMTP(Address);
             Help = Address;
             IsSMTP = true;
+        }
+
+        private string GetSMTPAddressViaAccessor(Outlook.Recipient recp, string schemaName)
+        {
+            try
+            {
+                QueueLogger.Log($"  Retrieving values for {schemaName}...");
+                object propertyValue = recp.AddressEntry.PropertyAccessor.GetProperty(schemaName);
+                if (propertyValue is string[] values)
+                {
+                    foreach (string value in values)
+                    {
+                        QueueLogger.Log($"  value: {value}");
+                        // The recipient may have multiple values with their types like:
+                        //   SIP:local@domain
+                        //   SMTP:local@domain
+                        // We should accept only SMTP address.
+                        if (!string.IsNullOrEmpty(value) &&
+                            Regex.IsMatch(value, "^(SMTP:)?[^:@]+@.+", RegexOptions.IgnoreCase))
+                        {
+                            return Regex.Replace(value, "^SMTP:", "");
+                        }
+                    }
+                }
+                return propertyValue.ToString();
+            }
+            catch (Exception ex)
+            {
+                QueueLogger.Log($"  Failed to GetProperty with {schemaName}: {ex}");
+                return "";
+            }
         }
 
         private void FromDistList(Outlook.Recipient recp)

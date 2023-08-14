@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace FlexConfirmMail.Dialog
@@ -16,6 +17,16 @@ namespace FlexConfirmMail.Dialog
 
         public RecipientInfo(Outlook.Recipient recp)
         {
+            recp.Resolve();
+            QueueLogger.Log("RecipientInfo");
+            QueueLogger.Log($"  Resolved: {recp.Resolved}");
+            QueueLogger.Log($"  Name: {recp.Name}");
+            QueueLogger.Log($"  Type: {recp.Type}");
+            QueueLogger.Log($"  Address: {recp.Address}");
+            QueueLogger.Log($"  AddressEntry.Name: {recp.AddressEntry.Name}");
+            QueueLogger.Log($"  AddressEntry.Address: {recp.AddressEntry.Address}");
+            QueueLogger.Log($"  AddressEntry.DisplayType: {recp.AddressEntry.DisplayType}");
+            QueueLogger.Log($"  AddressEntry.Type: {recp.AddressEntry.Type}");
             if (recp.AddressEntry.DisplayType == Outlook.OlDisplayType.olUser
                 && recp.AddressEntry.Type == "SMTP")
             {
@@ -39,6 +50,7 @@ namespace FlexConfirmMail.Dialog
 
         private void FromSMTP(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromSMTP");
             Type = GetType(recp);
             Address = recp.Address;
             Domain = GetDomainFromSMTP(Address);
@@ -48,24 +60,79 @@ namespace FlexConfirmMail.Dialog
 
         private void FromExchange(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromExchange");
             Outlook.ExchangeUser user = recp.AddressEntry.GetExchangeUser();
-            if (user == null || string.IsNullOrEmpty(user.PrimarySmtpAddress))
+            QueueLogger.Log($"  user: {user}");
+
+            string possibleAddress = "";
+            if (user == null ||
+                string.IsNullOrEmpty(user.PrimarySmtpAddress))
             {
-                FromOther(recp);
+                QueueLogger.Log("  user is null or has no PrimarySmtpAddress: trying to get it via PropertyAccessor");
+                const string PR_SMTP_ADDRESS = "https://schemas.microsoft.com/mapi/proptag/0x39FE001E";
+                possibleAddress = GetSMTPAddressViaAccessor(recp, PR_SMTP_ADDRESS);
+                if (string.IsNullOrEmpty(possibleAddress))
+                {
+                    const string PR_EMS_PROXY_ADDRESSES = "http://schemas.microsoft.com/mapi/proptag/0x800f101e";
+                    possibleAddress = GetSMTPAddressViaAccessor(recp, PR_EMS_PROXY_ADDRESSES);
+                }
             }
             else
             {
-                Type = GetType(recp);
-                Address = user.PrimarySmtpAddress;
-                Domain = GetDomainFromSMTP(Address);
-                Help = Address;
-                IsSMTP = true;
+                possibleAddress = user.PrimarySmtpAddress;
+            }
+
+            if (string.IsNullOrEmpty(possibleAddress))
+            {
+                QueueLogger.Log("  Couldn't get address: fallback to FromOther");
+                FromOther(recp);
+                return;
+            }
+            QueueLogger.Log($"  => finally resolved addrss: {possibleAddress}");
+
+            Type = GetType(recp);
+            Address = possibleAddress;
+            Domain = GetDomainFromSMTP(Address);
+            Help = Address;
+            IsSMTP = true;
+        }
+
+        private string GetSMTPAddressViaAccessor(Outlook.Recipient recp, string schemaName)
+        {
+            try
+            {
+                QueueLogger.Log($"  Retrieving values for {schemaName}...");
+                dynamic propertyValue = recp.AddressEntry.PropertyAccessor.GetProperty(schemaName);
+                if (propertyValue is string[] values)
+                {
+                    foreach (string value in values)
+                    {
+                        QueueLogger.Log($"  value: {value}");
+                        // The recipient may have multiple values with their types like:
+                        //   SIP:local@domain
+                        //   SMTP:local@domain
+                        // We should accept only SMTP address.
+                        if (!string.IsNullOrEmpty(value) &&
+                            Regex.IsMatch(value, "^(SMTP:)?[^:@]+@.+", RegexOptions.IgnoreCase))
+                        {
+                            return Regex.Replace(value, "^SMTP:", "");
+                        }
+                    }
+                }
+                return propertyValue.ToString();
+            }
+            catch (Exception ex)
+            {
+                QueueLogger.Log($"  Failed to GetProperty with {schemaName}: {ex}");
+                return "";
             }
         }
 
         private void FromDistList(Outlook.Recipient recp)
         {
+            QueueLogger.Log(" => FromDistList");
             Outlook.ExchangeDistributionList dist = recp.AddressEntry.GetExchangeDistributionList();
+            QueueLogger.Log($"  dist: {dist}");
             if (dist == null || string.IsNullOrEmpty(dist.PrimarySmtpAddress))
             {
                 FromOther(recp);
@@ -82,6 +149,7 @@ namespace FlexConfirmMail.Dialog
 
         private void FromOther(Outlook.Recipient recp)
         {
+            QueueLogger.Log($" => FromOther ({recp.AddressEntry.DisplayType})");
             switch (recp.AddressEntry.DisplayType)
             {
                 case Outlook.OlDisplayType.olUser:

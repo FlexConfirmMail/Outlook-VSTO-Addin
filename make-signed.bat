@@ -9,20 +9,24 @@ set timestamp=http://timestamp.sectigo.com
 @REM ==================
 @REM Compile C# sources
 @REM ==================
-copy /Y Global.public.cs Global.cs
 msbuild /p:Configuration=Release
 
 @REM ==================
 @REM Build an installer
 @REM ==================
-iscc.exe /Opublic FlexConfirmMail.iss
+iscc.exe FlexConfirmMail.iss
 
 @REM ==================
 @REM Sign the installer
 @REM ==================
-signtool sign /t %timestamp% /fd SHA256 /sha1 %cert% public\FlexConfirmMailSetup*.exe
+signtool sign /t %timestamp% /fd SHA256 /sha1 %cert% dest\FlexConfirmMailSetup*.exe
 
 @REM ==================
 @REM Add suffix to name
 @REM ==================
-powershell -C "Get-ChildItem public\*.exe | rename-item -newname { $_.Name -replace  '.exe', '-Free.exe' }"
+powershell -C "Get-ChildItem dest\*.exe | rename-item -newname { $_.Name -replace  '.exe', '-signed.exe' }"
+
+@REM ==================
+@REM Compress templates
+@REM ==================
+powershell -C "Compress-Archive  -DestinationPath dest\FlexConfirmMailADMX.zip policy"

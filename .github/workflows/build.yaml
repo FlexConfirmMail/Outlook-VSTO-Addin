@@ -12,7 +12,6 @@ jobs:
           (Get-Content FlexConfirmMail.csproj) -Replace '<ManifestCertificateThumbprint>[^<]*',("<ManifestCertificateThumbprint>" + $cert.Thumbprint) | Set-Content FlexConfirmMail.csproj
       - name: Compile
         run: |
-          cp Global.public.cs Global.cs
           msbuild /p:Configuration=Release
       - name: Make Installer
         run: iscc.exe FlexConfirmMail.iss

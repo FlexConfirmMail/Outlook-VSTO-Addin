@@ -40,6 +40,7 @@
                                         <TextBox x:Name="SafeBccThreshold" Width="40" VerticalAlignment="center"></TextBox>
                                         <Label Content="{x:Static resx:Resources.ConfigSafeBccThresholdSuffix}"></Label>
                                     </StackPanel>
+                                    <CheckBox x:Name="SafeNewDomainsEnabled" Content="{x:Static resx:Resources.ConfigSafeNewDomainsEnabled}" />
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>

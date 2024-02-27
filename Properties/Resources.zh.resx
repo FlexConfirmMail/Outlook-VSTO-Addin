@@ -333,4 +333,7 @@ example.org</value>
   <data name="MainFile" xml:space="preserve">
     <value>附件 / 警告</value>
   </data>
+  <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
+    <value>Warn if new domains are added when replying</value>
+  </data>
 </root>

@@ -336,4 +336,7 @@ so please use Bcc when sending an message to unrelated parties.</value>
   <data name="MainFile" xml:space="preserve">
     <value>Attachments / Warnings</value>
   </data>
+  <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
+    <value>Warn if new domains are added when replying</value>
+  </data>
 </root>

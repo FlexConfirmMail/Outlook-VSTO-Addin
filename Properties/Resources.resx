@@ -336,4 +336,7 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
   <data name="MainFile" xml:space="preserve">
     <value>添付ファイル／その他の警告</value>
   </data>
+  <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
+    <value>返信時に新しいドメインが追加されていた場合警告する</value>
+  </data>
 </root>

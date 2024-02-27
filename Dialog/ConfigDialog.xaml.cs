@@ -149,6 +149,9 @@ namespace FlexConfirmMail.Dialog
             text += Serialize(ConfigOption.MainSkipIfNoExt,
                               MainSkipIfNoExt.IsChecked,
                               _default.MainSkipIfNoExt);
+            text += Serialize(ConfigOption.SafeNewDomainsEnabled,
+                              SafeNewDomainsEnabled.IsChecked,
+                              _default.SafeNewDomainsEnabled);
             return text;
         }
 

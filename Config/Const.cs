@@ -18,6 +18,7 @@ namespace FlexConfirmMail
         MainSkipIfNoExt,
         TrustedDomains,
         UnsafeDomains,
-        UnsafeFiles
+        UnsafeFiles,
+        SafeNewDomainsEnabled,
     }
 }

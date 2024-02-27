@@ -16,6 +16,7 @@ namespace FlexConfirmMail
         public List<string> TrustedDomains;
         public List<string> UnsafeDomains;
         public List<string> UnsafeFiles;
+        public bool SafeNewDomainsEnabled = true;
         public HashSet<ConfigOption> Modified;
 
         public string TrustedDomainsPattern = "";
@@ -80,6 +81,11 @@ namespace FlexConfirmMail
             if (other.Modified.Contains(ConfigOption.UnsafeFiles))
             {
                 UnsafeFiles.AddRange(other.UnsafeFiles);
+            }
+
+            if (other.Modified.Contains(ConfigOption.SafeNewDomainsEnabled))
+            {
+                SafeNewDomainsEnabled = other.SafeNewDomainsEnabled;
             }
 
             Modified.UnionWith(other.Modified);

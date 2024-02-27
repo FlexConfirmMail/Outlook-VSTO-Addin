@@ -198,6 +198,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="FlexConfirmMail.iss" />
+    <None Include="FlexConfirmMail_3_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -248,11 +249,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>FlexConfirmMail_3_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>73E7B9D1F72EDA033E7A9D6B17BC37A96CE8513A</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>9890BBEF56F17434001CDAE60CA5534016A5047C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,8 @@ namespace FlexConfirmMail.Dialog
     public partial class MainDialog : Window
     {
         private Outlook.MailItem _mail;
+        private List<RecipientInfo> _recipients;
+        private List<RecipientInfo> _originalRecipients;
         private Config _config;
 
         public MainDialog()
@@ -17,17 +20,27 @@ namespace FlexConfirmMail.Dialog
             InitializeComponent();
         }
 
-        public MainDialog(Config config, Outlook.MailItem mail)
+        internal MainDialog(Config config, Outlook.MailItem mail, List<RecipientInfo> originalRecipients)
         {
             InitializeComponent();
             config.RebuildPatterns();
             _config = config;
             _mail = mail;
-
+            _originalRecipients = originalRecipients;
             QueueLogger.Log("===== Open MainDialog() =====");
 
             // Show the subject string in title bar
             Title = $"{mail.Subject} - {Global.AppName} v{Global.Version} {Global.Edition}";
+
+            // Set recipient info
+            List<RecipientInfo> recipients = new List<RecipientInfo>();
+
+            foreach (Outlook.Recipient recp in _mail.Recipients)
+            {
+                recipients.Add(new RecipientInfo(recp));
+            }
+            recipients.Sort();
+            _recipients = recipients;
 
             // Render contents in the dialog
             RenderMain();
@@ -48,21 +61,12 @@ namespace FlexConfirmMail.Dialog
 
         private void RenderMain()
         {
-            List<RecipientInfo> recipients = new List<RecipientInfo>();
-
-            foreach (Outlook.Recipient recp in _mail.Recipients)
-            {
-                recipients.Add(new RecipientInfo(recp));
-            }
-
-            // Address CheckBox
-            recipients.Sort();
-            RenderExternalList(recipients);
-            RenderTrustedList(recipients);
+            RenderExternalList(_recipients);
+            RenderTrustedList(_recipients);
 
             // Attachments/Alerts
-            CheckSafeBcc(recipients);
-            CheckUnsafeDomains(recipients);
+            CheckSafeBcc(_recipients);
+            CheckUnsafeDomains(_recipients);
             CheckUnsafeFiles();
 
             foreach (Outlook.Attachment item in _mail.Attachments)
@@ -74,6 +78,28 @@ namespace FlexConfirmMail.Dialog
                         item.FileName));
                 }
             }
+        }
+
+        private bool CheckNewDomains()
+        {
+            if (_originalRecipients == null)
+            {
+                return true;
+            }
+            var originalDomains = _originalRecipients.Select(_ => _.Domain).ToHashSet();
+            var newDomainAddresses = _recipients
+                .Where(_ => !originalDomains.Contains(_.Domain))
+                .Select(_ => _.Address)
+                .ToHashSet();
+            if (newDomainAddresses.Count == 0)
+            {
+                return true;
+            }
+            var message = string.Format(
+                Properties.Resources.ConfirmNewDomains,
+                string.Join("\n", newDomainAddresses));
+            MessageBoxResult result = MessageBox.Show(message, Properties.Resources.Warning, MessageBoxButton.YesNo);
+            return result == MessageBoxResult.Yes;
         }
 
         private bool IsEmbeddedImage(Outlook.Attachment item)
@@ -329,7 +355,17 @@ namespace FlexConfirmMail.Dialog
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
-            QueueLogger.Log("* Send button clicked. closing...");
+            QueueLogger.Log("* Send button clicked.");
+            if (_config.SafeNewDomainsEnabled)
+            {
+                QueueLogger.Log("* Check new domains");
+                if (!CheckNewDomains())
+                {
+                    return;
+                }
+            }
+
+            QueueLogger.Log("* closing...");
             DialogResult = true;
         }
 

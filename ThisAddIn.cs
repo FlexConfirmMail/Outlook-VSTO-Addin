@@ -4,25 +4,114 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System;
+using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace FlexConfirmMail
 {
     public partial class ThisAddIn
     {
+        private Outlook.Explorers Explorers { get; set; } = null;
+        private List<Outlook.Explorer> ExplorerList { get; set; } = new List<Outlook.Explorer>();
+        private Outlook.Inspectors Inspectors { get; set; } = null;
+        private Dictionary<string, Outlook.MailItem> SelectedMailDictionary { get; set; } = new Dictionary<string, Outlook.MailItem>();
+        private Dictionary<string, List<RecipientInfo>> EntryIdToOriginalRecipientsDictionary { get; set; } = new Dictionary<string, List<RecipientInfo>>();
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
-            this.Application.ItemSend += new Microsoft.Office.Interop.Outlook.ApplicationEvents_11_ItemSendEventHandler(ThisAddIn_ItemSend);
+            Application.ItemSend += new Outlook.ApplicationEvents_11_ItemSendEventHandler(ThisAddIn_ItemSend);
+            Explorers = Application.Explorers;
+            foreach (Outlook.Explorer explorer in Explorers)
+            {
+                explorer.SelectionChange += new Outlook.ExplorerEvents_10_SelectionChangeEventHandler(ThisAddIn_SelectionChange);
+                ExplorerList.Add(explorer);
+            }
+            Explorers.NewExplorer += new Outlook.ExplorersEvents_NewExplorerEventHandler(ThisAddIn_NewExplorer);
+            Inspectors = Application.Inspectors;
+            Inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(ThisAddIn_NewInspector);
             ShowBanner();
+        }
+
+        private void ThisAddIn_NewExplorer(Outlook.Explorer explorer)
+        {
+            explorer.SelectionChange += new Outlook.ExplorerEvents_10_SelectionChangeEventHandler(ThisAddIn_SelectionChange);
+            ExplorerList.Add(explorer);
+        }
+
+        private void SaveOriginalRecipients(object response, ref bool cancel)
+        {
+            Outlook.MailItem mailItem = response as Outlook.MailItem;
+            // EntryID is created when saving.
+            mailItem.Save();
+            var entryID = mailItem.EntryID;
+            if (string.IsNullOrEmpty(entryID))
+            {
+                return;
+            }
+            var originalRecipients = new List<RecipientInfo>();
+            foreach (Outlook.Recipient recp in mailItem.Recipients)
+            {
+                originalRecipients.Add(new RecipientInfo(recp));
+            }
+            EntryIdToOriginalRecipientsDictionary[entryID] = originalRecipients;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {
         }
 
+        private void ThisAddIn_NewInspector(Outlook.Inspector inspector)
+        {
+            object item = inspector.CurrentItem;
+            if (item is Outlook.MailItem mailItem)
+            {
+                SaveToMailCacheDictionary(mailItem);
+            }
+        }
+
+        private void ThisAddIn_SelectionChange()
+        {
+            Outlook.Explorer acriveExplorer = Application.ActiveExplorer();
+            if (acriveExplorer.Selection.Count > 0)
+            {
+                object item = acriveExplorer.Selection[1];
+                if (item is Outlook.MailItem mailItem)
+                {
+                    SaveToMailCacheDictionary(mailItem);
+                }
+            }
+        }
+
+        private void SaveToMailCacheDictionary(Outlook.MailItem mailItem)
+        {
+            if (mailItem.Sender == null)
+            {
+                //NewMail, can't reply
+                return;
+            }
+            var id = mailItem.EntryID;
+            if (SelectedMailDictionary.ContainsKey(id))
+            {
+                return;
+            }
+            Outlook.ItemEvents_10_Event mailEvent = mailItem;
+
+            mailEvent.Reply += new Outlook.ItemEvents_10_ReplyEventHandler(SaveOriginalRecipients);
+            mailEvent.ReplyAll += new Outlook.ItemEvents_10_ReplyAllEventHandler(SaveOriginalRecipients);
+            SelectedMailDictionary[id] = mailItem;
+        }
+
         private void ThisAddIn_ItemSend(object Item, ref bool Cancel)
         {
             Outlook.MailItem mail = (Outlook.MailItem)Item;
+            Outlook.Folder folder = mail.Parent as Outlook.Folder;
+            Outlook.Store store = folder.Store;
+            if (store.IsConversationEnabled)
+            {
+                // Obtain a Conversation object.
+                Outlook.Conversation conv =
+                    mail.GetConversation();
+            }
 
             // Some users reported that Intel Graphic + Win10 causes
             // a blank screen. Diable Hardware Accerelation.
@@ -34,7 +123,8 @@ namespace FlexConfirmMail
 
             try
             {
-                if (DoCheck(mail)) {
+                if (DoCheck(mail))
+                {
                     Cancel = false;
                     QueueLogger.Log("Check finished [send=yes]");
                 }
@@ -81,9 +171,12 @@ namespace FlexConfirmMail
             }
             config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
 
-            MainDialog mainDialog = new MainDialog(config, mail);
+            List<RecipientInfo> originalRecipients = GetOriginalRecipientsFromDictionary(mail.EntryID);
+
+            MainDialog mainDialog = new MainDialog(config, mail, originalRecipients);
             if (mainDialog.SkipConfirm())
             {
+                RemoveRecipientsFromDictionary(mail.EntryID);
                 return true;
             }
 
@@ -91,15 +184,35 @@ namespace FlexConfirmMail
             {
                 if (!config.CountEnabled)
                 {
+                    RemoveRecipientsFromDictionary(mail.EntryID);
                     return true;
                 }
 
                 if (new CountDialog(config).ShowDialog() == true)
                 {
+                    RemoveRecipientsFromDictionary(mail.EntryID);
                     return true;
                 }
             }
             return false;
+        }
+
+        private List<RecipientInfo> GetOriginalRecipientsFromDictionary(string entryID)
+        {
+            if (string.IsNullOrEmpty(entryID))
+            {
+                return null;
+            }
+            return EntryIdToOriginalRecipientsDictionary.ContainsKey(entryID) ? EntryIdToOriginalRecipientsDictionary[entryID] : null;
+        }
+
+        private void RemoveRecipientsFromDictionary(string entryID)
+        {
+            if (string.IsNullOrEmpty(entryID))
+            {
+                return;
+            }
+            EntryIdToOriginalRecipientsDictionary.Remove(entryID);
         }
 
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()

@@ -336,4 +336,14 @@ example.org</value>
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
     <value>Warn if new domains are added when replying</value>
   </data>
+  <data name="ConfirmNewDomains" xml:space="preserve">
+    <value>There are recipients with domains not included in the recipients of the original message.
+
+{0}
+
+Do you really want to send this message?</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
 </root>

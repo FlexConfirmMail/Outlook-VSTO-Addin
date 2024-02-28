@@ -233,6 +233,19 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
+        ///   返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。
+        ///
+        ///{0}
+        ///
+        ///送信してよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ConfirmNewDomains {
+            get {
+                return ResourceManager.GetString("ConfirmNewDomains", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   秒後に送信します に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string CountSendInSeconds {
@@ -592,6 +605,15 @@ namespace FlexConfirmMail.Properties {
         public static string UnsafeFilesTemplate {
             get {
                 return ResourceManager.GetString("UnsafeFilesTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   警告 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

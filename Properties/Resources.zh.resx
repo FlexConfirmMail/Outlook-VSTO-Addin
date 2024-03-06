@@ -334,14 +334,14 @@ example.org</value>
     <value>附件 / 警告</value>
   </data>
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
-    <value>Warn if new domains are added when replying</value>
+    <value>回复时如果添加新域则发出警告</value>
   </data>
   <data name="ConfirmNewDomains" xml:space="preserve">
-    <value>There are recipients with domains not included in the recipients of the original message.
+    <value>有些收件人的域未包含在原始邮件的收件人中。
 
 {0}
 
-Do you really want to send this message?</value>
+您真的要发送此消息吗？</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>警告</value>

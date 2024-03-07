@@ -17,7 +17,7 @@
       <string id="UnsafeDomains_Explain">送信時に警告対象とする注意ドメインを指定します。指定にはワイルドカード（*および?）を使用可能です。</string>
       <string id="UnsafeFiles">注意が必要なファイル名設定</string>
       <string id="UnsafeFiles_Explain">添付ファイルに含まれる場合に警告する注意ワードを指定します。指定にはワイルドカード（*および?）を使用可能です。</string>
-      <string id="SafeNewDomainsEnabled">To/Ccに一定数以上のドメインが含まれている場合に警告する</string>
+      <string id="SafeNewDomainsEnabled">返信時に新しいドメインが追加されていた場合に警告する</string>
     </stringTable>
     <presentationTable>
       <presentation id="CountSeconds">

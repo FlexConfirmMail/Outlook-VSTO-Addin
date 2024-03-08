@@ -104,14 +104,6 @@ namespace FlexConfirmMail
         private void ThisAddIn_ItemSend(object Item, ref bool Cancel)
         {
             Outlook.MailItem mail = (Outlook.MailItem)Item;
-            Outlook.Folder folder = mail.Parent as Outlook.Folder;
-            Outlook.Store store = folder.Store;
-            if (store.IsConversationEnabled)
-            {
-                // Obtain a Conversation object.
-                Outlook.Conversation conv =
-                    mail.GetConversation();
-            }
 
             // Some users reported that Intel Graphic + Win10 causes
             // a blank screen. Diable Hardware Accerelation.

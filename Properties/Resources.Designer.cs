@@ -179,7 +179,7 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
-        ///   返信時に新しいドメインが追加されていた場合に警告する に類似しているローカライズされた文字列を検索します。
+        ///   返信の宛先に今まで含まれていなかったドメインのアドレスが追加された場合に警告する に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ConfigSafeNewDomainsEnabled {
             get {

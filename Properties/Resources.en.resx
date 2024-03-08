@@ -337,7 +337,7 @@ so please use Bcc when sending an message to unrelated parties.</value>
     <value>Attachments / Warnings</value>
   </data>
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
-    <value>Warn if new domains are added when replying</value>
+    <value>Confirm when any recipients with domains different from any existing recipients are added</value>
   </data>
   <data name="ConfirmNewDomains" xml:space="preserve">
     <value>There are recipients with domains not included in the recipients of the original message.

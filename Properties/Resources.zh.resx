@@ -334,7 +334,7 @@ example.org</value>
     <value>附件 / 警告</value>
   </data>
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
-    <value>回复时如果添加新域则发出警告</value>
+    <value>确认何时添加域与现有收件人不同的任何收件人</value>
   </data>
   <data name="ConfirmNewDomains" xml:space="preserve">
     <value>有些收件人的域未包含在原始邮件的收件人中。

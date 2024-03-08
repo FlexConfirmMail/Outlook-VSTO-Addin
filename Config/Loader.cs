@@ -175,6 +175,16 @@ namespace FlexConfirmMail
                 }
             }
 
+            if (key == "SafeNewDomainsEnabled")
+            {
+                if (ParseBool(val, out b))
+                {
+                    config.SafeNewDomainsEnabled = b;
+                    config.Modified.Add(ConfigOption.SafeNewDomainsEnabled);
+                    return true;
+                }
+            }
+
             return false;
         }
 

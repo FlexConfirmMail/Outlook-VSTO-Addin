@@ -112,5 +112,17 @@
         <multiText id="UnsafeFiles" valueName="UnsafeFiles"/>
       </elements>
     </policy>
+    <policy name="SafeNewDomainsEnabled" valueName="SafeNewDomainsEnabled"
+        displayName="$(string.SafeNewDomainsEnabled)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
   </policies>
 </policyDefinitions>

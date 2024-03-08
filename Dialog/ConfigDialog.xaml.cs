@@ -36,6 +36,7 @@ namespace FlexConfirmMail.Dialog
             SafeBccEnabled.IsChecked = _config.SafeBccEnabled;
             SafeBccThreshold.Text = _config.SafeBccThreshold.ToString();
             MainSkipIfNoExt.IsChecked = _config.MainSkipIfNoExt;
+            SafeNewDomainsEnabled.IsChecked = _config.SafeNewDomainsEnabled;
 
             // TrustedDomains
             if (_default.Modified.Contains(ConfigOption.TrustedDomains))
@@ -149,6 +150,9 @@ namespace FlexConfirmMail.Dialog
             text += Serialize(ConfigOption.MainSkipIfNoExt,
                               MainSkipIfNoExt.IsChecked,
                               _default.MainSkipIfNoExt);
+            text += Serialize(ConfigOption.SafeNewDomainsEnabled,
+                              SafeNewDomainsEnabled.IsChecked,
+                              _default.SafeNewDomainsEnabled);
             return text;
         }
 

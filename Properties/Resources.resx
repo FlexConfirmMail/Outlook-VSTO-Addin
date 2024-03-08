@@ -336,4 +336,17 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
   <data name="MainFile" xml:space="preserve">
     <value>添付ファイル／その他の警告</value>
   </data>
+  <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
+    <value>返信の宛先に今まで含まれていなかったドメインのアドレスが追加された場合に警告する</value>
+  </data>
+  <data name="ConfirmNewDomains" xml:space="preserve">
+    <value>返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。
+
+{0}
+
+送信してよろしいですか？</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>警告</value>
+  </data>
 </root>

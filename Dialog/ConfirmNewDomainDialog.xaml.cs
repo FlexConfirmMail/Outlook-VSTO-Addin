@@ -1,28 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace FlexConfirmMail.Dialog
 {
-    /// <summary>
-    /// ConfirmNewDomainDialog.xaml の相互作用ロジック
-    /// </summary>
-    public partial class ConfirmNewDomainDialog : UserControl
+    public partial class ConfirmNewDomainDialog : Window
     {
         public ConfirmNewDomainDialog()
         {
+            QueueLogger.Log($"===== Open {nameof(ConfirmNewDomainDialog)} =====");
             InitializeComponent();
+        }
+
+        public ConfirmNewDomainDialog(HashSet<string> addresses) : this()
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
+
+            if (addresses.Count > 2)
+            {
+                this.Height += (addresses.Count - 2) * textBlockBody.FontSize;
+            }
+            textBlockBody.Inlines.Add(Properties.Resources.ConfirmNewDomainsBody1);
+            textBlockBody.Inlines.Add("\n\n");
+            textBlockBody.Inlines.Add(new Run()
+            {
+                Text = string.Join("\n", addresses),
+                FontWeight = FontWeights.Bold
+            });
+            textBlockBody.Inlines.Add("\n\n");
+            textBlockBody.Inlines.Add(Properties.Resources.ConfirmNewDomainsBody2);
+        }
+
+        private void buttonSend_Click(object sender, RoutedEventArgs e)
+        {
+            QueueLogger.Log($"* Send button clicked. closing...");
+            DialogResult = true;
         }
     }
 }

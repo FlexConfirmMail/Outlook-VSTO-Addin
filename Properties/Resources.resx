@@ -339,14 +339,16 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
     <value>返信の宛先に今まで含まれていなかったドメインのアドレスが追加された場合に警告する</value>
   </data>
-  <data name="ConfirmNewDomains" xml:space="preserve">
-    <value>返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。
-
-{0}
-
-送信してよろしいですか？</value>
+  <data name="ConfirmNewDomainsBody1" xml:space="preserve">
+    <value>返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>警告</value>
+  </data>
+  <data name="ConfirmNewDomainsBody2" xml:space="preserve">
+    <value>送信してよろしいですか？</value>
+  </data>
+  <data name="WarningBody" xml:space="preserve">
+    <value>警告！</value>
   </data>
 </root>

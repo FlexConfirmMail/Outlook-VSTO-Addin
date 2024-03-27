@@ -7,15 +7,15 @@ using System.Windows.Threading;
 
 namespace FlexConfirmMail.Dialog
 {
-    public partial class ConfirmNewDomainDialog : Window
+    public partial class NewDomainDialog : Window
     {
-        public ConfirmNewDomainDialog()
+        public NewDomainDialog()
         {
-            QueueLogger.Log($"===== Open {nameof(ConfirmNewDomainDialog)} =====");
+            QueueLogger.Log($"===== Open {nameof(NewDomainDialog)} =====");
             InitializeComponent();
         }
 
-        public ConfirmNewDomainDialog(HashSet<string> addresses) : this()
+        public NewDomainDialog(HashSet<string> addresses) : this()
         {
             CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
 

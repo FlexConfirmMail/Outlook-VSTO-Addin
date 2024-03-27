@@ -342,13 +342,13 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
   <data name="ConfirmNewDomainsBody1" xml:space="preserve">
     <value>返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>警告</value>
+  <data name="NewDomainDialogTitle" xml:space="preserve">
+    <value>警告 - FlexConfirmMail</value>
   </data>
   <data name="ConfirmNewDomainsBody2" xml:space="preserve">
     <value>送信してよろしいですか？</value>
   </data>
-  <data name="WarningBody" xml:space="preserve">
+  <data name="Warning" xml:space="preserve">
     <value>警告！</value>
   </data>
 </root>

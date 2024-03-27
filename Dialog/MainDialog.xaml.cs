@@ -94,7 +94,7 @@ namespace FlexConfirmMail.Dialog
             {
                 return true;
             }
-            ConfirmNewDomainDialog mainDialog = new ConfirmNewDomainDialog(newDomainAddresses);
+            NewDomainDialog mainDialog = new NewDomainDialog(newDomainAddresses);
             return mainDialog.ShowDialog() ?? false;
         }
 

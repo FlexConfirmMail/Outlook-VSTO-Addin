@@ -381,6 +381,15 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
+        ///   警告 - FlexConfirmMail に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string NewDomainDialogTitle {
+            get {
+                return ResourceManager.GetString("NewDomainDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   FlexConfirmMail設定 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string RibbonButtonFlexConfirmMail {
@@ -614,20 +623,11 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
-        ///   警告 に類似しているローカライズされた文字列を検索します。
+        ///   警告！ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Warning {
             get {
                 return ResourceManager.GetString("Warning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   警告！ に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string WarningBody {
-            get {
-                return ResourceManager.GetString("WarningBody", resourceCulture);
             }
         }
     }

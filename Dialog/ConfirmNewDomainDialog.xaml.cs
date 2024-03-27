@@ -21,7 +21,8 @@ namespace FlexConfirmMail.Dialog
 
             if (addresses.Count > 2)
             {
-                this.Height += (addresses.Count - 2) * textBlockBody.FontSize;
+                double margin = 10;
+                this.Height += (addresses.Count - 2) * (textBlockBody.FontSize + margin);
             }
             textBlockBody.Inlines.Add(Properties.Resources.ConfirmNewDomainsBody1);
             textBlockBody.Inlines.Add("\n\n");

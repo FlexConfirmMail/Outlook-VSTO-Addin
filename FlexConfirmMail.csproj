@@ -166,6 +166,9 @@
     <Compile Include="Dialog\ConfigDialog.xaml.cs">
       <DependentUpon>ConfigDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\ConfirmNewDomainDialog.xaml.cs">
+      <DependentUpon>ConfirmNewDomainDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\Helper.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\File.cs" />
@@ -221,6 +224,10 @@
     <Page Include="Dialog\ConfigDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialog\ConfirmNewDomainDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\MainDialog.xaml">
       <SubType>Designer</SubType>

@@ -623,7 +623,7 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
-        ///   警告！ に類似しているローカライズされた文字列を検索します。
+        ///   ⨉ 警告！ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Warning {
             get {

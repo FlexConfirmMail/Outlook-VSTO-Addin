@@ -349,6 +349,6 @@ ToおよびCcに含まれるメールアドレスはすべての受取人が確�
     <value>送信してよろしいですか？</value>
   </data>
   <data name="Warning" xml:space="preserve">
-    <value>警告！</value>
+    <value>⨉ 警告！</value>
   </data>
 </root>

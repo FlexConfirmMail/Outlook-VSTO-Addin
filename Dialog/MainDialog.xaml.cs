@@ -94,8 +94,8 @@ namespace FlexConfirmMail.Dialog
             {
                 return true;
             }
-            NewDomainDialog mainDialog = new NewDomainDialog(newDomainAddresses);
-            return mainDialog.ShowDialog() ?? false;
+            var newDomainDialog = new NewDomainDialog(newDomainAddresses);
+            return newDomainDialog.ShowDialog() ?? false;
         }
 
         private bool IsEmbeddedImage(Outlook.Attachment item)

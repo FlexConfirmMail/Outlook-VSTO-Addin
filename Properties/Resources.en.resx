@@ -339,14 +339,16 @@ so please use Bcc when sending an message to unrelated parties.</value>
   <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
     <value>Confirm when any recipients with domains different from any existing recipients are added</value>
   </data>
-  <data name="ConfirmNewDomains" xml:space="preserve">
-    <value>There are recipients with domains not included in the recipients of the original message.
-
-{0}
-
-Do you really want to send this message?</value>
+  <data name="ConfirmNewDomainsBody1" xml:space="preserve">
+    <value>There are recipients with domains not included in the recipients of the original message.</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+  <data name="NewDomainDialogTitle" xml:space="preserve">
+    <value>Warning  - FlexConfirmMail</value>
+  </data>
+  <data name="ConfirmNewDomainsBody2" xml:space="preserve">
+    <value>Do you really want to send this message?</value>
+  </data>
+  <data name="Warrning" xml:space="preserve">
+    <value>Warning!</value>
   </data>
 </root>

@@ -1,0 +1,16 @@
+﻿<Window x:Class="FlexConfirmMail.Dialog.NewDomainDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FlexConfirmMail"
+             xmlns:resx="clr-namespace:FlexConfirmMail.Properties"
+             Title="{x:Static resx:Resources.NewDomainDialogTitle}"
+             mc:Ignorable="d" Width="600" Height="400">
+    <Grid Background="Red">
+        <TextBlock x:Name="textBlockTitle" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{x:Static resx:Resources.Warning}" VerticalAlignment="Top" TextAlignment="Center" Margin="-8,0,0,0" Width="450" Height="47" FontSize="36" Foreground="White"/>
+        <TextBlock x:Name="textBlockBody" TextWrapping="Wrap" Text="" Margin="50,62,50,40" Background="White" FontSize="24"/>
+        <Button  x:Name="buttonSend" Content="{x:Static resx:Resources.Send}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="200,0,0,7" Height="25" Click="buttonSend_Click"/>
+        <Button Content="{x:Static resx:Resources.Cancel}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,200,7" Height="25" IsCancel="True"/>
+    </Grid>
+</Window>

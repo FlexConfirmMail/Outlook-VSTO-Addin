@@ -233,15 +233,20 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
-        ///   返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。
-        ///
-        ///{0}
-        ///
-        ///送信してよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        ///   返信元のメールの宛先に含まれていなかったドメインの以下の宛先が追加されています。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        public static string ConfirmNewDomains {
+        public static string ConfirmNewDomainsBody1 {
             get {
-                return ResourceManager.GetString("ConfirmNewDomains", resourceCulture);
+                return ResourceManager.GetString("ConfirmNewDomainsBody1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   送信してよろしいですか？ に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ConfirmNewDomainsBody2 {
+            get {
+                return ResourceManager.GetString("ConfirmNewDomainsBody2", resourceCulture);
             }
         }
         
@@ -372,6 +377,15 @@ namespace FlexConfirmMail.Properties {
         public static string MainUnsafeFilesWarningHint {
             get {
                 return ResourceManager.GetString("MainUnsafeFilesWarningHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   警告 - FlexConfirmMail に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string NewDomainDialogTitle {
+            get {
+                return ResourceManager.GetString("NewDomainDialogTitle", resourceCulture);
             }
         }
         
@@ -609,7 +623,7 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
-        ///   警告 に類似しているローカライズされた文字列を検索します。
+        ///   警告！ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Warning {
             get {

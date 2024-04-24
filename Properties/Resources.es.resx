@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="banner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\banner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RibbonButtonFlexConfirmMail" xml:space="preserve">
+    <value>Opciones FlexConfirmMail</value>
+  </data>
+  <data name="RibbonGroupFlexConfirmMail" xml:space="preserve">
+    <value>Revisar</value>
+  </data>
+  <data name="SaveAndQuit" xml:space="preserve">
+    <value>Salvar y Salir</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>segundos</value>
+  </data>
+  <data name="ConfigWindowTitle" xml:space="preserve">
+    <value>Opciones FlexConfirmMail</value>
+  </data>
+  <data name="ConfigGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="ConfigCount" xml:space="preserve">
+    <value>CuentaRegresiva</value>
+  </data>
+  <data name="ConfigCountEnabled" xml:space="preserve">
+    <value>Mostrar cuenta regresiva al enviar mensaje</value>
+  </data>
+  <data name="ConfigCountAllowSkip" xml:space="preserve">
+    <value>Mostrar boton de "Enviar Ahora" durante la cuenta regresiva</value>
+  </data>
+  <data name="ConfigCountSeconds" xml:space="preserve">
+    <value>Retrasar el envio de mensaje por</value>
+  </data>
+  <data name="ConfigWarning" xml:space="preserve">
+    <value>Para/Cc</value>
+  </data>
+  <data name="ConfigSafeBccEnabled" xml:space="preserve">
+    <value>Habilitar advertencia de "Demasiados Dominios en campos Para/Cc"</value>
+  </data>
+  <data name="ConfigSafeBccThreshold" xml:space="preserve">
+    <value>Advertir si los campos Para/Cc contienen</value>
+  </data>
+  <data name="ConfigSafeBccThresholdSuffix" xml:space="preserve">
+    <value>dominios (o mas)</value>
+  </data>
+  <data name="ConfigMisc" xml:space="preserve">
+    <value>Varios</value>
+  </data>
+  <data name="ConfigMainSkipIfNoExt" xml:space="preserve">
+    <value>Saltar confirmacion si todos los destinatarios son de confianza.</value>
+  </data>
+  <data name="ConfigTrustedDomains" xml:space="preserve">
+    <value>Configurar Dominios de Confianza</value>
+  </data>
+  <data name="TrustedDomainsPolicy" xml:space="preserve">
+    <value># Dominios de Confianza ###
+# La política de grupo de la empresa habilita la confianza en los siguientes dominios.
+#
+# {0}
+#
+# Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios agregando "-" al principio
+# Y también están disponibles los comodines (* y ?).
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeDomainsPolicy" xml:space="preserve">
+    <value># Dominios Inseguros ###
+# La politica grupo de la empresa los siguientes dominios como inseguros.
+#
+# {0}
+#
+# Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios agregando "-" al principio
+# Y también están disponibles los comodines (* y ?).
+##################################
+
+{1}</value>
+  </data>
+  <data name="UnsafeFilesPolicy" xml:space="preserve">
+    <value># Archivos Inseguros ###
+# La politica de la empresa considera Los siguientes tipos de Archivos como inseguros.
+#
+# {0}
+#
+# Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios agregando "-" al principio
+# Y también están disponibles los comodines (* y ?).
+##################################
+
+{1}</value>
+  </data>
+  <data name="TrustedDomainsExample" xml:space="preserve">
+    <value>ejemplo.com
+-ejemplo.org</value>
+  </data>
+  <data name="UnsafeDomainsExample" xml:space="preserve">
+    <value>ejemplo.com
+-ejemplo.org</value>
+  </data>
+  <data name="UnsafeFilesExample" xml:space="preserve">
+    <value>Confidencial
+-ExcluirTipo</value>
+  </data>
+  <data name="TrustedDomainsTemplate" xml:space="preserve">
+    <value># Dominios de Confianza ###
+#
+# (1) Establezca la lista de dominios que se tratarán como de confianza.
+# (2) Introduzca una entrada por línea de la siguiente manera.
+# (3) Las líneas que comienzan con # se ignoran.
+# (4) Los comodines (* y ?) estan disponibles.
+#
+##################################
+
+ejemplo.com
+ejemplo.org</value>
+  </data>
+  <data name="UnsafeDomainsTemplate" xml:space="preserve">
+    <value># Dominios Inseguros ###
+#
+# (1) Configure la lista de dominios para mostrar la advertencia de "destinatario inseguro".
+# (2) Introduzca una entrada por línea de la siguiente manera.
+# (3) Las líneas que comienzan con # se ignoran.
+# (4) Los comodines (* y ?) estan disponibles.
+#
+##################################
+
+example.com
+example.org</value>
+  </data>
+  <data name="UnsafeFilesTemplate" xml:space="preserve">
+    <value># Archivos Inseguros ###
+#
+# (1) Configure la lista de palabras clave para mostrar la advertencia de "nombre de archivo no seguro".
+# (2) Introduzca una entrada por línea de la siguiente manera.
+# (3) Las líneas que comienzan con # se ignoran.
+# (4) Los comodines (* y ?) estan disponibles.
+#
+##################################
+
+secreto
+confidencial
+</value>
+  </data>
+  <data name="TrustedDomains" xml:space="preserve">
+    <value>Dominios de Confianza</value>
+  </data>
+  <data name="ConfigUnsafeDomains" xml:space="preserve">
+    <value>Configurar Dominios Inseguros</value>
+  </data>
+  <data name="UnsafeDomains" xml:space="preserve">
+    <value>Dominios Inseguros</value>
+  </data>
+  <data name="ConfigUnsafeFiles" xml:space="preserve">
+    <value>Configurar Archivos Inseguros</value>
+  </data>
+  <data name="UnsafeFiles" xml:space="preserve">
+    <value>Archivos Inseguros</value>
+  </data>
+  <data name="AboutAddon" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="TextLog" xml:space="preserve">
+    <value>Registros de Aplicacion</value>
+  </data>
+  <data name="CountWindowTitle" xml:space="preserve">
+    <value>CuentaRegresiva - FlexConfirmMail</value>
+  </data>
+  <data name="CountSendInSeconds" xml:space="preserve">
+    <value>segundos para enviar</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Enviar</value>
+  </data>
+  <data name="SendNow" xml:space="preserve">
+    <value>Enviar Ahora</value>
+  </data>
+  <data name="MainExternal" xml:space="preserve">
+    <value>Destinatarios Externos</value>
+  </data>
+  <data name="MainUnsafeDomainsWarning" xml:space="preserve">
+    <value>[Advertencia] El dominio inseguro "{0}" fue encontradro en la lista de destinatarios</value>
+  </data>
+  <data name="MainUnsafeDomainsWarningHint" xml:space="preserve">
+    <value>Este dominio esta registrado como inseguro. Por favor revise y confirme.</value>
+  </data>
+  <data name="MainUnsafeFilesWarning" xml:space="preserve">
+    <value>[Advertencia] Una Archivo inseguro ({0}) fue encontrado en la lista de adjuntos</value>
+  </data>
+  <data name="MainUnsafeFilesWarningHint" xml:space="preserve">
+    <value>Este nombre de archivo esta registrado como inseguro. Por favor revise y confirme.</value>
+  </data>
+  <data name="MainSafeBccWarning" xml:space="preserve">
+    <value>[Advertencia] los campos Para/Cc contienen al menos {0} dominios</value>
+  </data>
+  <data name="MainSafeBccWarningHint" xml:space="preserve">
+    <value>Debe de saber que los destinatarios en los campos Para/Cc son visibles para todos,
+asi que por favor utilice Bcc cuando envie mensajes a destinatarios no relacionados.</value>
+  </data>
+  <data name="MainTrusted" xml:space="preserve">
+    <value>Destinatarios Internos</value>
+  </data>
+  <data name="MainCheckAll" xml:space="preserve">
+    <value>Marcar todos</value>
+  </data>
+  <data name="MainFilesWarning" xml:space="preserve">
+    <value>[Adjunto] {0}</value>
+  </data>
+  <data name="MainFile" xml:space="preserve">
+    <value>Adjuntos / Advertencias</value>
+  </data>
+  <data name="ConfigSafeNewDomainsEnabled" xml:space="preserve">
+    <value>Confirmar cuando algun destinatario con un dominio diferente a los existentes es agregado</value>
+  </data>
+  <data name="ConfirmNewDomainsBody1" xml:space="preserve">
+    <value>Existen destinatarios con dominios no incluidos en los destinatarios del mensaje original.</value>
+  </data>
+  <data name="NewDomainDialogTitle" xml:space="preserve">
+    <value>Advertencia - FlexConfirmMail</value>
+  </data>
+  <data name="ConfirmNewDomainsBody2" xml:space="preserve">
+    <value>Realmente quiere enviar este mensaje?</value>
+  </data>
+  <data name="Warrning" xml:space="preserve">
+    <value>Advertencia!</value>
+  </data>
+</root>

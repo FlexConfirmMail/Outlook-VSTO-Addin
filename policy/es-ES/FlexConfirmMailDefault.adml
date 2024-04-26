@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources revision="2.4" schemaVersion="1.0" >
+  <displayName/>
+  <description/>
+  <resources>
+    <stringTable>
+      <string id="Default">Predeterminados</string>
+      <string id="CountEnabled">Mostrar un reloj de cuenta regresiva al enviar un mensaje</string>
+      <string id="CountAllowSkip">Mostrar el botón "Enviar ahora" en el cuadro de cuenta regresiva</string>
+      <string id="CountSeconds">Retrasar el envío de un mensaje en N segundos</string>
+      <string id="SafeBccEnabled">Habilite advertencias de "demasiados dominios en los campos Para/Cc"</string>
+      <string id="SafeBccThreshold">Advertir si los campos Para/Cc contienen N dominios (o más)</string>
+      <string id="MainSkipIfNoExt">Omitir la confirmación si todos los destinatarios son de confianza</string>
+      <string id="TrustedDomains">Configurar dominios confiables</string>
+      <string id="TrustedDomains_Explain">Establezca la lista de dominios que se tratarán como internos.</string>
+      <string id="UnsafeDomains">Configurar dominios inseguros</string>
+      <string id="UnsafeDomains_Explain">Configure lista de dominios que muestre una advertencia de "destinatario no seguro".</string>
+      <string id="UnsafeFiles">Configurar archivos inseguros</string>
+      <string id="UnsafeFiles_Explain">Configure lista de palabras clave que muestre una advertencia "nombre de archivo no seguro"</string>
+    </stringTable>
+    <presentationTable>
+      <presentation id="CountSeconds">
+        <decimalTextBox refId="CountSeconds" defaultValue="3" spinStep="1">Segundos</decimalTextBox>
+      </presentation>
+      <presentation id="SafeBccThreshold">
+        <decimalTextBox refId="SafeBccThreshold" defaultValue="4" spinStep="1">Numero de Dominios</decimalTextBox>
+      </presentation>
+      <presentation id="TrustedDomains">
+        <multiTextBox refId="TrustedDomains"/>
+      </presentation>
+      <presentation id="UnsafeDomains">
+        <multiTextBox refId="UnsafeDomains"/>
+      </presentation>
+      <presentation id="UnsafeFiles">
+        <multiTextBox refId="UnsafeFiles"/>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

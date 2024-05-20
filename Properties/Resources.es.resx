@@ -187,6 +187,9 @@
 # Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
 # También puedes excluir dominios agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
+# You can specify not only domains but also addresses.
+#   * When an entry contains @, the entry is regarded as address.
+#   * When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,6 +239,9 @@
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
+# (5) You can specify not only domains but also addresses.
+#     * When an entry contains @, the entry is regarded as address.
+#     * when an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 

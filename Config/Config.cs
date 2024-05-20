@@ -20,6 +20,7 @@ namespace FlexConfirmMail
         public HashSet<ConfigOption> Modified;
 
         public string TrustedDomainsPattern = "";
+        public string TrustedAddressesPattern = "";
         public string UnsafeDomainsPattern = "";
         public string UnsafeFilesPattern = "";
 
@@ -93,7 +94,11 @@ namespace FlexConfirmMail
 
         public void RebuildPatterns()
         {
-            TrustedDomainsPattern = $"^({string.Join("|", TrustedDomains.Select(ConvertWildCardToRegex))})$";
+            var trustedAddressList = TrustedDomains.Where(_ => _.Contains("@"));
+            var trustedDomainList = TrustedDomains.Where(_ => !_.Contains("@"));
+
+            TrustedDomainsPattern = $"^({string.Join("|", trustedDomainList.Select(ConvertWildCardToRegex))})$";
+            TrustedAddressesPattern = $"^({string.Join("|", trustedAddressList.Select(ConvertWildCardToRegex))})$";
             UnsafeDomainsPattern = $"^({string.Join("|", UnsafeDomains.Select(ConvertWildCardToRegex))})$";
             UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
         }

@@ -19,7 +19,7 @@ namespace FlexConfirmMail.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -344,6 +344,24 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
+        ///   [警告] 注意が必要なアドレス（{0}）が宛先に含まれています。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MainUnsafeAddressesWarning {
+            get {
+                return ResourceManager.GetString("MainUnsafeAddressesWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   このアドレスは誤送信の可能性が高いため、再確認を促す警告を出してします。 に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MainUnsafeAddressesWarningHint {
+            get {
+                return ResourceManager.GetString("MainUnsafeAddressesWarningHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   [警告] 注意が必要なドメイン（{0}）が宛先に含まれています。 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string MainUnsafeDomainsWarning {
@@ -481,8 +499,8 @@ namespace FlexConfirmMail.Properties {
         ///# また、先頭に「-」をつけると、ドメインを除外することができます。
         ///# 指定にはワイルドカード（*および?）も使用可能です。
         ///# また、ドメインだけでなくアドレスを指定することもできます。
-        ///# * @を含む場合はアドレスが指定されたとみなします。
-        ///# * @を含まない場合はドメインが指定されたとみなします。
+        ///# * @を含む場合はアドレスが指定されたとみなします
+        ///# * @を含まない場合はドメインが指定されたとみなします
         ///##################################
         ///
         ///{1} に類似しているローカライズされた文字列を検索します。
@@ -543,6 +561,9 @@ namespace FlexConfirmMail.Properties {
         ///# さらにドメインを追加する場合は、以下に1行ずつ入力してください。
         ///# また、先頭に「-」をつけると、ドメインを除外することができます。
         ///# 指定にはワイルドカード（*および?）も使用可能です。
+        ///# また、ドメインだけでなくアドレスを指定することもできます。
+        ///# * @を含む場合はアドレスが指定されたとみなします
+        ///# * @を含まない場合はドメインが指定されたとみなします
         ///##################################
         ///
         ///{1} に類似しているローカライズされた文字列を検索します。
@@ -616,6 +637,9 @@ namespace FlexConfirmMail.Properties {
         ///# (1) 添付ファイルに含まれる場合に警告する注意ワードを指定します。
         ///# (2) 以下の例のように一行に一件ずつ記載します。
         ///# (3) 冒頭が「#」から始まる行は無視されます。
+        ///# (4) ドメインだけでなくアドレス全体を指定することもできます。
+        ///#     * @を含む場合はアドレスが指定されたとみなします。
+        ///#     * @を含まない場合はドメインが指定されたとみなします。
         ///#
         ///##################################
         ///

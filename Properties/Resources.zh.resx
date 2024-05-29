@@ -173,39 +173,37 @@
     <value>其他设置</value>
   </data>
   <data name="ConfigMainSkipIfNoExt" xml:space="preserve">
-    <value>如果所有目的地都是受信任的域，则立即发送</value>
+    <value>如果所有目的地都是受信任的，则立即发送</value>
   </data>
   <data name="ConfigTrustedDomains" xml:space="preserve">
-    <value>信任域</value>
+    <value>信任域，地址</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
-    <value># 信任域 ###
-# 以下域是由组策略信任的。
+    <value># 信任域，地址 ###
+# 以下域，地址是由组策略信任的。
 #
 # {0}
 #
-# 要添加更多的域，请在下面输入条目（每行一个）。
-# 你也可以通过在开头添加"-"来排除域名。
+# 要添加更多的域，地址，请在下面输入条目（每行一个）。
+# 你也可以通过在开头添加"-"来排除域名，地址。
 # And wildcards (* and ?) are also available.
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
   </data>
   <data name="UnsafeDomainsPolicy" xml:space="preserve">
-    <value># 不安全域 ###
-# 以下域被组策略视为不安全的域
+    <value># 不安全域，地址 ###
+# 以下域，地址被组策略视为不安全的域，地址。
 #
 # {0}
 #
-# 要添加更多的域，请在下面输入条目（每行一个）。
-# 你也可以通过在开头添加"-"来排除域名。
+# 要添加更多的域，地址，请在下面输入条目（每行一个）。
+# 你也可以通过在开头添加"-"来排除域名要添加更多的域，地址，请在下面输入条目（每行一个）。。
 # And wildcards (* and ?) are also available.
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,15 +234,14 @@
 -排除项目</value>
   </data>
   <data name="TrustedDomainsTemplate" xml:space="preserve">
-    <value># 信任域 ###
+    <value># 信任域，地址 ###
 #
-# (1) 设置域被视为内部目的地
+# (1) 设置域，地址被视为内部目的地
 # (2) 每行写一个条目，如下所示
 # (3) 以 "#" 开头的行被忽略
 # (4) Wildcards (* and ?) are available.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (6) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -252,15 +249,14 @@ example.com
 example.org</value>
   </data>
   <data name="UnsafeDomainsTemplate" xml:space="preserve">
-    <value># 不安全域 ###
+    <value># 不安全域，地址 ###
 #
-# (1) 设置要被提醒的域
+# (1) 设置要被提醒的域，地址
 # (2) 每行写一个条目，如下所示
 # (3) 以 "#" 开头的行被忽略
 # (4) Wildcards (* and ?) are available.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (5) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -280,13 +276,13 @@ example.org</value>
 秘密</value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
-    <value>信任域</value>
+    <value>信任域，地址</value>
   </data>
   <data name="ConfigUnsafeDomains" xml:space="preserve">
-    <value>不安全域</value>
+    <value>不安全域，地址</value>
   </data>
   <data name="UnsafeDomains" xml:space="preserve">
-    <value>不安全域</value>
+    <value>不安全域，地址</value>
   </data>
   <data name="ConfigUnsafeFiles" xml:space="preserve">
     <value>不安全的文件名</value>

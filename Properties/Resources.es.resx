@@ -203,6 +203,9 @@
 # Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
 # También puedes excluir dominios agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
+# You can specify not only domains but also addresses.
+#   * When an entry contains @, the entry is regarded as address.
+#   * When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -255,6 +258,9 @@ ejemplo.org</value>
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
+# (5) You can specify not only domains but also addresses.
+#     * When an entry contains @, the entry is regarded as address.
+#     * when an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -356,5 +362,11 @@ asi que por favor utilice Bcc cuando envie mensajes a destinatarios no relaciona
   </data>
   <data name="Warrning" xml:space="preserve">
     <value>Advertencia!</value>
+  </data>
+  <data name="MainUnsafeAddressesWarning" xml:space="preserve">
+    <value>[Advertencia] El correo inseguro "{0}" fue encontradro en la lista de destinatarios</value>
+  </data>
+  <data name="MainUnsafeAddressesWarningHint" xml:space="preserve">
+    <value>Este correo  esta registrado como inseguro. Por favor revise y confirme.</value>
   </data>
 </root>

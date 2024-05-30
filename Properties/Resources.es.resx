@@ -179,33 +179,31 @@
     <value>Configurar Dominios de Confianza</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
-    <value># Dominios de Confianza ###
-# La política de grupo de la empresa habilita la confianza en los siguientes dominios.
+    <value># Dominios y Direcciones de Confianza ###
+# La política de grupo de la empresa habilita la confianza en los siguientes dominios y ireccións.
 #
 # {0}
 #
-# Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
-# También puedes excluir dominios agregando "-" al principio
+# Para agregar más dominios o direcciones, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios o direcciones agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
   </data>
   <data name="UnsafeDomainsPolicy" xml:space="preserve">
-    <value># Dominios Inseguros ###
-# La politica grupo de la empresa los siguientes dominios como inseguros.
+    <value># Dominios y Direcciones Inseguros ###
+# La politica grupo de la empresa los siguientes dominios y direcciones como inseguros.
 #
 # {0}
 #
-# Para agregar más dominios, ingrese las entradas (una por línea) a continuación.
-# También puedes excluir dominios agregando "-" al principio
+# Para agregar más dominios o direcciones, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios o direcciones agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,15 +234,14 @@
 -ExcluirTipo</value>
   </data>
   <data name="TrustedDomainsTemplate" xml:space="preserve">
-    <value># Dominios de Confianza ###
+    <value># Dominios y Direcciones de Confianza ###
 #
-# (1) Establezca la lista de dominios que se tratarán como de confianza.
+# (1) Establezca la lista de dominios y direcciones que se tratarán como de confianza.
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (6) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -252,15 +249,14 @@ ejemplo.com
 ejemplo.org</value>
   </data>
   <data name="UnsafeDomainsTemplate" xml:space="preserve">
-    <value># Dominios Inseguros ###
+    <value># Dominios y Direcciones Inseguros ###
 #
-# (1) Configure la lista de dominios para mostrar la advertencia de "destinatario inseguro".
+# (1) Configure la lista de dominios y direcciones para mostrar la advertencia de "destinatario inseguro".
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (6) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -282,13 +278,13 @@ confidencial
 </value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
-    <value>Dominios de Confianza</value>
+    <value>Dominios y Direcciones de Confianza</value>
   </data>
   <data name="ConfigUnsafeDomains" xml:space="preserve">
-    <value>Configurar Dominios Inseguros</value>
+    <value>Configurar Dominios y Direcciones Inseguros</value>
   </data>
   <data name="UnsafeDomains" xml:space="preserve">
-    <value>Dominios Inseguros</value>
+    <value>Dominios y Direcciones Inseguros</value>
   </data>
   <data name="ConfigUnsafeFiles" xml:space="preserve">
     <value>Configurar Archivos Inseguros</value>
@@ -364,9 +360,9 @@ asi que por favor utilice Bcc cuando envie mensajes a destinatarios no relaciona
     <value>Advertencia!</value>
   </data>
   <data name="MainUnsafeAddressesWarning" xml:space="preserve">
-    <value>[Advertencia] El correo inseguro "{0}" fue encontradro en la lista de destinatarios</value>
+    <value>[Advertencia] La dirección inseguro "{0}" fue encontradro en la lista de destinatarios</value>
   </data>
   <data name="MainUnsafeAddressesWarningHint" xml:space="preserve">
-    <value>Este correo  esta registrado como inseguro. Por favor revise y confirme.</value>
+    <value>Esta dirección esta registrado como inseguro. Por favor revise y confirme.</value>
   </data>
 </root>

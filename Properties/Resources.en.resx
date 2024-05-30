@@ -176,36 +176,34 @@
     <value>Skip confirmation if all the recpients are trusted.</value>
   </data>
   <data name="ConfigTrustedDomains" xml:space="preserve">
-    <value>Configure Trusted Domains</value>
+    <value>Configure Trusted Domains and Addresses</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
-    <value># Trusted Domains ###
-# The following domains are trusted by Group Policy.
+    <value># Trusted Domains and Addresses ###
+# The following domains and addresses are trusted by Group Policy.
 #
 # {0}
 #
-# To add more domains, input entries (one per line) below.
-# You can also exclude domains by adding "-" at the beginning.
+# To add more domains or addresses, input entries (one per line) below.
+# You can also exclude domains or addresses by adding "-" at the beginning.
 # And wildcards (* and ?) are also available.
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
   </data>
   <data name="UnsafeDomainsPolicy" xml:space="preserve">
-    <value># Unsafe Domains ###
-# The following domains are considered unsafe by Group Policy.
+    <value># Unsafe Domains and Addresses ###
+# The following domains and addresses are considered unsafe by Group Policy.
 #
 # {0}
 #
-# To add more domains, input entries (one per line) below.
-# You can also exclude domains by adding "-" at the beginning.
+# To add more domains or addresses, input entries (one per line) below.
+# You can also exclude domains or addresses by adding "-" at the beginning.
 # And wildcards (* and ?) are also available.
-# You can specify not only domains but also addresses.
-#   * When an entry contains @, the entry is regarded as address.
-#   * When an entry does not contains @, the entry is regarded as domain.
+# When an entry contains @, the entry is regarded as address.
+# When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,15 +234,14 @@
 -ExcludedItem</value>
   </data>
   <data name="TrustedDomainsTemplate" xml:space="preserve">
-    <value># Trusted Domains ###
+    <value># Trusted Domains and Addresses ###
 #
-# (1) Set the list of domains to be treated as internal ones.
+# (1) Set the list of domains and addresses to be treated as internal ones.
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
 # (4) Wildcards (* and ?) are available.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (6) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -252,15 +249,14 @@ example.com
 example.org</value>
   </data>
   <data name="UnsafeDomainsTemplate" xml:space="preserve">
-    <value># Unsafe Domains ###
+    <value># Unsafe Domains and Addresses ###
 #
-# (1) Set the list of domains to show an "unsafe recipient" warning.
+# (1) Set the list of domains and addresses to show an "unsafe recipient" warning.
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
 # (4) Wildcards (* and ?) are available.
-# (5) You can specify not only domains but also addresses.
-#     * When an entry contains @, the entry is regarded as address.
-#     * when an entry does not contains @, the entry is regarded as domain.
+# (5) When an entry contains @, the entry is regarded as address.
+# (6) When an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -282,13 +278,13 @@ confidential
 </value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
-    <value>Trusted Domains</value>
+    <value>Trusted Domains and Addresses</value>
   </data>
   <data name="ConfigUnsafeDomains" xml:space="preserve">
-    <value>Configure Unsafe Domains</value>
+    <value>Configure Unsafe Domains and Addresses</value>
   </data>
   <data name="UnsafeDomains" xml:space="preserve">
-    <value>Unsafe Domains</value>
+    <value>Unsafe Domains and Addresses</value>
   </data>
   <data name="ConfigUnsafeFiles" xml:space="preserve">
     <value>Configure Unsafe Files</value>

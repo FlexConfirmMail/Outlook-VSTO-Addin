@@ -360,7 +360,7 @@ asi que por favor utilice Bcc cuando envie mensajes a destinatarios no relaciona
     <value>Advertencia!</value>
   </data>
   <data name="MainUnsafeAddressesWarning" xml:space="preserve">
-    <value>[Advertencia] la dirección inseguro "{0}" fue encontradro en la lista de destinatarios</value>
+    <value>[Advertencia] La dirección inseguro "{0}" fue encontradro en la lista de destinatarios</value>
   </data>
   <data name="MainUnsafeAddressesWarningHint" xml:space="preserve">
     <value>Esta dirección esta registrado como inseguro. Por favor revise y confirme.</value>

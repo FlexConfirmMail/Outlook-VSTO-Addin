@@ -179,13 +179,13 @@
     <value>Configurar Dominios de Confianza</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
-    <value># Dominios y Direccións de Confianza ###
-# La política de grupo de la empresa habilita la confianza en los siguientes dominios y direccións.
+    <value># Dominios y Direcciones de Confianza ###
+# La política de grupo de la empresa habilita la confianza en los siguientes dominios y ireccións.
 #
 # {0}
 #
-# Para agregar más dominios o direccións, ingrese las entradas (una por línea) a continuación.
-# También puedes excluir dominios o direccións agregando "-" al principio
+# Para agregar más dominios o direcciones, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios o direcciones agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
 # When an entry contains @, the entry is regarded as address.
 # When an entry does not contains @, the entry is regarded as domain.
@@ -194,13 +194,13 @@
 {1}</value>
   </data>
   <data name="UnsafeDomainsPolicy" xml:space="preserve">
-    <value># Dominios y Direccións Inseguros ###
-# La politica grupo de la empresa los siguientes dominios y direccións como inseguros.
+    <value># Dominios y Direcciones Inseguros ###
+# La politica grupo de la empresa los siguientes dominios y direcciones como inseguros.
 #
 # {0}
 #
-# Para agregar más dominios o direccións, ingrese las entradas (una por línea) a continuación.
-# También puedes excluir dominios o direccións agregando "-" al principio
+# Para agregar más dominios o direcciones, ingrese las entradas (una por línea) a continuación.
+# También puedes excluir dominios o direcciones agregando "-" al principio
 # Y también están disponibles los comodines (* y ?).
 # When an entry contains @, the entry is regarded as address.
 # When an entry does not contains @, the entry is regarded as domain.
@@ -234,9 +234,9 @@
 -ExcluirTipo</value>
   </data>
   <data name="TrustedDomainsTemplate" xml:space="preserve">
-    <value># Dominios y Direccións de Confianza ###
+    <value># Dominios y Direcciones de Confianza ###
 #
-# (1) Establezca la lista de dominios y direccións que se tratarán como de confianza.
+# (1) Establezca la lista de dominios y direcciones que se tratarán como de confianza.
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
@@ -249,9 +249,9 @@ ejemplo.com
 ejemplo.org</value>
   </data>
   <data name="UnsafeDomainsTemplate" xml:space="preserve">
-    <value># Dominios y Direccións Inseguros ###
+    <value># Dominios y Direcciones Inseguros ###
 #
-# (1) Configure la lista de dominios y direccións para mostrar la advertencia de "destinatario inseguro".
+# (1) Configure la lista de dominios y direcciones para mostrar la advertencia de "destinatario inseguro".
 # (2) Introduzca una entrada por línea de la siguiente manera.
 # (3) Las líneas que comienzan con # se ignoran.
 # (4) Los comodines (* y ?) estan disponibles.
@@ -278,13 +278,13 @@ confidencial
 </value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
-    <value>Dominios y Direccións de Confianza</value>
+    <value>Dominios y Direcciones de Confianza</value>
   </data>
   <data name="ConfigUnsafeDomains" xml:space="preserve">
-    <value>Configurar Dominios y Direccións Inseguros</value>
+    <value>Configurar Dominios y Direcciones Inseguros</value>
   </data>
   <data name="UnsafeDomains" xml:space="preserve">
-    <value>Dominios y Direccións Inseguros</value>
+    <value>Dominios y Direcciones Inseguros</value>
   </data>
   <data name="ConfigUnsafeFiles" xml:space="preserve">
     <value>Configurar Archivos Inseguros</value>
@@ -360,9 +360,9 @@ asi que por favor utilice Bcc cuando envie mensajes a destinatarios no relaciona
     <value>Advertencia!</value>
   </data>
   <data name="MainUnsafeAddressesWarning" xml:space="preserve">
-    <value>[Advertencia] La direccións inseguro "{0}" fue encontradro en la lista de destinatarios</value>
+    <value>[Advertencia] la dirección inseguro "{0}" fue encontradro en la lista de destinatarios</value>
   </data>
   <data name="MainUnsafeAddressesWarningHint" xml:space="preserve">
-    <value>Esta direccións esta registrado como inseguro. Por favor revise y confirme.</value>
+    <value>Esta dirección esta registrado como inseguro. Por favor revise y confirme.</value>
   </data>
 </root>

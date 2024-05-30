@@ -200,7 +200,7 @@
 # {0}
 #
 # 要添加更多的域，地址，请在下面输入条目（每行一个）。
-# 你也可以通过在开头添加"-"来排除域名要添加更多的域，地址，请在下面输入条目（每行一个）。。
+# 你也可以通过在开头添加"-"来排除域名，地址。
 # And wildcards (* and ?) are also available.
 # When an entry contains @, the entry is regarded as address.
 # When an entry does not contains @, the entry is regarded as domain.

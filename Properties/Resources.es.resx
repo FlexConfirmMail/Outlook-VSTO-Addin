@@ -176,7 +176,7 @@
     <value>Saltar confirmacion si todos los destinatarios son de confianza.</value>
   </data>
   <data name="ConfigTrustedDomains" xml:space="preserve">
-    <value>Configurar Dominios de Confianza</value>
+    <value>Configurar Dominios y Direcciones de Confianza</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
     <value># Dominios y Direcciones de Confianza ###

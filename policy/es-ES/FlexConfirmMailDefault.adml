@@ -11,10 +11,10 @@
       <string id="SafeBccEnabled">Habilite advertencias de "demasiados dominios en los campos Para/Cc"</string>
       <string id="SafeBccThreshold">Advertir si los campos Para/Cc contienen N dominios (o más)</string>
       <string id="MainSkipIfNoExt">Omitir la confirmación si todos los destinatarios son de confianza</string>
-      <string id="TrustedDomains">Configurar dominios confiables</string>
-      <string id="TrustedDomains_Explain">Establezca la lista de dominios que se tratarán como internos.</string>
-      <string id="UnsafeDomains">Configurar dominios inseguros</string>
-      <string id="UnsafeDomains_Explain">Configure lista de dominios que muestre una advertencia de "destinatario no seguro".</string>
+      <string id="TrustedDomains">Configurar dominios y direcciones confiables</string>
+      <string id="TrustedDomains_Explain">Establezca la lista de dominios y direcciones que se tratarán como internos.</string>
+      <string id="UnsafeDomains">Configurar dominios y direcciones inseguros</string>
+      <string id="UnsafeDomains_Explain">Configure lista de dominios y direcciones que muestre una advertencia de "destinatario no seguro".</string>
       <string id="UnsafeFiles">Configurar archivos inseguros</string>
       <string id="UnsafeFiles_Explain">Configure lista de palabras clave que muestre una advertencia "nombre de archivo no seguro"</string>
     </stringTable>

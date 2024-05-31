@@ -11,10 +11,10 @@
       <string id="SafeBccEnabled">当To/Cc包含许多域时发出警告</string>
       <string id="SafeBccThreshold">受到警告的To/Cc域的阈值</string>
       <string id="MainSkipIfNoExt">如果所有目的地都是受信任的域，则立即发送</string>
-      <string id="TrustedDomains">设置信任域</string>
-      <string id="TrustedDomains_Explain">设置域被视为内部目的地。 Wildcards (* and ?) are available.</string>
-      <string id="UnsafeDomains">设置不安全域</string>
-      <string id="UnsafeDomains_Explain">设置要被提醒的域。 Wildcards (* and ?) are available.</string>
+      <string id="TrustedDomains">设置信任域，地址</string>
+      <string id="TrustedDomains_Explain">设置域，地址被视为内部目的地。 Wildcards (* and ?) are available.</string>
+      <string id="UnsafeDomains">设置不安全域，地址</string>
+      <string id="UnsafeDomains_Explain">设置要被提醒的域，地址。 Wildcards (* and ?) are available.</string>
       <string id="UnsafeFiles">设置不安全的文件名</string>
       <string id="UnsafeFiles_Explain">为附件设置警告关键字。 Wildcards (* and ?) are available.</string>
       <string id="SafeNewDomainsEnabled">Confirm when any recipients with domains different from any existing recipients are added</string>

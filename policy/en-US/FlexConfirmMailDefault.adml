@@ -11,10 +11,10 @@
       <string id="SafeBccEnabled">Enable "too many domains in To/Cc fields" warnings</string>
       <string id="SafeBccThreshold">Warn if To/Cc fields contain N domains (or more)</string>
       <string id="MainSkipIfNoExt">Skip confirmation if all the recpients are trusted</string>
-      <string id="TrustedDomains">Configure Trusted Domains</string>
-      <string id="TrustedDomains_Explain">Set the list of domains to be treated as internal ones. Wildcards (* and ?) are available.</string>
-      <string id="UnsafeDomains">Configure Unsafe Domains</string>
-      <string id="UnsafeDomains_Explain">Set the list of domains to show an "unsafe recipient" warning. Wildcards (* and ?) are available.</string>
+      <string id="TrustedDomains">Configure Trusted Domains and Addresses</string>
+      <string id="TrustedDomains_Explain">Set the list of domains and addresses to be treated as internal ones. Wildcards (* and ?) are available.</string>
+      <string id="UnsafeDomains">Configure Unsafe Domains and Addresses</string>
+      <string id="UnsafeDomains_Explain">Set the list of domains and addresses to show an "unsafe recipient" warning. Wildcards (* and ?) are available.</string>
       <string id="UnsafeFiles">Configure Unsafe files</string>
       <string id="UnsafeFiles_Explain">Set the list of keywords to show an "unsafe filename" warning. Wildcards (* and ?) are available.</string>
       <string id="SafeNewDomainsEnabled">Confirm when any recipients with domains different from any existing recipients are added</string>

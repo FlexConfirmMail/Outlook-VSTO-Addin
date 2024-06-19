@@ -159,6 +159,7 @@ namespace FlexConfirmMail
             {
                 config.Merge(Loader.LoadFromReg(RegistryPath.DefaultPolicy));
             }
+            config.Merge(Loader.LoadFromDir(StandardPath.GetDefaultConfigDir()));
             config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
 
             List<RecipientInfo> originalRecipients = GetOriginalRecipientsFromDictionary(mail.EntryID);

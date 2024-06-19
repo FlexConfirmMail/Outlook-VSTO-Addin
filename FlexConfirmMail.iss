@@ -1,9 +1,9 @@
 ﻿[Setup]
 AppName=FlexConfirmMail
 AppVerName=FlexConfirmMail
-VersionInfoVersion=22.6.0
+VersionInfoVersion=22.7.0
 AppPublisher=ClearCode Inc.
-AppVersion=22.6.0
+AppVersion=22.7.0
 UninstallDisplayIcon={app}\fcm.ico
 DefaultDirName={commonpf}\FlexConfirmMail
 ShowLanguageDialog=no
@@ -47,3 +47,4 @@ Source: "bin\Release\es\FlexConfirmMail.resources.dll"; DestDir: "{app}\es"; Fla
 Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Resources\fcm.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{src}\DefaultConfig\*.txt"; DestDir: "{app}\DefaultConfig"; Flags:external skipifsourcedoesntexist

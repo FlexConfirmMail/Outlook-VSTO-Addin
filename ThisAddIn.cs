@@ -78,6 +78,7 @@ namespace FlexConfirmMail
             {
                 config.Merge(Loader.LoadFromReg(RegistryPath.DefaultPolicy));
             }
+            config.Merge(Loader.LoadFromDir(StandardPath.GetDefaultConfigDir()));
             config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
 
             MainDialog mainDialog = new MainDialog(config, mail);

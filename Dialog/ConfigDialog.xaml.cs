@@ -25,6 +25,9 @@ namespace FlexConfirmMail.Dialog
                 _default = Loader.LoadFromReg(RegistryPath.DefaultPolicy);
                 _config.Merge(_default);
             }
+            Config defaultWithFile = Loader.LoadFromDir(StandardPath.GetDefaultConfigDir());
+            _default.Merge(defaultWithFile);
+            _config.Merge(defaultWithFile);
 
             _local = Loader.LoadFromDir(StandardPath.GetUserDir());
             _config.Merge(_local);

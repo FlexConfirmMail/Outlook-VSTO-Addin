@@ -47,3 +47,4 @@ Source: "bin\Release\es\FlexConfirmMail.resources.dll"; DestDir: "{app}\es"; Fla
 Source: "bin\Release\Microsoft.Office.Tools.Common.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "bin\Release\Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Resources\fcm.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{src}\DefaultConfig\*.txt"; DestDir: "{app}\DefaultConfig"; Flags:external skipifsourcedoesntexist

@@ -8,6 +8,11 @@ namespace FlexConfirmMail
         public static readonly string Policy = @"SOFTWARE\Policies\FlexConfirmMail";
     }
 
+    public class ConfigPath
+    {
+        public static readonly string DefaultConfigDirName = @"DefaultConfig";
+    }
+
     public enum ConfigOption
     {
         CountEnabled,

@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Collections.Generic;
+using System.IO;
 
 namespace FlexConfirmMail
 {
@@ -159,6 +160,7 @@ namespace FlexConfirmMail
             {
                 config.Merge(Loader.LoadFromReg(RegistryPath.DefaultPolicy));
             }
+            config.Merge(Loader.LoadFromDir(StandardPath.GetDefaultConfigDir()));
             config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
 
             List<RecipientInfo> originalRecipients = GetOriginalRecipientsFromDictionary(mail.EntryID);

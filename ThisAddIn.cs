@@ -4,7 +4,6 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Collections.Generic;
-using System.IO;
 
 namespace FlexConfirmMail
 {

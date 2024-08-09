@@ -4,6 +4,7 @@ using System.Windows.Media;
 using System.Windows.Interop;
 using Outlook = Microsoft.Office.Interop.Outlook;
 using System.Collections.Generic;
+using System;
 
 namespace FlexConfirmMail
 {
@@ -14,6 +15,8 @@ namespace FlexConfirmMail
         private Outlook.Inspectors Inspectors { get; set; } = null;
         private Dictionary<string, Outlook.MailItem> SelectedMailDictionary { get; set; } = new Dictionary<string, Outlook.MailItem>();
         private Dictionary<string, List<RecipientInfo>> EntryIdToOriginalRecipientsDictionary { get; set; } = new Dictionary<string, List<RecipientInfo>>();
+        private string OutBoxFolderPath { get; set; } = null;
+
 
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
         {
@@ -27,6 +30,15 @@ namespace FlexConfirmMail
             Explorers.NewExplorer += new Outlook.ExplorersEvents_NewExplorerEventHandler(ThisAddIn_NewExplorer);
             Inspectors = Application.Inspectors;
             Inspectors.NewInspector += new Outlook.InspectorsEvents_NewInspectorEventHandler(ThisAddIn_NewInspector);
+            try
+            {
+                OutBoxFolderPath = Application.Session.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox).FolderPath;
+            }
+            catch
+            {
+                // If the target folder type does not exist, Outlook raises an error.
+                // It is a possible situation, so ignore it.
+            }
             ShowBanner();
         }
 
@@ -70,6 +82,17 @@ namespace FlexConfirmMail
         private void ThisAddIn_SelectionChange()
         {
             Outlook.Explorer acriveExplorer = Application.ActiveExplorer();
+            if (!string.IsNullOrEmpty(OutBoxFolderPath) &&
+                StringComparer.InvariantCultureIgnoreCase.Equals(acriveExplorer.CurrentFolder.FolderPath, OutBoxFolderPath))
+            {
+                // When deferred delivery is enabled, a mail is moved to the outbox and delivered after spending the delay time.
+                // If we access any of properties of the mail in the outbox, the mail is regarded as "edited" and not delivered
+                // even after spending the delay time.
+                // So if the folder is the outbox, return before accessing properties of the mail.
+                // Note that if a mail in the outbox is opened with a new inspector, it is regarded as "edited", which is Outlook's
+                // specification, so we don't add this check for ThisAddIn_NewInspector.
+                return;
+            }
             if (acriveExplorer.Selection.Count > 0)
             {
                 object item = acriveExplorer.Selection[1];

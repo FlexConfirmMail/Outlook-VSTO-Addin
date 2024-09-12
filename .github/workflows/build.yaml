@@ -4,8 +4,8 @@ jobs:
   build:
     runs-on: [ windows-2019 ]
     steps:
-      - uses: actions/checkout@v2
-      - uses: microsoft/setup-msbuild@v1.0.2
+      - uses: actions/checkout@v4
+      - uses: microsoft/setup-msbuild@v2
       - name: Generate self-signed cert
         run: |
           $cert = New-SelfSignedCertificate -Subject "CN=FlexConfirmMailSelfSign" -Type CodeSigningCert -CertStoreLocation "Cert:\CurrentUser\My" -NotAfter (Get-Date).AddYears(10)
@@ -16,7 +16,7 @@ jobs:
       - name: Make Installer
         run: iscc.exe FlexConfirmMail.iss
       - name: Upload Installer
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Installer
           path: dest/*.exe

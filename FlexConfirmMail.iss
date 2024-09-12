@@ -31,7 +31,6 @@ Root: HKLM32; Subkey: "Software\Microsoft\Office\Outlook\Addins\FlexConfirmMail"
 
 ; Prevent Outlook from disabling .NET addon
 Root: HKCU; Subkey: "Software\Microsoft\Office\16.0\Outlook\Resiliency\DoNotDisableAddinList"; ValueType: dword; ValueName: "FlexConfirmMail"; ValueData: 1
-Root: HKCU; Subkey: "Software\Microsoft\Office\13.0\Outlook\Resiliency\DoNotDisableAddinList"; ValueType: dword; ValueName: "FlexConfirmMail"; ValueData: 1
 
 [Languages]
 Name: en; MessagesFile: "compiler:Default.isl"

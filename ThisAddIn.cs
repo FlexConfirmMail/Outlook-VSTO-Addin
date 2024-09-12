@@ -51,10 +51,9 @@ namespace FlexConfirmMail
         private void SaveOriginalRecipients(object response, ref bool cancel)
         {
             Outlook.MailItem mailItem = response as Outlook.MailItem;
-            // EntryID is created when saving.
-            mailItem.Save();
-            var entryID = mailItem.EntryID;
-            if (string.IsNullOrEmpty(entryID))
+
+            var mailID = GenerateMailID(mailItem);
+            if (string.IsNullOrEmpty(mailID))
             {
                 return;
             }
@@ -63,7 +62,7 @@ namespace FlexConfirmMail
             {
                 originalRecipients.Add(new RecipientInfo(recp));
             }
-            EntryIdToOriginalRecipientsDictionary[entryID] = originalRecipients;
+            EntryIdToOriginalRecipientsDictionary[mailID] = originalRecipients;
         }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
@@ -184,8 +183,8 @@ namespace FlexConfirmMail
             }
             config.Merge(Loader.LoadFromDir(StandardPath.GetDefaultConfigDir()));
             config.Merge(Loader.LoadFromDir(StandardPath.GetUserDir()));
-
-            List<RecipientInfo> originalRecipients = GetOriginalRecipientsFromDictionary(mail.EntryID);
+            var mailID = GenerateMailID(mail);
+            List<RecipientInfo> originalRecipients = GetOriginalRecipientsFromDictionary(mailID);
 
             MainDialog mainDialog = new MainDialog(config, mail, originalRecipients);
             if (mainDialog.SkipConfirm())
@@ -198,35 +197,56 @@ namespace FlexConfirmMail
             {
                 if (!config.CountEnabled)
                 {
-                    RemoveRecipientsFromDictionary(mail.EntryID);
+                    RemoveRecipientsFromDictionary(mailID);
                     return true;
                 }
 
                 if (new CountDialog(config).ShowDialog() == true)
                 {
-                    RemoveRecipientsFromDictionary(mail.EntryID);
+                    RemoveRecipientsFromDictionary(mailID);
                     return true;
                 }
             }
             return false;
         }
 
-        private List<RecipientInfo> GetOriginalRecipientsFromDictionary(string entryID)
+        private List<RecipientInfo> GetOriginalRecipientsFromDictionary(string mailID)
         {
-            if (string.IsNullOrEmpty(entryID))
+            if (string.IsNullOrEmpty(mailID))
             {
                 return null;
             }
-            return EntryIdToOriginalRecipientsDictionary.ContainsKey(entryID) ? EntryIdToOriginalRecipientsDictionary[entryID] : null;
+            return EntryIdToOriginalRecipientsDictionary.ContainsKey(mailID) ? EntryIdToOriginalRecipientsDictionary[mailID] : null;
         }
 
-        private void RemoveRecipientsFromDictionary(string entryID)
+        private void RemoveRecipientsFromDictionary(string mailID)
         {
-            if (string.IsNullOrEmpty(entryID))
+            if (string.IsNullOrEmpty(mailID))
             {
                 return;
             }
-            EntryIdToOriginalRecipientsDictionary.Remove(entryID);
+            EntryIdToOriginalRecipientsDictionary.Remove(mailID);
+        }
+
+        private string GenerateMailID(Outlook.MailItem mailItem)
+        {
+            if(mailItem == null)
+            {
+                return null;
+            }
+            // Create an uniq id for this mail(response). mailItem.EntryID can use as uniq id, but
+            // mailItem.EntryID is created when saving, but this mail(response) is not saved yet.
+            // We can generate the entry id by executing mailItem.Save(), but mailItem.Save()
+            // may do unexpected behavior when a mail item is an inline reply, so we can't use it.
+            //
+            // https://learn.microsoft.com/en-us/office/vba/api/outlook.mailitem.save
+            // > If a mail item is an inline reply, calling Save on that mail item may fail and result in unexpected behavior.
+            var index = mailItem.ConversationIndex ?? "";
+            var topic = mailItem.ConversationTopic ?? "";
+
+            // For mails that have no index and no topic, we give up to specify an uniq id, and mailId for them becomes "_".
+            // Among those mails, recipients of the last mail that passes this method is regarded as original recipients.
+            return $"{topic}_{index}";
         }
 
         protected override Microsoft.Office.Core.IRibbonExtensibility CreateRibbonExtensibilityObject()

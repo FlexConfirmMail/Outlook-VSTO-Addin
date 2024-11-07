@@ -125,94 +125,94 @@
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RibbonButtonFlexConfirmMail" xml:space="preserve">
-    <value>FlexConfirmMail設定</value>
+    <value>FlexConfirmMail Options</value>
   </data>
   <data name="RibbonGroupFlexConfirmMail" xml:space="preserve">
-    <value>送信チェック</value>
+    <value>Check</value>
   </data>
   <data name="SaveAndQuit" xml:space="preserve">
-    <value>保存して閉じる</value>
+    <value>Save and Exit</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>キャンセル</value>
+    <value>Cancel</value>
   </data>
   <data name="Seconds" xml:space="preserve">
-    <value>秒</value>
+    <value>seconds</value>
   </data>
   <data name="ConfigWindowTitle" xml:space="preserve">
-    <value>FlexConfirmMail設定</value>
+    <value>FlexConfirmMail Options</value>
   </data>
   <data name="ConfigGeneral" xml:space="preserve">
-    <value>一般設定</value>
+    <value>General</value>
   </data>
   <data name="ConfigCount" xml:space="preserve">
-    <value>送信カウントダウン設定</value>
+    <value>Countdown</value>
   </data>
   <data name="ConfigCountEnabled" xml:space="preserve">
-    <value>メール送信前のカウントダウンを有効化する</value>
+    <value>Show a countdown clock when sending a message</value>
   </data>
   <data name="ConfigCountAllowSkip" xml:space="preserve">
-    <value>カウントダウンのダイアログの「いますぐ送信」ボタンを有効化する</value>
+    <value>Show "Send Now" button in the countdown dialog</value>
   </data>
   <data name="ConfigCountSeconds" xml:space="preserve">
-    <value>送信までのカウントダウン秒数:</value>
+    <value>Delay sending a message by</value>
   </data>
   <data name="ConfigWarning" xml:space="preserve">
-    <value>警告設定</value>
+    <value>To/Cc</value>
   </data>
   <data name="ConfigSafeBccEnabled" xml:space="preserve">
-    <value>To/CCに一定数以上のドメインが含まれている場合に警告する</value>
+    <value>Enable "too many domains in To/Cc fields" warnings</value>
   </data>
   <data name="ConfigSafeBccThreshold" xml:space="preserve">
-    <value>警告対象となるドメインの数:</value>
+    <value>Warn if To/Cc fields contain</value>
   </data>
   <data name="ConfigSafeBccThresholdSuffix" xml:space="preserve">
-    <value>件以上</value>
+    <value>domains (or more)</value>
   </data>
   <data name="ConfigMisc" xml:space="preserve">
-    <value>その他の設定</value>
+    <value>Miscellaneous</value>
   </data>
   <data name="ConfigMainSkipIfNoExt" xml:space="preserve">
-    <value>宛先が社内ドメインのみの場合は確認をスキップする</value>
+    <value>Skip confirmation if all the recpients are trusted.</value>
   </data>
   <data name="ConfigTrustedDomains" xml:space="preserve">
-    <value>社内ドメイン設定</value>
+    <value>Configure Trusted Domains</value>
   </data>
   <data name="TrustedDomainsPolicy" xml:space="preserve">
-    <value># 社内ドメイン設定 ###
-# 組織設定により、社内ドメインとして以下が指定されています。
+    <value># Trusted Domains ###
+# The following domains are trusted by Group Policy.
 #
 # {0}
 #
-# さらにドメインを追加する場合は、以下に1行ずつ入力してください。
-# また、先頭に「-」をつけると、ドメインを除外することができます。
-# 指定にはワイルドカード（*および?）も使用可能です。
+# To add more domains, input entries (one per line) below.
+# You can also exclude domains by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
   </data>
   <data name="UnsafeDomainsPolicy" xml:space="preserve">
-    <value># 注意が必要なドメイン設定 ###
-# 組織設定により、注意が必要なドメインとして以下が指定されています。
+    <value># Unsafe Domains ###
+# The following domains are considered unsafe by Group Policy.
 #
 # {0}
 #
-# さらにドメインを追加する場合は、以下に1行ずつ入力してください。
-# また、先頭に「-」をつけると、ドメインを除外することができます。
-# 指定にはワイルドカード（*および?）も使用可能です。
+# To add more domains, input entries (one per line) below.
+# You can also exclude domains by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
   </data>
   <data name="UnsafeFilesPolicy" xml:space="preserve">
-    <value># 注意が必要なファイル名設定 ###
-# 組織設定により、注意が必要なファイル名として以下が指定されています。
+    <value># Unsafe Files ###
+# The following keywords are considered unsafe by Group Policy.
 #
 # {0}
 #
-# さらにキーワードを追加する場合は、以下に1行ずつ入力してください。
-# また、先頭に「-」をつけると、キーワードを除外することができます。
-# 指定にはワイルドカード（*および?）も使用可能です。
+# To add more keywords, input entries (one per line) below.
+# You can also exclude keywords by adding "-" at the beginning.
+# And wildcards (* and ?) are also available.
 ##################################
 
 {1}</value>
@@ -226,16 +226,16 @@
 -example.org</value>
   </data>
   <data name="UnsafeFilesExample" xml:space="preserve">
-    <value>社外秘
--除外キーワード</value>
+    <value>Confidential
+-ExcludedItem</value>
   </data>
   <data name="TrustedDomainsTemplate" xml:space="preserve">
-    <value># 社内ドメイン設定 ###
+    <value># Trusted Domains ###
 #
-# (1) 送信時に社内の宛先として扱うドメインを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
-# (4) 指定にはワイルドカード（*および?）を使用可能です。
+# (1) Set the list of domains to be treated as internal ones.
+# (2) Enter one entry per line as follows.
+# (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 
@@ -243,12 +243,12 @@ example.com
 example.org</value>
   </data>
   <data name="UnsafeDomainsTemplate" xml:space="preserve">
-    <value># 注意が必要なドメイン設定 ###
+    <value># Unsafe Domains ###
 #
-# (1) 送信時に警告対象とする注意ドメインを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
-# (4) 指定にはワイルドカード（*および?）を使用可能です。
+# (1) Set the list of domains to show an "unsafe recipient" warning.
+# (2) Enter one entry per line as follows.
+# (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 
@@ -256,84 +256,84 @@ example.com
 example.org</value>
   </data>
   <data name="UnsafeFilesTemplate" xml:space="preserve">
-    <value># 注意が必要なファイル名設定 ###
+    <value># Unsafe Files ###
 #
-# (1) 添付ファイルに含まれる場合に警告する注意ワードを指定します。
-# (2) 以下の例のように一行に一件ずつ記載します。
-# (3) 冒頭が「#」から始まる行は無視されます。
+# (1) Set the list of keywords to show an "unsafe filename" warning.
+# (2) Enter one entry per line as follows.
+# (3) Lines starting with # are ignored.
+# (4) Wildcards (* and ?) are available.
 #
 ##################################
 
-社外秘
-機密</value>
+secret
+confidential
+</value>
   </data>
   <data name="TrustedDomains" xml:space="preserve">
-    <value>社内ドメイン</value>
+    <value>Trusted Domains</value>
   </data>
   <data name="ConfigUnsafeDomains" xml:space="preserve">
-    <value>注意が必要なドメイン設定</value>
+    <value>Configure Unsafe Domains</value>
   </data>
   <data name="UnsafeDomains" xml:space="preserve">
-    <value>注意が必要なドメイン</value>
+    <value>Unsafe Domains</value>
   </data>
   <data name="ConfigUnsafeFiles" xml:space="preserve">
-    <value>注意が必要なファイル名設定</value>
+    <value>Configure Unsafe Files</value>
   </data>
   <data name="UnsafeFiles" xml:space="preserve">
-    <value>注意が必要なファイル名</value>
+    <value>Unsafe Files</value>
   </data>
   <data name="AboutAddon" xml:space="preserve">
-    <value>このアドオンについて</value>
+    <value>Version</value>
   </data>
   <data name="TextLog" xml:space="preserve">
-    <value>動作ログ</value>
+    <value>App Logs</value>
   </data>
   <data name="CountWindowTitle" xml:space="preserve">
-    <value>送信カウントダウン - FlexConfirmMail</value>
+    <value>Countdown - FlexConfirmMail</value>
   </data>
   <data name="CountSendInSeconds" xml:space="preserve">
-    <value>秒後に送信します</value>
+    <value>seconds to send</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>送信</value>
+    <value>Send</value>
   </data>
   <data name="SendNow" xml:space="preserve">
-    <value>今すぐ送信</value>
+    <value>Send Now</value>
   </data>
   <data name="MainExternal" xml:space="preserve">
-    <value>外部の送信先</value>
+    <value>External Recipients</value>
   </data>
   <data name="MainUnsafeDomainsWarning" xml:space="preserve">
-    <value>[警告] 注意が必要なドメイン（{0}）が宛先に含まれています。</value>
+    <value>[Warn] An unsafe domain "{0}" found in the recipient list</value>
   </data>
   <data name="MainUnsafeDomainsWarningHint" xml:space="preserve">
-    <value>このドメインは誤送信の可能性が高いため、再確認を促す警告を出してします。</value>
+    <value>This domain is registered as unsafe. Please recheck and confirm.</value>
   </data>
   <data name="MainUnsafeFilesWarning" xml:space="preserve">
-    <value>[警告] 注意が必要なファイル名（{0}）が含まれています。</value>
+    <value>[Warn] An unsafe keyword ({0}) found in the attachment list</value>
   </data>
   <data name="MainUnsafeFilesWarningHint" xml:space="preserve">
-    <value>添付ファイルに注意が必要な単語が含まれているため、
-再確認を促す警告を出しています。</value>
+    <value>This filename is registered as unsafe. Please recheck and confirm.</value>
   </data>
   <data name="MainSafeBccWarning" xml:space="preserve">
-    <value>[警告] To・Ccに{0}件以上のドメインが含まれています。</value>
+    <value>[Warn] To/Cc fields contain no less than {0} domains</value>
   </data>
   <data name="MainSafeBccWarningHint" xml:space="preserve">
-    <value>宛先に多数のドメインが検知されました。
-ToおよびCcに含まれるメールアドレスはすべての受取人が確認できるため、
-アナウンスなどを一斉送信する場合はBccを利用して宛先リストを隠します。</value>
-  </data>
-  <data name="MainFilesWarning" xml:space="preserve">
-    <value>[添付ファイル] {0}</value>
+    <value>Beware that To/Cc fields are visible to any recipients,
+so please use Bcc when sending an message to unrelated parties.</value>
   </data>
   <data name="MainTrusted" xml:space="preserve">
-    <value>社内の送信先</value>
+    <value>Internal Recipients</value>
   </data>
   <data name="MainCheckAll" xml:space="preserve">
-    <value>一括チェック</value>
+    <value>Check all</value>
+  </data>
+  <data name="MainFilesWarning" xml:space="preserve">
+    <value>[Attachment] {0}</value>
   </data>
   <data name="MainFile" xml:space="preserve">
-    <value>添付ファイル／その他の警告</value>
+    <value>Attachments / Warnings</value>
   </data>
 </root>

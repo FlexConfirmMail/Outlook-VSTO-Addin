@@ -16,7 +16,7 @@ jobs:
       - name: Make Installer
         run: iscc.exe FlexConfirmMail.iss
       - name: Upload Installer
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Installer
           path: dest/*.exe

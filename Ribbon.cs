@@ -44,7 +44,11 @@ namespace FlexConfirmMail
 
         public string GetCustomUI(string ribbonID)
         {
-            return GetResourceText("FlexConfirmMail.Ribbon.xml");
+            if (ribbonID == "Microsoft.Outlook.Explorer")
+            {
+                return GetResourceText("FlexConfirmMail.Ribbon.xml");
+            }
+            return "";
         }
 
         #endregion

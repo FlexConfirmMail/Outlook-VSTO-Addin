@@ -124,6 +124,10 @@ namespace FlexConfirmMail
                 }
             }
             accept.ExceptWith(exclude);
+            if (accept.Count == 0)
+            {
+                return "(?!)"; // means "never match to anything" for a blank list
+            }
             return $"({string.Join("|", accept.Select(ConvertWildCardToRegex))})";
         }
 

@@ -95,21 +95,22 @@ namespace FlexConfirmMail
 
         public void RebuildPatterns()
         {
-            HashSet<string> trustedAddressList = GetHashSet(TrustedDomains.Where(_ => _.Contains("@")));
-            HashSet<string> trustedDomainList = GetHashSet(TrustedDomains.Where(_ => !_.Contains("@")));
-            HashSet<string> unsafeAddressList = GetHashSet(UnsafeDomains.Where(_ => _.Contains("@")));
-            HashSet<string> unsafeDomainList = GetHashSet(UnsafeDomains.Where(_ => !_.Contains("@")));
+            TrustedAddressesPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => _.Contains("@")))}$";
+            TrustedDomainsPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeAddressesPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => _.Contains("@")))}$";
+            UnsafeDomainsPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeFilesPattern = ConvertToMatcherRegex(UnsafeFiles);
 
-            TrustedDomainsPattern = $"^({string.Join("|", trustedDomainList.Select(ConvertWildCardToRegex))})$";
-            TrustedAddressesPattern = $"^({string.Join("|", trustedAddressList.Select(ConvertWildCardToRegex))})$";
-            UnsafeDomainsPattern = $"^({string.Join("|", unsafeDomainList.Select(ConvertWildCardToRegex))})$";
-            UnsafeAddressesPattern = $"^({string.Join("|", unsafeAddressList.Select(ConvertWildCardToRegex))})$";
-            UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
+            QueueLogger.Log($"TrustedAddressesPattern = {TrustedAddressesPattern}");
+            QueueLogger.Log($"TrustedDomainsPattern = {TrustedDomainsPattern}");
+            QueueLogger.Log($"UnsafeAddressesPattern = {UnsafeAddressesPattern}");
+            QueueLogger.Log($"UnsafeDomainsPattern = {UnsafeDomainsPattern}");
+            QueueLogger.Log($"UnsafeFilesPattern = {UnsafeFilesPattern}");
         }
 
-        private HashSet<string> GetHashSet(IEnumerable<string> list)
+        private static string ConvertToMatcherRegex(IEnumerable<string> list)
         {
-            HashSet<string> ret = new HashSet<string>();
+            HashSet<string> accept = new HashSet<string>();
             HashSet<string> exclude = new HashSet<string>();
             foreach (string entry in list)
             {
@@ -119,11 +120,15 @@ namespace FlexConfirmMail
                 }
                 else
                 {
-                    ret.Add(entry);
+                    accept.Add(entry);
                 }
             }
-            ret.ExceptWith(exclude);
-            return ret;
+            accept.ExceptWith(exclude);
+            if (accept.Count == 0)
+            {
+                return "(?!)"; // means "never match to anything" for a blank list
+            }
+            return $"({string.Join("|", accept.Select(ConvertWildCardToRegex))})";
         }
 
         private static string ConvertWildCardToRegex(string value)

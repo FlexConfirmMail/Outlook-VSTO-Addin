@@ -96,7 +96,7 @@ namespace FlexConfirmMail
         public void RebuildPatterns()
         {
             HashSet<string> trustedAddressList = GetHashSet(TrustedDomains.Where(_ => _.Contains("@")));
-            HashSet<string> trustedDomainList = GetHashSet(TrustedDomains.Where(_ => !_.Contains("@")).ToList());
+            HashSet<string> trustedDomainList = GetHashSet(TrustedDomains.Where(_ => !_.Contains("@")));
             HashSet<string> unsafeAddressList = GetHashSet(UnsafeDomains.Where(_ => _.Contains("@")).ToList());
             HashSet<string> unsafeDomainList = GetHashSet(UnsafeDomains.Where(_ => !_.Contains("@")).ToList());
 

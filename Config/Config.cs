@@ -108,7 +108,7 @@ namespace FlexConfirmMail
             QueueLogger.Log($"UnsafeFilesPattern = {UnsafeFilesPattern}");
         }
 
-        private static string ConvertListToMatcherRegex(IEnumerable<string> list)
+        private static string ConvertToMatcherRegex(IEnumerable<string> list)
         {
             HashSet<string> accept = new HashSet<string>();
             HashSet<string> exclude = new HashSet<string>();

@@ -15,6 +15,7 @@ namespace FlexConfirmMail
         public bool MainSkipIfNoExt = false;
         public List<string> TrustedDomains;
         public List<string> UnsafeDomains;
+        public bool UntrustUnsafeRecipients = false;
         public List<string> UnsafeFiles;
         public bool SafeNewDomainsEnabled = true;
         public HashSet<ConfigOption> Modified;
@@ -78,6 +79,11 @@ namespace FlexConfirmMail
             if (other.Modified.Contains(ConfigOption.UnsafeDomains))
             {
                 UnsafeDomains.AddRange(other.UnsafeDomains);
+            }
+
+            if (other.Modified.Contains(ConfigOption.UntrustUnsafeRecipients))
+            {
+                UntrustUnsafeRecipients = other.UntrustUnsafeRecipients;
             }
 
             if (other.Modified.Contains(ConfigOption.UnsafeFiles))

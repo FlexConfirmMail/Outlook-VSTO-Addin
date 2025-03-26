@@ -185,6 +185,16 @@ namespace FlexConfirmMail
                 }
             }
 
+            if (key == "UntrustUnsafeRecipients")
+            {
+                if (ParseBool(val, out b))
+                {
+                    config.UntrustUnsafeRecipients = b;
+                    config.Modified.Add(ConfigOption.UntrustUnsafeRecipients);
+                    return true;
+                }
+            }
+
             return false;
         }
 

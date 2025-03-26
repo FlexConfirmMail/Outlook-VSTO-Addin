@@ -208,6 +208,9 @@
 
 {1}</value>
   </data>
+  <data name="UntrustUnsafeRecipients" xml:space="preserve">
+    <value>Treat recipients as "not trusted" if they are matched to unsafe patterns.</value>
+  </data>
   <data name="UnsafeFilesPolicy" xml:space="preserve">
     <value># Archivos Inseguros ###
 # La politica de la empresa considera Los siguientes tipos de Archivos como inseguros.

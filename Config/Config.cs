@@ -97,7 +97,7 @@ namespace FlexConfirmMail
         {
             HashSet<string> trustedAddressList = GetHashSet(TrustedDomains.Where(_ => _.Contains("@")));
             HashSet<string> trustedDomainList = GetHashSet(TrustedDomains.Where(_ => !_.Contains("@")));
-            HashSet<string> unsafeAddressList = GetHashSet(UnsafeDomains.Where(_ => _.Contains("@")).ToList());
+            HashSet<string> unsafeAddressList = GetHashSet(UnsafeDomains.Where(_ => _.Contains("@")));
             HashSet<string> unsafeDomainList = GetHashSet(UnsafeDomains.Where(_ => !_.Contains("@")).ToList());
 
             TrustedDomainsPattern = $"^({string.Join("|", trustedDomainList.Select(ConvertWildCardToRegex))})$";

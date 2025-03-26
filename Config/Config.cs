@@ -95,11 +95,11 @@ namespace FlexConfirmMail
 
         public void RebuildPatterns()
         {
-            TrustedAddressesPattern = $"^{ConvertListToMatcherRegex(TrustedDomains.Where(_ => _.Contains("@")))}$";
-            TrustedDomainsPattern = $"^{ConvertListToMatcherRegex(TrustedDomains.Where(_ => !_.Contains("@")))}$";
-            UnsafeAddressesPattern = $"^{ConvertListToMatcherRegex(UnsafeDomains.Where(_ => _.Contains("@")))}$";
-            UnsafeDomainsPattern = $"^{ConvertListToMatcherRegex(UnsafeDomains.Where(_ => !_.Contains("@")))}$";
-            UnsafeFilesPattern = ConvertListToMatcherRegex(UnsafeFiles);
+            TrustedAddressesPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => _.Contains("@")))}$";
+            TrustedDomainsPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeAddressesPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => _.Contains("@")))}$";
+            UnsafeDomainsPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeFilesPattern = ConvertToMatcherRegex(UnsafeFiles);
 
             QueueLogger.Log($"TrustedAddressesPattern = {TrustedAddressesPattern}");
             QueueLogger.Log($"TrustedDomainsPattern = {TrustedDomainsPattern}");

@@ -108,25 +108,6 @@ namespace FlexConfirmMail.Dialog
             return _mail.HTMLBody.Contains($"cid:{item.FileName}");
         }
 
-        private HashSet<string> GetHashSet(List<string> list)
-        {
-            HashSet<string> ret = new HashSet<string>();
-            HashSet<string> exclude = new HashSet<string>();
-            foreach (string entry in list)
-            {
-                if (entry.StartsWith("-"))
-                {
-                    exclude.Add(entry.Substring(1));
-                }
-                else
-                {
-                    ret.Add(entry);
-                }
-            }
-            ret.ExceptWith(exclude);
-            return ret;
-        }
-
         private List<string> ToLower(List<string> list)
         {
             List<string> ret = new List<string>();
@@ -253,8 +234,6 @@ namespace FlexConfirmMail.Dialog
 
         private void CheckUnsafeFiles()
         {
-            HashSet<string> notsafe = GetHashSet(_config.UnsafeFiles);
-
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
                 HashSet<string> seen = new HashSet<string>();

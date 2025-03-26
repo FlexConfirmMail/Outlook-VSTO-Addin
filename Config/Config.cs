@@ -107,7 +107,7 @@ namespace FlexConfirmMail
             UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
         }
 
-        private HashSet<string> GetHashSet(List<string> list)
+        private HashSet<string> GetHashSet(IEnumerable<string> list)
         {
             HashSet<string> ret = new HashSet<string>();
             HashSet<string> exclude = new HashSet<string>();

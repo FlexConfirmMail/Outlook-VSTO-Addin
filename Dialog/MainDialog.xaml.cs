@@ -118,30 +118,26 @@ namespace FlexConfirmMail.Dialog
             return ret;
         }
 
-        private bool IsTrustedDomain(string domain)
+        private bool IsTrustedRecipient(RecipientInfo recipient)
         {
             // Note: DOMAIN_EXCHANGE basically means "LegacyDN recipients whose
             // SMTP address we don't know". We assume they are internal users,
             // since it implies that they reside in Active Direcotry.
-            if (domain == RecipientInfo.DOMAIN_EXCHANGE)
+            if (recipient.Domain == RecipientInfo.DOMAIN_EXCHANGE)
             {
                 return true;
             }
 
             try
             {
-                return Regex.IsMatch(domain, _config.TrustedDomainsPattern, RegexOptions.IgnoreCase);
-            }
-            catch (RegexMatchTimeoutException) { }
-
-            return false;
-        }
-
-        private bool IsTrustedAddress(string address)
-        {
-            try
-            {
-                return Regex.IsMatch(address, _config.TrustedAddressesPattern, RegexOptions.IgnoreCase);
+                if (_config.UntrustUnsafeRecipients &&
+                    (Regex.IsMatch(recipient.Domain, _config.UnsafeDomainsPattern, RegexOptions.IgnoreCase) ||
+                     Regex.IsMatch(recipient.Address, _config.UnsafeAddressesPattern, RegexOptions.IgnoreCase)))
+                {
+                    return false;
+                }
+                return Regex.IsMatch(recipient.Domain, _config.TrustedDomainsPattern, RegexOptions.IgnoreCase) ||
+                       Regex.IsMatch(recipient.Address, _config.TrustedAddressesPattern, RegexOptions.IgnoreCase);
             }
             catch (RegexMatchTimeoutException) { }
 
@@ -154,7 +150,7 @@ namespace FlexConfirmMail.Dialog
 
             foreach (RecipientInfo info in recipients)
             {
-                if (IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address))
+                if (IsTrustedRecipient(info))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -172,7 +168,7 @@ namespace FlexConfirmMail.Dialog
 
             foreach (RecipientInfo info in list)
             {
-                if (!(IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address)))
+                if (!IsTrustedRecipient(info))
                 {
                     if (!seen.Contains(info.Domain))
                     {

@@ -114,7 +114,7 @@ namespace FlexConfirmMail.Dialog
             return ret;
         }
 
-        private bool IsTrustedDomain(string domain, HashSet<string> trusted)
+        private bool IsTrustedDomain(string domain)
         {
             // Note: DOMAIN_EXCHANGE basically means "LegacyDN recipients whose
             // SMTP address we don't know". We assume they are internal users,
@@ -133,14 +133,24 @@ namespace FlexConfirmMail.Dialog
             return false;
         }
 
+        private bool IsTrustedAddress(string address)
+        {
+            try
+            {
+                return Regex.IsMatch(address, _config.TrustedAddressesPattern, RegexOptions.IgnoreCase);
+            }
+            catch (RegexMatchTimeoutException) { }
+
+            return false;
+        }
+
         private void RenderTrustedList(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in recipients)
             {
-                if (IsTrustedDomain(info.Domain, trusted))
+                if (IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -155,11 +165,10 @@ namespace FlexConfirmMail.Dialog
         private void RenderExternalList(List<RecipientInfo> list)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in list)
             {
-                if (!IsTrustedDomain(info.Domain, trusted))
+                if (!(IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address)))
                 {
                     if (!seen.Contains(info.Domain))
                     {

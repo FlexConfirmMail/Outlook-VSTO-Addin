@@ -187,6 +187,9 @@
 # 要添加更多的域，请在下面输入条目（每行一个）。
 # 你也可以通过在开头添加"-"来排除域名。
 # And wildcards (* and ?) are also available.
+# You can specify not only domains but also addresses.
+#   * When an entry contains @, the entry is regarded as address.
+#   * When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,6 +239,9 @@
 # (2) 每行写一个条目，如下所示
 # (3) 以 "#" 开头的行被忽略
 # (4) Wildcards (* and ?) are available.
+# (5) You can specify not only domains but also addresses.
+#     * When an entry contains @, the entry is regarded as address.
+#     * when an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 

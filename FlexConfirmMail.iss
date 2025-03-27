@@ -12,7 +12,7 @@ SolidCompression=yes
 OutputDir=dest
 OutputBaseFilename=FlexConfirmMailSetup-{#SetupSetting("AppVersion")}
 VersionInfoDescription=FlexConfirmMailSetup
-ArchitecturesAllowed=x64
+ArchitecturesAllowed=x86compatible
 ArchitecturesInstallIn64BitMode=x64
 
 [Registry]

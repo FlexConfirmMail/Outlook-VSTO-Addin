@@ -63,6 +63,7 @@ namespace FlexConfirmMail.Dialog
             // Attachments/Alerts
             CheckSafeBcc(recipients);
             CheckUnsafeDomains(recipients);
+            CheckUnsafeAddresses(recipients);
             CheckUnsafeFiles();
 
             foreach (Outlook.Attachment item in _mail.Attachments)
@@ -85,25 +86,6 @@ namespace FlexConfirmMail.Dialog
             return _mail.HTMLBody.Contains($"cid:{item.FileName}");
         }
 
-        private HashSet<string> GetHashSet(List<string> list)
-        {
-            HashSet<string> ret = new HashSet<string>();
-            HashSet<string> exclude = new HashSet<string>();
-            foreach (string entry in list)
-            {
-                if (entry.StartsWith("-"))
-                {
-                    exclude.Add(entry.Substring(1));
-                }
-                else
-                {
-                    ret.Add(entry);
-                }
-            }
-            ret.ExceptWith(exclude);
-            return ret;
-        }
-
         private List<string> ToLower(List<string> list)
         {
             List<string> ret = new List<string>();
@@ -114,7 +96,7 @@ namespace FlexConfirmMail.Dialog
             return ret;
         }
 
-        private bool IsTrustedDomain(string domain, HashSet<string> trusted)
+        private bool IsTrustedDomain(string domain)
         {
             // Note: DOMAIN_EXCHANGE basically means "LegacyDN recipients whose
             // SMTP address we don't know". We assume they are internal users,
@@ -133,14 +115,24 @@ namespace FlexConfirmMail.Dialog
             return false;
         }
 
+        private bool IsTrustedAddress(string address)
+        {
+            try
+            {
+                return Regex.IsMatch(address, _config.TrustedAddressesPattern, RegexOptions.IgnoreCase);
+            }
+            catch (RegexMatchTimeoutException) { }
+
+            return false;
+        }
+
         private void RenderTrustedList(List<RecipientInfo> recipients)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in recipients)
             {
-                if (IsTrustedDomain(info.Domain, trusted))
+                if (IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -155,11 +147,10 @@ namespace FlexConfirmMail.Dialog
         private void RenderExternalList(List<RecipientInfo> list)
         {
             HashSet<string> seen = new HashSet<string>();
-            HashSet<string> trusted = GetHashSet(ToLower(_config.TrustedDomains));
 
             foreach (RecipientInfo info in list)
             {
-                if (!IsTrustedDomain(info.Domain, trusted))
+                if (!(IsTrustedDomain(info.Domain) || IsTrustedAddress(info.Address)))
                 {
                     if (!seen.Contains(info.Domain))
                     {
@@ -195,10 +186,32 @@ namespace FlexConfirmMail.Dialog
             }
         }
 
+        private void CheckUnsafeAddresses(List<RecipientInfo> recipients)
+        {
+            HashSet<string> seen = new HashSet<string>();
+
+            foreach (RecipientInfo info in recipients)
+            {
+                if (!seen.Contains(info.Address))
+                {
+                    try
+                    {
+                        if (Regex.IsMatch(info.Address, _config.UnsafeAddressesPattern, RegexOptions.IgnoreCase))
+                        {
+                            spFile.Children.Add(GetWarnCheckBox(
+                                string.Format(Properties.Resources.MainUnsafeAddressesWarning, info.Address),
+                                Properties.Resources.MainUnsafeAddressesWarningHint
+                            ));
+                        }
+                    }
+                    catch (RegexMatchTimeoutException) { }
+                    seen.Add(info.Address);
+                }
+            }
+        }
+
         private void CheckUnsafeFiles()
         {
-            HashSet<string> notsafe = GetHashSet(_config.UnsafeFiles);
-
             foreach (Outlook.Attachment item in _mail.Attachments)
             {
                 HashSet<string> seen = new HashSet<string>();

@@ -19,7 +19,9 @@ namespace FlexConfirmMail
         public HashSet<ConfigOption> Modified;
 
         public string TrustedDomainsPattern = "";
+        public string TrustedAddressesPattern = "";
         public string UnsafeDomainsPattern = "";
+        public string UnsafeAddressesPattern = "";
         public string UnsafeFilesPattern = "";
 
         public Config()
@@ -87,9 +89,40 @@ namespace FlexConfirmMail
 
         public void RebuildPatterns()
         {
-            TrustedDomainsPattern = $"^({string.Join("|", TrustedDomains.Select(ConvertWildCardToRegex))})$";
-            UnsafeDomainsPattern = $"^({string.Join("|", UnsafeDomains.Select(ConvertWildCardToRegex))})$";
-            UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
+            TrustedAddressesPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => _.Contains("@")))}$";
+            TrustedDomainsPattern = $"^{ConvertToMatcherRegex(TrustedDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeAddressesPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => _.Contains("@")))}$";
+            UnsafeDomainsPattern = $"^{ConvertToMatcherRegex(UnsafeDomains.Where(_ => !_.Contains("@")))}$";
+            UnsafeFilesPattern = ConvertToMatcherRegex(UnsafeFiles);
+
+            QueueLogger.Log($"TrustedAddressesPattern = {TrustedAddressesPattern}");
+            QueueLogger.Log($"TrustedDomainsPattern = {TrustedDomainsPattern}");
+            QueueLogger.Log($"UnsafeAddressesPattern = {UnsafeAddressesPattern}");
+            QueueLogger.Log($"UnsafeDomainsPattern = {UnsafeDomainsPattern}");
+            QueueLogger.Log($"UnsafeFilesPattern = {UnsafeFilesPattern}");
+        }
+
+        private static string ConvertToMatcherRegex(IEnumerable<string> list)
+        {
+            HashSet<string> accept = new HashSet<string>();
+            HashSet<string> exclude = new HashSet<string>();
+            foreach (string entry in list)
+            {
+                if (entry.StartsWith("-"))
+                {
+                    exclude.Add(entry.Substring(1));
+                }
+                else
+                {
+                    accept.Add(entry);
+                }
+            }
+            accept.ExceptWith(exclude);
+            if (accept.Count == 0)
+            {
+                return "(?!)"; // means "never match to anything" for a blank list
+            }
+            return $"({string.Join("|", accept.Select(ConvertWildCardToRegex))})";
         }
 
         private static string ConvertWildCardToRegex(string value)

@@ -187,6 +187,9 @@
 # To add more domains, input entries (one per line) below.
 # You can also exclude domains by adding "-" at the beginning.
 # And wildcards (* and ?) are also available.
+# You can specify not only domains but also addresses.
+#   * When an entry contains @, the entry is regarded as address.
+#   * When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -200,6 +203,9 @@
 # To add more domains, input entries (one per line) below.
 # You can also exclude domains by adding "-" at the beginning.
 # And wildcards (* and ?) are also available.
+# You can specify not only domains but also addresses.
+#   * When an entry contains @, the entry is regarded as address.
+#   * When an entry does not contains @, the entry is regarded as domain.
 ##################################
 
 {1}</value>
@@ -236,6 +242,9 @@
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
 # (4) Wildcards (* and ?) are available.
+# (5) You can specify not only domains but also addresses.
+#     * When an entry contains @, the entry is regarded as address.
+#     * when an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -249,6 +258,9 @@ example.org</value>
 # (2) Enter one entry per line as follows.
 # (3) Lines starting with # are ignored.
 # (4) Wildcards (* and ?) are available.
+# (5) You can specify not only domains but also addresses.
+#     * When an entry contains @, the entry is regarded as address.
+#     * when an entry does not contains @, the entry is regarded as domain.
 #
 ##################################
 
@@ -310,6 +322,12 @@ confidential
   </data>
   <data name="MainUnsafeDomainsWarningHint" xml:space="preserve">
     <value>This domain is registered as unsafe. Please recheck and confirm.</value>
+  </data>
+  <data name="MainUnsafeAddressesWarning" xml:space="preserve">
+    <value>[Warn] An unsafe address "{0}" found in the recipient list</value>
+  </data>
+  <data name="MainUnsafeAddressesWarningHint" xml:space="preserve">
+    <value>This address is registered as unsafe. Please recheck and confirm.</value>
   </data>
   <data name="MainUnsafeFilesWarning" xml:space="preserve">
     <value>[Warn] An unsafe keyword ({0}) found in the attachment list</value>

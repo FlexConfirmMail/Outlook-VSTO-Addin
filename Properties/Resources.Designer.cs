@@ -19,7 +19,7 @@ namespace FlexConfirmMail.Properties {
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
     // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -323,6 +323,18 @@ namespace FlexConfirmMail.Properties {
         public static string MainUnsafeDomainsWarningHint {
             get {
                 return ResourceManager.GetString("MainUnsafeDomainsWarningHint", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeAddressesWarning {
+            get {
+                return ResourceManager.GetString("MainUnsafeAddressesWarning", resourceCulture);
+            }
+        }
+
+        public static string MainUnsafeAddressesWarningHint {
+            get {
+                return ResourceManager.GetString("MainUnsafeAddressesWarningHint", resourceCulture);
             }
         }
 

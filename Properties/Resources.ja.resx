@@ -210,6 +210,9 @@
 
 {1}</value>
   </data>
+  <data name="UntrustUnsafeRecipients" xml:space="preserve">
+    <value>注意が必要なパターンに該当する宛先を「社内ではない」ものとして扱う</value>
+  </data>
   <data name="UnsafeFilesPolicy" xml:space="preserve">
     <value># 注意が必要なファイル名設定 ###
 # 組織設定により、注意が必要なファイル名として以下が指定されています。

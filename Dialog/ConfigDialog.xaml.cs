@@ -67,6 +67,7 @@ namespace FlexConfirmMail.Dialog
             {
                 UnsafeDomains.Text = Properties.Resources.UnsafeDomainsTemplate;
             }
+            UntrustUnsafeRecipients.IsChecked = _config.UntrustUnsafeRecipients;
 
             // UnsafeFiles
             if (_default.Modified.Contains(ConfigOption.UnsafeFiles))
@@ -152,6 +153,9 @@ namespace FlexConfirmMail.Dialog
             text += Serialize(ConfigOption.MainSkipIfNoExt,
                               MainSkipIfNoExt.IsChecked,
                               _default.MainSkipIfNoExt);
+            text += Serialize(ConfigOption.UntrustUnsafeRecipients,
+                              UntrustUnsafeRecipients.IsChecked,
+                              _default.UntrustUnsafeRecipients);
             return text;
         }
 

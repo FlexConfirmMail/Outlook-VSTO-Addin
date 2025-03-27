@@ -236,6 +236,12 @@ namespace FlexConfirmMail.Properties {
             }
         }
 
+        public static string UntrustUnsafeRecipients {
+            get {
+                return ResourceManager.GetString("UntrustUnsafeRecipients", resourceCulture);
+            }
+        }
+
         public static string UnsafeFilesTemplate {
             get {
                 return ResourceManager.GetString("UnsafeFilesTemplate", resourceCulture);

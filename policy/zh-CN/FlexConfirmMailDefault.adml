@@ -17,6 +17,7 @@
       <string id="UnsafeDomains_Explain">设置要被提醒的域。 Wildcards (* and ?) are available.</string>
       <string id="UnsafeFiles">设置不安全的文件名</string>
       <string id="UnsafeFiles_Explain">为附件设置警告关键字。 Wildcards (* and ?) are available.</string>
+      <string id="UntrustUnsafeRecipients">Treat recipients as "not trusted" if they are matched to unsafe patterns.</string>
     </stringTable>
     <presentationTable>
       <presentation id="CountSeconds">

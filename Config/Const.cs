@@ -23,6 +23,7 @@ namespace FlexConfirmMail
         MainSkipIfNoExt,
         TrustedDomains,
         UnsafeDomains,
-        UnsafeFiles
+        UnsafeFiles,
+        UntrustUnsafeRecipients,
     }
 }

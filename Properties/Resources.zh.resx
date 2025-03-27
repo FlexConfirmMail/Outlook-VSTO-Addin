@@ -208,6 +208,9 @@
 
 {1}</value>
   </data>
+  <data name="UntrustUnsafeRecipients" xml:space="preserve">
+    <value>Treat recipients as "not trusted" if they are matched to unsafe patterns.</value>
+  </data>
   <data name="UnsafeFilesPolicy" xml:space="preserve">
     <value># 不安全的文件名 ###
 # 以下关键词被组策略认为是不安全的。

@@ -17,6 +17,8 @@
       <string id="UnsafeDomains_Explain">Configure lista de dominios y direcciones que muestre una advertencia de "destinatario no seguro".</string>
       <string id="UnsafeFiles">Configurar archivos inseguros</string>
       <string id="UnsafeFiles_Explain">Configure lista de palabras clave que muestre una advertencia "nombre de archivo no seguro"</string>
+      <string id="SafeNewDomainsEnabled">Confirm when any recipients with domains different from any existing recipients are added</string>
+      <string id="UntrustUnsafeRecipients">Treat recipients as "not trusted" if they are matched to unsafe patterns.</string>
     </stringTable>
     <presentationTable>
       <presentation id="CountSeconds">

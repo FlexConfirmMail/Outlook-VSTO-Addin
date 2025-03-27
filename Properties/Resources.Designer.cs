@@ -593,6 +593,15 @@ namespace FlexConfirmMail.Properties {
         }
         
         /// <summary>
+        ///   注意が必要なパターンに該当する宛先を「社内ではない」ものとして扱う に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string UntrustUnsafeRecipients {
+            get {
+                return ResourceManager.GetString("UntrustUnsafeRecipients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   注意が必要なファイル名 に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string UnsafeFiles {

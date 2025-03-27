@@ -25,5 +25,6 @@ namespace FlexConfirmMail
         UnsafeDomains,
         UnsafeFiles,
         SafeNewDomainsEnabled,
+        UntrustUnsafeRecipients,
     }
 }

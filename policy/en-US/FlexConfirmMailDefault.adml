@@ -18,6 +18,7 @@
       <string id="UnsafeFiles">Configure Unsafe files</string>
       <string id="UnsafeFiles_Explain">Set the list of keywords to show an "unsafe filename" warning. Wildcards (* and ?) are available.</string>
       <string id="SafeNewDomainsEnabled">Confirm when any recipients with domains different from any existing recipients are added</string>
+      <string id="UntrustUnsafeRecipients">Treat recipients as "not trusted" if they are matched to unsafe patterns.</string>
     </stringTable>
     <presentationTable>
       <presentation id="CountSeconds">

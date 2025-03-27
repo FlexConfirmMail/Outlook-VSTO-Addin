@@ -101,6 +101,18 @@
         <multiText id="UnsafeDomains" valueName="UnsafeDomains"/>
       </elements>
     </policy>
+    <policy name="UntrustUnsafeRecipients" valueName="UntrustUnsafeRecipients"
+        displayName="$(string.UntrustUnsafeRecipients)" class="Machine"
+        key="SOFTWARE\Policies\FlexConfirmMail\Default">
+      <parentCategory ref="FlexConfirmMailDefault"/>
+      <supportedOn ref="SUPPORTED_NotSpecified"/>
+      <enabledValue>
+        <decimal value="1"/>
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0"/>
+      </disabledValue>
+    </policy>
     <policy name="UnsafeFiles"
         displayName="$(string.UnsafeFiles)"
         explainText="$(string.UnsafeFiles_Explain)"

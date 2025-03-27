@@ -63,6 +63,7 @@ namespace FlexConfirmMail.Dialog
             // Attachments/Alerts
             CheckSafeBcc(recipients);
             CheckUnsafeDomains(recipients);
+            CheckUnsafeAddresses(recipients);
             CheckUnsafeFiles();
 
             foreach (Outlook.Attachment item in _mail.Attachments)
@@ -200,6 +201,30 @@ namespace FlexConfirmMail.Dialog
                     }
                     catch (RegexMatchTimeoutException) { }
                     seen.Add(info.Domain);
+                }
+            }
+        }
+
+        private void CheckUnsafeAddresses(List<RecipientInfo> recipients)
+        {
+            HashSet<string> seen = new HashSet<string>();
+
+            foreach (RecipientInfo info in recipients)
+            {
+                if (!seen.Contains(info.Address))
+                {
+                    try
+                    {
+                        if (Regex.IsMatch(info.Address, _config.UnsafeAddressesPattern, RegexOptions.IgnoreCase))
+                        {
+                            spFile.Children.Add(GetWarnCheckBox(
+                                string.Format(Properties.Resources.MainUnsafeAddressesWarning, info.Address),
+                                Properties.Resources.MainUnsafeAddressesWarningHint
+                            ));
+                        }
+                    }
+                    catch (RegexMatchTimeoutException) { }
+                    seen.Add(info.Address);
                 }
             }
         }

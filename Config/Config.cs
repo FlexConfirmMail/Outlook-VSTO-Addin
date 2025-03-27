@@ -21,6 +21,7 @@ namespace FlexConfirmMail
         public string TrustedDomainsPattern = "";
         public string TrustedAddressesPattern = "";
         public string UnsafeDomainsPattern = "";
+        public string UnsafeAddressesPattern = "";
         public string UnsafeFilesPattern = "";
 
         public Config()
@@ -90,10 +91,13 @@ namespace FlexConfirmMail
         {
             var trustedAddressList = TrustedDomains.Where(_ => _.Contains("@"));
             var trustedDomainList = TrustedDomains.Where(_ => !_.Contains("@"));
+            var unsafeAddressList = UnsafeDomains.Where(_ => _.Contains("@"));
+            var unsafeDomainList = UnsafeDomains.Where(_ => !_.Contains("@"));
 
             TrustedDomainsPattern = $"^({string.Join("|", trustedDomainList.Select(ConvertWildCardToRegex))})$";
             TrustedAddressesPattern = $"^({string.Join("|", trustedAddressList.Select(ConvertWildCardToRegex))})$";
-            UnsafeDomainsPattern = $"^({string.Join("|", UnsafeDomains.Select(ConvertWildCardToRegex))})$";
+            UnsafeDomainsPattern = $"^({string.Join("|", unsafeDomainList.Select(ConvertWildCardToRegex))})$";
+            UnsafeAddressesPattern = $"^({string.Join("|", unsafeAddressList.Select(ConvertWildCardToRegex))})$";
             UnsafeFilesPattern = $"({string.Join("|", UnsafeFiles.Select(ConvertWildCardToRegex))})";
         }
 
